@@ -1,0 +1,37 @@
+<svg width="365" height="86" viewBox="0 0 365 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+#Group_9 {
+	width: 362px;
+	height: 80.65px;
+	animation: 0.3s linear 0s 1 normal forwards running Group_9;
+	transform-box: fill-box;
+	transform-origin: 50% 50%;
+}
+@keyframes Group_9 {
+	0% {
+		transform: scaleX(1) scaleY(1);
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: scaleX(1) scaleY(1);
+	}
+}
+</style>
+<g id="Frame 500">
+<g id="Group_9">
+<ellipse id="Ellipse 4" cx="18.5546" cy="66.9191" rx="9.70184" ry="9.70225" fill="white"/>
+<path id="Vector 2" d="M364.789 2.03543C358.694 1.9849 352.598 1.93437 346.502 1.88384C270.941 1.25748 195.379 0.63113 119.818 0.00477491L119.243 9.34817e-06L118.727 0.322685C89.7598 18.437 60.7927 36.5513 31.8256 54.6656C26.657 57.8977 21.4884 61.1299 16.3197 64.362C17.4056 66.0668 18.4914 67.7716 19.5772 69.4764C24.6916 66.159 29.8059 62.8416 34.9203 59.5242C63.5831 40.9322 92.2459 22.3402 120.909 3.74818L119.818 4.06609C195.379 3.43973 270.941 2.81338 346.502 2.18702C352.598 2.13649 358.694 2.08596 364.789 2.03543Z" fill="white"/>
+<g id="Ellipse 5" filter="url(#filter0_f_7806_79)">
+<ellipse cx="18.5548" cy="66.9193" rx="15.7655" ry="15.7661" fill="white" fill-opacity="0.36"/>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_7806_79" x="2.69413e-05" y="48.3638" width="37.1096" height="37.1108" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="1.39464" result="effect1_foregroundBlur_7806_79"/>
+</filter>
+</defs>
+</svg>

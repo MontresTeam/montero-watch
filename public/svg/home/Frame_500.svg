@@ -1,0 +1,39 @@
+<svg width="167" height="202" viewBox="0 0 167 202" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+#Vector {
+	width: 160.7px;
+	height: 195.66px;
+	animation: 0.3s linear 0s 1 normal forwards running Vector;
+	transform-box: fill-box;
+	transform-origin: 0% 50%;
+}
+@keyframes Vector {
+	0% {
+		transform: scaleX(1) scaleY(1);
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+		transform: scaleX(1) scaleY(1);
+	}
+}
+</style>
+<g id="Frame 500">
+<g id="Group 8">
+<g id="Group 2">
+<g id="Vector" filter="url(#filter0_f_7806_67)">
+<path d="M142.248 25.5665C146.671 28.59 152.709 27.4549 155.732 23.0311C158.755 18.6074 157.62 12.5702 153.197 9.5467C148.773 6.52318 142.736 7.6583 139.713 12.082C136.689 16.5058 137.824 22.543 142.248 25.5665Z" fill="white"/>
+<path d="M4.55705 183.545C3.96784 188.513 3.37851 193.482 2.78931 198.449C3.47875 193.495 4.16783 188.539 4.85727 183.584C12.2499 130.455 19.6425 77.3265 27.0351 24.1979C62.4135 23.2888 97.7922 22.3804 133.171 21.4714C138.171 21.3429 143.172 21.2145 148.172 21.086C148.1 19.0661 148.028 17.0457 147.955 15.0257C142.958 15.2552 137.961 15.4845 132.964 15.714C97.1115 17.3606 61.2585 19.0079 25.4056 20.6545L23.8687 20.7242L4.55705 183.545Z" fill="white"/>
+<path d="M138.827 31.5726C146.015 36.4858 155.825 34.6413 160.738 27.4527C165.651 20.2641 163.807 10.4537 156.618 5.54048C149.43 0.627279 139.62 2.47183 134.707 9.66041C129.794 16.849 131.638 26.6594 138.827 31.5726Z" fill="white" fill-opacity="0.36"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_7806_67" x="2.69413e-05" y="-3.57628e-06" width="166.279" height="201.239" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="1.39464" result="effect1_foregroundBlur_7806_67"/>
+</filter>
+</defs>
+</svg>

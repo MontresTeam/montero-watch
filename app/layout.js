@@ -1,10 +1,22 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
+import "./globals/globals.css";
+import localFont from "next/font/local";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
+const amstelvar = localFont({
+  src: "../public/fonts/AmstelvarAlpha-VF.ttf",
+  variable: "--font-amstelvar",
+  display: "swap",
+});
+const monaSans = localFont({
+  src: "../public/fonts/MonaSans-Black.woff2",
+  variable: "--font-mona",
+  display: "swap",
+});
+
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
