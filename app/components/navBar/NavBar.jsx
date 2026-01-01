@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import gsap from "gsap";
 
-import Logo from "@/public/images/Logo/LogoNav.png";
+  import Logo from "@/public/images/Logo/LogoNav.png";
 import Glob from "@/public/icons/home/glob.png";
 
 const Navbar = () => {
