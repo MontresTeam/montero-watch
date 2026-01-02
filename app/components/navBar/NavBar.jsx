@@ -65,7 +65,7 @@ const Navbar = () => {
   }, [isLangOpen]);
 
   return (
-    <nav className="font-mona fixed top-0 left-0 w-full bg-white border-b z-50">
+    <nav className="font-mona fixed top-0 left-0 w-full bg-white  z-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className="h-16 flex items-center justify-between">
 
