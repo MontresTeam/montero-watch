@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Navbar from "../components/navBar/NavBar";
 import Footer from "../components/home/Footer/Footer";
-
+import Link from 'next/link'
 import Blog1 from "@/public/images/Blog/blog1.jpg";
 import Blog2 from "@/public/images/Blog/blog2.jpg";
 import Blog3 from "@/public/images/Blog/blog3.jpg";
@@ -47,9 +47,11 @@ export default function Page() {
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.96] active:shadow-inner">
-              Blog
-            </button>
+          <Link href="/review/blog">
+          <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.96] active:shadow-inner">
+          Blog
+          </button>
+          </Link>
 
             <h2 className="font-cormorant mt-6 sm:mt-8 text-3xl sm:text-4xl lg:text-5xl">
               Latest insights and trends
