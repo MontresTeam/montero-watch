@@ -2,7 +2,7 @@ import React from "react";
 
 function WatchDisplay() {
     return (
-        <div className="relative w-full md:w-[60%] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[800px]">
+        <div className="relative w-full md:w-[70%] h-[500px] sm:h-[500px] md:h-[600px] lg:h-[800px]">
             {/* SMALL GREEN WATCH (left-middle) */}
             <div className="absolute left-2 sm:left-5 md:left-8 lg:left-10 top-1/2 -translate-y-1/2 z-10 rotate-12 sm:rotate-15 md:rotate-20">
                 <img

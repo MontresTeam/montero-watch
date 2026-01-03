@@ -4,7 +4,7 @@ import WatchDisplay from "./WatchDisplay";
 
 function ProductBanner() {
   return (
-    <section className="relative min-h-screen overflow-hidden text-white">
+    <section className="relative min-h-screen py-6  overflow-hidden text-white">
       {/* BACKGROUND IMAGE */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -15,7 +15,7 @@ function ProductBanner() {
       <div className="absolute inset-0 bg-[#22374F]" />
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-16 sm:pt-24 lg:pt-32 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-16 sm:mt-[55px] sm:pt-24 lg:pt-32 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-0">
         {/* LEFT TEXT */}
         <div className="space-y-6 w-full lg:w-[55%] mt-0 sm:mt-10 text-center lg:text-left flex flex-col items-center lg:items-start">
           <h1

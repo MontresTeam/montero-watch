@@ -12,6 +12,7 @@ function page() {
   return (
     <>
       <Navbar />  
+      <div className='overflow-hidden'>
       <ProductBanner />
       <ProductDetails />
       <About />
@@ -19,6 +20,9 @@ function page() {
       <Quote />
       <SecondQuote/>
       <Subscribe />
+      </div>
+
+     
       <Footer />
     </>
   )
