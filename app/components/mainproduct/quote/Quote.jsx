@@ -26,7 +26,7 @@ export default function Quote() {
                    text-4xl md:text-5xl lg:text-6xl 
                    leading-[1.1] text-white"
           >
-            A World Time Watch Inspired by Global Beaches 
+            A World Time Watch Inspired by Global Beaches
           </h2>
 
           <p
@@ -37,6 +37,21 @@ export default function Quote() {
             Crafted for explorers, dreamers, and lovers of the world s most
             iconic beaches
           </p>
+
+          {/* BUTTON */}
+          <Link href="/product/comparison">
+            <button
+              className="mt-6 inline-flex items-center justify-center
+                       px-8 py-3
+                       border border-white/70
+                       text-white font-light
+                       rounded-full
+                       hover:bg-white hover:text-[#7F7E62]
+                       transition-all duration-300"
+            >
+              Comparison
+            </button>
+          </Link>
         </div>
       </div>
     </section>
