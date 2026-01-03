@@ -8,12 +8,14 @@ import WatchFeatures from '../components/mainproduct/features/WatchFeatures'
 import Quote from '../components/mainproduct/quote/Quote'
 import SecondQuote from '../components/mainproduct/Quote2/SecondQuote'
 import Subscribe from '../components/mainproduct/subscribe/Subscribe'
+import AboutHome from '../components/home/About/AboutHome'
 function page() {
   return (
     <>
       <Navbar />  
       <div className='overflow-hidden'>
       <ProductBanner />
+      <AboutHome />
       <ProductDetails />
       <About />
       <WatchFeatures />

@@ -20,7 +20,7 @@ export default function Home() {
       <HomeBanner />
 
       <RevealSection>
-        <AboutHome />
+        {/* <AboutHome /> */}
       </RevealSection>
 
       <RevealSection delay={0.1}>
