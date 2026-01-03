@@ -194,10 +194,10 @@ export default function Page() {
       <video
   src="/images/Gallery/galleryV.mp4"
   poster="/images/Gallery/gallary8.jpg"
-  autoPlay
-  muted
-  loop
-  playsInline
+    autoPlay
+    muted
+    loop
+    playsInline
   className="absolute inset-0 w-full h-full object-cover"
 />
 

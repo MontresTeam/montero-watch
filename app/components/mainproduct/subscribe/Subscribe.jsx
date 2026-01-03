@@ -1,36 +1,92 @@
-import React from 'react';
-import { FiMail } from 'react-icons/fi';
+"use client";
+
+import React, {useState,useEffect, useRef} from 'react';
 
 export default function Subscribe() {
     return (
         
-        <section className="w-full bg-white py-20 px-6 md:px-12 lg:px-24 flex flex-col lg:flex-row items-center justify-between gap-10">
-            {/* Left Content */}
-            <div className="w-full lg:w-1/2 max-w-xl space-y-4 ml-20">
-                <h2 className="font-cormorant text-5xl md:text-6xl text-black font-light leading-tight">
-                    Subscribe for Exclusive Updates
-                </h2>
-                <p className="Mona Sans text-gray-600 text-base md:text-lg font-light leading-relaxed max-w-md">
-                    Join our mailing list to receive early access, limited-edition alerts, and insider updates directly from the Montero team.
-                </p>
-            </div>
+        <ScrollAnimation animationClass="animate-fade-in-up">
+        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+          <div className="mx-auto max-w-7xl">
+            {/* SUBSCRIBE ROW */}
+            <ScrollAnimation animationClass="animate-fade-in-up">
+              <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+                {/* LEFT TEXT */}
+                <ScrollAnimation animationClass="animate-slide-in-left">
+                  <div>
+                    <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                      Subscribe for Exclusive Updates
+                    </h2>
 
-            {/* Right Form */}
-            <div className="w-full lg:w-1/2 flex justify-start lg:justify-end mr-30">
-                <div className="flex w-full max-w-2xl gap-5 h-[60px]">
-                    <div className="flex-1 bg-[#E6E6E6] flex items-center px-6 h-full">
-                        <FiMail className="text-xl text-gray-500 mr-4" />
-                        <input
-                            type="email"
-                            placeholder="Enter your e-mail"
-                            className="bg-transparent w-full outline-none text-gray-800 placeholder-gray-500 Mona Sans text-sm font-light h-full"
-                        />
+                    <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                      Join our mailing list to receive early access, limited-edition
+                      alerts, and insider updates directly from the Montero team.
+                    </p>
+                  </div>
+                </ScrollAnimation>
+
+                {/* RIGHT */}
+                <ScrollAnimation animationClass="animate-slide-in-right">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+                      <span className="mr-3 text-gray-500">✉</span>
+                      <input
+                        type="email"
+                        placeholder="Enter your e-mail"
+                        className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                      />
                     </div>
-                    <button className="bg-black text-white px-10 Mona Sans text-sm font-normal h-full whitespace-nowrap hover:bg-gray-900 transition-colors">
-                        Subscribe Now
+
+                    <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
+                      Subscribe Now
                     </button>
-                </div>
-            </div>
+                  </div>
+                </ScrollAnimation>
+              </div>
+            </ScrollAnimation>
+          </div>
         </section>
+      </ScrollAnimation>
     );
+}
+
+function ScrollAnimation({ children, animationClass, delay = 0 }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [delay]);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"}`}
+    >
+      {children}
+    </div>
+  );
 }
