@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/navBar/NavBar'
-import Signup from '../components/signup/SignupPage'
+import Signup from '../components/signup/page'
 import Footer from '../components/home/Footer/Footer'
 
 function page() {

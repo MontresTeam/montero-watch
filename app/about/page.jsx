@@ -1,0 +1,349 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Navbar from "../components/navBar/NavBar";
+import Footer from "../components/home/Footer/Footer";
+
+// ICONS
+import { FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+
+import About1 from "@/public/images/About/about1.jpg";
+import About2 from "@/public/images/About/about2.jpg";
+import About3 from "@/public/images/About/about3.jpg";
+import About4 from "@/public/images/About/about4.jpg";
+import About5 from "@/public/images/About/about5.jpg";
+import About6 from "@/public/images/About/about6.jpg";
+
+export default function Page() {
+  const [open, setOpen] = useState(null);
+
+  const faqs = [
+    "Do the watches come with a warranty?",
+    "Are the watches scratch-resistant?",
+    "What materials are used to make your watches?",
+    "How can I place an order?",
+  ];
+
+  return (
+    <>
+      <Navbar />
+
+      {/* ================= HERO ================= */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <Image
+          src={About1}
+          alt="Hero"
+          fill
+          priority
+          className="object-cover object-[center_10%] transition-transform duration-[8000ms] ease-out hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-black/50 transition-opacity duration-700" />
+        <div className="relative z-10 flex h-full items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl text-center text-white animate-fade-in-up">
+            <h1 className="font-cormorant text-[clamp(2rem,6vw,4rem)] leading-tight">
+              A World Time Watch Inspired by Global Beaches
+            </h1>
+            <p className="mt-4 text-sm sm:text-base lg:text-lg opacity-90 animate-fade-in-up-delayed px-4">
+              Crafted for explorers, dreamers, and lovers of the world s iconic
+              beaches
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= ABOUT ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
+        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:gap-12 md:grid-cols-2">
+            <ScrollAnimation animationClass="animate-slide-in-left">
+              <div>
+                <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.96] active:shadow-inner">
+                  About us
+                </button>
+                <h2 className="font-cormorant mt-4 sm:mt-6 text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                  The Story Behind Montero
+                </h2>
+                <p className="mt-4 sm:mt-6 max-w-xl text-sm sm:text-base text-gray-700 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                  Montero was born from a deep appreciation for the world, its diversity, and the timeless beauty of global coastlines. Each detail of the watch carries inspiration from the beaches that have shaped culture, adventure, and unforgettable memories. From Ibiza to Bali, Miami to Bora Bora, the Montero world-time concept celebrates the connection between people and place. It is more than a watch — it is a reminder that every moment holds a new horizon.
+                </p>
+              </div>
+            </ScrollAnimation>
+
+            <ScrollAnimation animationClass="animate-slide-in-right">
+              <div className="relative h-[300px] sm:h-[400px] lg:h-[520px] overflow-hidden group">
+                <Image 
+                  src={About2} 
+                  alt="About" 
+                  fill 
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+                />
+              </div>
+            </ScrollAnimation>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* ================= VALUES ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
+        <section className="bg-white px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-12 sm:pb-16 lg:pb-20">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <ScrollAnimation animationClass="animate-slide-in-up" delay={0}>
+              <ValueCard
+                img={About3}
+                title="Adventure"
+                text="For those who never stop exploring"
+              />
+            </ScrollAnimation>
+            <ScrollAnimation animationClass="animate-slide-in-up" delay={200}>
+              <ValueCard
+                img={About4}
+                title="Precision"
+                text="Powered by reliable world-time engineering"
+              />
+            </ScrollAnimation>
+            <ScrollAnimation animationClass="animate-slide-in-up" delay={400}>
+              <ValueCard
+                img={About5}
+                title="Culture"
+                text="Celebrating iconic beaches across the globe"
+              />
+            </ScrollAnimation>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* ================= OUR TEAM ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
+        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
+              <ScrollAnimation animationClass="animate-fade-in">
+                <div>
+                  <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.96] active:shadow-inner">
+                    Our Team
+                  </button>
+                  <h2 className="font-cormorant mt-4 sm:mt-6 text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                    The People Behind Montero
+                  </h2>
+                  <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                    Crafted by passionate professionals committed to precision and
+                    quality
+                  </p>
+                </div>
+              </ScrollAnimation>
+
+              <ScrollAnimation animationClass="animate-fade-in-delayed">
+                <div className="hidden md:flex gap-3">
+                  <button className="h-10 w-10 rounded-full border transition-all duration-300 hover:bg-gray-100 hover:border-gray-400 hover:shadow-md hover:-translate-y-0.5 active:scale-95">←</button>
+                  <button className="h-10 w-10 rounded-full border transition-all duration-300 hover:bg-gray-100 hover:border-gray-400 hover:shadow-md hover:-translate-y-0.5 active:scale-95">→</button>
+                </div>
+              </ScrollAnimation>
+            </div>
+
+            <ScrollAnimation animationClass="animate-slide-in-up">
+              <div className="mt-8 sm:mt-12 lg:mt-16 flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-hide">
+
+                {/* INFO CARD WITH ICONS */}
+                <div className="min-w-[280px] sm:min-w-[300px] bg-[#0f1e33] p-6 sm:p-8 text-white transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
+                  <h3 className="font-cormorant text-lg sm:text-xl">Della R. Thomas</h3>
+                  <p className="text-xs sm:text-sm opacity-80">CEO</p>
+
+                  <p className="mt-4 sm:mt-6 text-xs sm:text-sm opacity-70 leading-relaxed">
+                    Each beach was chosen for its cultural significance, beauty, and
+                    global reputation — together forming the emotional core of Montero.
+                    Each beach was chosen for its cultural significance, beauty, and
+                    global reputation — together forming the emotional core of Montero.
+                  </p>
+
+                  {/* ICONS */}
+                  <div className="mt-6 sm:mt-8 flex gap-4 sm:gap-5 text-base sm:text-lg opacity-80">
+                    <FaInstagram className="cursor-pointer transition hover:opacity-100 hover:scale-110" />
+                    <FaWhatsapp className="cursor-pointer transition hover:opacity-100 hover:scale-110" />
+                    <FaXTwitter className="cursor-pointer transition hover:opacity-100 hover:scale-110" />
+                  </div>
+                </div>
+
+                <TeamCard img={About6} name="Della R. Thomas" role="CEO" />
+                <TeamCard img={About6} name="Della R. Thomas" role="CEO" />
+                <TeamCard img={About6} name="Della R. Thomas" role="CEO" />
+              </div>
+            </ScrollAnimation>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* ================= FAQ + SUBSCRIBE ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
+        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+          <div className="mx-auto max-w-7xl">
+            {/* FAQ ROW */}
+            <div className="grid grid-cols-1 gap-8 lg:gap-16 md:grid-cols-2 items-start">
+              {/* LEFT TEXT */}
+              <ScrollAnimation animationClass="animate-slide-in-left">
+                <div>
+                  <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                    Frequently Asked Question
+                  </h2>
+
+                  <p className="mt-4 sm:mt-6 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed transition-opacity duration-300 hover:opacity-80">
+                    Each beach was chosen for its cultural significance, beauty, and
+                    global reputation — together forming the emotional core of
+                    Montero. Each beach was chosen for its cultural significance,
+                    beauty, and global reputation — together forming the emotional
+                    core of Montero.
+                  </p>
+                </div>
+              </ScrollAnimation>
+
+              {/* RIGHT FAQ LIST */}
+              <ScrollAnimation animationClass="animate-slide-in-right">
+                <div className="space-y-4 sm:space-y-6">
+                  {faqs.map((q, i) => (
+                    <div key={i} className="border-b border-gray-200 pb-3 sm:pb-4 transition-all duration-300 hover:border-gray-400">
+                      <button
+                        onClick={() => setOpen(open === i ? null : i)}
+                        className="flex w-full items-center justify-between text-left text-sm sm:text-base text-black transition-colors duration-300 hover:text-gray-600"
+                      >
+                        <span className="pr-4">{q}</span>
+                        <span className="text-xl flex-shrink-0 transition-transform duration-300" style={{ transform: open === i ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                          {open === i ? "−" : "+"}
+                        </span>
+                      </button>
+
+                      {open === i && (
+                        <p className="mt-3 sm:mt-4 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
+                          Yes, all Montero watches come with a comprehensive
+                          warranty covering manufacturing defects.
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </ScrollAnimation>
+            </div>
+
+            {/* SUBSCRIBE ROW */}
+            <ScrollAnimation animationClass="animate-fade-in-up">
+              <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+                {/* LEFT TEXT */}
+                <ScrollAnimation animationClass="animate-slide-in-left">
+                  <div>
+                    <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                      Subscribe for Exclusive Updates
+                    </h2>
+
+                    <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                      Join our mailing list to receive early access, limited-edition
+                      alerts, and insider updates directly from the Montero team.
+                    </p>
+                  </div>
+                </ScrollAnimation>
+
+                {/* RIGHT */}
+                <ScrollAnimation animationClass="animate-slide-in-right">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+                      <span className="mr-3 text-gray-500">✉</span>
+                      <input
+                        type="email"
+                        placeholder="Enter your e-mail"
+                        className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                      />
+                    </div>
+
+                    <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
+                      Subscribe Now
+                    </button>
+                  </div>
+                </ScrollAnimation>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      <Footer />
+    </>
+  );
+}
+
+/* ================= SCROLL ANIMATION COMPONENT ================= */
+function ScrollAnimation({ children, animationClass, delay = 0 }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [delay]);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ================= COMPONENTS ================= */
+
+function ValueCard({ img, title, text }) {
+  return (
+    <div className="relative h-[280px] sm:h-[350px] lg:h-[420px] overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+      <Image 
+        src={img} 
+        alt={title} 
+        fill 
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+      />
+      <div className="absolute inset-0 bg-black/40 transition-all duration-500 group-hover:bg-black/30" />
+      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white transition-transform duration-500 group-hover:translate-y-[-8px]">
+        <h3 className="font-mona text-xl sm:text-2xl transition-all duration-300">{title}</h3>
+        <p className="text-xs sm:text-sm transition-all duration-300 mt-1">{text}</p>
+      </div>
+    </div>
+  );
+}
+
+function TeamCard({ img, name, role }) {
+  return (
+    <div className="relative min-w-[240px] sm:min-w-[260px] h-[320px] sm:h-[360px] overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+      <Image 
+        src={img} 
+        alt={name} 
+        fill 
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-all duration-500 group-hover:from-black/60" />
+      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white transition-transform duration-500 group-hover:translate-y-[-8px]">
+        <h4 className="font-cormorant text-base sm:text-lg transition-all duration-300">{name}</h4>
+        <p className="text-xs sm:text-sm opacity-80 transition-all duration-300">{role}</p>
+      </div>
+    </div>
+  );
+}
