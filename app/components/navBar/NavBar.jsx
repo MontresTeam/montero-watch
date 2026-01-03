@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FaChevronDown, FaBars, FaTimes, FaUser } from "react-icons/fa";
+import { FaChevronDown, FaBars, FaTimes, FaUser,FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import gsap from "gsap";
-
-  import Logo from "@/public/images/Logo/LogoNav.png";
+import Logo from "@/public/images/Logo/LogoNav.png";
 import Glob from "@/public/icons/home/glob.png";
 
 const Navbar = () => {
@@ -65,7 +64,7 @@ const Navbar = () => {
   }, [isLangOpen]);
 
   return (
-    <nav className="font-mona fixed top-0 left-0 w-full bg-white border-b z-50">
+    <nav className="font-mona fixed top-0 left-0 w-full bg-white  z-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className="h-16 flex items-center justify-between">
 
@@ -136,7 +135,7 @@ const Navbar = () => {
 
             {/* USER ICON */}
             <Link href="/account" className="hidden md:block">
-              <FaUser className="text-gray-700" size={16} />
+              <FaRegUser className="text-gray-700" size={16} />
             </Link>
 
             {/* SIGN IN BUTTON (THIN OUTLINE) */}
