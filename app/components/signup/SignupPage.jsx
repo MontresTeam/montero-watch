@@ -9,7 +9,7 @@ export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <div className="min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
+        <div className="mt-6 min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
             <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 px-6 py-12 lg:py-0">
         
                 {/* Image Section */}
