@@ -1,13 +1,20 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FaChevronDown, FaBars, FaTimes, FaUser,FaRegUser } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaBars,
+  FaTimes,
+  FaRegUser,
+} from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import gsap from "gsap";
 
+import Dropdown from "./Dropdown";
 
+import Avatar from "../../../public/images/Avatar.png";
 import Logo from "@/public/images/Logo/LogoNav.png";
 import Glob from "@/public/icons/home/glob.png";
 
@@ -17,6 +24,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState("EN");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const mobileMenuRef = useRef(null);
   const langRef = useRef(null);
@@ -54,21 +62,19 @@ const Navbar = () => {
 
   /* LANGUAGE DROPDOWN */
   useEffect(() => {
-    if (!langRef.current) return;
+    if (!langRef.current || !isLangOpen) return;
 
-    if (isLangOpen) {
-      gsap.fromTo(
-        langRef.current,
-        { opacity: 0, scale: 0.95, y: -4 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.2, ease: "power2.out" }
-      );
-    }
+    gsap.fromTo(
+      langRef.current,
+      { opacity: 0, scale: 0.95, y: -4 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.2, ease: "power2.out" }
+    );
   }, [isLangOpen]);
 
   return (
-    <nav className="font-mona fixed top-0 left-0 w-full bg-white  z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white z-50 font-mona">
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
-        <div className="h-16 flex items-center justify-between">
+        <div className="relative h-16 flex items-center justify-between">
 
           {/* LEFT MENU */}
           <div className="hidden md:flex items-center space-x-6">
@@ -78,12 +84,11 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-[13px] tracking-wide font-light transition
-                    ${
-                      isActive
-                        ? "text-black"
-                        : "text-gray-500 hover:text-black"
-                    }`}
+                  className={`text-[13px] font-light tracking-wide transition ${
+                    isActive
+                      ? "text-black"
+                      : "text-gray-500 hover:text-black"
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -91,18 +96,18 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* LOGO (CENTER) */}
+          {/* LOGO */}
           <Link href="/" className="flex-shrink-0">
             <Image src={Logo} alt="Logo" width={190} height={80} priority />
           </Link>
 
           {/* RIGHT SIDE */}
-          <div className="flex items-center gap-5">
+          <div className="relative flex items-center gap-5">
 
-            {/* LANGUAGE */}
+            {/* LANGUAGE (DESKTOP) */}
             <div className="relative hidden md:block">
               <button
-                onClick={() => setIsLangOpen(!isLangOpen)}
+                onClick={() => setIsLangOpen((p) => !p)}
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700"
               >
                 <Image src={Glob} alt="Lang" width={18} height={18} />
@@ -135,16 +140,18 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* USER ICON */}
-            <Link href="/account" className="hidden md:block">
-              <FaRegUser className="text-gray-700" size={16} />
-            </Link>
+            {/* USER ICON (DESKTOP) */}
+            <button
+              onClick={() => setIsDropdownOpen((p) => !p)}
+              className="hidden md:block"
+            >
+              <FaRegUser size={16} className="text-gray-700" />
+            </button>
 
-            {/* SIGN IN BUTTON (THIN OUTLINE) */}
+            {/* SIGN IN */}
             <Link
               href="/signup"
-              className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition
-              ${
+              className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${
                 pathname === "/signup"
                   ? "bg-black text-white"
                   : "hover:bg-black hover:text-white"
@@ -153,13 +160,43 @@ const Navbar = () => {
               Sign In
             </Link>
 
-            {/* MOBILE TOGGLE */}
-            <button
-              className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-            </button>
+            {/* MOBILE RIGHT */}
+            <div className="md:hidden flex items-center gap-3">
+
+              {/* AVATAR (MOBILE) */}
+              <button
+                onClick={() => setIsDropdownOpen((p) => !p)}
+                className="w-10 h-10 rounded-full overflow-hidden bg-neutral-200"
+              >
+                <Image
+                  src={Avatar}
+                  alt="User Avatar"
+                  width={40}
+                  height={40}
+                  className="object-cover w-full h-full"
+                />
+              </button>
+
+              {/* TOGGLE */}
+              <button onClick={() => setIsMobileMenuOpen((p) => !p)}>
+                {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+              </button>
+            </div>
+
+            {/* 🔥 SHARED DROPDOWN (ONE INSTANCE) */}
+            {isDropdownOpen && (
+              <>
+                {/* DESKTOP */}
+                <div className="hidden md:block absolute right-0 top-10 z-[999]">
+                  <Dropdown onClose={() => setIsDropdownOpen(false)} />
+                </div>
+
+                {/* MOBILE */}
+                <div className="md:hidden absolute right-0 top-14 z-[999]">
+                  <Dropdown onClose={() => setIsDropdownOpen(false)} />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -171,8 +208,6 @@ const Navbar = () => {
         style={{ height: 0, opacity: 0 }}
       >
         <div className="flex flex-col px-6 py-5 space-y-4">
-
-          {/* MOBILE LINKS */}
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -189,16 +224,14 @@ const Navbar = () => {
             );
           })}
 
-          {/* LANGUAGE */}
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-500 mb-2 font-light">Language</p>
+            <p className="text-sm text-gray-500 mb-2">Language</p>
             <div className="flex gap-3">
               {languages.map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setSelectedLang(lang)}
-                  className={`px-4 py-1 rounded-full border font-light text-sm
-                  ${
+                  className={`px-4 py-1 rounded-full border text-sm ${
                     selectedLang === lang
                       ? "bg-black text-white border-black"
                       : "border-gray-300"
@@ -210,11 +243,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* SIGN IN */}
           <Link
             href="/signup"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-4 text-center border border-black rounded-full py-2 font-light hover:bg-black hover:text-white"
+            className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
           >
             Sign In
           </Link>
