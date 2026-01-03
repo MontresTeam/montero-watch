@@ -14,8 +14,8 @@ export default function page() {
             {/* Progress Bar */}
             <div className="flex items-center justify-center mb-8 sm:mb-12">
                 {/* Step 1 */}
-                <div className="relative z-10 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gray-100">
-                    <Image src={star} alt="Step 1" width={30} height={30} />
+                <div className="relative z-10 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-black bg-white">
+                    <Image src={star} alt="Step 2" width={30} height={30} />
                 </div>
 
                 {/* Line */}
