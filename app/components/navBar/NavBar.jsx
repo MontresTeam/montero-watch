@@ -84,11 +84,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-[13px] font-light tracking-wide transition ${
-                    isActive
+                  className={`text-[13px] font-light tracking-wide transition ${isActive
                       ? "text-black"
                       : "text-gray-500 hover:text-black"
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -113,9 +112,8 @@ const Navbar = () => {
                 <Image src={Glob} alt="Lang" width={18} height={18} />
                 {selectedLang}
                 <FaChevronDown
-                  className={`text-[10px] transition ${
-                    isLangOpen ? "rotate-180" : ""
-                  }`}
+                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -151,11 +149,10 @@ const Navbar = () => {
             {/* SIGN IN */}
             <Link
               href="/signup"
-              className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${
-                pathname === "/signup"
+              className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/signup"
                   ? "bg-black text-white"
                   : "hover:bg-black hover:text-white"
-              }`}
+                }`}
             >
               Sign In
             </Link>
@@ -215,9 +212,8 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-light ${
-                  isActive ? "text-black" : "text-gray-600"
-                }`}
+                className={`text-base font-light ${isActive ? "text-black" : "text-gray-600"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -231,11 +227,10 @@ const Navbar = () => {
                 <button
                   key={lang}
                   onClick={() => setSelectedLang(lang)}
-                  className={`px-4 py-1 rounded-full border text-sm ${
-                    selectedLang === lang
+                  className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
                       ? "bg-black text-white border-black"
                       : "border-gray-300"
-                  }`}
+                    }`}
                 >
                   {lang}
                 </button>

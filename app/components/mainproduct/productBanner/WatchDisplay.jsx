@@ -1,12 +1,16 @@
 import React from "react";
+import Image from "next/image";
+import blueWatch from "@/public/images/MainProducts/blueWatch/blueWatch2.png"
+import greenWatch from "@/public/images/MainProducts/greenWatch/green-watch1.png"
+
 
 function WatchDisplay() {
     return (
         <div className="relative w-full md:w-[70%] h-[500px] sm:h-[500px] md:h-[600px] lg:h-[800px]">
             {/* SMALL GREEN WATCH (left-middle) */}
             <div className="absolute left-2 sm:left-5 md:left-8 lg:left-10 top-1/2 -translate-y-1/2 z-10 rotate-12 sm:rotate-15 md:rotate-20">
-                <img
-                    src="/images/MainProducts/greenWatch/green-watch1.png"
+                <Image
+                    src={greenWatch}
                     alt="Green Watch"
                     className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain opacity-90 blur-[0.5px] sm:blur-[1px]"
                 />
@@ -42,16 +46,28 @@ function WatchDisplay() {
             </svg>
 
             {/* MAIN BLUE WATCH (right-center, dominant) */}
-            <div className="absolute right-0 sm:right-0 md:right-0 top-1/2 -translate-y-1/2 z-20">
-                <img
-                    src="/images/MainProducts/blueWatch/blue-watch1.png"
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 z-20">
+                <Image
+                    src={blueWatch}
                     alt="Blue World Time Watch"
-                    className="w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] lg:w-[1000px] lg:h-[1000px] 
-                    ml-[80px] sm:ml-[100px] md:ml-[150px] lg:ml-[214px] 
-                    mt-[40px] sm:mt-[60px] md:mt-[80px] lg:mt-[120px] 
-                    object-contain -rotate-[260deg]"
+                    className="
+      w-[220px] h-[220px]
+      sm:w-[320px] sm:h-[320px]
+      md:w-[450px] md:h-[450px]
+      lg:w-[650px] lg:h-[650px]
+
+      ml-[60px]
+      sm:ml-[90px]
+      md:ml-[140px]
+      lg:ml-[200px]
+
+      mt-[20px] sm:mt-[30px] md:mt-[40px] lg:mt-[60px]
+      object-contain -rotate-[165deg]
+    "
                 />
             </div>
+
+
 
             {/* BOTTOM CURVED ARROW */}
             <svg

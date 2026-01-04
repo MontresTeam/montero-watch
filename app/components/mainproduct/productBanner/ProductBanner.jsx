@@ -8,7 +8,7 @@ function ProductBanner() {
       {/* BACKGROUND IMAGE */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/home/Bg.png')" }}
+        style={{ backgroundImage: "url('/images/Home/Bg.png')" }}
       />
 
       {/* SOLID OVERLAY */}

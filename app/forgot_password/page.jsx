@@ -9,7 +9,7 @@ import Footer from '../components/home/Footer/Footer';
 export default function page() {
     return (
         <>
-        <Navbar/>
+            <Navbar />
             <div className="min-h-screen w-full bg-white flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12">
                 {/* Progress Bar */}
 
@@ -62,7 +62,7 @@ export default function page() {
                     </button>
                 </form>
             </div>
-            <Footer/>
+            <Footer />
         </>
 
     );
