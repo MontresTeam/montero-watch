@@ -8,14 +8,18 @@ import WatchFeatures from "../components/mainproduct/features/WatchFeatures";
 import Quote from "../components/mainproduct/quote/Quote";
 import SecondQuote from "../components/mainproduct/Quote2/SecondQuote";
 import Subscribe from "../components/mainproduct/subscribe/Subscribe";
+import RevealSection from "../components/animations/RevealSection";
 function page() {
   return (
     <>
       <Navbar />
       <div className="overflow-hidden">
         <ProductBanner />
-        <ProductDetails />
-        <About />
+        <ProductDetails /> 
+       
+        <RevealSection delay={.5}>
+             <About />
+        </RevealSection>
         <WatchFeatures />
         <Quote />
         <SecondQuote />
