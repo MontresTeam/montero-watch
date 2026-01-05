@@ -79,18 +79,16 @@ export default function WatchFeatures() {
             {/* COLOR SELECTOR BUTTONS */}
             <div className="flex gap-3 mt-2">
               <button
-                className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full border ${
-                  activeColor === "green"
+                className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full border ${activeColor === "green"
                     ? "bg-green-800 border-green-800 scale-110"
                     : "border-neutral-400"
-                } transition-all`}
+                  } transition-all`}
               />
               <button
-                className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full border ${
-                  activeColor === "blue"
+                className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full border ${activeColor === "blue"
                     ? "bg-blue-700 border-blue-700 scale-110"
                     : "border-neutral-400"
-                } transition-all`}
+                  } transition-all`}
               />
             </div>
           </div>

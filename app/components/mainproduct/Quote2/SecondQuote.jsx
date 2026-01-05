@@ -69,11 +69,10 @@ function SecondQuote() {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-6 h-6 rounded-full border transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                  idx === currentIndex
+                className={`w-6 h-6 rounded-full border transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 ${idx === currentIndex
                     ? `bg-[${watch.color}] border-[${watch.color}]`
                     : "bg-white border-gray-400 hover:border-gray-900"
-                }`}
+                  }`}
                 aria-label={`Select ${idx === 0 ? "Green" : "Blue"} Watch`}
               ></button>
             ))}
