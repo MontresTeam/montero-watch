@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import userAvatar from '../../../public/images/Avatar.png';
+import Link from 'next/link';
+
 import {
   FiUser,
   FiSettings,
@@ -48,11 +50,13 @@ function Dropdown({ onClose }) {
 
       {/* Menu */}
       <div className="space-y-1">
-        <MenuItem
+        <Link href="/profile">
+          <MenuItem
           icon={<FiUser size={18} />}
           label="My Profile"
           right={<FiChevronRight size={16} />}
         />
+        </Link>
 
         <MenuItem
           icon={<FiSettings size={18} />}

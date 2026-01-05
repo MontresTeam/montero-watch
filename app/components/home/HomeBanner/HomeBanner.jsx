@@ -179,7 +179,7 @@ export default function HomeBanner() {
       </div>
 
       {/* LEFT ARROW */}
-      <div
+      < div
         ref={leftArrowRef}
         className="absolute top-[25%] right-[23%] hidden lg:block z-10"
       >

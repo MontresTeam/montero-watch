@@ -137,37 +137,37 @@ const page = () => {
 
                 <ul className="grid grid-cols-2 gap-y-3 text-sm text-gray-700 mb-6">
                   <li className="flex items-center gap-2">
-                    <span className="text-[#2596be] text-lg leading-none">
+                    <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Case size
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#2596be] text-lg leading-none">
+                    <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Movement
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#2596be] text-lg leading-none">
+                    <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Materials
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#2596be] text-lg leading-none">
+                    <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Warranty
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#2596be] text-lg leading-none">
+                    <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Straps
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#2596be] text-lg leading-none">
+                    <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Delivery Window
@@ -197,37 +197,37 @@ const page = () => {
 
                 <ul className="grid grid-cols-2 gap-y-3 text-sm text-gray-700 mb-6">
                   <li className="flex items-center gap-2">
-                    <span className="text-[#15493b] text-lg leading-none">
+                    <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Case size
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#15493b] text-lg leading-none">
+                    <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Movement
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#15493b] text-lg leading-none">
+                    <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Materials
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#15493b] text-lg leading-none">
+                    <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Warranty
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#15493b] text-lg leading-none">
+                    <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Straps
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#15493b] text-lg leading-none">
+                    <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
                     Delivery Window
@@ -280,7 +280,7 @@ const page = () => {
 
                 {/* RIGHT */}
                 <ScrollAnimation animationClass="animate-slide-in-right">
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1">
                     <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
                       <span className="mr-3 text-gray-500">✉</span>
                       <input

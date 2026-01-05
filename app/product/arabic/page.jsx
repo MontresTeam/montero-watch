@@ -28,65 +28,55 @@ const Page = () => {
     <>
       <Navbar />
       {/* First Section */}
-      <section className="relative w-full min-h-screen bg-gradient-to-br from-[#1a5647] via-[#0f3d30] to-[#0a2920] overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 right-20 w-96 h-96 bg-emerald-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-teal-600 rounded-full blur-3xl"></div>
-        </div>
-
-        {/* Content Container */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-12 lg:py-0">
-          <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
-            {/* Left Content */}
-            <div className="max-w-xl text-center lg:text-left z-10">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif text-white leading-tight">
-                A World Time Watch Inspired by Global Beaches
-              </h1>
-
-              <p className="text-xs sm:text-sm lg:text-base text-white/90 mb-6 sm:mb-8 leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the
-                <br className="hidden sm:block" />
-                world s most iconic beaches
-              </p>
-
-              <button
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                Pre-Order Now
-              </button>
-            </div>
-
-            {/* Right Watch Image */}
-            <div className="relative w-full max-w-[320px] sm:max-w-[460px] lg:max-w-[600px] xl:max-w-[740px] aspect-square">
-              <div className="absolute inset-0 bg-gradient-radial from-emerald-400/20 to-transparent rounded-full blur-2xl"></div>
-
-              <div
-                className="
-      relative w-full h-full
-      transform
-      translate-y-8    /* UP */
-      translate-x-4      /* RIGHT */
-      scale-138         /* SIZE */
-      hover:scale-115
-      transition-transform duration-500
-    "
-              >
-                <Image
-                  src={Green1}
-                  alt="Green World Time Watch"
-                  className="w-full h-full object-contain drop-shadow-2xl"
-                />
+      {/* ================= HERO SECTION ================= */}
+            <section className="relative w-full min-h-screen overflow-hidden bg-gradient-to-br from-[#1a5647] via-[#0f3d30] to-[#0a2920]">
+              {/* Decorative Elements */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-48 h-48 sm:w-96 sm:h-96 bg-emerald-400 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-48 h-48 sm:w-96 sm:h-96 bg-teal-600 rounded-full blur-3xl"></div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
-      </section>
+      
+              {/* Content Container */}
+              <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-12 lg:py-0">
+                <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
+                  {/* Left Content */}
+                  <div className="max-w-xl text-center lg:text-left z-10 order-2 lg:order-1">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif text-white leading-tight mb-4 sm:mb-6">
+                      A World Time Watch Inspired by Global Beaches
+                    </h1>
+      
+                    <p className="text-sm sm:text-base lg:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed">
+                      Crafted for explorers, dreamers, and lovers of the world's most iconic beaches
+                    </p>
+      
+                    <button
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                      className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      Pre-Order Now
+                    </button>
+                  </div>
+      
+                  {/* Right Watch Image */}
+                  <div className="relative w-full max-w-[280px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[600px] xl:max-w-[700px] aspect-square order-1 lg:order-2">
+                    <div className="absolute inset-0 bg-gradient-radial from-emerald-400/20 to-transparent rounded-full blur-2xl"></div>
+                    <div className="relative w-full h-full transform scale-110 sm:scale-125 lg:scale-138 hover:scale-115 transition-transform duration-500">
+                      <Image
+                        src={Green1}
+                        alt="Green World Time Watch"
+                        fill
+                        className="object-contain drop-shadow-2xl"
+                        priority
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              {/* Bottom gradient fade */}
+              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </section>
 
       {/* Second Section */}
       <section>
@@ -159,17 +149,132 @@ const Page = () => {
               </div>
 
               {/* Order Button */}
+              <Link href="/order">
               <button className="bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2">
                 <span className="text-xl">₽</span>
                 <span>859 Order Now</span>
-              </button>
+              </button> 
+              </Link><br />  <br />
+              <h1 className="inline-flex items-center gap-3">
+                <span className="px-3 py-1 text-xs tracking-widest font-semibold text-red-700 border border-red-600 uppercase">
+                  Limited Edition
+                </span>
+              </h1>
             </div>
           </div>
-        </div>
+        </div> 
       </section>
 
-      {/* Section 3 */}
-      <section></section>
+      {/* Section    3 */}
+      {/* ================= TECHNICAL SPECIFICATIONS SECTION ================= */}
+            <section className="bg-white py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
+                {/* Title - Always visible */}
+                <div className="max-w-md mb-8 sm:mb-0">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-gray-900 mb-3">
+                    Technical Specifications
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    Seiko NH34 GMT – reliable, accurate, and trusted by global enthusiasts.
+                  </p>
+                </div>
+      
+                {/* Mobile/Tablet View - Stack layout */}
+                <div className="lg:hidden mt-8 space-y-8">
+                  {/* Watch Image - Mobile */}
+                  <div className="relative w-full h-[400px] sm:h-[500px] flex items-center justify-center">
+                    <Image
+                      src={Green3}
+                      alt="Montero Watch"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+      
+                  {/* Specifications List - Mobile */}
+                  <div className="space-y-4">
+                    {[
+                      "Stainless Steel",
+                      "Polished & brushed finishing",
+                      "Case Thickness: 14.8mm",
+                      "Diameter: 41 mm",
+                    ].map((spec, i) => (
+                      <div key={i} className="flex items-center gap-3 pb-3 border-b border-gray-200">
+                        <span className="w-2 h-2 bg-black rounded-full flex-shrink-0"></span>
+                        <p className="text-sm text-gray-700">{spec}</p>
+                      </div>
+                    ))}
+                  </div>
+      
+                  {/* Limited Edition Text - Mobile */}
+                  <div className="text-center sm:text-left pt-4">
+                    <p className="text-4xl sm:text-5xl font-serif text-gray-200 leading-tight">
+                      LIMITED EDITION
+                    </p>
+                    <p className="text-3xl sm:text-4xl font-serif text-gray-200">ONE OF 150</p>
+                  </div>
+                </div>
+      
+                {/* Desktop View - Original positioned layout */}
+                <div className="hidden lg:block min-h-[700px]">
+                  {/* RIGHT TOP SPEC */}
+                  <div className="absolute right-[120px] top-36">
+                    <div className="flex items-center gap-4">
+                      <span className="w-2 h-2 bg-black rounded-full" />
+                      <p className="text-sm text-gray-700 w-[160px]">Stainless Steel</p>
+                      <span className="w-56 h-px bg-gray-300" />
+                    </div>
+                  </div>
+      
+                  {/* LEFT MIDDLE SPECS */}
+                  <div className="absolute left-[480px] top-72 space-y-16">
+                    <div className="flex items-center gap-4">
+                      <span className="w-2 h-2 bg-black rounded-full" />
+                      <p className="text-sm text-gray-700 w-[220px]">
+                        Polished & brushed finishing
+                      </p>
+                      <span className="w-64 h-px bg-gray-300" />
+                    </div>
+      
+                    <div className="flex items-center gap-4">
+                      <span className="w-2 h-2 bg-black rounded-full" />
+                      <p className="text-sm text-gray-700 w-[240px]">
+                        Case Thickness: 14.8mm
+                      </p>
+                      <span className="w-72 h-px bg-gray-300" />
+                    </div>
+                  </div>
+      
+                  {/* FADED TEXT */}
+                  <div className="absolute left-12 bottom-40 pointer-events-none">
+                    <p className="text-6xl font-serif text-gray-200 leading-none">
+                      LIMITED EDITION
+                    </p>
+                    <p className="text-5xl font-serif text-gray-200">ONE OF 150</p>
+                  </div>
+      
+                  {/* BOTTOM LEFT SPEC */}
+                  <div className="absolute left-[620px] bottom-10">
+                    <div className="flex items-center gap-4">
+                      <span className="w-2 h-2 bg-black rounded-full" />
+                      <p className="text-sm text-gray-700 w-[140px]">Diameter: 41 mm</p>
+                      <span className="w-64 h-px bg-gray-300" />
+                    </div>
+                  </div>
+      
+                  {/* WATCH IMAGE - Desktop */}
+                  <div className="absolute left-[800px] top-[-250px] w-[900px] h-[1250px]">
+                    <Image
+                      src={Green3}
+                      alt="Montero Watch"
+                      fill
+                      priority
+                      className="object-contain -rotate-[70deg] scale-110 transition-transform duration-700 ease-out"
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
 
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -247,7 +352,7 @@ const Page = () => {
               <div className="relative w-full h-full max-w-md">
                 {/* Image */}
                 <video
-                  src="/images/Gallery/galleryV.mp4"
+                  // src="/images/Gallery/galleryV.mp4"
                   autoPlay
                   muted
                   loop
@@ -296,7 +401,7 @@ const Page = () => {
                   text-xl md:text-2xl 
                   text-white/90 leading-relaxed"
             >
-              Crafted for explorers, dreamers, and lovers of the world s most
+              Crafted for explorers, dreamers, and lovers of the world's most
               iconic beaches
             </p>
           </div>
@@ -345,7 +450,7 @@ const Page = () => {
 
                   {/* Text */}
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                    I recently purchased the Montero watch, and I m extremely
+                    I recently purchased the Montero watch, and I'm extremely
                     satisfied. The design looks premium, the build quality is
                     solid, and it feels very comfortable on the wrist. Perfect
                     for both formal and casual wear.
