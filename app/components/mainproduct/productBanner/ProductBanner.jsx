@@ -5,9 +5,20 @@ import Image from "next/image";
 import WatchDisplay from "./WatchDisplay";
 import gsap from "gsap";
 
+import { useRouter } from "next/navigation";
+
 function ProductBanner() {
+  const router = useRouter();
   const [isSwapped, setIsSwapped] = useState(false);
   const textRef = useRef(null);
+
+  const handlePreOrder = () => {
+    if (isSwapped) {
+      router.push("/product/arabic");
+    } else {
+      router.push("/product/english");
+    }
+  };
 
   useEffect(() => {
     gsap.fromTo(
@@ -54,6 +65,7 @@ function ProductBanner() {
           </p>
 
           <button
+            onClick={handlePreOrder}
             className="px-8 py-3 sm:px-10 sm:py-4 rounded-full text-black bg-white border border-white font-medium text-sm sm:text-base hover:scale-105 transition"
           >
             Pre-Order Now

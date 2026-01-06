@@ -16,7 +16,7 @@ import blueWatch from "../../../../public/images/MainProducts/blueWatch/blueWatc
 import limitedEditionBlue from '../../../../public/images/MainProducts/blueWatchIcons/limited 1.png';
 import timerWatchBlue from '../../../../public/images/MainProducts/blueWatchIcons/Blue dial inspired by Jumeirah  shoreline.png';
 import handIconBlue from '../../../../public/images/MainProducts/blueWatchIcons/Sapphire crystal for durability.png';
-import arabicNumberBlue from '../../../../public/images/MainProducts/blueWatchIcons/Eastern Arabic numerals.png';
+import arabicNumberBlue from '../../../../public/images/MainProducts/blueWatchIcons/24_icon.png';
 import gmtIconBlue from '../../../../public/images/MainProducts/blueWatchIcons/GMT function for global  synchrony.png';
 
 export default function WatchFeatures() {

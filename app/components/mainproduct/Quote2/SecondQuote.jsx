@@ -10,13 +10,25 @@ import bluewatchBack from "../../../../public/images/MainProducts/blueWatch/DSC0
 import greenwatchFront from "../../../../public/images/MainProducts/greenWatch/gw1.png";
 import greenwatchBack from "../../../../public/images/MainProducts/greenWatch/gw2.png";
 
+import { useRouter } from "next/navigation";
+
 function SecondQuote() {
+  const router = useRouter();
   const watches = [
     { front: greenwatchFront, back: greenwatchBack, color: "#0E4A66" },
     { front: bluewatchFront, back: bluewatchBack, color: "#1A1A1A" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePreOrder = () => {
+    // index 1 is blue, index 0 is green
+    if (currentIndex === 1) {
+      router.push("/product/english");
+    } else {
+      router.push("/product/arabic");
+    }
+  };
 
   // Automatically switch watches every 5 seconds
   useEffect(() => {
@@ -70,8 +82,8 @@ function SecondQuote() {
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 className={`w-6 h-6 rounded-full border transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 ${idx === currentIndex
-                    ? `bg-[${watch.color}] border-[${watch.color}]`
-                    : "bg-white border-gray-400 hover:border-gray-900"
+                  ? `bg-[${watch.color}] border-[${watch.color}]`
+                  : "bg-white border-gray-400 hover:border-gray-900"
                   }`}
                 aria-label={`Select ${idx === 0 ? "Green" : "Blue"} Watch`}
               ></button>
@@ -90,7 +102,9 @@ function SecondQuote() {
             Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
           </p>
 
-          <button className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium tracking-wide text-[#1A1A1A] border border-[#1A1A1A] rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:border-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A1A1A]">
+          <button
+            onClick={handlePreOrder}
+            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium tracking-wide text-[#1A1A1A] border border-[#1A1A1A] rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:border-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A1A1A]">
             <span className="absolute inset-0 w-full h-full bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out"></span>
             <span className="relative z-10">Pre-Order Now</span>
           </button>
