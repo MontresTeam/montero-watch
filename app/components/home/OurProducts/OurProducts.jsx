@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from 'next/link'
+import Link from "next/link";
 
 import WatchBlue from "@/public/images/Home/watch1.png";
 import WatchGreen from "@/public/images/Home/watch2.png";
@@ -74,43 +74,38 @@ const OurProducts = () => {
           Choose Your Montero Edition
         </h1>
 
-<p className="
+        <p
+          className="
   mt-6
   font-mona
-  text-[22px] md:text-[24px]
+  text-[24px]
   leading-[170%]
   tracking-[0.015em]
-  text-gray-700
   text-center
   max-w-3xl
   mx-auto
-">
-  Montero is available in two collectible editions — each designed with its own
-  identity while sharing the same world-time DNA and craftsmanship.
-</p>
-
-
-
-
+"
+        >
+          Montero is available in two collectible editions — each designed with
+          its own identity while sharing the same world-time DNA and
+          craftsmanship.
+        </p>
       </div>
 
       {/* CTA */}
       <div className="flex justify-center mt-8">
         <Link href="/product">
-        <button
-          ref={ctaRef}
-          className="bg-black text-white px-10 py-3 rounded-full text-base font-medium hover:opacity-80 transition"
-        >
-          View Details
-        </button>
+          <button
+            ref={ctaRef}
+            className="bg-black text-white px-10 py-3 rounded-full text-base font-medium hover:opacity-80 transition"
+          >
+            View Details
+          </button>
         </Link>
       </div>
 
       {/* PRODUCT GRID */}
-      <div
-        ref={contentRef}
-        className="max-w-7xl mx-auto w-full mt-16"
-      >
+      <div ref={contentRef} className="max-w-7xl mx-auto w-full mt-16">
         <div className="flex flex-col md:flex-row justify-between gap-16">
           {/* LEFT PRODUCT */}
           <div className="product-item grid grid-cols-1 md:grid-cols-2 items-center gap-8">
@@ -118,7 +113,8 @@ const OurProducts = () => {
             <div className="space-y-3 text-center md:text-left">
               <h3 className="text-2xl font-semibold">English Edition</h3>
               <p className="text-gray-600">
-                A refined international version with a crisp white & blue dial inspired by modern minimalism.
+                A refined international version with a crisp white & blue dial
+                inspired by modern minimalism.
               </p>
             </div>
 
@@ -149,7 +145,8 @@ const OurProducts = () => {
             <div className="space-y-3 order-1 md:order-2 text-center md:text-left">
               <h3 className="text-2xl font-semibold">Arabic Edition</h3>
               <p className="text-gray-600">
-                A bold blue dial with Eastern Arabic numerals inspired by regional identity and oceanic depth.
+                A bold blue dial with Eastern Arabic numerals inspired by
+                regional identity and oceanic depth.
               </p>
             </div>
           </div>
