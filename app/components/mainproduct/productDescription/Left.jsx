@@ -84,6 +84,9 @@ export default function Left() {
     flex items-center gap-2 sm:gap-4
     translate-x-[10%] sm:translate-x-[15%] md:translate-x-[25%] lg:translate-x-[35%]
     mr-0 sm:mr-10 md:mr-20 lg:mr-[300px]
+
+    hover:scale-[1.15] transition-transform duration-300 ease-out
+
   "
                 >
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
@@ -97,7 +100,7 @@ export default function Left() {
 
 
                 {/* Case Thickness */}
-                <div className="flex items-center gap-2 sm:gap-4 translate-x-[-15%] sm:translate-x-[-15%] md:translate-x-[-10%] lg:translate-x-[-15%] mr-10 md:mr-20 lg:ml-[60px]">
+                <div className="flex hover:scale-[1.15] transition-transform duration-300 ease-out items-center gap-2 sm:gap-4 translate-x-[-15%] sm:translate-x-[-15%] md:translate-x-[-10%] lg:translate-x-[-15%] mr-10 md:mr-20 lg:ml-[60px]">
             
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
                     <span className="monaSans font-light text-[11px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
@@ -114,6 +117,7 @@ export default function Left() {
     translate-x-[15%] sm:translate-x-[20%] md:translate-x-[35%] lg:translate-x-[50%]
     pt-4 sm:pt-8
     mr-10 md:mr-20 lg:mr-[369px]
+        hover:scale-[1.15] transition-transform duration-300 ease-out
   "
                 >
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
