@@ -58,29 +58,49 @@ export default function Left() {
             {/* Callouts Container - Precisely aligned and responsive */}
             <div className="relative z-20 w-full h-full flex flex-col justify-center space-y-10 sm:space-y-12 lg:space-y-20 pl-6 sm:pl-8 md:pl-16 lg:pl-20">
 
-                {/* Stainless Steel */}
-                <div className="flex items-center gap-2 sm:gap-4 translate-x-[30%] sm:translate-x-[40%] md:translate-x-[50%] lg:translate-x-[60%] transition-transform hover:scale-105 duration-500 mr-10 md:mr-20 lg:mr-32">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
-                    <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
-                        Stainless Steel
-                    </span>
-                    <div className="h-px bg-black w-16 sm:w-20 md:w-32 lg:w-40" />
-                </div>
+              {/* Stainless Steel */}
+<div
+  className="
+    
+    flex items-center gap-2 sm:gap-4
+    translate-x-[30%] sm:translate-x-[40%] mr-[145px] md:translate-x-[50%] lg:translate-x-[60%]
+    md:mr-20 lg:mr-[338px]
+    transition-transform duration-500 hover:scale-105
+  "
+>
+  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
+
+  <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
+    Stainless Steel
+  </span>
+
+  <div className="h-px bg-black w-16 sm:w-40 md:w-32 lg:w-40" />
+</div>
+
 
                 {/* Polished & brushed finishing */}
-                <div className="flex items-center gap-2 sm:gap-4 translate-x-[10%] sm:translate-x-[15%] md:translate-x-[25%] lg:translate-x-[35%] mr-10 md:mr-20 lg:mr-32">
+                <div
+                    className="
+    flex items-center gap-2 sm:gap-4
+    translate-x-[10%] sm:translate-x-[15%] md:translate-x-[25%] lg:translate-x-[35%]
+    mr-0 sm:mr-10 md:mr-20 lg:mr-[300px]
+  "
+                >
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
-                    <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
+
+                    <span className="monaSans font-light text-[11px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
                         Polished & brushed finishing
                     </span>
+
                     <div className="h-px bg-black w-14 sm:w-16 md:w-24 lg:w-32" />
                 </div>
 
+
                 {/* Case Thickness */}
-                <div className="flex items-center gap-2 sm:gap-4 translate-x-[-15%] sm:translate-x-[-15%] md:translate-x-[-10%] lg:translate-x-[-15%] mr-10 md:mr-20 lg:mr-32">
-                    <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-black shrink-0" />
+                <div className="flex items-center gap-2 sm:gap-4 translate-x-[-15%] sm:translate-x-[-15%] md:translate-x-[-10%] lg:translate-x-[-15%] mr-10 md:mr-20 lg:ml-[60px]">
+            
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
-                    <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
+                    <span className="monaSans font-light text-[11px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
                         Case Thickness: (add your number)
                     </span>
                     <div className="h-px bg-black w-20 sm:w-28 md:w-40 lg:w-56" />
@@ -88,14 +108,23 @@ export default function Left() {
                 </div>
 
                 {/* Diameter */}
-                <div className="flex items-center gap-2 sm:gap-4 translate-x-[15%] sm:translate-x-[20%] md:translate-x-[35%] lg:translate-x-[50%] pt-4 sm:pt-8 mr-10 md:mr-20 lg:mr-32">
+                <div
+                    className="
+    flex items-center gap-2 sm:gap-4
+    translate-x-[15%] sm:translate-x-[20%] md:translate-x-[35%] lg:translate-x-[50%]
+    pt-4 sm:pt-8
+    mr-10 md:mr-20 lg:mr-[369px]
+  "
+                >
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
+
                     <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
                         Diameter: 41 mm
                     </span>
-                    <div className="h-px bg-black w-16 sm:w-20 md:w-32 lg:w-48" />
 
+                    <div className="h-px bg-black w-16 sm:w-20 md:w-32 lg:w-48" />
                 </div>
+
 
             </div>
         </div>

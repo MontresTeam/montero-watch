@@ -1,4 +1,3 @@
-
 import React from "react";
 import Navbar from "../components/navBar/NavBar";
 import ProductBanner from "../components/mainproduct/productBanner/ProductBanner";
@@ -9,21 +8,24 @@ import WatchFeatures from "../components/mainproduct/features/WatchFeatures";
 import Quote from "../components/mainproduct/quote/Quote";
 import SecondQuote from "../components/mainproduct/Quote2/SecondQuote";
 import Subscribe from "../components/mainproduct/subscribe/Subscribe";
+import RevealSection from "../components/animations/RevealSection";
 // import AboutHome from "../components/home/About/AboutHome";
 
 function page() {
   return (
     <>
-      <Navbar />  
-      <div className='overflow-hidden'>
-      <ProductBanner />
-      {/* <AboutHome /> */}
-      <ProductDetails />
-      <About />
-      <WatchFeatures />
-      <Quote />
-      <SecondQuote/>
-      <Subscribe />
+      <Navbar />
+      <div className="overflow-hidden">
+        <ProductBanner />
+        <ProductDetails /> 
+       
+        <RevealSection delay={.5}>
+             <About />
+        </RevealSection>
+        <WatchFeatures />
+        <Quote />
+        <SecondQuote />
+        <Subscribe />
       </div>
 
       <Footer />
