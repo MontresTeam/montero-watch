@@ -3,7 +3,7 @@ import ImgContainer from './ImgContainer'
 import Form from './Form'
 export default function Contact() {
     return (
-        <section className="w-full bg-white py-30 overflow-hidden">
+        <section className="w-full bg-white pt-4 pb-6 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center flex justify-center">
 
