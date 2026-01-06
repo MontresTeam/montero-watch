@@ -47,11 +47,9 @@ export default function Page() {
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
-          <Link href="/review/blog">
-          <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.96] active:shadow-inner">
+          <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm">
           Blog
           </button>
-          </Link>
 
             <h2 className="font-cormorant mt-6 sm:mt-8 text-3xl sm:text-4xl lg:text-5xl">
               Latest insights and trends
@@ -70,63 +68,75 @@ export default function Page() {
         <section className="bg-white px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-28">
           <div className="mx-auto max-w-7xl grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
             <ScrollAnimation animationClass="animate-slide-in-up" delay={0}>
-              <BlogCard
+              <Link href="review/blog">
+                <BlogCard
                 img={Blog2}
                 category="Travel"
                 date="11 March 2023"
                 title="Train Or Bus Journey? Which one suits?"
                 desc="The choice between a train or bus journey depends on various factors such as the distance of the journey, the available time, the cost, and personal preferences."
               />
+              </Link>
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={100}>
-              <BlogCard
+              <Link href="/review/blog">
+                <BlogCard
                 img={Blog3}
                 category="Design"
                 date="11 March 2023"
                 title="Best Website to research for your next project"
                 desc="Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs."
               />
+              </Link>
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={200}>
-              <BlogCard
+              <Link href="review/blog">
+                <BlogCard
                 img={Blog4}
                 category="Sports"
                 date="10 March 2023"
                 title="How to Be a Dancer in 2023 with proper skills?"
                 desc="Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
               />
+              </Link>
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={0}>
-              <BlogCard
+              <Link href="review/blog">
+                <BlogCard
                 img={Blog5}
-                category="Music"
-                date="9 March 2023"
-                title="Who is the best singer on chart? Know him?"
-                desc="Chart by Billboard ranks the all-time greatest artists based on their performance on the weekly Billboard Hot 100."
+                category="Sports"
+                date="10 March 2023"
+                title="How to Be a Dancer in 2023 with proper skills?"
+                desc="Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
               />
+              </Link>
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={100}>
-              <BlogCard
+              <Link href="review/blog">
+                <BlogCard
                 img={Blog6}
-                category="Development"
-                date="8 March 2023"
-                title="How to start export import business from home?"
-                desc="Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide."
+                category="Sports"
+                date="10 March 2023"
+                title="How to Be a Dancer in 2023 with proper skills?"
+                desc="Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
               />
+              </Link>
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={200}>
-              <BlogCard
+              <Link href="review/blog">
+                <BlogCard
                 img={Blog7}
-                category="Food"
-                date="7 March 2023"
-                title="Make some drinks with chocolates and milk"
+                category="Sports"
+                date="10 March 2023"
+                title="How to Be a Dancer in 2023 with proper skills?"
                 desc="Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
               />
+              </Link>
             </ScrollAnimation>
           </div>
         </section>
