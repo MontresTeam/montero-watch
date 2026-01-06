@@ -25,13 +25,13 @@ export default function WatchFeatures() {
   // Auto toggle between green and blue every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveColor(prev => (prev === "green" ? "blue" : "green"));
+      setActiveColor(prev => (prev === "green" ? "black" : "green"));
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   const watchImage = activeColor === "green" ? greenWatch : blueWatch;
-  const themeColor = activeColor === "green" ? "text-green-800" : "text-blue-700";
+  const themeColor = activeColor === "green" ? "text-green-800" : "text-black-700";
 
   const leftIcons = activeColor === "green"
     ? [limitedEdition, timerWatch]
