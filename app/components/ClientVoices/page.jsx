@@ -3,7 +3,7 @@ import React from "react";
 const videos = [
   "https://www.youtube.com/embed/RvFvfoztjNo",
   "https://www.youtube.com/embed/RaDTuqW6kkA",
-  "https://www.youtube.com/embed/RaDTuqW6kkA",
+  "https://www.youtube.com/embed/CZwg2KEwBCQ",
 ];
 
 const ClientVoices = () => {
