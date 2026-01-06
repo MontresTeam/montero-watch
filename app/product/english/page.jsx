@@ -339,7 +339,7 @@ const Page = () => {
             <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[420px] flex items-center justify-center order-1 lg:order-2">
               <div className="relative w-full h-full max-w-md mx-auto">
                 <video
-                  // src="/images/Gallery/galleryV.mp4"
+                  src="/images/Gallery/galleryV.mp4"
                   autoPlay
                   muted
                   loop

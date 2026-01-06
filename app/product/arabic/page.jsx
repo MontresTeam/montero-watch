@@ -352,7 +352,7 @@ const Page = () => {
               <div className="relative w-full h-full max-w-md">
                 {/* Image */}
                 <video
-                  // src="/images/Gallery/galleryV.mp4"
+                  src="/images/Gallery/galleryV.mp4"
                   autoPlay
                   muted
                   loop
