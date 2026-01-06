@@ -48,14 +48,6 @@ const Page = () => {
                     <p className="text-sm sm:text-base lg:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed">
                       Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
                     </p>
-      
-                    <button
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                      className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                    >
-                      Pre-Order Now
-                    </button>
                   </div>
       
                   {/* Right Watch Image */}

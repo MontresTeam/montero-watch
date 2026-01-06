@@ -77,19 +77,19 @@ const OurProducts = () => {
         <p
           className="
   mt-6
-  font-mona
-  text-[24px]
   leading-[170%]
   tracking-[0.015em]
   text-center
   max-w-3xl
   mx-auto
-"
-        >
-          Montero is available in two collectible editions — each designed with
-          its own identity while sharing the same world-time DNA and
-          craftsmanship.
-        </p>
+">
+  Montero is available in two collectible editions, each designed with its own
+  identity while sharing the same world-time DNA and craftsmanship.
+</p>
+
+
+
+
       </div>
 
       {/* CTA */}
