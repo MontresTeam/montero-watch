@@ -65,7 +65,7 @@ export default function Page() {
       <Navbar />
 
       {/* ================= HERO / FEATURE SECTION ================= */}
-      <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
+      <section className="bg-white px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-6 sm:pb-8 ">
         <div className="mx-auto max-w-7xl grid grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16 md:grid-cols-2">
           {/* LEFT CONTENT */}
           <ScrollAnimation animationClass="animate-slide-in-left">
@@ -103,7 +103,7 @@ export default function Page() {
       </section>
 
       {/* ================= PRODUCT EDITIONS ================= */}
-      <section className="bg-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-28">
+      <section className="bg-white px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 md:pt-12 lg:pt-16 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
         <div className="mx-auto max-w-7xl grid grid-cols-1 gap-8 sm:gap-10 lg:gap-12 md:grid-cols-2">
           {/* CARD 1 */}
           <ScrollAnimation animationClass="animate-fade-in-up" delay={100}>
@@ -166,7 +166,7 @@ export default function Page() {
       </section>
 
       {/* ================= IMAGE GALLERY SECTION ================= */}
-      <section className="bg-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
+      <section className="bg-white px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-4 sm:pb-6 md:pb-10 lg:pb-14">
         <div className="mx-auto max-w-7xl">
           {/* TITLE */}
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -239,7 +239,7 @@ export default function Page() {
 
       {/* ================= SUBSCRIBE SECTION ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
-        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <section className="bg-white px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-12 pb-12 sm:pb-16 lg:pb-20">
           <div className="mx-auto max-w-7xl">
             <div className="grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
               {/* LEFT TEXT */}
