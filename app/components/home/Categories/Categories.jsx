@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import Link from "next/link";
 import ArabicImg from "@/public/images/Home/leftitemarabic.png";
 import EnglishImg from "@/public/images/Home/englishedition.png";
 
@@ -93,6 +93,13 @@ const Categories = () => {
 
           {/* TOP CONTENT (FIXED POSITION) */}
           <div className="center-content absolute inset-0 flex flex-col items-center justify-center text-center px-6 space-y-4">
+            
+            <Link href="/product/arabic">
+            <button className="border border-white text-white px-6 py-2 rounded-full text-sm font-medium hover:opacity-80 transition">
+              Pre-Order Now
+            </button>
+            </Link>
+
             <h3 className="text-white text-2xl font-semibold">
               Explore the Arabic Edition
             </h3>
@@ -127,9 +134,11 @@ const Categories = () => {
 
           {/* CENTER CONTENT (SAME TITLE POSITION LOGIC) */}
           <div className="center-content absolute inset-0 flex flex-col items-center justify-center text-center px-6 space-y-4">
+            <Link href="/product/english">
             <button className="border border-white text-white px-6 py-2 rounded-full text-sm font-medium hover:opacity-80 transition">
               Pre-Order Now
             </button>
+            </Link>
 
             <h3 className="text-white text-2xl font-semibold">
               Explore the English Edition
