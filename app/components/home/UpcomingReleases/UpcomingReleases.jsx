@@ -47,7 +47,7 @@ const UpcomingReleases = () => {
         {/* LEFT CONTENT */}
         <div className="relative z-10 pl-12">
           <h2 className="text-white font-serif text-4xl md:text-5xl  mb-6">
-            Upcoming Releases
+            Already Released 
           </h2>
 
           <p className="text-gray-400 max-w-md mb-8 leading-relaxed">
@@ -69,13 +69,17 @@ const UpcomingReleases = () => {
 
           {/* Countdown Boxes */}
           <div className="flex gap-4 w-full  justify-center">
-            <TimeBox value={timeLeft.hours} label="Hours" />
-            <TimeBox value={timeLeft.minutes} label="Minutes" />
-            <TimeBox value={timeLeft.seconds} label="Seconds" />
+            {/* <TimeBox value={timeLeft.hours} label="Hours" /> */}
+            <TimeBox value={0} label="Hours" />
+            {/* <TimeBox value={timeLeft.minutes} label="Minutes" /> */}
+            <TimeBox value={0} label="Minutes" />
+            {/* <TimeBox value={timeLeft.seconds} label="Seconds" /> */}
+            <TimeBox value={0} label="Seconds" />
           </div>
 
           <p className="mt-6 text-sm font-semibold  text-center w-full text-gray-300">
-            Upcoming collections
+            {/* Upcoming collections */}
+            Already Released 
           </p>
         </div>
       </div>
