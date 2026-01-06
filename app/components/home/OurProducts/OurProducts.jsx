@@ -76,8 +76,6 @@ const OurProducts = () => {
 
 <p className="
   mt-6
-  font-mona
-  text-[22px] md:text-[24px]
   leading-[170%]
   tracking-[0.015em]
   text-gray-700
@@ -85,7 +83,7 @@ const OurProducts = () => {
   max-w-3xl
   mx-auto
 ">
-  Montero is available in two collectible editions — each designed with its own
+  Montero is available in two collectible editions, each designed with its own
   identity while sharing the same world-time DNA and craftsmanship.
 </p>
 
