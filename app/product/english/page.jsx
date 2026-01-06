@@ -46,7 +46,7 @@ const Page = () => {
               </h1>
 
               <p className="text-sm sm:text-base lg:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+                Crafted for explorers, dreamers, and lovers of the world's most iconic beaches
               </p>
 
               <button
@@ -183,7 +183,7 @@ const Page = () => {
                 "Stainless Steel",
                 "Polished & brushed finishing",
                 "Case Thickness: 14.8mm",
-                "Diameter: 40 mm",
+                "Diameter: 41 mm",
               ].map((spec, i) => (
                 <div key={i} className="flex items-center gap-3 pb-3 border-b border-gray-200">
                   <span className="w-2 h-2 bg-black rounded-full flex-shrink-0"></span>
@@ -243,7 +243,7 @@ const Page = () => {
             <div className="absolute left-[620px] bottom-10">
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[140px]">Diameter: 40 mm</p>
+                <p className="text-sm text-gray-700 w-[140px]">Diameter: 41 mm</p>
                 <span className="w-64 h-px bg-gray-300" />
               </div>
             </div>
@@ -375,7 +375,7 @@ const Page = () => {
             </h2>
 
             <p className="font-light text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed">
-              Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+              Crafted for explorers, dreamers, and lovers of the world's most iconic beaches
             </p>
           </div>
         </div>
@@ -421,7 +421,7 @@ const Page = () => {
 
                   {/* Text */}
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                    I recently purchased the Montero watch, and I m extremely satisfied. The design looks premium, the build quality is solid, and it feels very comfortable on the wrist. Perfect for both formal and casual wear.
+                    I recently purchased the Montero watch, and I'm extremely satisfied. The design looks premium, the build quality is solid, and it feels very comfortable on the wrist. Perfect for both formal and casual wear.
                   </p>
 
                   {/* User */}

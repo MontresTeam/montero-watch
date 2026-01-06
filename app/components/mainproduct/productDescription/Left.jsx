@@ -91,7 +91,7 @@ export default function Left() {
                 <div className="flex items-center gap-2 sm:gap-4 translate-x-[15%] sm:translate-x-[20%] md:translate-x-[35%] lg:translate-x-[50%] pt-4 sm:pt-8 mr-10 md:mr-20 lg:mr-32">
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
                     <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
-                        Diameter: 40 mm
+                        Diameter: 41 mm
                     </span>
                     <div className="h-px bg-black w-16 sm:w-20 md:w-32 lg:w-48" />
 
