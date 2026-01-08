@@ -5,6 +5,7 @@ import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 import Link from "next/link";
 import Image from "next/image";
+import { Mail } from "lucide-react";
 import { FaArrowLeft } from "react-icons/fa6";
 import InnerBlog1 from "@/public/images/Blog/innerBlog1.jpg";
 import Blog5 from "@/public/images/Blog/blog5.jpg";
@@ -228,7 +229,7 @@ const page = () => {
               <ScrollAnimation animationClass="animate-slide-in-right">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex items-center bg-gray-100 px-4 py-3 sm:py-4 w-full rounded-md transition-all duration-300 hover:bg-gray-200">
-                    <span className="mr-3 text-gray-500">✉</span>
+                    <Mail className="mr-4" />
                     <input
                       type="email"
                       placeholder="Enter your e-mail"

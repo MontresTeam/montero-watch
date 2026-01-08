@@ -13,6 +13,8 @@ import Blog5 from "@/public/images/Blog/blog5.jpg";
 import Blog6 from "@/public/images/Blog/blog6.jpg";
 import Blog7 from "@/public/images/Blog/blog7.jpg";
 
+import { Mail } from "lucide-react";
+
 export default function Page() {
   return (
     <>
@@ -166,7 +168,7 @@ export default function Page() {
               <ScrollAnimation animationClass="animate-slide-in-right">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-                    <span className="mr-3 text-gray-500">✉</span>
+                    <Mail className="mr-4" />
                     <input
                       type="email"
                       placeholder="Enter your e-mail"

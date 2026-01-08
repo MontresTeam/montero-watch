@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-
+import { Mail } from "lucide-react";
 import Blue1 from "@/public/images/BlueWatch/productBlue1.png";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
@@ -27,7 +27,7 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      
+
       {/* ================= HERO SECTION ================= */}
       <section className="relative w-full min-h-screen overflow-hidden bg-[linear-gradient(104.09deg,#004770_1.87%,#0C2636_49.7%,#000106_100.38%)]">
         {/* Decorative Elements */}
@@ -46,14 +46,16 @@ const Page = () => {
               </h1>
 
               <p className="text-sm sm:text-base lg:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+                Crafted for explorers, dreamers, and lovers of the world s most
+                iconic beaches
               </p>
             </div>
 
             {/* Right Watch Image */}
             <div className="relative w-full max-w-[280px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[600px] xl:max-w-[700px] aspect-square order-1 lg:order-2">
               <div className="absolute inset-0 bg-gradient-radial from-emerald-400/20 to-transparent rounded-full blur-2xl"></div>
-              <div className="relative w-full h-full transform scale-110 sm:scale-125 lg:scale-138 hover:scale-115 transition-transform duration-500">
+
+              <div className="relative w-full h-full scale-110 sm:scale-125 lg:scale-138">
                 <Image
                   src={Blue1}
                   alt="Green World Time Watch"
@@ -78,7 +80,6 @@ const Page = () => {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-gray-900 mb-6 sm:mb-8">
               Montero English Edition
             </h2>
-
             {/* Watch Image */}
             <div className="relative mb-8 sm:mb-12">
               <div className="relative z-10 w-full max-w-xs sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[300px] sm:h-[400px] md:h-[480px] lg:h-[520px]">
@@ -91,7 +92,6 @@ const Page = () => {
                 />
               </div>
             </div>
-
             {/* Features Grid */}
             <div className="max-w-6xl mx-auto mb-6 sm:mb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 place-items-center">
@@ -111,7 +111,6 @@ const Page = () => {
                 ))}
               </div>
             </div>
-
             {/* Additional Features */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 px-4">
               <div className="flex items-center gap-2">
@@ -125,15 +124,14 @@ const Page = () => {
                 GMT function for global synchrony
               </p>
             </div>
-
             {/* Order Button */}
             <Link href="/order">
               <button className="bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2">
                 <span className="text-xl">₽</span>
                 <span>859 Order Now</span>
-              </button> 
-              </Link> <br />
-
+              </button>
+            </Link>{" "}
+            <br />
             {/* Limited Edition Badge */}
             <div className="inline-flex items-center gap-3 mt-4">
               <span className="px-3 py-1 text-xs tracking-widest font-semibold text-red-700 border border-red-600 uppercase">
@@ -153,7 +151,8 @@ const Page = () => {
               Technical Specifications
             </h2>
             <p className="text-sm text-gray-600">
-              Seiko NH34 GMT – reliable, accurate, and trusted by global enthusiasts.
+              Seiko NH34 GMT – reliable, accurate, and trusted by global
+              enthusiasts.
             </p>
           </div>
 
@@ -177,7 +176,10 @@ const Page = () => {
                 "Case Thickness: 14.8mm",
                 "Diameter: 41 mm",
               ].map((spec, i) => (
-                <div key={i} className="flex items-center gap-3 pb-3 border-b border-gray-200">
+                <div
+                  key={i}
+                  className="flex items-center gap-3 pb-3 border-b border-gray-200"
+                >
                   <span className="w-2 h-2 bg-black rounded-full flex-shrink-0"></span>
                   <p className="text-sm text-gray-700">{spec}</p>
                 </div>
@@ -189,7 +191,9 @@ const Page = () => {
               <p className="text-4xl sm:text-5xl font-serif text-gray-200 leading-tight">
                 LIMITED EDITION
               </p>
-              <p className="text-3xl sm:text-4xl font-serif text-gray-200">ONE OF 150</p>
+              <p className="text-3xl sm:text-4xl font-serif text-gray-200">
+                ONE OF 150
+              </p>
             </div>
           </div>
 
@@ -199,7 +203,9 @@ const Page = () => {
             <div className="absolute right-[120px] top-36">
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[160px]">Stainless Steel</p>
+                <p className="text-sm text-gray-700 w-[160px]">
+                  Stainless Steel
+                </p>
                 <span className="w-56 h-px bg-gray-300" />
               </div>
             </div>
@@ -235,7 +241,9 @@ const Page = () => {
             <div className="absolute left-[620px] bottom-10">
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[140px]">Diameter: 41 mm</p>
+                <p className="text-sm text-gray-700 w-[140px]">
+                  Diameter: 41 mm
+                </p>
                 <span className="w-64 h-px bg-gray-300" />
               </div>
             </div>
@@ -298,7 +306,9 @@ const Page = () => {
                   </li>
                   <li className="flex gap-3">
                     <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    <span>Rotate clockwise to move the GMT hand in 1-hour increments</span>
+                    <span>
+                      Rotate clockwise to move the GMT hand in 1-hour increments
+                    </span>
                   </li>
                   <li className="flex gap-3">
                     <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
@@ -315,12 +325,15 @@ const Page = () => {
                 <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
                   <li className="flex gap-3">
                     <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    <span>Each beach on the dial corresponds to its GMT offset</span>
+                    <span>
+                      Each beach on the dial corresponds to its GMT offset
+                    </span>
                   </li>
                   <li className="flex gap-3">
                     <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
                     <span>
-                      Choose the beach you want, match its time zone with your GMT hand, and enjoy instant global reference.
+                      Choose the beach you want, match its time zone with your
+                      GMT hand, and enjoy instant global reference.
                     </span>
                   </li>
                 </ul>
@@ -367,7 +380,8 @@ const Page = () => {
             </h2>
 
             <p className="font-light text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed">
-              Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+              Crafted for explorers, dreamers, and lovers of the world s most
+              iconic beaches
             </p>
           </div>
         </div>
@@ -407,13 +421,18 @@ const Page = () => {
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, j) => (
-                      <span key={j} className="text-orange-500 text-sm">★</span>
+                      <span key={j} className="text-orange-500 text-sm">
+                        ★
+                      </span>
                     ))}
                   </div>
 
                   {/* Text */}
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                    I recently purchased the Montero watch, and I m extremely satisfied. The design looks premium, the build quality is solid, and it feels very comfortable on the wrist. Perfect for both formal and casual wear.
+                    I recently purchased the Montero watch, and I m extremely
+                    satisfied. The design looks premium, the build quality is
+                    solid, and it feels very comfortable on the wrist. Perfect
+                    for both formal and casual wear.
                   </p>
 
                   {/* User */}
@@ -426,7 +445,9 @@ const Page = () => {
                         className="object-cover"
                       />
                     </div>
-                    <p className="text-sm font-medium text-gray-900">Mirana Marci</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      Mirana Marci
+                    </p>
                   </div>
                 </div>
               ))}
@@ -449,7 +470,9 @@ const Page = () => {
                   </h2>
 
                   <p className="mt-4 sm:mt-6 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed transition-opacity duration-300 hover:opacity-80">
-                    Each beach was chosen for its cultural significance, beauty, and global reputation — together forming the emotional core of Montero.
+                    Each beach was chosen for its cultural significance, beauty,
+                    and global reputation — together forming the emotional core
+                    of Montero.
                   </p>
                 </div>
               </ScrollAnimation>
@@ -470,7 +493,8 @@ const Page = () => {
                         <span
                           className="text-xl flex-shrink-0 transition-transform duration-300"
                           style={{
-                            transform: open === i ? "rotate(180deg)" : "rotate(0deg)",
+                            transform:
+                              open === i ? "rotate(180deg)" : "rotate(0deg)",
                           }}
                         >
                           {open === i ? "−" : "+"}
@@ -479,7 +503,8 @@ const Page = () => {
 
                       {open === i && (
                         <p className="mt-3 sm:mt-4 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
-                          Yes, all Montero watches come with a comprehensive warranty covering manufacturing defects.
+                          Yes, all Montero watches come with a comprehensive
+                          warranty covering manufacturing defects.
                         </p>
                       )}
                     </div>
@@ -494,12 +519,14 @@ const Page = () => {
                 {/* LEFT TEXT */}
                 <ScrollAnimation animationClass="animate-slide-in-left">
                   <div>
-                    <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
+                    <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
                       Subscribe for Exclusive Updates
                     </h2>
 
                     <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                      Join our mailing list to receive early access, limited-edition alerts, and insider updates directly from the Montero team.
+                      Join our mailing list to receive early access,
+                      limited-edition alerts, and insider updates directly from
+                      the Montero team.
                     </p>
                   </div>
                 </ScrollAnimation>
@@ -508,7 +535,7 @@ const Page = () => {
                 <ScrollAnimation animationClass="animate-slide-in-right">
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
-                      <span className="mr-3 text-gray-500">✉</span>
+                      <Mail className="mr-4" />
                       <input
                         type="email"
                         placeholder="Enter your e-mail"

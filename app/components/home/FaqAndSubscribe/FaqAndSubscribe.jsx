@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Mail } from "lucide-react";
 
 const faqs = [
   {
@@ -97,7 +98,7 @@ export default function FaqAndSubscribe() {
           
           {/* LEFT */}
           <div>
-            <h2 className="font-serif text-4xl mb-4">
+            <h2 className="font-cormorant text-4xl mb-4">
               Subscribe for Exclusive Updates
             </h2>
 
@@ -110,7 +111,7 @@ export default function FaqAndSubscribe() {
           {/* RIGHT */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-              <span className="mr-3 text-gray-500">✉</span>
+              <Mail className="mr-4" />
               <input
                 type="email"
                 placeholder="Enter your e-mail"

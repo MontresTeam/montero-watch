@@ -5,7 +5,7 @@ import Image from "next/image";
 import Navbar from "../components/navBar/NavBar";
 import Footer from "../components/home/Footer/Footer";
 import Link from "next/link";
-
+import { Mail } from "lucide-react";
 import Gallery1 from "@/public/images/Gallery/gallary1.jpg";
 import Gallery2 from "@/public/images/Gallery/gallary2.png";
 import Gallery3 from "@/public/images/Gallery/gallary3.png";
@@ -267,7 +267,7 @@ export default function Page() {
               <ScrollAnimation animationClass="animate-slide-in-right">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex items-center bg-gray-100 px-4 py-3 sm:py-4 w-full rounded-md transition-all duration-300 hover:bg-gray-200 focus-within:ring-2 focus-within:ring-gray-400">
-                    <span className="mr-3 text-gray-500 text-lg">✉</span>
+                    <Mail className="mr-4" />
                     <input
                       type="email"
                       placeholder="Enter your e-mail"
