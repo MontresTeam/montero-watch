@@ -4,9 +4,24 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import img from "../../../public/images/loginimg.jpg";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await login(email, password);
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <div className="mt-6 min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
@@ -38,12 +53,16 @@ export default function LoginPage() {
             </p>
           </header>
 
-          <form className="space-y-6">
+          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Email Input */}
             <div className="relative">
               <input
                 type="email"
                 placeholder="Email ID"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
               />
             </div>
@@ -53,6 +72,8 @@ export default function LoginPage() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
               />
               <button

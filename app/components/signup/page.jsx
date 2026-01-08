@@ -4,14 +4,33 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import img from '../../../public/images/signupImg.jpg';
+import { useAuth } from '../../context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { register } = useAuth();
+    const router = useRouter();
+    const [error, setError] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+        try {
+            await register({ name, email, password });
+            router.push("/login"); // Redirect to login after success
+        } catch (err) {
+            setError(err.response?.data?.message || "Registration failed");
+        }
+    };
 
     return (
         <div className="mt-6 min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
             <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 px-6 py-12 lg:py-0">
-        
+
                 {/* Image Section */}
                 <div className="w-full lg:w-1/2 flex items-center justify-center">
                     <div className="relative w-full max-w-[500px] aspect-square overflow-hidden shadow-2xl rounded-sm group">
@@ -39,12 +58,16 @@ export default function SignupPage() {
                         </p>
                     </header>
 
-                    <form className="space-y-6">
+                    {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         {/* Name Input */}
                         <div className="relative">
                             <input
                                 type="text"
                                 placeholder="Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
                             />
                         </div>
@@ -54,6 +77,8 @@ export default function SignupPage() {
                             <input
                                 type="email"
                                 placeholder="Email ID"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
                             />
                         </div>
@@ -63,6 +88,8 @@ export default function SignupPage() {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
                             />
                             <button
