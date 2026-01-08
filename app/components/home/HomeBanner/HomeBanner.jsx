@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WatchImage from "@/public/images/Home/bannerWatch.png";
 import LeftArrow from "@/public/images/Home/bannerleft.png";
 import RightArrow from "@/public/images/Home/bannerrigth.png";
-import Link from 'next/link'
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,46 +130,38 @@ export default function HomeBanner() {
       ref={sectionRef}
       className="relative min-h-screen overflow-hidden text-white"
     >
-      {/* BACKGROUND */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/home/Bg.png')" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-[#083654]/90 via-[#06283D]/90 to-[#031A2A]/95" />
+      {/* BACKGROUND COLOR ONLY */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#004770] via-[#0C2636] to-[#000106]" />
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-24 lg:pt-32 flex ">
         {/* LEFT TEXT */}
-        <div className="space-y-6  w-[55%] mt-10" >
+        <div className="space-y-6  w-[55%] mt-10">
           <h1
             ref={titleRef}
             className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-serif leading-tight"
           >
-            A World Time Watch Inspired
-            by Global Beaches
+            A World Time Watch Inspired by Global Beaches
           </h1>
 
-          <p ref={descRef} className="max-w-md font-Monasans font-light text-[24px] text-gray-300">
+          <p
+            ref={descRef}
+            className="max-w-md font-Monasans font-light text-[24px] text-gray-300"
+          >
             Crafted for explorers, dreamers, and lovers of the world’s most
             iconic beaches
           </p>
 
           <Link href="/product">
-            <button
-            
-            className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition"
-          >
-            Pre-Order Now
-          </button>
+            <button className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition">
+              Pre-Order Now
+            </button>
           </Link>
         </div>
 
         {/* RIGHT TEXT */}
         <div className="relative  hidden lg:block w-[45%]">
-          <div
-            ref={rightTextRef}
-            className="absolute top-24 right-0 max-w-xs"
-          >
+          <div ref={rightTextRef} className="absolute top-24 right-0 max-w-xs">
             <h4 className="font-semibold">Elegant Timekeeping</h4>
             <p className="text-sm text-gray-300">
               Precision inspired by the world
@@ -179,7 +171,7 @@ export default function HomeBanner() {
       </div>
 
       {/* LEFT ARROW */}
-      < div
+      <div
         ref={leftArrowRef}
         className="absolute top-[25%] right-[23%] hidden lg:block z-10"
       >
