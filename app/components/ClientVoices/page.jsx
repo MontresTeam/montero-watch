@@ -10,12 +10,15 @@ const ClientVoices = () => {
   return (
     <section className="bg-white pt-24 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* CENTERED REVIEW BUTTON */}
+        <div className="flex justify-center -mt-6 mb-4">
+          <button className="bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm">
+            Review
+          </button>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-14">
-          <span className="inline-block text-xs tracking-widest text-gray-500 border border-gray-300 px-4 py-1 rounded-full mb-6">
-            Review
-          </span>
-
           <h2
             style={{ fontWeight: 500 }}
             className="font-cormorant text-4xl lg:text-5xl text-gray-900 mb-4"

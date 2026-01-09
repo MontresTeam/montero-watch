@@ -14,15 +14,15 @@ import { useRouter } from "next/navigation";
 
 function SecondQuote() {
   const router = useRouter();
+
   const watches = [
-    { front: greenwatchFront, back: greenwatchBack, color: "#0E4A66" },
-    { front: bluewatchFront, back: bluewatchBack, color: "#1A1A1A" },
+    { front: greenwatchFront, back: greenwatchBack, color: "#297D61" }, // GREEN
+    { front: bluewatchFront, back: bluewatchBack, color: "#004770" },   // BLUE
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePreOrder = () => {
-    // index 1 is blue, index 0 is green
     if (currentIndex === 1) {
       router.push("/product/english");
     } else {
@@ -30,11 +30,11 @@ function SecondQuote() {
     }
   };
 
-  // Automatically switch watches every 5 seconds
+  // Auto switch
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % watches.length);
-    }, 3000); // 5 seconds
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -44,68 +44,75 @@ function SecondQuote() {
     <section className="bg-white px-4 py-16 md:py-24 overflow-hidden">
       <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
 
-        {/* Left Side - Watches */}
+        {/* LEFT */}
         <div className="flex-1 w-full relative flex flex-col items-center">
 
-          {/* Watch Images Container */}
+          {/* WATCHES */}
           <div className="flex justify-center items-center gap-6 md:gap-12 relative z-10">
-            {/* Front View */}
-            <div className="relative w-[160px] md:w-[280px] aspect-[3/5] drop-shadow-2xl overflow-hidden">
+            <div className="relative w-[160px] md:w-[280px] aspect-[3/5] drop-shadow-2xl">
               <Image
-                key={currentWatch.front.src} // key forces smooth image transition
+                key={currentWatch.front.src}
                 src={currentWatch.front}
-                alt="Watch Front View"
+                alt="Watch Front"
                 fill
-                className="object-contain transition-transform duration-1000 ease-in-out transform hover:scale-105"
-                sizes="(max-width: 768px) 160px, 280px"
+                className="object-contain transition-transform duration-1000 hover:scale-105"
                 priority
               />
             </div>
 
-            {/* Back View */}
-            <div className="relative w-[160px] md:w-[280px] aspect-[3/5] drop-shadow-2xl overflow-hidden">
+            <div className="relative w-[160px] md:w-[280px] aspect-[3/5] drop-shadow-2xl">
               <Image
                 key={currentWatch.back.src}
                 src={currentWatch.back}
-                alt="Watch Back View"
+                alt="Watch Back"
                 fill
-                className="object-contain transition-transform duration-1000 ease-in-out transform hover:scale-105"
-                sizes="(max-width: 768px) 160px, 280px"
+                className="object-contain transition-transform duration-1000 hover:scale-105"
               />
             </div>
           </div>
 
-          {/* Color/Pagination Dots */}
+          {/* ✅ FIXED COLOR DOTS */}
           <div className="flex items-center gap-4 mt-8 md:mt-12">
             {watches.map((watch, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-6 h-6 rounded-full border transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 ${idx === currentIndex
-                  ? `bg-[${watch.color}] border-[${watch.color}]`
-                  : "bg-white border-gray-400 hover:border-gray-900"
-                  }`}
                 aria-label={`Select ${idx === 0 ? "Green" : "Blue"} Watch`}
-              ></button>
+                className={`w-6 h-6 rounded-full border transition-transform hover:scale-110 focus:outline-none ${
+                  idx === currentIndex
+                    ? "scale-110"
+                    : "bg-white border-gray-400 hover:border-gray-900"
+                }`}
+                style={
+                  idx === currentIndex
+                    ? {
+                        backgroundColor: watch.color,
+                        borderColor: watch.color,
+                      }
+                    : {}
+                }
+              />
             ))}
           </div>
         </div>
 
-        {/* Right Side - Content */}
+        {/* RIGHT */}
         <div className="flex-1 w-full max-w-xl text-center lg:text-left mt-12 lg:mt-0">
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-[#1A1A1A] leading-[1.1] mb-6">
             A World Time Watch Inspired
+            <br />
             by Global Beaches
           </h2>
 
           <p className="monospace text-gray-600 text-lg md:text-xl leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0">
-            Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+            Crafted for explorers, dreamers, and lovers of the world’s most iconic beaches
           </p>
 
           <button
             onClick={handlePreOrder}
-            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium tracking-wide text-[#1A1A1A] border border-[#1A1A1A] rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:border-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A1A1A]">
-            <span className="absolute inset-0 w-full h-full bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out"></span>
+            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium tracking-wide text-[#1A1A1A] border border-[#1A1A1A] rounded-full overflow-hidden transition-all duration-300 hover:text-white"
+          >
+            <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             <span className="relative z-10">Pre-Order Now</span>
           </button>
         </div>
