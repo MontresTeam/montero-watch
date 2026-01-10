@@ -10,6 +10,7 @@ import Green2 from "@/public/images/GreenWatch/productGreen2.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
+import White from "@/public/images/BlueWatch/whiteShadow.png";
 
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
@@ -87,7 +88,8 @@ const Page = () => {
             <div className="relative mb-1 sm:mb-2">
               <div
                 className="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto
-          h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]"
+    h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]
+    -rotate-6"
               >
                 <Image
                   src={Green2}
@@ -297,10 +299,25 @@ const Page = () => {
             </div>
           </div>
         </div>
+        <div className="flex justify-end">
+          <span className="inline-block w-48 h-48 mr-44 ml-12 relative top-4 overflow-hidden">
+            <Image
+              src={White}
+              alt="New Watch"
+              fill
+              priority
+              className="object-contain rotate-[0.5deg] scale-110"
+            />
+
+            {/* STRONG TOP fade */}
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-transparent via-white/70 to-white"></span>
+          </span>
+        </div>
       </section>
 
-      <section className="bg-white py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      {/* Section    4 */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Title */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-8 sm:mb-12">
             How to Set Your Montero Arabic Edition Watch
@@ -393,6 +410,7 @@ const Page = () => {
         </div>
       </section>
 
+      {/* Section    5 */}
       <section className="w-full flex flex-col lg:flex-row relative">
         {/* LEFT — Image with Gradient Fade */}
         <div className="relative w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-[531px]">
@@ -423,9 +441,10 @@ const Page = () => {
         </div>
       </section>
 
-      <section className="bg-white py-12 sm:py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 sm:gap-12 items-start">
+      {/* Section   6 */}
+      <section className="bg-white py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
             {/* LEFT CONTENT */}
             <div className="lg:col-span-1">
               <p className="text-xs sm:text-sm text-gray-500 mb-3">Client Feedback</p>
@@ -496,6 +515,8 @@ const Page = () => {
           </div>
         </div>
       </section>
+      
+      {/* Section   6 */}
       {/* ================= FAQ + SUBSCRIBE ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24">
