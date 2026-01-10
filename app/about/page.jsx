@@ -72,14 +72,17 @@ export default function Page() {
                 </h2>
 
                 <p className="mt-3 sm:mt-4 max-w-xl text-sm sm:text-base text-gray-700 leading-relaxed">
-                  Montero was born from a deep appreciation for the world, its
-                  diversity, and the timeless beauty of global coastlines. Each
-                  detail of the watch carries inspiration from the beaches that
-                  have shaped culture, adventure, and unforgettable memories.
-                  From Ibiza to Bali, Miami to Bora Bora, the Montero world-time
-                  concept celebrates the connection between people and place. It
-                  is more than a watch — it is a reminder that every moment
-                  holds a new horizon.
+                  Montero was born from a passion for time, travel, and
+                  exploration. Inspired by iconic beaches, global journeys, and
+                  the freedom of adventure, Montero represents moments where
+                  time is lived, not rushed. Backed by over 35 years of
+                  watchmaking experience, Montero focuses on what truly matters
+                  - quality, reliability, and thoughtful design. Each Montero
+                  watch blends precise engineering with purposeful detail,
+                  created for those who value craftsmanship and believe time is
+                  measured through experiences. Montero is not just about where
+                  time takes you, it’s about choosing your direction before
+                  time.
                 </p>
               </div>
             </ScrollAnimation>
@@ -128,7 +131,6 @@ export default function Page() {
           </div>
         </section>
       </ScrollAnimation>
-
 
       {/* ================= FAQ + SUBSCRIBE ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">

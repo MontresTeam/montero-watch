@@ -66,12 +66,12 @@ export default function Page() {
 
       {/* ================= HERO / FEATURE SECTION ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
-      <section className="bg-white px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-6 sm:pb-8 ">
+      <section className="bg-white px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-6 sm:pb-8">
         <div className="mx-auto max-w-7xl grid grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16 md:grid-cols-2">
           {/* LEFT CONTENT */}
           <ScrollAnimation animationClass="animate-slide-in-left">
             <div>
-              <h1 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-black">
+              <h1 className="font-cormorant text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight text-black">
                 A World Time Watch Inspired <br className="hidden sm:block" />
                 by Global Beaches
               </h1>
@@ -169,18 +169,18 @@ export default function Page() {
       </section>
       </ScrollAnimation>
 
-      {/* ================= IMAGE GALLERY SECTION ================= */}3
+      {/* ================= IMAGE GALLERY SECTION ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="bg-white px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-4 sm:pb-6 md:pb-10 lg:pb-14">
         <div className="mx-auto max-w-7xl">
           {/* TITLE */}
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-            <h2 className="font-cormorant text-3xl sm:text-4xl md:text-5xl text-black">
+            <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
               A World Time Watch Inspired <br className="hidden sm:block" />
               by Global Beaches
             </h2>
 
-            <p className="mt-3 text-sm text-gray-600">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600">
               Crafted for explorers, dreamers, and lovers of the world s most
               iconic beaches
             </p>
@@ -251,7 +251,7 @@ export default function Page() {
               {/* LEFT TEXT */}
               <ScrollAnimation animationClass="animate-slide-in-left">
                 <div>
-                  <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-black transition-colors duration-300 hover:text-gray-700">
+                  <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-black transition-colors duration-300 hover:text-gray-700 leading-tight">
                     Subscribe for Exclusive Updates
                   </h2>
 
