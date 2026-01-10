@@ -47,6 +47,12 @@ const Footer = () => {
               <Link href="/about" className="hover:text-white transition">
                 About Us
               </Link>
+              <Link href="/review" className="hover:text-white transition">
+                Blog
+              </Link>
+              <Link href="/gallery" className="hover:text-white transition">
+                Gallery
+              </Link>
               <Link href="/contact" className="hover:text-white transition">
                 Contact Us
               </Link>
