@@ -290,6 +290,7 @@ const Page = () => {
         </div>
       </section>
 
+      {/* Section    4 */}
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Title */}
@@ -387,6 +388,7 @@ const Page = () => {
         </div>
       </section>
 
+      {/* Section    5 */}
       <section className="w-full flex flex-col lg:flex-row relative">
         {/* LEFT — Image with Gradient Fade */}
         <div className="relative w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-[531px]">
@@ -416,6 +418,7 @@ const Page = () => {
         </div>
       </section>
 
+      {/* Section   6 */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
@@ -484,6 +487,8 @@ const Page = () => {
           </div>
         </div>
       </section>
+      
+      {/* Section   6 */}
       {/* ================= FAQ + SUBSCRIBE ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">

@@ -30,6 +30,7 @@ const Page = () => {
       <Navbar />
 
       {/* ================= HERO SECTION ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="relative w-full min-h-screen overflow-hidden bg-[linear-gradient(104.09deg,#004770_1.87%,#0C2636_49.7%,#000106_100.38%)]">
         {/* Decorative Elements */}
         <div className="absolute inset-0 opacity-10">
@@ -72,8 +73,10 @@ const Page = () => {
         {/* Bottom gradient fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
       </section>
+      </ScrollAnimation>
 
       {/* ================= MONTERO EDITION SECTION ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="relative w-full min-h-fit bg-gray-50 flex items-center justify-center py-4 sm:py-5 lg:py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="text-center">
@@ -149,8 +152,10 @@ const Page = () => {
           </div>
         </div>
       </section>
+      </ScrollAnimation>
 
       {/* ================= TECHNICAL SPECIFICATIONS SECTION ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="bg-white py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
           {/* Title - Always visible */}
@@ -283,8 +288,10 @@ const Page = () => {
           </span>
         </div>
       </section>
+      </ScrollAnimation>
 
       {/* ================= HOW TO SET SECTION ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="bg-white py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Title */}
@@ -378,8 +385,10 @@ const Page = () => {
           </div>
         </div>
       </section>
+      </ScrollAnimation>
 
       {/* ================= SPLIT IMAGE/TEXT SECTION ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="w-full flex flex-col lg:flex-row relative">
         {/* LEFT — Image with Gradient Fade */}
         <div className="relative w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-[531px]">
@@ -408,8 +417,10 @@ const Page = () => {
           </div>
         </div>
       </section>
+      </ScrollAnimation>
 
       {/* ================= TESTIMONIALS SECTION ================= */}
+      <ScrollAnimation animationClass="animate-fade-in-up">
       <section className="bg-white py-12 sm:py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 items-start">
@@ -477,6 +488,7 @@ const Page = () => {
           </div>
         </div>
       </section>
+      </ScrollAnimation>
 
       {/* ================= FAQ + SUBSCRIBE ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
