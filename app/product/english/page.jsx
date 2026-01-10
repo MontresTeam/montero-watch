@@ -9,7 +9,6 @@ import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
 import Blue4 from "@/public/images/BlueWatch/productBlue4.jpg";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
-import White from "@/public/images/BlueWatch/whiteShadow.png";
 
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
@@ -272,20 +271,6 @@ const Page = () => {
               />
             </div>
           </div>
-        </div>
-        <div className="flex justify-end">
-          <span className="inline-block w-48 h-48 mr-44 ml-12 relative top-4 overflow-hidden">
-            <Image
-              src={White}
-              alt="New Watch"
-              fill
-              priority
-              className="object-contain rotate-[0.5deg] scale-110"
-            />
-
-            {/* STRONG TOP fade */}
-            <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-transparent via-white/70 to-white"></span>
-          </span>
         </div>
       </section>
       </ScrollAnimation>
