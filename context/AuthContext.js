@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         const initSession = async () => {
             try {
                 const data = await checkSession();
-                setUser({ isAuthenticated: true });
+                setUser(data.user);
                 api.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
             } catch (error) {
                 setUser(null);

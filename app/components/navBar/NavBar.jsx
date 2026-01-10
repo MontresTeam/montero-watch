@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -20,6 +21,7 @@ import Glob from "@/public/icons/home/glob.png";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { user } = useAuth();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -85,8 +87,8 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className={`text-[13px] font-light tracking-wide transition ${isActive
-                      ? "text-black"
-                      : "text-gray-500 hover:text-black"
+                    ? "text-black"
+                    : "text-gray-500 hover:text-black"
                     }`}
                 >
                   {link.name}
@@ -112,8 +114,7 @@ const Navbar = () => {
                 <Image src={Glob} alt="Lang" width={18} height={18} />
                 {selectedLang}
                 <FaChevronDown
-                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""
-                    }`}
+                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""}`}
                 />
               </button>
 
@@ -138,24 +139,47 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* USER ICON (DESKTOP) */}
-            <button
-              onClick={() => setIsDropdownOpen((p) => !p)}
-              className="hidden md:block"
-            >
-              <FaRegUser size={16} className="text-gray-700" />
-            </button>
+            {/* USER PROFILE/ICON (DESKTOP) */}
+            <div className="hidden md:block">
+              {user ? (
+                <button
+                  onClick={() => setIsDropdownOpen((p) => !p)}
+                  className="flex items-center gap-2"
+                >
+                  <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+                    <Image
+                      src={user.profilePic || Avatar}
+                      alt="Profile"
+                      width={36}
+                      height={36}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsDropdownOpen((p) => !p)}
+                  className="flex items-center"
+                >
+                  <FaRegUser size={16} className="text-gray-700" />
+                </button>
+              )}
+            </div>
+
+
 
             {/* SIGN IN */}
-            <Link
-              href="/signup"
-              className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/signup"
+            {!user && (
+              <Link
+                href="/signup"
+                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/signup"
                   ? "bg-black text-white"
                   : "hover:bg-black hover:text-white"
-                }`}
-            >
-              Sign In
-            </Link>
+                  }`}
+              >
+                Sign In
+              </Link>
+            )}
 
             {/* MOBILE RIGHT */}
             <div className="md:hidden flex items-center gap-3">
@@ -166,7 +190,7 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full overflow-hidden bg-neutral-200"
               >
                 <Image
-                  src={Avatar}
+                  src={(user && user.profilePic) ? user.profilePic : Avatar}
                   alt="User Avatar"
                   width={40}
                   height={40}
@@ -228,8 +252,8 @@ const Navbar = () => {
                   key={lang}
                   onClick={() => setSelectedLang(lang)}
                   className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
-                      ? "bg-black text-white border-black"
-                      : "border-gray-300"
+                    ? "bg-black text-white border-black"
+                    : "border-gray-300"
                     }`}
                 >
                   {lang}
@@ -238,13 +262,15 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link
-            href="/signup"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
-          >
-            Sign In
-          </Link>
+          {!user && (
+            <Link
+              href="/signup"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </nav>
