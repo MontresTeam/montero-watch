@@ -106,19 +106,22 @@ function WatchDisplay({ isSwapped, setIsSwapped }) {
         className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
       >
         <Image
-          src={mainImage}
-          alt="Main Watch"
-          className="
-            w-[320px] h-[320px]
-            sm:w-[380px] sm:h-[380px]
-            md:w-[520px] md:h-[520px]
-            lg:w-[720px] lg:h-[720px]
-            xl:w-[780px] xl:h-[780px]
-            ml-[120px] md:ml-[160px] lg:ml-[220px]
-            mt-[20px] md:mt-[40px] lg:mt-[60px]
-            object-contain -rotate-[165deg]
-          "
-        />
+  src={mainImage}
+  alt="Main Watch"
+  className="
+    w-[320px] h-[320px]
+    sm:w-[380px] sm:h-[380px]
+    md:w-[520px] md:h-[520px]
+    lg:w-[720px] lg:h-[720px]
+    xl:w-[780px] xl:h-[780px]
+    ml-[120px] md:ml-[160px] lg:ml-[220px]
+    mt-[20px] md:mt-[40px] lg:mt-[60px]
+    object-contain
+    rotate-[30deg]
+  "
+/>
+
+
       </div>
 
       {/* BOTTOM ARROW */}
