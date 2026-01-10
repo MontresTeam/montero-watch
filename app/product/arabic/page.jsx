@@ -86,7 +86,8 @@ const Page = () => {
             <div className="relative mb-1 sm:mb-2">
               <div
                 className="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto
-          h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]"
+    h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]
+    -rotate-6"
               >
                 <Image
                   src={Green2}

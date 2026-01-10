@@ -79,7 +79,7 @@ const Page = () => {
                 <div className="text-center">
                   {/* Title */}
                   <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-cormorant text-gray-900 mb-2 sm:mb-3">
-                    Montero Arabic Edition
+                    Montero English Edition
                   </h2>
       
                   {/* Watch Image */}
