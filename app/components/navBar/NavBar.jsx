@@ -12,6 +12,8 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n"; // Initialize i18n
 
 import Dropdown from "./Dropdown";
 
@@ -22,25 +24,43 @@ import Glob from "@/public/icons/home/glob.png";
 const Navbar = () => {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { t, i18n } = useTranslation();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState("EN");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const mobileMenuRef = useRef(null);
   const langRef = useRef(null);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Products", href: "/product" },
-    { name: "About Us", href: "/about" },
-    { name: "Blog", href: "/review" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Contact Us", href: "/contact" },
+    { name: t("nav.home"), href: "/" },
+    { name: t("nav.products"), href: "/product" },
+    { name: t("nav.about"), href: "/about" },
+    { name: t("nav.blog"), href: "/review" },
+    { name: t("nav.gallery"), href: "/gallery" },
+    { name: t("nav.contact"), href: "/contact" },
   ];
 
-  const languages = ["EN", "AR"];
+  const languages = [
+    { code: "en", label: "EN" },
+    { code: "ar", label: "AR" }
+  ];
+
+  /* HANDLE LANGUAGE CHANGE */
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
+    setIsLangOpen(false);
+  };
+
+  // Sync direction on mount/change
+  useEffect(() => {
+    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
 
   /* MOBILE MENU ANIMATION */
   useEffect(() => {
@@ -78,13 +98,13 @@ const Navbar = () => {
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className="relative h-16 flex items-center justify-between">
 
-          {/* LEFT MENU */}
-          <div className="hidden md:flex items-center space-x-6">
+          {/* LEFT MENU (Corrected for RTL support order) */}
+          <div className="hidden md:flex items-center space-x-6 rtl:space-x-reverse">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
                   className={`text-[13px] font-light tracking-wide transition ${isActive
                     ? "text-black"
@@ -98,7 +118,7 @@ const Navbar = () => {
           </div>
 
           {/* LOGO */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0 absolute left-1/2 transform -translate-x-1/2 md:static md:translate-x-0 rtl:md:translate-x-0">
             <Image src={Logo} alt="Logo" width={190} height={80} style={{ height: 'auto' }} priority />
           </Link>
 
@@ -109,10 +129,10 @@ const Navbar = () => {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setIsLangOpen((p) => !p)}
-                className="flex items-center gap-1 text-[13px] font-light text-gray-700"
+                className="flex items-center gap-1 text-[13px] font-light text-gray-700 uppercase"
               >
                 <Image src={Glob} alt="Lang" width={18} height={18} />
-                {selectedLang}
+                {i18n.language}
                 <FaChevronDown
                   className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""}`}
                 />
@@ -121,18 +141,16 @@ const Navbar = () => {
               {isLangOpen && (
                 <div
                   ref={langRef}
-                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm"
+                  className="absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-24 bg-white border rounded-md shadow-sm z-50"
+                  style={{ transformOrigin: i18n.language === 'ar' ? 'top left' : 'top right' }}
                 >
                   {languages.map((lang) => (
                     <button
-                      key={lang}
-                      onClick={() => {
-                        setSelectedLang(lang);
-                        setIsLangOpen(false);
-                      }}
-                      className="w-full px-3 py-2 text-left text-[13px] font-light hover:bg-gray-100"
+                      key={lang.code}
+                      onClick={() => changeLanguage(lang.code)}
+                      className={`w-full px-3 py-2 text-left rtl:text-right text-[13px] font-light hover:bg-gray-100 ${i18n.language === lang.code ? 'font-medium bg-gray-50' : ''}`}
                     >
-                      {lang}
+                      {lang.label}
                     </button>
                   ))}
                 </div>
@@ -166,8 +184,6 @@ const Navbar = () => {
               )}
             </div>
 
-
-
             {/* SIGN IN */}
             {!user && (
               <Link
@@ -177,7 +193,7 @@ const Navbar = () => {
                   : "hover:bg-black hover:text-white"
                   }`}
               >
-                Sign In
+                {t("nav.signin")}
               </Link>
             )}
 
@@ -208,12 +224,12 @@ const Navbar = () => {
             {isDropdownOpen && (
               <>
                 {/* DESKTOP */}
-                <div className="hidden md:block absolute right-0 top-10 z-[999]">
+                <div className="hidden md:block absolute right-0 rtl:left-0 rtl:right-auto top-10 z-[999]">
                   <Dropdown onClose={() => setIsDropdownOpen(false)} />
                 </div>
 
                 {/* MOBILE */}
-                <div className="md:hidden absolute right-0 top-14 z-[999]">
+                <div className="md:hidden absolute right-0 rtl:left-0 rtl:right-auto top-14 z-[999]">
                   <Dropdown onClose={() => setIsDropdownOpen(false)} />
                 </div>
               </>
@@ -233,7 +249,7 @@ const Navbar = () => {
             const isActive = pathname === link.href;
             return (
               <Link
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-base font-light ${isActive ? "text-black" : "text-gray-600"
@@ -245,18 +261,18 @@ const Navbar = () => {
           })}
 
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-500 mb-2">Language</p>
+            <p className="text-sm text-gray-500 mb-2">{t("nav.language")}</p>
             <div className="flex gap-3">
               {languages.map((lang) => (
                 <button
-                  key={lang}
-                  onClick={() => setSelectedLang(lang)}
-                  className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
+                  key={lang.code}
+                  onClick={() => changeLanguage(lang.code)}
+                  className={`px-4 py-1 rounded-full border text-sm ${i18n.language === lang.code
                     ? "bg-black text-white border-black"
                     : "border-gray-300"
                     }`}
                 >
-                  {lang}
+                  {lang.label}
                 </button>
               ))}
             </div>
@@ -268,7 +284,7 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
             >
-              Sign In
+              {t("nav.signin")}
             </Link>
           )}
         </div>
