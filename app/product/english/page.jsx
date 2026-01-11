@@ -184,6 +184,7 @@ const Page = () => {
               </div>
             </div>
           </div>
+        </div>
 
           {/* Bottom gradient fade */}
           <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -213,6 +214,7 @@ const Page = () => {
                   />
                 </div>
               </div>
+            </div>
 
               {/* Features Grid */}
               <div className="max-w-6xl mx-auto mb-4 sm:mb-6">
@@ -236,6 +238,7 @@ const Page = () => {
                   ))}
                 </div>
               </div>
+            </div>
 
               {/* Additional Features */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6 px-2">
@@ -249,7 +252,7 @@ const Page = () => {
                 <div className="w-2 h-2 bg-[#2596be] rounded-full hidden sm:block"></div>
 
                 <p className="text-gray-700 text-xs sm:text-sm text-center">
-                  GMT function for global synchrony
+                  Sapphire crystal for durability
                 </p>
               </div>
 
@@ -278,7 +281,8 @@ const Page = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
       </ScrollAnimation>
 
       {/* ================= TECHNICAL SPECIFICATIONS SECTION ================= */}
@@ -335,6 +339,7 @@ const Page = () => {
                 <p className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-200 mt-2">
                   ONE OF 150
                 </p>
+                <span className="w-56 h-px bg-gray-300" />
               </div>
             </div>
 
@@ -377,6 +382,7 @@ const Page = () => {
                 </p>
                 <p className="text-5xl font-serif text-gray-200">ONE OF 150</p>
               </div>
+            </div>
 
               {/* BOTTOM LEFT SPEC */}
               <div className="absolute left-[620px] bottom-10">
@@ -509,7 +515,8 @@ const Page = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
       </ScrollAnimation>
 
       {/* ================= SPLIT IMAGE/TEXT SECTION ================= */}
@@ -560,7 +567,8 @@ const Page = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
       </ScrollAnimation>
 
       {/* ================= TESTIMONIALS SECTION ================= */}
@@ -597,6 +605,7 @@ const Page = () => {
                   </button>
                 </div>
               </div>
+            </div>
 
               {/* TESTIMONIAL CARDS */}
               <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
@@ -645,7 +654,8 @@ const Page = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
       </ScrollAnimation>
 
       {/* ================= FAQ + SUBSCRIBE ================= */}
