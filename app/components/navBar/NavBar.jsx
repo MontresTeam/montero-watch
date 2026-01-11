@@ -86,62 +86,74 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full bg-white z-50 font-mona border-b border-neutral-100">
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className="relative h-16 flex items-center justify-between">
-          {/* MOBILE MENU BUTTON - LEFT SIDE */}
-          <button
-            onClick={() => setIsMobileMenuOpen((p) => !p)}
-            className="md:hidden flex items-center"
-          >
-            {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-          </button>
+          {/* LEFT SECTION - MOBILE MENU & DESKTOP NAV */}
+          <div className="flex items-center gap-8">
+            {/* MOBILE MENU BUTTON */}
+            <button
+              onClick={() => setIsMobileMenuOpen((p) => !p)}
+              className="md:hidden flex items-center justify-center w-8 h-8"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            </button>
 
-          {/* LEFT MENU - DESKTOP */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`
-                    text-[13px] font-semibold tracking-wide relative
-                    transition-colors duration-200
-                    ${
-                      isActive ? "text-black" : "text-gray-500 hover:text-black"
-                    }
-                  `}
-                >
-                  {link.name}
-
-                  {/* ACTIVE / HOVER UNDERLINE */}
-                  <span
+            {/* DESKTOP NAVIGATION */}
+            <div className="hidden md:flex items-center gap-8">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
                     className={`
-                      absolute left-0 -bottom-1 h-[1px] bg-black transition-all duration-300
-                      ${isActive ? "w-full" : "w-0 group-hover:w-full"}
+                      text-[13px] font-semibold tracking-wide relative
+                      transition-colors duration-200
+                      ${
+                        isActive
+                          ? "text-black"
+                          : "text-gray-500 hover:text-black"
+                      }
                     `}
-                  />
-                </Link>
-              );
-            })}
+                  >
+                    {link.name}
+                    <span
+                      className={`
+                        absolute left-0 -bottom-1 h-[1px] bg-black transition-all duration-300
+                        ${isActive ? "w-full" : "w-0 hover:w-full"}
+                      `}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
-          {/* LOGO - CENTER BUT SLIGHTLY LEFT */}
+          {/* CENTER LOGO - Responsive positioning */}
           <Link
             href="/"
-            className="absolute left-1/2 -translate-x-[55%] flex-shrink-0"
+            className="absolute left-1/2 -translate-x-1/2 flex-shrink-0"
           >
-            <Image src={Logo} alt="Logo" width={180} height={70} priority />
+            <Image
+              src={Logo}
+              alt="Logo"
+              width={180}
+              height={70}
+              priority
+              className="w-[140px] md:w-[180px] h-auto"
+            />
           </Link>
 
-          {/* RIGHT SIDE */}
-          <div className="relative flex items-center gap-5">
-            {/* LANGUAGE - DESKTOP */}
-            <div className="relative hidden md:block">
+          {/* RIGHT SECTION - User actions */}
+          <div className="flex items-center gap-4 md:gap-5">
+            {/* LANGUAGE SELECTOR - Desktop only */}
+            <div className="relative hidden md:flex items-center">
               <button
                 onClick={() => setIsLangOpen((p) => !p)}
-                className="flex items-center gap-1 text-[13px] font-medium text-gray-600 hover:text-black transition"
+                className="flex items-center gap-2 text-[13px] font-medium text-gray-600 hover:text-black transition px-2 py-1 rounded hover:bg-gray-50"
+                aria-label="Language selector"
               >
-                <Image src={Glob} alt="Lang" width={18} height={18} />
-                {selectedLang}
+                <Image src={Glob} alt="Language" width={16} height={16} />
+                <span className="min-w-[24px] text-center">{selectedLang}</span>
                 <FaChevronDown
                   className={`text-[10px] transition ${
                     isLangOpen ? "rotate-180" : ""
@@ -152,7 +164,7 @@ const Navbar = () => {
               {isLangOpen && (
                 <div
                   ref={langRef}
-                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm z-50"
+                  className="absolute right-0 top-full mt-1 w-20 bg-white border rounded-md shadow-sm z-50"
                 >
                   {languages.map((lang) => (
                     <button
@@ -161,7 +173,7 @@ const Navbar = () => {
                         setSelectedLang(lang);
                         setIsLangOpen(false);
                       }}
-                      className="w-full px-3 py-2 text-left text-[13px] font-medium hover:bg-gray-100"
+                      className="w-full px-4 py-2 text-left text-[13px] font-medium hover:bg-gray-100 first:rounded-t-md last:rounded-b-md"
                     >
                       {lang}
                     </button>
@@ -170,60 +182,61 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* USER SECTION - DESKTOP */}
-            <div className="relative hidden md:block" ref={dropdownRef}>
-              <button
-                onClick={() => setIsDropdownOpen((p) => !p)}
-                className="flex items-center gap-2"
-              >
-                <FaRegUser size={16} className="text-gray-700" />
-                <FaChevronDown
-                  className={`text-[10px] transition ${
-                    isDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+            {/* USER SECTION - Desktop */}
+            <div className="relative hidden md:flex items-center gap-3">
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsDropdownOpen((p) => !p)}
+                  className="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-50"
+                  aria-label="User menu"
+                >
+                  <FaRegUser size={16} className="text-gray-700" />
+                  <FaChevronDown
+                    className={`text-[10px] transition ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-              {/* DROPDOWN FOR DESKTOP */}
-              {isDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 z-[999]">
-                  <Dropdown onClose={() => setIsDropdownOpen(false)} />
-                </div>
-              )}
+                {isDropdownOpen && (
+                  <div className="absolute right-0 top-full mt-1 z-[999]">
+                    <Dropdown onClose={() => setIsDropdownOpen(false)} />
+                  </div>
+                )}
+              </div>
+
+              <Link
+                href="/signup"
+                className={`
+                  rounded-full px-6 py-2
+                  text-[13px] font-medium transition whitespace-nowrap
+                  ${
+                    pathname === "/signup"
+                      ? "bg-black text-white"
+                      : "border border-black hover:bg-black hover:text-white"
+                  }
+                `}
+              >
+                Sign In
+              </Link>
             </div>
 
-            {/* SIGN IN - DESKTOP */}
-            <Link
-              href="/signup"
-              className={`
-                hidden md:block rounded-full px-6 py-[6px]
-                text-[13px] font-medium transition
-                ${
-                  pathname === "/signup"
-                    ? "bg-black text-white"
-                    : "border border-black hover:bg-black hover:text-white"
-                }
-              `}
-            >
-              Sign In
-            </Link>
-
-            {/* MOBILE RIGHT SIDE */}
+            {/* MOBILE RIGHT SECTION */}
             <div className="md:hidden flex items-center gap-3">
-              {/* LANGUAGE - MOBILE */}
+              {/* LANGUAGE - Mobile */}
               <div className="relative">
                 <button
                   onClick={() => setIsLangOpen((p) => !p)}
-                  className="flex items-center gap-1 text-sm font-medium text-gray-600"
+                  className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-50"
+                  aria-label="Language selector"
                 >
-                  <Image src={Glob} alt="Lang" width={16} height={16} />
-                  {selectedLang}
+                  <Image src={Glob} alt="Language" width={18} height={18} />
                 </button>
 
                 {isLangOpen && (
                   <div
                     ref={langRef}
-                    className="absolute right-0 top-8 w-20 bg-white border rounded-md shadow-sm z-50"
+                    className="absolute right-0 top-full mt-1 w-20 bg-white border rounded-md shadow-sm z-50"
                   >
                     {languages.map((lang) => (
                       <button
@@ -232,7 +245,7 @@ const Navbar = () => {
                           setSelectedLang(lang);
                           setIsLangOpen(false);
                         }}
-                        className="w-full px-3 py-2 text-left text-sm font-medium hover:bg-gray-100"
+                        className="w-full px-4 py-2 text-left text-sm font-medium hover:bg-gray-100 first:rounded-t-md last:rounded-b-md"
                       >
                         {lang}
                       </button>
@@ -241,18 +254,19 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* USER AVATAR & DROPDOWN - MOBILE */}
+              {/* USER AVATAR & DROPDOWN - Mobile */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen((p) => !p)}
                   className="flex items-center gap-1"
+                  aria-label="User menu"
                 >
-                  <div className="w-10 h-10 rounded-full overflow-hidden bg-neutral-200">
+                  <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-gray-100">
                     <Image
                       src={Avatar}
                       alt="User Avatar"
-                      width={40}
-                      height={40}
+                      width={36}
+                      height={36}
                       className="object-cover"
                     />
                   </div>
@@ -263,9 +277,8 @@ const Navbar = () => {
                   />
                 </button>
 
-                {/* DROPDOWN FOR MOBILE */}
                 {isDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 z-[999]">
+                  <div className="absolute right-0 top-full mt-1 z-[999]">
                     <Dropdown onClose={() => setIsDropdownOpen(false)} />
                   </div>
                 )}
@@ -289,8 +302,10 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-medium ${
-                  isActive ? "text-black" : "text-gray-600"
+                className={`py-2 text-base font-medium ${
+                  isActive
+                    ? "text-black border-l-4 border-black pl-3"
+                    : "text-gray-600 hover:text-black"
                 }`}
               >
                 {link.name}
@@ -298,22 +313,24 @@ const Navbar = () => {
             );
           })}
 
-          {/* SIGN IN - MOBILE */}
-          <Link
-            href="/signup"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={`
-              mt-4 rounded-full px-6 py-[8px] text-center
-              text-sm font-medium transition
-              ${
-                pathname === "/signup"
-                  ? "bg-black text-white"
-                  : "border border-black hover:bg-black hover:text-white"
-              }
-            `}
-          >
-            Sign In
-          </Link>
+          {/* SIGN IN - Mobile (in menu) */}
+          <div className="pt-4 mt-2 border-t">
+            <Link
+              href="/signup"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`
+                block rounded-full px-6 py-3 text-center
+                text-sm font-medium transition
+                ${
+                  pathname === "/signup"
+                    ? "bg-black text-white"
+                    : "border border-black hover:bg-black hover:text-white"
+                }
+              `}
+            >
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
