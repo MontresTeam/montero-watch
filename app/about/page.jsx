@@ -8,8 +8,8 @@ import Footer from "../components/home/Footer/Footer";
 // ICONS
 import { FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 
-import About1 from "@/public/images/About/about1.jpg";
-import About2 from "@/public/images/About/about2.jpg";
+import About1 from "@/public/images/About/gmt compass image.jpg";
+import About2 from "@/public/images/About/gmt compass image2.jpg";
 import About3 from "@/public/images/About/about3.jpg";
 import About4 from "@/public/images/About/about4.jpg";
 import About5 from "@/public/images/About/about5.jpg";

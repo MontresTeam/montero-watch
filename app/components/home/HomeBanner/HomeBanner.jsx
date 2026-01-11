@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 // Images
 import WatchImage from "@/public/images/Home/bannerWatch.png";
 import LeftArrow from "@/public/images/Home/bannerleft.png";
 import RightArrow from "@/public/images/Home/bannerrigth.png";
-import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +22,7 @@ export default function HomeBanner() {
   const rightTextRef = useRef(null);
   const leftFeatureRef = useRef(null);
   const watchRef = useRef(null);
-  const leftArrowRef = useRef(null);
+  const leftArrowRef = useRef(null);   
   const rightArrowRef = useRef(null);
 
   useEffect(() => {
@@ -33,14 +33,11 @@ export default function HomeBanner() {
         defaults: { ease: "power3.out" },
       });
 
-      /* ───────── WATCH FIRST ───────── */
       tl.from(watchRef.current, {
         x: 120,
         opacity: 0,
         duration: 1.3,
       })
-
-        /* ───────── ARROWS AFTER WATCH ───────── */
         .from(
           leftArrowRef.current,
           {
@@ -59,8 +56,6 @@ export default function HomeBanner() {
           },
           "-=0.6"
         )
-
-        /* ───────── SIDE FEATURES ───────── */
         .from(
           leftFeatureRef.current,
           {
@@ -79,8 +74,6 @@ export default function HomeBanner() {
           },
           "-=0.6"
         )
-
-        /* ───────── MAIN TEXT LAST ───────── */
         .from(
           titleRef.current,
           {
@@ -109,7 +102,6 @@ export default function HomeBanner() {
           "-=0.5"
         );
 
-      /* ───────── PARALLAX ───────── */
       gsap.to(watchRef.current, {
         y: 0,
         ease: "none",
@@ -130,13 +122,13 @@ export default function HomeBanner() {
       ref={sectionRef}
       className="relative min-h-screen overflow-hidden text-white"
     >
-      {/* BACKGROUND COLOR ONLY */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#004770] via-[#0C2636] to-[#000106]" />
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-24 lg:pt-32 flex ">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-24 lg:pt-32 flex">
         {/* LEFT TEXT */}
-        <div className="space-y-6  w-[55%] mt-10">
+        <div className="space-y-6 w-[55%] mt-10">
           <h1
             ref={titleRef}
             className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-cormorant leading-tight"
@@ -153,14 +145,17 @@ export default function HomeBanner() {
           </p>
 
           <Link href="/product">
-            <button className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition">
+            <button
+              ref={buttonRef}
+              className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition"
+            >
               Pre-Order Now
             </button>
           </Link>
         </div>
 
         {/* RIGHT TEXT */}
-        <div className="relative  hidden lg:block w-[45%]">
+        <div className="relative hidden lg:block w-[45%]">
           <div ref={rightTextRef} className="absolute top-24 right-0 max-w-xs">
             <h4 className="font-semibold">Elegant Timekeeping</h4>
             <p className="text-sm text-gray-300">
@@ -170,21 +165,32 @@ export default function HomeBanner() {
         </div>
       </div>
 
-      {/* LEFT ARROW */}
+      {/* LEFT ARROW  */}
       <div
         ref={leftArrowRef}
-        className="absolute top-[25%] right-[23%] hidden lg:block z-10"
+        className="absolute top-[32%] right-[25%] hidden lg:block z-10 w-36 h-36"
       >
-        <Image src={LeftArrow} alt="Left Arrow" />
+        <Image
+          src={LeftArrow}
+          alt="Left Arrow"
+          fill
+          className="object-contain scale-150"
+        />
       </div>
 
       {/* RIGHT ARROW */}
-      <div
-        ref={rightArrowRef}
-        className="absolute bottom-[18%] left-[30%] hidden lg:block z-10"
-      >
-        <Image src={RightArrow} alt="Right Arrow" />
-      </div>
+     <div
+  ref={rightArrowRef}
+  className="absolute bottom-[24%] left-[20%] hidden lg:block z-10 w-24 h-24 overflow-visible"
+>
+  <Image
+    src={RightArrow}
+    alt="Right Arrow"
+    fill
+    className="object-contain scale-[2.8]"
+  />
+</div>
+
 
       {/* WATCH */}
       <div
@@ -212,3 +218,4 @@ export default function HomeBanner() {
     </section>
   );
 }
+  

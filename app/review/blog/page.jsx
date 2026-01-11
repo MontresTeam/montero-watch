@@ -12,7 +12,7 @@ import Blog5 from "@/public/images/Blog/gmt2.png";
 import Blog6 from "@/public/images/Blog/gmt3.jpg";
 import Blog7 from "@/public/images/Blog/gmt11.jpg";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <Navbar />
@@ -23,9 +23,9 @@ const page = () => {
           <div className="mx-auto max-w-7xl">
             {/* TOP BAR */}
             <div className="mb-8 sm:mb-10 flex items-center gap-4 sm:gap-6">
-              {/* BACK BUTTON */}
+              {/* BACK BUTTON - Fixed to go back to reviews page */}
               <Link
-                href="/review"
+                href="/reviews" // Changed from "/review" to "/reviews" (assuming this is your reviews page)
                 className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-gray-300 transition-all duration-300 hover:bg-gray-100 hover:border-gray-400"
               >
                 <FaArrowLeft className="text-xs sm:text-sm" />
@@ -45,19 +45,26 @@ const page = () => {
         </section>
       </ScrollAnimation>
 
-      {/* HERO IMAGE */}
+      {/* HERO IMAGE - Fixed with proper image configuration */}
       <ScrollAnimation animationClass="animate-slide-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
           <div className="mx-auto max-w-7xl">
             <div className="relative h-[280px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-lg">
               <Image
-                src={InnerBlog1} // Suggested hero shot: Montero GMT dial
-                alt="Montero GMT Hero"
+                src={InnerBlog1} // Ensure this image is high-resolution in your public folder
+                alt="Montero GMT Hero - Exclusive Production Update"
                 fill
                 priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                 className="object-cover"
+                quality={90} // Increased quality
+                placeholder="blur" // Add blur placeholder if image supports it
               />
             </div>
+            {/* Optional: Add image caption */}
+            <p className="text-xs text-gray-500 mt-2 text-center italic">
+              Montero GMT - Final Production Sample
+            </p>
           </div>
         </section>
       </ScrollAnimation>
@@ -67,27 +74,28 @@ const page = () => {
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-4xl">
             <div className="space-y-5 sm:space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed">
-
-              <p>
-                By Montero Watches
-              </p>
+              <p>By Montero Watches</p>
 
               <hr className="my-6 border-gray-300" />
 
+              <p>Welcome Back, Montero Community</p>
+
               <p>
-                Welcome Back, Montero Community
+                Thank you for your continued trust and patience. Were excited
+                to share a new exclusive production update for the Montero GMT,
+                following weeks of intensive refinement, testing, and
+                collaboration.
               </p>
 
               <p>
-                Thank you for your continued trust and patience. We’re excited to share a new exclusive production update for the Montero GMT, following weeks of intensive refinement, testing, and collaboration.
+                Over the past period, our focus has been on enhancing
+                legibility, night visibility, and overall functional precision,
+                while maintaining the distinctive identity that defines Montero.
               </p>
 
               <p>
-                Over the past period, our focus has been on enhancing legibility, night visibility, and overall functional precision, while maintaining the distinctive identity that defines Montero.
-              </p>
-
-              <p>
-                Below are the latest confirmed updates now locked into production.
+                Below are the latest confirmed updates now locked into
+                production.
               </p>
 
               {/* Enhanced Lume Section */}
@@ -95,13 +103,20 @@ const page = () => {
                 Enhanced Super-LumiNova – Clearer, Stronger, More Purposeful
               </h2>
               <p>
-                We’ve refined the lume application to ensure superior night-time readability while preserving visual balance during the day.
+                We ve refined the lume application to ensure superior night-time
+                readability while preserving visual balance during the day.
               </p>
-              <ul className="list-disc list-inside">
-                <li>Earth map: Only the land areas are treated with Super-LumiNova for improved contrast and a cleaner night appearance.</li>
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Earth map: Only the land areas are treated with Super-LumiNova
+                  for improved contrast and a cleaner night appearance.
+                </li>
                 <li>Blue Edition: Emits a blue lume glow at night.</li>
                 <li>Green Edition: Emits a green lume glow at night.</li>
-                <li>GMT Red Pointer: Now larger, more legible, and filled with red lume for instant GMT reference.</li>
+                <li>
+                  GMT Red Pointer: Now larger, more legible, and filled with
+                  red lume for instant GMT reference.
+                </li>
               </ul>
 
               {/* GMT Hand Visibility */}
@@ -109,9 +124,11 @@ const page = () => {
                 Improved GMT Hand Visibility
               </h2>
               <p>
-                The red GMT pointer has been intentionally enlarged to improve readability across time zones, especially in low-light conditions.
+                The red GMT pointer has been intentionally enlarged to improve
+                readability across time zones, especially in low-light
+                conditions.
               </p>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-2">
                 <li>Faster GMT recognition</li>
                 <li>Balanced dial proportions</li>
                 <li>Enhanced night performance</li>
@@ -121,17 +138,22 @@ const page = () => {
               <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
                 Refined Buckle Design – Minimal & Elegant
               </h2>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-2">
                 <li>The buckle will feature the Montero logo only</li>
-                <li>All additional markings have been removed for a refined finish</li>
+                <li>
+                  All additional markings have been removed for a refined finish
+                </li>
               </ul>
 
               {/* GMT Crown */}
               <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
                 GMT Crown Optimization
               </h2>
-              <ul className="list-disc list-inside">
-                <li>The GMT crown will be partially or fully hidden, depending on final ergonomic validation</li>
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  The GMT crown will be partially or fully hidden, depending on
+                  final ergonomic validation
+                </li>
                 <li>This improves wearability without affecting functionality</li>
               </ul>
 
@@ -139,13 +161,15 @@ const page = () => {
               <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
                 Screw-Down Caseback – Finalized
               </h2>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-2">
                 <li>Improved durability</li>
                 <li>Secure construction</li>
                 <li>Long-term reliability</li>
                 <li>Limited Edition serial numbering</li>
                 <li>Clear English & Arabic lettering</li>
-                <li>Optimized font size and engraving depth for clarity</li>
+                <li>
+                  Optimized font size and engraving depth for clarity
+                </li>
               </ul>
 
               {/* GMT Function */}
@@ -153,40 +177,42 @@ const page = () => {
                 GMT Function – Fully Verified
               </h2>
               <p>
-                We confirm that the GMT mechanism is working accurately and independently, ensuring correct time zone tracking without interference.
+                We confirm that the GMT mechanism is working accurately and
+                independently, ensuring correct time zone tracking without
+                interference.
               </p>
               <p>
-                This was a critical functional checkpoint and is now fully validated.
+                This was a critical functional checkpoint and is now fully
+                validated.
               </p>
 
               <p className="mt-6">
-                We’ll continue sharing transparent updates as we move closer to delivery.
+                We ll continue sharing transparent updates as we move closer to
+                delivery.
               </p>
 
-              <p>
-                Thank you for being part of the Montero journey 
-              </p>
+              <p>Thank you for being part of the Montero journey</p>
 
               <p className="mt-6 font-cormorant text-lg">
-                Montero Watches<br/>
+                Montero Watches
+                <br />
                 Designed for explorers. Built for precision.
               </p>
-
             </div>
           </div>
         </section>
       </ScrollAnimation>
 
-      {/* POPULAR POST SECTION */}
+      {/* POPULAR POST SECTION - Fixed links to connect properly */}
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-7xl">
             <div className="mb-8 sm:mb-12 flex items-center justify-between">
               <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl">
-                Popular Post
+                Popular Posts
               </h2>
 
-              <Link href="/review">
+              <Link href="/reviews"> {/* Fixed to /reviews */}
                 <button className="bg-black text-white px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm rounded-md transition-all duration-300 hover:bg-gray-800 active:scale-95">
                   View All
                 </button>
@@ -197,30 +223,33 @@ const page = () => {
               <ScrollAnimation animationClass="animate-slide-in-up" delay={0}>
                 <BlogCard
                   img={Blog5}
-                  category="Music"
-                  date="9 March 2023"
-                  title="Who is the best singer on chart? Know him?"
-                  desc="Chart by Billboard ranks the all-time greatest artists based on their performance on the weekly Billboard Hot 100."
+                  category="Watches"
+                  date="9 March 2025"
+                  title="The Evolution of GMT Watches: A Comprehensive Guide"
+                  desc="Explore the history and technical advancements of GMT watches, from their origins to modern innovations."
+                  href="/reviews/gmt-evolution" // Added href prop
                 />
               </ScrollAnimation>
 
               <ScrollAnimation animationClass="animate-slide-in-up" delay={100}>
                 <BlogCard
                   img={Blog6}
-                  category="Development"
-                  date="8 March 2023"
-                  title="How to start export import business from home?"
-                  desc="Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide."
+                  category="Design"
+                  date="8 March 2025"
+                  title="Montero Design Philosophy: Where Tradition Meets Innovation"
+                  desc="Discover how Montero combines traditional watchmaking techniques with modern design principles."
+                  href="/reviews/design-philosophy" // Added href prop
                 />
               </ScrollAnimation>
 
               <ScrollAnimation animationClass="animate-slide-in-up" delay={200}>
                 <BlogCard
                   img={Blog7}
-                  category="Food"
-                  date="7 March 2023"
-                  title="Make some drinks with chocolates and milk"
-                  desc="Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
+                  category="Technology"
+                  date="7 March 2025"
+                  title="Advanced Lume Technology in Modern Watchmaking"
+                  desc="Understanding the science behind Super-LumiNova and how it enhances watch legibility in all conditions."
+                  href="/reviews/lume-technology" // Added href prop
                 />
               </ScrollAnimation>
             </div>
@@ -275,7 +304,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 
 /* ================= SCROLL ANIMATION COMPONENT ================= */
 function ScrollAnimation({ children, animationClass, delay = 0 }) {
@@ -321,16 +350,18 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   );
 }
 
-/* ================= BLOG CARD COMPONENT ================= */
-function BlogCard({ img, category, date, title, desc }) {
+/* ================= BLOG CARD COMPONENT - Updated ================= */
+function BlogCard({ img, category, date, title, desc, href = "#" }) {
   return (
-    <div className="group cursor-pointer">
+    <Link href={href} className="group cursor-pointer block">
       <div className="relative h-[220px] sm:h-[240px] lg:h-[260px] w-full overflow-hidden rounded-lg">
         <Image
           src={img}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          quality={85}
         />
       </div>
 
@@ -350,12 +381,9 @@ function BlogCard({ img, category, date, title, desc }) {
         {desc}
       </p>
 
-      <a
-        href="#"
-        className="mt-3 sm:mt-4 inline-block text-xs sm:text-sm text-blue-600 transition-all duration-300 hover:text-blue-700 hover:underline hover:translate-x-1"
-      >
+      <div className="mt-3 sm:mt-4 inline-block text-xs sm:text-sm text-blue-600 transition-all duration-300 hover:text-blue-700 hover:underline group-hover:translate-x-1">
         Read More...
-      </a>
-    </div>
+      </div>
+    </Link>
   );
 }

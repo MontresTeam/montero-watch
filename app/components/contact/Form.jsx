@@ -2,75 +2,95 @@ import React from "react";
 
 export default function Form() {
   return (
-    <div className="w-full max-w-2xl mx-auto px-6 py-12">
-      <div className="mb-10 max-w-xl">
+    <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <div className="mb-8 sm:mb-10 max-w-xl">
         {/* HEADING */}
-        <h2
-          className="text-4xl md:text-5xl font-light text-gray-900 font-cormorant whitespace-nowrap tracking-tight mb-4
-    "
-        >
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 font-cormorant tracking-tight mb-3 sm:mb-4 leading-tight">
           Where Time Meets Conversation
         </h2>
 
         {/* SUBHEADING */}
-        <p
-          className="
-      text-gray-500
-      text-sm md:text-base
-      leading-relaxed
-      font-sans
-    "
-        >
-          Let's align our constellations! Reach out and let the magic of
+        <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-sans">
+          Let s align our constellations! Reach out and let the magic of
           collaboration illuminate our skies.
         </p>
       </div>
 
-      <form className="space-y-4 Mona Sans">
-        {/* Name Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            placeholder="Last Name"
-            className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3 rounded-md outline-none focus:ring-1 focus:ring-gray-300 transition placeholder:text-gray-400 font-light"
-          />
-          <input
-            type="text"
-            placeholder="First Name"
-            className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3 rounded-md outline-none focus:ring-1 focus:ring-gray-300 transition placeholder:text-gray-400 font-light"
-          />
+      <form className="space-y-5 sm:space-y-6 Mona Sans">
+        {/* Name Row - Stack vertically on mobile */}
+        <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 sm:gap-4">
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+              First Name
+            </label>
+            <input
+              type="text"
+              placeholder="John"
+              className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
+            />
+          </div>
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+              Last Name
+            </label>
+            <input
+              type="text"
+              placeholder="Doe"
+              className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
+            />
+          </div>
         </div>
 
         {/* Email */}
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3 rounded-md outline-none focus:ring-1 focus:ring-gray-300 transition placeholder:text-gray-400 font-light"
-        />
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            placeholder="you@example.com"
+            className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
+          />
+        </div>
 
         {/* Phone */}
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3 rounded-md outline-none focus:ring-1 focus:ring-gray-300 transition placeholder:text-gray-400 font-light"
-        />
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            placeholder="(123) 456-7890"
+            className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
+          />
+        </div>
 
         {/* Message */}
-        <textarea
-          placeholder="Message"
-          rows={5}
-          className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3 rounded-md outline-none focus:ring-1 focus:ring-gray-300 transition placeholder:text-gray-400 resize-none font-light"
-        />
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+            Message
+          </label>
+          <textarea
+            placeholder="Type your message here..."
+            rows={4}
+            className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 resize-y font-light text-base sm:text-sm min-h-[120px]"
+          />
+        </div>
 
-        {/* Button */}
-        <div className="flex justify-end pt-2">
+        {/* Button - Full width on mobile, right-aligned on larger screens */}
+        <div className="flex flex-col sm:flex-row sm:justify-end pt-2 sm:pt-4">
           <button
             type="button"
-            className="bg-black text-white px-8 py-3 rounded-sm hover:opacity-80 transition text-sm font-medium"
+            className="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-4 sm:py-3 rounded-sm hover:opacity-90 active:opacity-80 transition text-sm sm:text-base font-medium min-h-[52px] sm:min-h-[48px] touch-manipulation"
           >
             Subscribe Now
           </button>
         </div>
+
+        {/* Optional: Add a small note for mobile users */}
+        <p className="text-xs text-gray-400 text-center sm:text-left mt-4 sm:mt-2">
+          Tap on any field to start typing
+        </p>
       </form>
     </div>
   );
