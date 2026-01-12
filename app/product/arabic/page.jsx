@@ -6,7 +6,7 @@ import newcurrency from "../../../public/images/dbff981dfc9f1a8358f03cc8ee71583a
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import Green1 from "@/public/images/GreenWatch/productGreen1.png";
-import Green2 from "@/public/images/GreenWatch/productGreen2.png";
+import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
@@ -26,129 +26,7 @@ const Page = () => {
     "How can I place an order?",
   ];
 
-  // Add smooth scroll CSS
-  useEffect(() => {
-    // Add smooth scroll behavior to html
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Add CSS for animations
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      @keyframes fadeInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      
-      .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out forwards;
-      }
-      
-      .animate-fade-in-down {
-        animation: fadeInDown 0.3s ease-out forwards;
-      }
-      
-      .animate-slide-in-left {
-        animation: slideInLeft 0.6s ease-out forwards;
-      }
-      
-      .animate-slide-in-right {
-        animation: slideInRight 0.6s ease-out forwards;
-      }
-      
-      /* Mobile responsive text */
-      @media (max-width: 640px) {
-        .mobile-heading {
-          font-size: calc(1.5rem + 1vw);
-        }
-        
-        .mobile-text {
-          font-size: calc(14px + 0.5vw);
-        }
-        
-        .mobile-small-text {
-          font-size: calc(12px + 0.3vw);
-        }
-      }
-      
-      /* Touch friendly buttons */
-      button, 
-      [role="button"],
-      a[href] {
-        min-height: 44px;
-        min-width: 44px;
-      }
-      
-      /* Prevent image dragging on mobile */
-      img {
-        -webkit-user-drag: none;
-        user-select: none;
-      }
-      
-      /* Smooth scrolling */
-      html {
-        scroll-behavior: smooth;
-      }
-      
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-        
-        .animate-fade-in-up,
-        .animate-fade-in-down,
-        .animate-slide-in-left,
-        .animate-slide-in-right {
-          animation: none;
-          opacity: 1;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-    
-    return () => {
-      document.head.removeChild(style);
-      document.documentElement.style.scrollBehavior = '';
-    };
-  }, []);
+
 
   return (
     <>
@@ -226,11 +104,9 @@ const Page = () => {
             </h2>
 
             {/* Watch Image */}
-            <div className="relative mb-3 sm:mb-4">
+            <div className="relative mb-3 sm:mb-4 overflow-hidden">
               <div
-                className="relative z-10 w-full max-w-[280px] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto
-                h-[140px] sm:h-[200px] md:h-[280px] lg:h-[360px]
-                -rotate-6 scale-75 sm:scale-100"
+               className="relative transform scale-200 z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]"
               >
                 <Image
                   src={Green2}
