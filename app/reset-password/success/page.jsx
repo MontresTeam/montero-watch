@@ -8,7 +8,7 @@ import star from "./../../../public/images/contact/star.png";
 import Footer from "../../components/home/Footer/Footer";
 import Navbar from "../../components/navBar/NavBar";
 
-export default function page() {
+export default function ResetPasswordSuccessPage() {
     const router = useRouter();
 
     return (
@@ -49,10 +49,10 @@ export default function page() {
 
                 {/* Button Section */}
                 <button
-                    onClick={() => router.push('/')}
+                    onClick={() => router.push('/login')}
                     className="w-full max-w-xs bg-black text-white font-medium py-4 sm:py-5 text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98]"
                 >
-                    Get Back
+                    Back to Login
                 </button>
             </div>
             <Footer />

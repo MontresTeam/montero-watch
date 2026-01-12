@@ -10,14 +10,22 @@ import Green2 from "@/public/images/GreenWatch/productGreen2.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
-import newCurrency from '@/public/images/newSymbole.png'
+// Removed duplicate import of newCurrency since it's already imported as newcurrency
 
+import { useRouter } from "next/navigation";
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 
 const Page = () => {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
+
+  const ARABIC_PRODUCT_ID = "696294b5d2b02c0550d276d1";
+
+  const handlePreOrder = () => {
+    router.push(`/order?productId=${ARABIC_PRODUCT_ID}`);
+  };
 
   const faqs = [
     "Do the watches come with a warranty?",
@@ -172,7 +180,7 @@ const Page = () => {
               </h1>
 
               <p className="text-sm font-body font-extralight sm:text-base lg:text-lg text-white/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed mobile-text max-w-2xl mx-auto lg:mx-0">
-                Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+                Crafted for explorers, dreamers, and lovers of the world&apos;s most iconic beaches
               </p>
               
               {/* Mobile-only Order Button */}
@@ -192,6 +200,15 @@ const Page = () => {
                   </button>
                 </Link>
               </div>
+
+              <button
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={handlePreOrder}
+                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-h-[44px]"
+              >
+                Pre-Order Now
+              </button>
             </div>
 
             {/* Right Watch Image */}
@@ -571,7 +588,7 @@ const Page = () => {
             </h2>
 
             <p className="font-light text-base sm:text-lg lg:text-xl xl:text-2xl text-white/90 leading-relaxed text-center lg:text-left mobile-text">
-              Crafted for explorers, dreamers, and lovers of the world s most
+              Crafted for explorers, dreamers, and lovers of the world&apos;s most
               iconic beaches. Now with Arabic numerals for the Middle Eastern
               market.
             </p>
@@ -646,7 +663,7 @@ const Page = () => {
 
                   {/* Text */}
                   <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 mobile-small-text">
-                    I recently purchased the Montero Arabic Edition watch, and I m
+                    I recently purchased the Montero Arabic Edition watch, and I&apos;m
                     extremely satisfied. The design looks premium, the Arabic
                     numerals add a traditional touch, and it feels very
                     comfortable on the wrist. Perfect for both formal and casual
@@ -779,5 +796,48 @@ const Page = () => {
     </>
   );
 };
+
+// ScrollAnimation component is declared but not used - keeping it in case it's needed elsewhere
+// function ScrollAnimation({ children, animationClass, delay = 0 }) {
+//   const [isVisible, setIsVisible] = useState(false);
+//   const ref = useRef(null);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setTimeout(() => {
+//             setIsVisible(true);
+//           }, delay);
+//           observer.unobserve(entry.target);
+//         }
+//       },
+//       {
+//         threshold: 0.1,
+//         rootMargin: "50px",
+//       }
+//     );
+
+//     if (ref.current) {
+//       observer.observe(ref.current);
+//     }
+
+//     return () => {
+//       if (ref.current) {
+//         observer.unobserve(ref.current);
+//       }
+//     };
+//   }, [delay]);
+
+//   return (
+//     <div
+//       ref={ref}
+//       className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
+//         }`}
+//     >
+//       {children}
+//     </div>
+//   );
+// }
 
 export default Page;

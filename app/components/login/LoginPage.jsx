@@ -4,9 +4,47 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import img from "../../../public/images/loginimg.jpg";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, googleLogin, facebookLogin } = useAuth();
+  const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
+
+
+  const validateForm = () => {
+    const errors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email.trim()) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(email)) {
+      errors.email = "Invalid email format";
+    }
+
+    if (!password) {
+      errors.password = "Password is required";
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!validateForm()) return;
+
+    try {
+      await login(email, password);
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <div className="mt-6 min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
@@ -18,6 +56,7 @@ export default function LoginPage() {
               src={img}
               alt="Montero Watch Premium Display"
               fill
+              sizes="(max-width: 1024px) 100vw, 500px"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               priority
             />
@@ -38,14 +77,19 @@ export default function LoginPage() {
             </p>
           </header>
 
-          <form className="space-y-6">
+          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Email Input */}
             <div className="relative">
               <input
                 type="email"
                 placeholder="Email ID"
-                className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.email ? "border-red-500" : "border-neutral-200"}`}
               />
+              {fieldErrors.email && <p className="text-red-500 text-xs mt-1 absolute">{fieldErrors.email}</p>}
             </div>
 
             {/* Password Input */}
@@ -53,7 +97,9 @@ export default function LoginPage() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.password ? "border-red-500" : "border-neutral-200"}`}
               />
               <button
                 type="button"
@@ -92,6 +138,7 @@ export default function LoginPage() {
                   </svg>
                 )}
               </button>
+              {fieldErrors.password && <p className="text-red-500 text-xs mt-1 absolute -bottom-5">{fieldErrors.password}</p>}
             </div>
 
             <div className="flex items-center justify-between pb-2">
@@ -118,12 +165,20 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center lg:text-left">
-            <Link
-              href="/signup"
-              className="monaSans text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-            >
-              Create account
-            </Link>
+            <p className="monaSans text-sm text-neutral-600">
+              Don’t have an account?{" "}
+              <Link
+                href="/signup"
+                className="
+      font-medium text-neutral-900
+      underline-offset-4
+      hover:underline
+      transition-colors
+    "
+              >
+                Create account
+              </Link>
+            </p>
           </div>
 
           <footer className="mt-10 text-center space-y-8">
@@ -135,8 +190,11 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-center gap-4">
-              <button className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm">
-                <svg width="20" height="20" viewBox="0 0 48 48">
+              <button
+                onClick={googleLogin}
+                className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm"
+              >
+                {/* <svg width="20" height="20" viewBox="0 0 48 48">
                   <path
                     fill="#EA4335"
                     d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
@@ -153,10 +211,14 @@ export default function LoginPage() {
                     fill="#34A853"
                     d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
                   />
-                </svg>
+                </svg> */}
+                <i className="fa-brands fa-google text-xl"></i>
               </button>
-              <button className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm">
-                <i className="fa-brands fa-apple text-xl"></i>
+              <button
+                onClick={facebookLogin}
+                className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm"
+              >
+                <i className="fa-brands fa-facebook text-xl"></i>
               </button>
             </div>
           </footer>

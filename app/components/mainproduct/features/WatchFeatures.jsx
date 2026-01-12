@@ -104,7 +104,11 @@ export default function WatchFeatures() {
 
           {/* RIGHT */}
           <div className="flex flex-col items-center md:items-end justify-between h-auto md:h-[420px] gap-6 md:gap-0">
-            <SideFeature icon={rightIcons[0]} text="Eastern Arabic numerals" theme={themeColor} />
+            <SideFeature
+              icon={rightIcons[0]}
+              text={activeColor === "green" ? "Eastern Arabic numerals" : "24-hour bezel display"}
+              theme={themeColor}
+            />
             <SideFeature icon={rightIcons[1]} text="GMT function for global synchrony" theme={themeColor} />
           </div>
 

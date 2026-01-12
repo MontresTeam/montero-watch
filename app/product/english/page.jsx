@@ -14,8 +14,15 @@ import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 
 const Page = () => {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
+
+  const ENGLISH_PRODUCT_ID = "696293d7aed7103263e01fb5";
+
+  const handlePreOrder = () => {
+    router.push(`/order?productId=${ENGLISH_PRODUCT_ID}`);
+  };
 
   const faqs = [
     "Do the watches come with a warranty?",
@@ -50,6 +57,15 @@ const Page = () => {
                 Crafted for explorers, dreamers, and lovers of the world s most
                 iconic beaches
               </p>
+
+              <button
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={handlePreOrder}
+                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Pre-Order Now
+              </button>
             </div>
 
             {/* Right Watch Image */}
@@ -625,9 +641,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>

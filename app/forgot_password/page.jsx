@@ -1,12 +1,34 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import star from "../../public/images/contact/star.png";
 import Navbar from '../components/navBar/NavBar';
 import Footer from '../components/home/Footer/Footer';
+import { forgotPassword } from '../../actions/auth';
+import { toast } from 'react-toastify';
 
 export default function page() {
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            await forgotPassword(email);
+            toast.success("Password reset link sent to your email.");
+            router.push("/forgot_password/sent");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Something went wrong.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <>
             <Navbar />
@@ -49,16 +71,22 @@ export default function page() {
                 </div>
 
                 {/* Form Section */}
-                <form className="w-full max-w-sm sm:max-w-md space-y-4 sm:space-y-6">
+                <form onSubmit={handleSubmit} className="w-full max-w-sm sm:max-w-md space-y-4 sm:space-y-6">
                     <div className="relative">
                         <input
                             type="email"
                             placeholder="Email ID"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                             className="w-full bg-neutral-50 border border-neutral-200 px-4 sm:px-5 py-3 sm:py-4 monaSans text-xs sm:text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
                         />
                     </div>
-                    <button className="w-full bg-black text-white font-medium py-4 sm:py-5 text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98]">
-                        Reset password
+                    <button
+                        disabled={loading}
+                        className="w-full bg-black text-white font-medium py-4 sm:py-5 text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {loading ? "Sending..." : "Reset password"}
                     </button>
                 </form>
             </div>

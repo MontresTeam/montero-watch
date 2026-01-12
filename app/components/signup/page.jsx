@@ -4,14 +4,75 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import img from '../../../public/images/signupImg.jpg';
+import { useAuth } from '../../../context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { register, googleLogin, facebookLogin } = useAuth();
+    const router = useRouter();
+
+    const [error, setError] = useState("");
+    const [fieldErrors, setFieldErrors] = useState({});
+
+    const validateForm = () => {
+        const errors = {};
+        if (!name.trim()) errors.name = "Name is required";
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.trim()) {
+            errors.email = "Email is required ";
+        } else if (!emailRegex.test(email)) {
+            errors.email = "Invalid email format";
+        }
+
+        if (!password) {
+            errors.password = "Password is required ";
+        } else if (password.length < 6) {
+            errors.password = "Password must be at least 6 characters";
+        }
+
+        setFieldErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        if (!validateForm()) {
+            toast.error("Please fix the validation errors");
+            return;
+        }
+
+        try {
+            const response = await register({ name, email, password });
+
+            console.log("✅ Register response:", response);
+            toast.success("Account created successfully. Please check your email for verification.");
+
+            // optional: log specific fields if backend sends them
+            console.log("Message:", response?.message);
+            console.log("User:", response?.user);
+
+            router.push("/signup/verify");
+        } catch (err) {
+            console.error("❌ Register error:", err);
+            const msg = err?.response?.data?.message || err?.message || "Registration failed";
+            toast.error(msg);
+            setError(msg);
+        }
+    };
+
 
     return (
         <div className="mt-6 min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
             <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 px-6 py-12 lg:py-0">
-        
+
                 {/* Image Section */}
                 <div className="w-full lg:w-1/2 flex items-center justify-center">
                     <div className="relative w-full max-w-[500px] aspect-square overflow-hidden shadow-2xl rounded-sm group">
@@ -19,6 +80,7 @@ export default function SignupPage() {
                             src={img}
                             alt="Montero Watch Premium Display"
                             fill
+                            sizes="(max-width: 1024px) 100vw, 500px"
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                             priority
                         />
@@ -39,14 +101,19 @@ export default function SignupPage() {
                         </p>
                     </header>
 
-                    <form className="space-y-6">
+
+
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         {/* Name Input */}
                         <div className="relative">
                             <input
                                 type="text"
                                 placeholder="Name"
-                                className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.name ? "border-red-500" : "border-neutral-200"}`}
                             />
+                            {fieldErrors.name && <p className="text-red-500 text-xs mt-1 absolute">{fieldErrors.name}</p>}
                         </div>
 
                         {/* Email Input */}
@@ -54,8 +121,11 @@ export default function SignupPage() {
                             <input
                                 type="email"
                                 placeholder="Email ID"
-                                className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.email ? "border-red-500" : "border-neutral-200"}`}
                             />
+                            {fieldErrors.email && <p className="text-red-500 text-xs mt-1 absolute">{fieldErrors.email}</p>}
                         </div>
 
                         {/* Password Input */}
@@ -63,7 +133,9 @@ export default function SignupPage() {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
-                                className="w-full bg-neutral-50 border border-neutral-200 px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.password ? "border-red-500" : "border-neutral-200"}`}
                             />
                             <button
                                 type="button"
@@ -82,6 +154,7 @@ export default function SignupPage() {
                                     </svg>
                                 )}
                             </button>
+                            {fieldErrors.password && <p className="text-red-500 text-xs mt-1 absolute -bottom-5">{fieldErrors.password}</p>}
                         </div>
 
                         <div className="flex items-center justify-between pb-2">
@@ -90,16 +163,22 @@ export default function SignupPage() {
                                 <span className="monaSans text-xs text-neutral-600 group-hover:text-neutral-900 transition-colors">Keep me signed in</span>
                             </label>
                         </div>
-
+                        {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
                         <button className="w-full bg-black text-white font-medium py-5 text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98]">
                             Sign Up
                         </button>
                     </form>
 
-                    <div className="mt-6 text-center lg:text-left">
-                        <Link href="/login" className="monaSans text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
-                            Already have an account? Sign In
-                        </Link>
+                    <div className="mt-12 pt-8 border-t border-neutral-100 text-center lg:text-left">
+                        <p className="monaSans text-sm text-neutral-500 tracking-tight">
+                            Already have an account?{" "}
+                            <Link
+                                href="/login"
+                                className="text-neutral-900  hover:text-neutral-600 transition-colors underline-offset-4 hover:underline"
+                            >
+                                Sign In
+                            </Link>
+                        </p>
                     </div>
 
                     <footer className="mt-10 text-center space-y-8">
@@ -109,16 +188,23 @@ export default function SignupPage() {
                         </div>
 
                         <div className="flex items-center justify-center gap-4">
-                            <button className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm">
-                                <svg width="20" height="20" viewBox="0 0 48 48">
+                            <button
+                                onClick={googleLogin}
+                                className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm"
+                            >
+                                {/* <svg width="20" height="20" viewBox="0 0 48 48">
                                     <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
                                     <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
                                     <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
                                     <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
-                                </svg>
+                                </svg> */}
+                                <i className="fa-brands fa-google text-xl"></i>
                             </button>
-                            <button className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm">
-                                <i className="fa-brands fa-apple text-xl"></i>
+                            <button
+                                onClick={facebookLogin}
+                                className="flex-1 flex items-center justify-center border border-neutral-200 py-3.5 hover:bg-neutral-50 transition-all duration-300 rounded-sm"
+                            >
+                                <i className="fa-brands fa-facebook text-xl"></i>
                             </button>
                         </div>
                     </footer>

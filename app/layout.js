@@ -44,7 +44,8 @@ export const metadata = {
   },
 };
 
-
+import { AuthProvider } from "../context/AuthContext";
+import ToasterProvider from "./components/ToasterProvider";
 
 export default function RootLayout({ children }) {
   return (
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
+        suppressHydrationWarning
         className={`
           ${geistSans.variable}
           ${geistMono.variable}
@@ -67,7 +69,10 @@ export default function RootLayout({ children }) {
           antialiased
         `}
       >
-        {children}
+        <AuthProvider>
+          <ToasterProvider />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

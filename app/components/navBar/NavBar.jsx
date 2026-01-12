@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaChevronDown, FaBars, FaTimes, FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -15,6 +16,7 @@ import Glob from "@/public/icons/home/glob.png";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { user } = useAuth();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -97,50 +99,28 @@ const Navbar = () => {
               {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
             </button>
 
-            {/* DESKTOP NAVIGATION */}
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`
-                      text-[13px] font-semibold tracking-wide relative
-                      transition-colors duration-200
-                      ${
-                        isActive
-                          ? "text-black"
-                          : "text-gray-500 hover:text-black"
-                      }
-                    `}
-                  >
-                    {link.name}
-                    <span
-                      className={`
-                        absolute left-0 -bottom-1 h-[1px] bg-black transition-all duration-300
-                        ${isActive ? "w-full" : "w-0 hover:w-full"}
-                      `}
-                    />
-                  </Link>
-                );
-              })}
-            </div>
+          {/* LEFT MENU */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-[13px] font-light tracking-wide transition ${isActive
+                    ? "text-black"
+                    : "text-gray-500 hover:text-black"
+                    }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* CENTER LOGO - Responsive positioning */}
-          <Link
-            href="/"
-            className="absolute left-1/2 -translate-x-1/2 flex-shrink-0"
-          >
-            <Image
-              src={Logo}
-              alt="Logo"
-              width={180}
-              height={70}
-              priority
-              className="w-[140px] md:w-[180px] h-auto"
-            />
+          {/* LOGO */}
+          <Link href="/" className="flex-shrink-0">
+            <Image src={Logo} alt="Logo" width={190} height={80} style={{ height: 'auto' }} priority />
           </Link>
 
           {/* RIGHT SECTION - User actions */}
@@ -155,9 +135,7 @@ const Navbar = () => {
                 <Image src={Glob} alt="Language" width={16} height={16} />
                 <span className="min-w-[24px] text-center">{selectedLang}</span>
                 <FaChevronDown
-                  className={`text-[10px] transition ${
-                    isLangOpen ? "rotate-180" : ""
-                  }`}
+                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""}`}
                 />
               </button>
 
@@ -182,43 +160,49 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* USER SECTION - Desktop */}
-            <div className="relative hidden md:flex items-center gap-3">
-              <div className="relative" ref={dropdownRef}>
+            {/* USER PROFILE/ICON (DESKTOP) */}
+            <div className="hidden md:block">
+              {user ? (
                 <button
                   onClick={() => setIsDropdownOpen((p) => !p)}
-                  className="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-50"
-                  aria-label="User menu"
+                  className="flex items-center gap-2"
+                >
+                  <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+                    <Image
+                      src={user.profilePic || Avatar}
+                      alt="Profile"
+                      width={36}
+                      height={36}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsDropdownOpen((p) => !p)}
+                  className="flex items-center"
                 >
                   <FaRegUser size={16} className="text-gray-700" />
-                  <FaChevronDown
-                    className={`text-[10px] transition ${
-                      isDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
                 </button>
+              )}
+            </div>
 
-                {isDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-1 z-[999]">
-                    <Dropdown onClose={() => setIsDropdownOpen(false)} />
-                  </div>
-                )}
-              </div>
 
+
+            {/* SIGN IN */}
+            {!user && (
               <Link
-                href="/signup"
-                className={`
-                  rounded-full px-6 py-2
-                  text-[13px] font-medium transition whitespace-nowrap
-                  ${
-                    pathname === "/signup"
-                      ? "bg-black text-white"
-                      : "border border-black hover:bg-black hover:text-white"
-                  }
-                `}
+                href="/login"
+                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/login"
+                  ? "bg-black text-white"
+                  : "hover:bg-black hover:text-white"
+                  }`}
               >
                 Sign In
               </Link>
+            )}
+
+          
             </div>
 
             {/* MOBILE RIGHT SECTION */}
@@ -313,24 +297,33 @@ const Navbar = () => {
             );
           })}
 
-          {/* SIGN IN - Mobile (in menu) */}
-          <div className="pt-4 mt-2 border-t">
+          <div className="border-t pt-4">
+            <p className="text-sm text-gray-500 mb-2">Language</p>
+            <div className="flex gap-3">
+              {languages.map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setSelectedLang(lang)}
+                  className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
+                    ? "bg-black text-white border-black"
+                    : "border-gray-300"
+                    }`}
+                >
+                  {lang}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {!user && (
             <Link
-              href="/signup"
+              href="/login"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`
-                block rounded-full px-6 py-3 text-center
-                text-sm font-medium transition
-                ${
-                  pathname === "/signup"
-                    ? "bg-black text-white"
-                    : "border border-black hover:bg-black hover:text-white"
-                }
-              `}
+              className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
             >
               Sign In
             </Link>
-          </div>
+          )}
         </div>
       </div>
     </nav>
