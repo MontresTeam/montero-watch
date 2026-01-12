@@ -5,12 +5,15 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useTranslation } from "react-i18next";
+
 import ArabicImg from "@/public/images/Home/leftitemarabic.png";
 import EnglishImg from "@/public/images/Home/englishedition.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Categories = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const leftCardRef = useRef(null);
   const rightCardRef = useRef(null);
@@ -94,17 +97,17 @@ const Categories = () => {
           {/* TOP CONTENT (FIXED POSITION) */}
           <div className="center-content absolute inset-0 flex flex-col items-center justify-center text-center px-6 space-y-4">
             <h3 className="text-white text-2xl font-semibold">
-              Explore the Arabic Edition
+              {t("home.products.arabic.exploreTitle")}
             </h3>
             <p className="text-gray-200">
-              Distinctively crafted with Eastern Arabic numerals and a bold blue dial
+              {t("home.products.arabic.exploreDesc")}
             </p>
           </div>
 
           {/* BOTTOM LEFT TEXT */}
           <div className="absolute bottom-2 right-4">
             <span className="bottom-text text-white text-sm font-medium">
-              Only 150 Pieces Worldwide
+              {t("home.products.limited")}
             </span>
           </div>
         </div>
@@ -128,22 +131,22 @@ const Categories = () => {
           {/* CENTER CONTENT (SAME TITLE POSITION LOGIC) */}
           <div className="center-content absolute inset-0 flex flex-col items-center justify-center text-center px-6 space-y-4">
             <button className="border border-white text-white px-6 py-2 rounded-full text-sm font-medium hover:opacity-80 transition">
-              Pre-Order Now
+              {t("home.products.preOrder")}
             </button>
 
             <h3 className="text-white text-2xl font-semibold">
-              Explore the English Edition
+              {t("home.products.english.exploreTitle")}
             </h3>
 
             <p className="text-gray-200 max-w-md">
-              A refined classic design with modern elegance
+              {t("home.products.english.exploreDesc")}
             </p>
           </div>
 
           {/* BOTTOM LEFT TEXT */}
           <div className="absolute bottom-2 right-4">
             <span className="bottom-text text-white text-sm font-medium">
-              Only 150 Pieces Worldwide
+              {t("home.products.limited")}
             </span>
           </div>
         </div>

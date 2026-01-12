@@ -10,10 +10,12 @@ import WatchImage from "@/public/images/Home/bannerWatch.png";
 import LeftArrow from "@/public/images/Home/bannerleft.png";
 import RightArrow from "@/public/images/Home/bannerrigth.png";
 import Link from 'next/link'
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeBanner() {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
 
   const titleRef = useRef(null);
@@ -145,22 +147,20 @@ export default function HomeBanner() {
             ref={titleRef}
             className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-serif leading-tight"
           >
-            A World Time Watch Inspired
-            by Global Beaches
+            {t("home.banner.title")}
           </h1>
 
           <p ref={descRef} className="max-w-md font-Monasans font-light text-[24px] text-gray-300">
-            Crafted for explorers, dreamers, and lovers of the world’s most
-            iconic beaches
+            {t("home.banner.desc")}
           </p>
 
           <Link href="/product">
             <button
-            
-            className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition"
-          >
-            Pre-Order Now
-          </button>
+
+              className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition"
+            >
+              {t("home.banner.preOrder")}
+            </button>
           </Link>
         </div>
 
@@ -170,9 +170,9 @@ export default function HomeBanner() {
             ref={rightTextRef}
             className="absolute top-24 right-0 max-w-xs"
           >
-            <h4 className="font-semibold">Elegant Timekeeping</h4>
+            <h4 className="font-semibold">{t("home.banner.right.title")}</h4>
             <p className="text-sm text-gray-300">
-              Precision inspired by the world
+              {t("home.banner.right.desc")}
             </p>
           </div>
         </div>
@@ -181,23 +181,23 @@ export default function HomeBanner() {
       {/* LEFT ARROW */}
       <div
         ref={leftArrowRef}
-        className="absolute top-[25%] right-[23%] hidden lg:block z-10"
+        className="absolute top-[25%] right-[23%] rtl:left-[23%] rtl:right-auto hidden lg:block z-10"
       >
-        <Image src={LeftArrow} alt="Left Arrow" />
+        <Image src={LeftArrow} alt="Left Arrow" className="rtl:scale-x-[-1]" />
       </div>
 
       {/* RIGHT ARROW */}
       <div
         ref={rightArrowRef}
-        className="absolute bottom-[18%] left-[30%] hidden lg:block z-10"
+        className="absolute bottom-[18%] left-[30%] rtl:right-[30%] rtl:left-auto hidden lg:block z-10"
       >
-        <Image src={RightArrow} alt="Right Arrow" />
+        <Image src={RightArrow} alt="Right Arrow" className="rtl:scale-x-[-1]" />
       </div>
 
       {/* WATCH */}
       <div
         ref={watchRef}
-        className="absolute bottom-0 right-0 w-[100%] sm:w-[85%] lg:w-[55%] z-10"
+        className="absolute bottom-0 right-0 rtl:left-0 rtl:right-auto w-[100%] sm:w-[85%] lg:w-[55%] z-10"
       >
         <Image
           src={WatchImage}
@@ -210,11 +210,11 @@ export default function HomeBanner() {
       {/* LEFT FEATURE */}
       <div
         ref={leftFeatureRef}
-        className="absolute bottom-[20%] left-[10%] hidden lg:block z-10 max-w-xs"
+        className="absolute bottom-[20%] left-[10%] rtl:right-[10%] rtl:left-auto hidden lg:block z-10 max-w-xs rtl:text-right"
       >
-        <h4 className="font-semibold">Elegant Timekeeping</h4>
+        <h4 className="font-semibold">{t("home.banner.left.title")}</h4>
         <p className="text-sm text-gray-300">
-          Designed for precision and beauty
+          {t("home.banner.left.desc")}
         </p>
       </div>
     </section>

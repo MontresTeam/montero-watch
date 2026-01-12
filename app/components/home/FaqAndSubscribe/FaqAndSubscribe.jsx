@@ -1,32 +1,13 @@
 "use client";
 
 import { useState } from "react";
-
-const faqs = [
-  {
-    question: "Do the watches come with a warranty?",
-    answer:
-      "Yes, all Montero watches come with an international warranty covering manufacturing defects.",
-  },
-  {
-    question: "Are the watches scratch-resistant?",
-    answer:
-      "Our watches use scratch-resistant sapphire crystal to ensure durability.",
-  },
-  {
-    question: "What materials are used to make your watches?",
-    answer:
-      "We use premium stainless steel, sapphire crystal, and genuine leather straps.",
-  },
-  {
-    question: "How can I place an order?",
-    answer:
-      "Orders can be placed directly through our website during product launches.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function FaqAndSubscribe() {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState(null);
+
+  const faqs = t("home.faq.list", { returnObjects: true });
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -38,29 +19,21 @@ export default function FaqAndSubscribe() {
 
         {/* FAQ SECTION */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-28">
-          
+
           {/* LEFT */}
           <div>
             <h2 className="font-serif text-4xl mb-6">
-              Frequently Asked Question
+              {t("home.faq.title")}
             </h2>
 
             <p className="text-gray-600 leading-relaxed max-w-md">
-              Each beach was chosen for its cultural significance, beauty, and
-              global reputation — together forming the emotional core of
-              Montero.
-            </p>
-
-            <p className="text-gray-600 leading-relaxed max-w-md mt-4">
-              Each beach was chosen for its cultural significance, beauty, and
-              global reputation — together forming the emotional core of
-              Montero.
+              {t("home.faq.desc")}
             </p>
           </div>
 
           {/* RIGHT FAQ */}
           <div className="space-y-6">
-            {faqs.map((faq, index) => (
+            {Array.isArray(faqs) && faqs.map((faq, index) => (
               <div
                 key={index}
                 className=" text-black pb-4"
@@ -74,9 +47,8 @@ export default function FaqAndSubscribe() {
                   </span>
 
                   <span
-                    className={`text-xl transition-transform ${
-                      openIndex === index ? "rotate-45" : ""
-                    }`}
+                    className={`text-xl transition-transform ${openIndex === index ? "rotate-45" : ""
+                      }`}
                   >
                     +
                   </span>
@@ -94,16 +66,15 @@ export default function FaqAndSubscribe() {
 
         {/* SUBSCRIBE SECTION */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* LEFT */}
           <div>
             <h2 className="font-serif text-4xl mb-4">
-              Subscribe for Exclusive Updates
+              {t("home.subscribe2.title")}
             </h2>
 
             <p className="text-gray-600 max-w-md">
-              Join our mailing list to receive early access, limited-edition
-              alerts, and insider updates directly from the Montero team.
+              {t("home.subscribe2.desc")}
             </p>
           </div>
 
@@ -113,13 +84,13 @@ export default function FaqAndSubscribe() {
               <span className="mr-3 text-gray-500">✉</span>
               <input
                 type="email"
-                placeholder="Enter your e-mail"
+                placeholder={t("home.subscribe2.placeholder")}
                 className="bg-transparent outline-none w-full text-sm"
               />
             </div>
 
             <button className="bg-black text-white px-8 py-3 whitespace-nowrap hover:opacity-90 transition">
-              Subscribe Now
+              {t("home.subscribe2.button")}
             </button>
           </div>
         </div>

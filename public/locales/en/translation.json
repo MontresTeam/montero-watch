@@ -8,5 +8,126 @@
         "contact": "Contact Us",
         "signin": "Sign In",
         "language": "Language"
+    },
+    "footer": {
+        "getInTouch": "Get in Touch",
+        "desc": "If you have any questions about your order, warranty, or Montero products, we’re here to help.",
+        "links": {
+            "home": "Home",
+            "products": "Products",
+            "about": "About Us",
+            "contact": "Contact Us"
+        },
+        "subscribe": {
+            "title": "Contact",
+            "placeholder": "Enter your e-mail or mobile number",
+            "submit": "Submit"
+        }
+    },
+    "home": {
+        "banner": {
+            "title": "A World Time Watch Inspired by Global Beaches",
+            "desc": "Crafted for explorers, dreamers, and lovers of the world’s most iconic beaches",
+            "preOrder": "Pre-Order Now",
+            "right": {
+                "title": "Elegant Timekeeping",
+                "desc": "Precision inspired by the world"
+            },
+            "left": {
+                "title": "Elegant Timekeeping",
+                "desc": "Designed for precision and beauty"
+            }
+        },
+        "about": {
+            "button": "About Us",
+            "title": "The Story Behind Montero",
+            "desc": "Montero was born from a deep appreciation for the world, its diversity, and the timeless beauty of global coastlines. Each detail of the watch carries inspiration from the beaches that have shaped culture, adventure, and unforgettable memories. From Ibiza to Bali, Miami to Bora Bora, the Montero world-time concept celebrates the connection between people and place. It is more than a watch — it is a reminder that every moment holds a new horizon.",
+            "adventure": {
+                "title": "Adventure",
+                "desc": "For those who never stop exploring"
+            },
+            "precision": {
+                "title": "Precision",
+                "desc": "Powered by reliable world-time engineering"
+            },
+            "culture": {
+                "title": "Culture",
+                "desc": "Celebrating eight iconic beaches across the globe"
+            }
+        },
+        "products": {
+            "title": "Choose Your Montero Edition",
+            "desc": "Montero is available in two collectible editions — each designed with its own identity while sharing the same world-time DNA and craftsmanship.",
+            "viewDetails": "View Details",
+            "english": {
+                "title": "English Edition",
+                "desc": "A refined international version with a crisp white & blue dial inspired by modern minimalism.",
+                "exploreTitle": "Explore the English Edition",
+                "exploreDesc": "A refined classic design with modern elegance"
+            },
+            "arabic": {
+                "title": "Arabic Edition",
+                "desc": "A bold blue dial with Eastern Arabic numerals inspired by regional identity and oceanic depth.",
+                "exploreTitle": "Explore the Arabic Edition",
+                "exploreDesc": "Distinctively crafted with Eastern Arabic numerals and a bold blue dial"
+            },
+            "preOrder": "Pre-Order Now",
+            "limited": "Only 150 Pieces Worldwide"
+        },
+        "locations": {
+            "title": "The Eight Beaches That Inspired Montero",
+            "desc": "Each beach was chosen for its cultural significance, beauty, and global reputation — together forming the emotional core of Montero.",
+            "bottomDesc": "Together, these beaches form Montero’s world map — connecting you to memories, destinations, and future adventures."
+        },
+        "vip": {
+            "title": "Join the Montero VIP Club",
+            "desc": "Our VIP members gain access to exclusive benefits and are part of shaping the future of Montero.",
+            "points": {
+                "vote": "Vote on future Montero editions",
+                "access": "Early access to new drops",
+                "pricing": "Special pricing for limited releases",
+                "updates": "Exclusive email updates"
+            },
+            "button": "Become a VIP Member"
+        },
+        "upcoming": {
+            "title": "Upcoming Releases",
+            "desc": "Discover what’s next for Montero. Get early previews and reserve your spot for the next limited edition.",
+            "button": "Join the List",
+            "time": {
+                "hours": "Hours",
+                "minutes": "Minutes",
+                "seconds": "Seconds"
+            },
+            "subtitle": "Upcoming collections"
+        },
+        "faq": {
+            "title": "Frequently Asked Question",
+            "desc": "Each beach was chosen for its cultural significance, beauty, and global reputation — together forming the emotional core of Montero.",
+            "list": [
+                {
+                    "question": "Do the watches come with a warranty?",
+                    "answer": "Yes, all Montero watches come with an international warranty covering manufacturing defects."
+                },
+                {
+                    "question": "Are the watches scratch-resistant?",
+                    "answer": "Our watches use scratch-resistant sapphire crystal to ensure durability."
+                },
+                {
+                    "question": "What materials are used to make your watches?",
+                    "answer": "We use premium stainless steel, sapphire crystal, and genuine leather straps."
+                },
+                {
+                    "question": "How can I place an order?",
+                    "answer": "Orders can be placed directly through our website during product launches."
+                }
+            ]
+        },
+        "subscribe2": {
+            "title": "Subscribe for Exclusive Updates",
+            "desc": "Join our mailing list to receive early access, limited-edition alerts, and insider updates directly from the Montero team.",
+            "placeholder": "Enter your e-mail",
+            "button": "Subscribe Now"
+        }
     }
 }

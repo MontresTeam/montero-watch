@@ -48,11 +48,22 @@ const Navbar = () => {
   ];
 
   /* HANDLE LANGUAGE CHANGE */
-  const changeLanguage = (lang) => {
+  const changeLanguage = async (lang) => {
     i18n.changeLanguage(lang);
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = lang;
     setIsLangOpen(false);
+
+    if (user) {
+      try {
+        // Dynamically import api to avoid circular dependencies if any, or just use fetch/axios
+        // Assuming api.js can be imported or we use a simple fetch
+        const { default: api } = await import("../../../../lib/api");
+        await api.post("/user/language", { language: lang });
+      } catch (error) {
+        console.error("Failed to persist language preference:", error);
+      }
+    }
   };
 
   // Sync direction on mount/change

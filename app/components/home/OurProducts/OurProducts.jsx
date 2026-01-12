@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from 'next/link'
+import { useTranslation } from "react-i18next";
 
 import WatchBlue from "@/public/images/Home/watch1.png";
 import WatchGreen from "@/public/images/Home/watch2.png";
@@ -14,6 +15,7 @@ import HOmeTittle from "../../ui/HomeTitle/HOmeTittle";
 gsap.registerPlugin(ScrollTrigger);
 
 const OurProducts = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const contentRef = useRef(null);
@@ -71,10 +73,10 @@ const OurProducts = () => {
       {/* TITLE */}
       <div ref={titleRef} className="max-w-4xl mx-auto text-center">
         <h1 className="font-cormorant font-normal text-[48px] md:text-[61px] leading-[130%] tracking-tightest">
-          Choose Your Montero Edition
+          {t("home.products.title")}
         </h1>
 
-<p className="
+        <p className="
   mt-6
   font-mona
   text-[22px] md:text-[24px]
@@ -85,9 +87,8 @@ const OurProducts = () => {
   max-w-3xl
   mx-auto
 ">
-  Montero is available in two collectible editions — each designed with its own
-  identity while sharing the same world-time DNA and craftsmanship.
-</p>
+          {t("home.products.desc")}
+        </p>
 
 
 
@@ -97,12 +98,12 @@ const OurProducts = () => {
       {/* CTA */}
       <div className="flex justify-center mt-8">
         <Link href="/product">
-        <button
-          ref={ctaRef}
-          className="bg-black text-white px-10 py-3 rounded-full text-base font-medium hover:opacity-80 transition"
-        >
-          View Details
-        </button>
+          <button
+            ref={ctaRef}
+            className="bg-black text-white px-10 py-3 rounded-full text-base font-medium hover:opacity-80 transition"
+          >
+            {t("home.products.viewDetails")}
+          </button>
         </Link>
       </div>
 
@@ -116,9 +117,9 @@ const OurProducts = () => {
           <div className="product-item grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             {/* TEXT */}
             <div className="space-y-3 text-center md:text-left">
-              <h3 className="text-2xl font-semibold">English Edition</h3>
+              <h3 className="text-2xl font-semibold">{t("home.products.english.title")}</h3>
               <p className="text-gray-600">
-                A refined international version with a crisp white & blue dial inspired by modern minimalism.
+                {t("home.products.english.desc")}
               </p>
             </div>
 
@@ -147,9 +148,9 @@ const OurProducts = () => {
 
             {/* TEXT */}
             <div className="space-y-3 order-1 md:order-2 text-center md:text-left">
-              <h3 className="text-2xl font-semibold">Arabic Edition</h3>
+              <h3 className="text-2xl font-semibold">{t("home.products.arabic.title")}</h3>
               <p className="text-gray-600">
-                A bold blue dial with Eastern Arabic numerals inspired by regional identity and oceanic depth.
+                {t("home.products.arabic.desc")}
               </p>
             </div>
           </div>

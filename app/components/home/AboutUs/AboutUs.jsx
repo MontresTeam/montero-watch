@@ -12,9 +12,12 @@ import adventure from '@/public/images/Home/adventure.png';
 import precision from '@/public/images/Home/precision.png';
 import culture from '@/public/images/Home/culture.png';
 
+import { useTranslation } from "react-i18next";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -81,14 +84,14 @@ const AboutUs = () => {
     <div ref={sectionRef}>
       {/* Button */}
       <div className="about-btn">
-        <HomeButton text="About Us" />
+        <HomeButton text={t("home.about.button")} />
       </div>
 
       {/* Title */}
       <div className="about-title">
         <HOmeTittle
-          title="The Story Behind Montero"
-          description="Montero was born from a deep appreciation for the world, its diversity, and the timeless beauty of global coastlines. Each detail of the watch carries inspiration from the beaches that have shaped culture, adventure, and unforgettable memories. From Ibiza to Bali, Miami to Bora Bora, the Montero world-time concept celebrates the connection between people and place. It is more than a watch — it is a reminder that every moment holds a new horizon."
+          title={t("home.about.title")}
+          description={t("home.about.desc")}
         />
       </div>
 
@@ -101,9 +104,9 @@ const AboutUs = () => {
             <Image src={adventure} alt="Adventure" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white max-w-xs about-text">
-              <h3 className="text-2xl font-bold">Adventure</h3>
+              <h3 className="text-2xl font-bold">{t("home.about.adventure.title")}</h3>
               <p className="text-sm text-gray-200 mt-1">
-                For those who never stop exploring
+                {t("home.about.adventure.desc")}
               </p>
             </div>
           </div>
@@ -113,9 +116,9 @@ const AboutUs = () => {
             <Image src={precision} alt="Precision" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white max-w-xs about-text">
-              <h3 className="text-2xl font-bold">Precision</h3>
+              <h3 className="text-2xl font-bold">{t("home.about.precision.title")}</h3>
               <p className="text-sm text-gray-200 mt-1">
-                Powered by reliable world-time <br /> engineering
+                {t("home.about.precision.desc")}
               </p>
             </div>
           </div>
@@ -126,9 +129,9 @@ const AboutUs = () => {
           <Image src={culture} alt="Culture" fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="absolute bottom-6 left-6 text-white max-w-xs about-text">
-            <h3 className="text-2xl font-bold">Culture</h3>
+            <h3 className="text-2xl font-bold">{t("home.about.culture.title")}</h3>
             <p className="text-sm text-gray-200 mt-1">
-              Celebrating eight iconic beaches <br /> across the globe
+              {t("home.about.culture.desc")}
             </p>
           </div>
         </div>

@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useTranslation } from "react-i18next";
+
 import HOmeTittle from "../../ui/HomeTitle/HOmeTittle";
 import Image from "next/image";
 import MapImage from "@/public/images/Home/map.png";
@@ -11,6 +13,7 @@ import MapImage from "@/public/images/Home/map.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Locations = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -63,8 +66,8 @@ const Locations = () => {
       {/* Top Title */}
       <div className="locations-title-top">
         <HOmeTittle
-          title="The Eight Beaches That Inspired Montero"
-          description="Each beach was chosen for its cultural significance, beauty, and global reputation — together forming the emotional core of Montero."
+          title={t("home.locations.title")}
+          description={t("home.locations.desc")}
         />
       </div>
 
@@ -84,8 +87,7 @@ const Locations = () => {
         className="max-w-4xl mx-auto text-center space-y-5 px-4 mt-16"
       >
         <p className="text-lg text-gray-600">
-          Together, these beaches form Montero’s world map — connecting you to
-          memories, destinations, and future adventures.
+          {t("home.locations.bottomDesc")}
         </p>
       </div>
     </div>
