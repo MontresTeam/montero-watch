@@ -39,6 +39,10 @@ function OrderContent() {
     paymentMethod: "stripe",
   });
 
+  const [shippingFee, setShippingFee] = useState(0);
+  const [orderTotal, setOrderTotal] = useState(0);
+  const [calculating, setCalculating] = useState(false);
+
   useEffect(() => {
     const fetchProduct = async () => {
       // Logic from Tail, but fallback to HEAD dummy data if no ID provided for UI testing? 
@@ -71,6 +75,34 @@ function OrderContent() {
 
     fetchProduct();
   }, [productId]);
+
+  // Handle dynamic shipping calculation
+  useEffect(() => {
+    if (!product || !formData.country) return;
+
+    const calculateTotals = async () => {
+      setCalculating(true);
+      try {
+        const response = await api.post("/order/stripe/create-checkout", {
+          items: [{ productId, quantity }],
+          shippingAddress: { country: formData.country, city: formData.city || "Dubai", address1: "temp" },
+          calculateOnly: true
+        });
+
+        if (response.data.success) {
+          setShippingFee(response.data.shippingFee);
+          setOrderTotal(response.data.total);
+        }
+      } catch (err) {
+        console.error("Calculation error:", err);
+      } finally {
+        setCalculating(false);
+      }
+    };
+
+    const timer = setTimeout(calculateTotals, 500);
+    return () => clearTimeout(timer);
+  }, [formData.country, formData.city, quantity, product, productId]);
 
   const handleQuantityChange = (delta) => {
     setQuantity((prev) => Math.max(1, prev + delta));
@@ -131,7 +163,7 @@ function OrderContent() {
         if (response.data.checkoutUrl) {
           window.location.href = response.data.checkoutUrl;
         } else {
-          router.push(`/order-success?orderId=${response.data.order?._id || response.data.orderId}`);
+          router.push(`/payment-success?orderId=${response.data.order?._id || response.data.orderId}`);
         }
       } else {
         toast.error(response.data.message || "Failed to create order");
@@ -168,8 +200,9 @@ function OrderContent() {
     );
   }
 
-  const subtotal = product.salePrice * quantity;
-  const total = subtotal; // If delivery is free locally
+  const subtotal = (product.salePrice || product.price || 0) * quantity;
+  // Use backend total if available, else fallback to frontend subtotal
+  const total = orderTotal || subtotal;
 
   // HEAD Styles applied to the structure
   return (
@@ -456,16 +489,7 @@ function OrderContent() {
                             {product.name}
                           </h3>
                           <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                            <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 flex-shrink-0">
-                              <Image
-                                src={newCurrencySymbol}
-                                alt="Currency"
-                                fill
-                                className="object-contain"
-                                sizes="(max-width: 640px) 14px, (max-width: 768px) 16px, 20px"
-                              />
-                            </div>
-
+                            <span className="mr-1">$</span>
                           </div>
                         </div>
 
@@ -523,15 +547,7 @@ function OrderContent() {
                           <div className="text-right">
                             <div className="text-xs text-gray-500 mb-1">Item Total</div>
                             <div className="flex items-center justify-end text-base sm:text-lg font-bold text-gray-900">
-                              <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 flex-shrink-0">
-                                <Image
-                                  src={newCurrencySymbol}
-                                  alt="Currency"
-                                  fill
-                                  className="object-contain"
-                                  sizes="(max-width: 640px) 14px, (max-width: 768px) 16px"
-                                />
-                              </div>
+                              <span className="mr-1">$</span>
                               <span>{subtotal.toLocaleString()}</span>
                             </div>
                           </div>
@@ -555,15 +571,7 @@ function OrderContent() {
                         <span className="text-xs text-gray-500">({quantity} items)</span>
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
-                        <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5">
-                          <Image
-                            src={newCurrencySymbol}
-                            alt="Currency"
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 640px) 14px, (max-width: 768px) 16px"
-                          />
-                        </div>
+                        <span className="mr-1.5">$</span>
                         {subtotal.toLocaleString()}
                       </div>
                     </div>
@@ -575,16 +583,8 @@ function OrderContent() {
                         <span className="text-xs text-gray-500">Standard shipping</span>
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
-                        <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5">
-                          <Image
-                            src={newCurrencySymbol}
-                            alt="Currency"
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 640px) 14px, (max-width: 768px) 16px"
-                          />
-                        </div>
-                        00.00
+                        <span className="mr-1.5">$</span>
+                        {calculating ? "..." : shippingFee.toFixed(2)}
                       </div>
                     </div>
 
@@ -606,15 +606,7 @@ function OrderContent() {
 
                       </div>
                       <div className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
-                        <div className="relative w-4 h-4 sm:w-5 sm:h-5 mr-2">
-                          <Image
-                            src={newCurrencySymbol}
-                            alt="Currency"
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 640px) 16px, (max-width: 768px) 20px"
-                          />
-                        </div>
+                        <span className="mr-2">$</span>
                         {total.toLocaleString()}
                       </div>
                     </div>
