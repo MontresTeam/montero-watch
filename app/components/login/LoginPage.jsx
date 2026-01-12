@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import img from "../../../public/images/loginimg.jpg";
 import { useAuth } from "../../../context/AuthContext";
 
@@ -13,6 +14,8 @@ export default function LoginPage() {
   const { login, googleLogin, facebookLogin } = useAuth();
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
+  const searchParams = useSearchParams();
+  const redirect = searchParams?.get("redirect");
 
 
   const validateForm = () => {
@@ -40,7 +43,7 @@ export default function LoginPage() {
     if (!validateForm()) return;
 
     try {
-      await login(email, password);
+      await login(email, password, redirect);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }

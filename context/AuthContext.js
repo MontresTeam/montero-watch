@@ -36,13 +36,13 @@ export const AuthProvider = ({ children }) => {
         initSession();
     }, []);
 
-    const login = React.useCallback(async (email, password) => {
+    const login = React.useCallback(async (email, password, redirectTo) => {
         try {
             const data = await loginUser(email, password);
             setUser(data.user);
             api.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
             toast.success("Login successful!");
-            router.push("/"); // Redirect to home/dashboard
+            router.push(redirectTo || "/"); // Redirect to provided path or home
             return data;
         } catch (error) {
             throw error;
