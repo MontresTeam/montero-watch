@@ -7,7 +7,8 @@ import Logo from "@/public/images/Logo/LogoFooter.png";
 import BgIcon from "@/public/images/Home/BgFooterLogo.png";
 import Instagram from "@/public/icons/home/instagram.png";
 import Whatsapp from "@/public/icons/home/whatsapp.png";
-import X from "@/public/icons/home/x.png";
+import X from "@/public/icons/home/x.png"; // Using this icon for Threads
+import Youtube from "@/public/icons/home/sm_5b01250f7fc22.jpg"; // Make sure this icon exists
 
 const Footer = () => {
   return (
@@ -32,64 +33,34 @@ const Footer = () => {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-10 pb-8 sm:pb-10">
         {/* TOP GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-start">
-          {/* LEFT - Get in Touch */}
-          <div className="px-2 sm:px-0">
+          {/* LEFT */}
+          <div>
             <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium">
               Get in Touch
             </h4>
             <p className="text-xs sm:text-sm text-gray-400 leading-relaxed max-w-sm">
               If you have any questions about your order, warranty, or Montero
-              products, we re here to help.
+              products, we’re here to help.
             </p>
           </div>
 
-          {/* CENTER - Navigation Links */}
-          <div className="px-2 sm:px-0">
+          {/* CENTER */}
+          <div>
             <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium md:hidden">
               Quick Links
             </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3 text-sm">
-              <Link
-                href="/"
-                className="hover:text-white transition text-xs sm:text-sm py-1"
-              >
-                Home
-              </Link>
-              <Link
-                href="/product"
-                className="hover:text-white transition text-xs sm:text-sm py-1"
-              >
-                Products
-              </Link>
-              <Link
-                href="/about"
-                className="hover:text-white transition text-xs sm:text-sm py-1"
-              >
-                About Us
-              </Link>
-              <Link
-                href="/review"
-                className="hover:text-white transition text-xs sm:text-sm py-1"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/gallery"
-                className="hover:text-white transition text-xs sm:text-sm py-1"
-              >
-                Gallery
-              </Link>
-              <Link
-                href="/contact"
-                className="hover:text-white transition text-xs sm:text-sm py-1"
-              >
-                Contact Us
-              </Link>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+              <Link href="/" className="hover:text-white transition">Home</Link>
+              <Link href="/product" className="hover:text-white transition">Products</Link>
+              <Link href="/about" className="hover:text-white transition">About Us</Link>
+              <Link href="/review" className="hover:text-white transition">Blog</Link>
+              <Link href="/gallery" className="hover:text-white transition">Gallery</Link>
+              <Link href="/contact" className="hover:text-white transition">Contact Us</Link>
             </div>
           </div>
 
-          {/* RIGHT - Newsletter */}
-          <div className="px-2 sm:px-0 md:col-span-2 lg:col-span-1">
+          {/* RIGHT */}
+          <div>
             <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium">
               Stay Updated
             </h4>
@@ -97,67 +68,67 @@ const Footer = () => {
               <input
                 type="text"
                 placeholder="Enter your email"
-                className="bg-transparent border border-gray-600 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm w-full outline-none focus:border-white transition placeholder-gray-500"
+                className="bg-transparent border border-gray-600 px-4 py-3 text-sm w-full outline-none focus:border-white transition"
               />
-              <button className="border border-white px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm hover:bg-white hover:text-black transition whitespace-nowrap min-w-[100px]">
+              <button className="border border-white px-6 py-3 text-sm hover:bg-white hover:text-black transition">
                 Subscribe
               </button>
             </div>
-            <p className="text-gray-500 text-xs mt-2 sm:mt-3">
+            <p className="text-gray-500 text-xs mt-3">
               Subscribe to get updates on new products and offers
             </p>
           </div>
         </div>
 
         {/* DIVIDER */}
-        <div className="my-8 sm:my-10 md:my-12 lg:my-14 border-t border-white/20" />
+        <div className="my-12 border-t border-white/20" />
 
-        {/* BOTTOM - Social Links */}
+        {/* SOCIAL LINKS */}
         <div className="flex flex-col items-center">
-          <p className="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-6 text-center">
+          <p className="text-gray-400 text-sm mb-6">
             Connect with us on social media
           </p>
-          <div className="flex justify-center gap-5 sm:gap-6">
+
+          <div className="flex gap-6">
+            {/* Instagram */}
             <Link
-              href="#"
-              className="hover:opacity-70 transition p-2 hover:bg-white/10 rounded-full"
+              href="https://www.instagram.com/montero.watch/"
+              target="_blank"
+              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
             >
-              <Image
-                src={Instagram}
-                alt="Instagram"
-                width={18}
-                height={18}
-                className="w-4 h-4 sm:w-5 sm:h-5"
-              />
+              <Image src={Instagram} alt="Instagram" width={20} height={20} />
             </Link>
+
+            {/* Threads */}
             <Link
-              href="#"
-              className="hover:opacity-70 transition p-2 hover:bg-white/10 rounded-full"
+              href="https://www.threads.com/@montero.watch"
+              target="_blank"
+              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
             >
-              <Image
-                src={Whatsapp}
-                alt="WhatsApp"
-                width={18}
-                height={18}
-                className="w-4 h-4 sm:w-5 sm:h-5"
-              />
+              <Image src={X} alt="Threads" width={20} height={20} />
             </Link>
+
+            {/* WhatsApp */}
             <Link
-              href="#"
-              className="hover:opacity-70 transition p-2 hover:bg-white/10 rounded-full"
+              href="https://wa.me/97142671124"
+              target="_blank"
+              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
             >
-              <Image
-                src={X}
-                alt="X"
-                width={18}
-                height={18}
-                className="w-4 h-4 sm:w-5 sm:h-5"
-              />
+              <Image src={Whatsapp} alt="WhatsApp" width={20} height={20} />
+            </Link>
+
+            {/* YouTube */}
+            <Link
+              href="https://www.youtube.com/@MontresOfficial"
+              target="_blank"
+              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
+            >
+              <Image src={Youtube} alt="YouTube" width={20} height={20} />
             </Link>
           </div>
 
-          {/* Copyright */}
-          <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10 w-full">
+          {/* COPYRIGHT */}
+          <div className="mt-8 pt-6 border-t border-white/10 w-full">
             <p className="text-center text-xs text-gray-500">
               © {new Date().getFullYear()} Montero. All rights reserved.
             </p>
