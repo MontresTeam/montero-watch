@@ -12,6 +12,7 @@ import {
 import TmaraPayment from '../../../public/images/Tamara.jpeg';
 import { useSearchParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
+import { useAuth } from "@/context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,12 +20,20 @@ function OrderContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
+  const { user, loading: authLoading } = useAuth();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      toast.info("Please sign in to continue with your order");
+      router.push(`/login?redirect=/order?productId=${productId}`);
+    }
+  }, [user, authLoading, router, productId]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -176,13 +185,15 @@ function OrderContent() {
     }
   };
 
-  if (loading) {
+  if (loading || authLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
       </div>
     );
   }
+
+  if (!user) return null; // Prevent showing content if not logged in
 
   if (error || !product) {
     // Styling the error state with HEAD-ish generic container if needed, or kept simple
