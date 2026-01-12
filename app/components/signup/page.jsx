@@ -14,6 +14,7 @@ export default function SignupPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { register, googleLogin, facebookLogin } = useAuth();
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const [error, setError] = useState("");
@@ -41,14 +42,16 @@ export default function SignupPage() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
+        if (e) e.preventDefault();
+        if (loading) return;
 
+        setError("");
         if (!validateForm()) {
             toast.error("Please fix the validation errors");
             return;
         }
 
+        setLoading(true);
         try {
             const response = await register({ name, email, password });
 
@@ -65,6 +68,8 @@ export default function SignupPage() {
             const msg = err?.response?.data?.message || err?.message || "Registration failed";
             toast.error(msg);
             setError(msg);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -164,8 +169,19 @@ export default function SignupPage() {
                             </label>
                         </div>
                         {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
-                        <button className="w-full bg-black text-white font-medium py-5 text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98]">
-                            Sign Up
+                        <button
+                            type="button"
+                            onClick={handleSubmit}
+                            disabled={loading}
+                            className={`
+        w-full bg-black text-white font-medium py-5 text-sm
+        uppercase tracking-[0.2em] transition-all duration-300
+        shadow-xl shadow-neutral-100 active:scale-[0.98]
+        disabled:cursor-not-allowed disabled:bg-neutral-700
+        ${!loading && "hover:bg-neutral-800"}
+      `}
+                        >
+                            {loading ? "Creating account…" : "Sign Up"}
                         </button>
                     </form>
 

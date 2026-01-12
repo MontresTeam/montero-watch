@@ -152,19 +152,20 @@ const Page = () => {
                 </p>
               </div>
 
+              {/* Price & Order Button */}
+              <div className="flex flex-col items-center gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl sm:text-4xl font-bold text-gray-900">$799</span>
+                  <span className="text-xl text-gray-400 line-through">$860</span>
+                  <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
+                </div>
+                <p className="text-sm text-gray-500 font-medium">Pre-Order Price (Official retail price: $860 USD)</p>
+              </div>
+
               {/* Order Button - Integrated with Product ID */}
               <Link href={`/order?productId=${ENGLISH_PRODUCT_ID}`} className="inline-block">
-                <button className="bg-black text-white px-6 sm:px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center justify-center gap-2 min-h-[44px] min-w-[140px]">
-                  <div className="relative w-4 h-4 sm:w-5 sm:h-5">
-                    <Image
-                      src={newCurrency}
-                      alt="Currency Symbol"
-                      fill
-                      className="object-contain"
-                      sizes="20px"
-                    />
-                  </div>
-                  <span>859 Order Now</span>
+                <button className="bg-black text-white px-10 sm:px-12 py-4 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2">
+                  <span>Pre-Order Now</span>
                 </button>
               </Link>
               <br />
