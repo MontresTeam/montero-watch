@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoCloseCircleOutline, IoArrowBackOutline } from "react-icons/io5";
 import newCurrencySymbol from '../../../public/images/newSymbole.png';
 import {
   FaCcVisa,
@@ -201,12 +201,26 @@ function OrderContent() {
   }
 
   const subtotal = (product.salePrice || product.price || 0) * quantity;
+  const originalSubtotal = (product.price || 860) * quantity;
+  const discountAmount = originalSubtotal - subtotal;
   // Use backend total if available, else fallback to frontend subtotal
-  const total = orderTotal || subtotal;
+  const total = orderTotal || (subtotal + shippingFee);
 
   // HEAD Styles applied to the structure
   return (
-    <div className="container mx-auto px-3 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+    <div className="container mx-auto px-3 py-4 mt-5 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+      {/* Back Button */}
+      <button
+        type="button"
+        onClick={() => window.history.back()}
+        className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-6 group"
+      >
+        <div className="p-2 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+          <IoArrowBackOutline size={20} />
+        </div>
+        <span className="text-sm font-medium">Back to Product</span>
+      </button>
+
       <form onSubmit={(e) => handlePlaceOrder(e)}> {/* Wrap in form for enter key submission if desired */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
           {/* Left Column - Billing Address */}
@@ -392,7 +406,7 @@ function OrderContent() {
                         value="stripe"
                         checked={formData.paymentMethod === 'stripe'}
                         onChange={handleInputChange}
-                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black flex-shrink-0"
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
@@ -403,9 +417,9 @@ function OrderContent() {
                             </p>
                           </div>
                           <div className="flex gap-1.5 sm:gap-2 mt-1 sm:mt-0">
-                            <FaCcVisa className="text-xl sm:text-2xl text-blue-900 flex-shrink-0" />
-                            <FaCcMastercard className="text-xl sm:text-2xl text-red-600 flex-shrink-0" />
-                            <FaCcAmex className="text-xl sm:text-2xl text-blue-600 flex-shrink-0" />
+                            <FaCcVisa className="text-xl sm:text-2xl text-blue-900 shrink-0" />
+                            <FaCcMastercard className="text-xl sm:text-2xl text-red-600 shrink-0" />
+                            <FaCcAmex className="text-xl sm:text-2xl text-blue-600 shrink-0" />
                           </div>
                         </div>
                       </div>
@@ -419,7 +433,7 @@ function OrderContent() {
                         value="tamara"
                         checked={formData.paymentMethod === 'tamara'}
                         onChange={handleInputChange}
-                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black flex-shrink-0"
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
@@ -465,12 +479,12 @@ function OrderContent() {
                       className="absolute top-3 right-3 sm:top-4 sm:right-4 text-[#9B1111] hover:text-red-600 transition-colors z-10 bg-white rounded-full p-0.5"
                       aria-label="Remove item"
                     >
-                      <IoCloseCircleOutline size={20} className="sm:size-6 md:size-7" />
+
                     </button>
 
                     <div className="flex gap-3 sm:gap-4">
                       {/* Product Image */}
-                      <div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 flex-shrink-0 bg-gray-50 rounded-lg flex items-center justify-center p-2">
+                      <div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 shrink-0 bg-gray-50 rounded-lg flex items-center justify-center p-2">
                         <Image
                           src={product.images?.[0]?.url || "/images/placeholder.png"}
                           alt={product.name}
@@ -489,7 +503,7 @@ function OrderContent() {
                             {product.name}
                           </h3>
                           <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                            <span className="mr-1">$</span>
+                            <span className="mr-1">${(product.price || 860).toLocaleString()}</span>
                           </div>
                         </div>
 
@@ -497,7 +511,7 @@ function OrderContent() {
                         <div className="grid grid-cols-1 xs:grid-cols-2 gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                           {product.features?.map((feature, idx) => (
                             <div key={idx} className="flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-blue-900 flex-shrink-0"></span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-900 shrink-0"></span>
                               <span className="text-xs text-gray-600 truncate">{feature}</span>
                             </div>
                           ))}
@@ -534,7 +548,7 @@ function OrderContent() {
                             </div>
 
                             <div className="flex items-center gap-2">
-                              <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <svg className="w-4 h-4 text-gray-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                               </svg>
                               <div className="flex flex-col">
@@ -548,7 +562,7 @@ function OrderContent() {
                             <div className="text-xs text-gray-500 mb-1">Item Total</div>
                             <div className="flex items-center justify-end text-base sm:text-lg font-bold text-gray-900">
                               <span className="mr-1">$</span>
-                              <span>{subtotal.toLocaleString()}</span>
+                              <span>{originalSubtotal.toLocaleString()}</span>
                             </div>
                           </div>
                         </div>
@@ -572,7 +586,7 @@ function OrderContent() {
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
                         <span className="mr-1.5">$</span>
-                        {subtotal.toLocaleString()}
+                        {originalSubtotal.toLocaleString()}
                       </div>
                     </div>
 
@@ -585,6 +599,18 @@ function OrderContent() {
                       <div className="flex items-center text-sm font-medium text-gray-900">
                         <span className="mr-1.5">$</span>
                         {calculating ? "..." : shippingFee.toFixed(2)}
+                      </div>
+                    </div>
+
+                    {/* Discount */}
+                    <div className="flex justify-between items-center text-red-600 bg-red-50/50 p-2 rounded-lg border border-red-100/50">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold">Pre-Order Discount</span>
+                        <span className="text-xs opacity-80">7% off retail price</span>
+                      </div>
+                      <div className="flex items-center text-sm font-bold">
+                        <span className="mr-1">-$</span>
+                        {discountAmount.toLocaleString()}
                       </div>
                     </div>
 
@@ -603,7 +629,7 @@ function OrderContent() {
                     <div className="flex justify-between items-center pt-3">
                       <div className="flex flex-col">
                         <span className="text-base sm:text-lg font-bold text-gray-900">Total</span>
-
+                        <span className="text-[10px] text-gray-500 italic">Subtotal - Discount + Delivery</span>
                       </div>
                       <div className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
                         <span className="mr-2">$</span>
@@ -637,7 +663,7 @@ function OrderContent() {
                     {/* Security Note */}
                     <div className="pt-4 border-t border-gray-200">
                       <div className="flex items-start gap-3">
-                        <div className="bg-green-50 rounded-full p-1.5 flex-shrink-0">
+                        <div className="bg-green-50 rounded-full p-1.5 shrink-0">
                           <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
