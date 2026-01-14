@@ -514,7 +514,8 @@ function OrderContent() {
                             {product.name}
                           </h3>
                           <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                            <span className="mr-1">${(product.price || 860).toLocaleString()}</span>
+                            <span className="mr-1">$</span>
+                            <span>{(product.price || 860).toLocaleString()}</span>
                           </div>
                         </div>
 
@@ -670,6 +671,12 @@ function OrderContent() {
                         </svg>
                       </button>
                     </div>
+
+                    {formData.paymentMethod === "tamara" && (
+                      <p className="text-xs text-gray-500 text-center mb-6 -mt-4 italic">
+                        You will be charged in AED at the current exchange rate.
+                      </p>
+                    )}
 
                     {/* Security Note */}
                     <div className="pt-4 border-t border-gray-200">
