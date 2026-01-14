@@ -150,7 +150,7 @@ const Navbar = () => {
                     <Image
                       src={user.profilePic || Avatar}
                       alt="Profile"
-                      width={36}
+                      width={36}   
                       height={36}
                       className="object-cover w-full h-full"
                     />
