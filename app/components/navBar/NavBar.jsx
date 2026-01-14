@@ -1,12 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import {
-  FaChevronDown,
-  FaBars,
-  FaTimes,
-  FaRegUser,
-} from "react-icons/fa";
+import { FaChevronDown, FaBars, FaTimes, FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -77,7 +72,6 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full bg-white z-50 font-mona">
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className="relative h-16 flex items-center justify-between">
-
           {/* LEFT MENU */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => {
@@ -86,12 +80,24 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-[13px] font-light tracking-wide transition ${isActive
-                    ? "text-black"
-                    : "text-gray-500 hover:text-black"
-                    }`}
+                  className="relative text-[13px] tracking-wide group"
                 >
-                  {link.name}
+                  <span
+                    className={`transition-all duration-300 ${
+                      isActive
+                        ? "font-semibold text-black"
+                        : "font-light text-gray-500 group-hover:text-black"
+                    }`}
+                  >
+                    {link.name}
+                  </span>
+
+                  {/* UNDERLINE */}
+                  <span
+                    className={`absolute left-0 -bottom-1 h-[1.5px] bg-black transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  ></span>
                 </Link>
               );
             })}
@@ -99,12 +105,18 @@ const Navbar = () => {
 
           {/* LOGO */}
           <Link href="/" className="flex-shrink-0">
-            <Image src={Logo} alt="Logo" width={190} height={80} style={{ height: 'auto' }} priority />
+            <Image
+              src={Logo}
+              alt="Logo"
+              width={190}
+              height={80}
+              style={{ height: "auto" }}
+              priority
+            />
           </Link>
 
           {/* RIGHT SIDE */}
           <div className="relative flex items-center gap-5">
-
             {/* LANGUAGE (DESKTOP) */}
             <div className="relative hidden md:block">
               <button
@@ -114,7 +126,9 @@ const Navbar = () => {
                 <Image src={Glob} alt="Lang" width={18} height={18} />
                 {selectedLang}
                 <FaChevronDown
-                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""}`}
+                  className={`text-[10px] transition ${
+                    isLangOpen ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
@@ -150,7 +164,7 @@ const Navbar = () => {
                     <Image
                       src={user.profilePic || Avatar}
                       alt="Profile"
-                      width={36}   
+                      width={36}
                       height={36}
                       className="object-cover w-full h-full"
                     />
@@ -166,16 +180,15 @@ const Navbar = () => {
               )}
             </div>
 
-
-
             {/* SIGN IN */}
             {!user && (
               <Link
                 href="/login"
-                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/login"
-                  ? "bg-black text-white"
-                  : "hover:bg-black hover:text-white"
-                  }`}
+                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${
+                  pathname === "/login"
+                    ? "bg-black text-white"
+                    : "hover:bg-black hover:text-white"
+                }`}
               >
                 Sign In
               </Link>
@@ -183,7 +196,6 @@ const Navbar = () => {
 
             {/* MOBILE RIGHT */}
             <div className="md:hidden flex items-center gap-3">
-
               {/* AVATAR (MOBILE) */}
               <button
                 onClick={() => setIsDropdownOpen((p) => !p)}
@@ -200,7 +212,11 @@ const Navbar = () => {
 
               {/* TOGGLE */}
               <button onClick={() => setIsMobileMenuOpen((p) => !p)}>
-                {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+                {isMobileMenuOpen ? (
+                  <FaTimes size={20} />
+                ) : (
+                  <FaBars size={20} />
+                )}
               </button>
             </div>
 
@@ -236,8 +252,9 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-light ${isActive ? "text-black" : "text-gray-600"
-                  }`}
+                className={`text-base font-light ${
+                  isActive ? "text-black" : "text-gray-600"
+                }`}
               >
                 {link.name}
               </Link>
@@ -251,10 +268,11 @@ const Navbar = () => {
                 <button
                   key={lang}
                   onClick={() => setSelectedLang(lang)}
-                  className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
-                    ? "bg-black text-white border-black"
-                    : "border-gray-300"
-                    }`}
+                  className={`px-4 py-1 rounded-full border text-sm ${
+                    selectedLang === lang
+                      ? "bg-black text-white border-black"
+                      : "border-gray-300"
+                  }`}
                 >
                   {lang}
                 </button>
