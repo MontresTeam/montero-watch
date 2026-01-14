@@ -38,7 +38,7 @@ function OrderContent() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: user?.email || "",
     phone: "",
     address: "",
     city: "",
@@ -47,6 +47,13 @@ function OrderContent() {
     zipCode: "",
     paymentMethod: "stripe",
   });
+
+  // Keep email synced if user loads later
+  useEffect(() => {
+    if (user?.email) {
+      setFormData(prev => ({ ...prev, email: user.email }));
+    }
+  }, [user]);
 
   const [shippingFee, setShippingFee] = useState(0);
   const [orderTotal, setOrderTotal] = useState(0);
@@ -277,9 +284,8 @@ function OrderContent() {
                   type="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Enter your email..."
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                  readOnly
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm text-gray-500 cursor-not-allowed focus:outline-none"
                   required
                 />
               </div>
