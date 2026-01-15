@@ -12,7 +12,7 @@ const ClientVoices = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* CENTERED REVIEW BUTTON */}
         <div className="flex justify-center -mt-6 mb-4">
-          <button className="bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm">
+          <button className="bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700">
             Review
           </button>
         </div>

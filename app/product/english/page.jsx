@@ -563,10 +563,8 @@ const Page = () => {
             </div>
 
             {/* SUBSCRIBE ROW */}
-            <ScrollAnimation animationClass="animate-fade-in-up">
               <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
                 {/* LEFT TEXT */}
-                <ScrollAnimation animationClass="animate-slide-in-left">
                   <div>
                     <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
                       Subscribe for Exclusive Updates
@@ -578,10 +576,8 @@ const Page = () => {
                       the Montero team.
                     </p>
                   </div>
-                </ScrollAnimation>
 
                 {/* RIGHT */}
-                <ScrollAnimation animationClass="animate-slide-in-right">
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
                       <Mail className="mr-4" />
@@ -596,9 +592,7 @@ const Page = () => {
                       Subscribe Now
                     </button>
                   </div>
-                </ScrollAnimation>
               </div>
-            </ScrollAnimation>
           </div>
         </section>
       </ScrollAnimation>

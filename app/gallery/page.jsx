@@ -244,12 +244,10 @@ export default function Page() {
       </ScrollAnimation>
 
       {/* ================= SUBSCRIBE SECTION ================= */}
-      <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-12 pb-12 sm:pb-16 lg:pb-20">
           <div className="mx-auto max-w-7xl">
             <div className="grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
               {/* LEFT TEXT */}
-              <ScrollAnimation animationClass="animate-slide-in-left">
                 <div>
                   <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-black transition-colors duration-300 hover:text-gray-700 leading-tight">
                     Subscribe for Exclusive Updates
@@ -261,10 +259,8 @@ export default function Page() {
                     the Montero team.
                   </p>
                 </div>
-              </ScrollAnimation>
 
               {/* RIGHT FORM */}
-              <ScrollAnimation animationClass="animate-slide-in-right">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex items-center bg-gray-100 px-4 py-3 sm:py-4 w-full rounded-md transition-all duration-300 hover:bg-gray-200 focus-within:ring-2 focus-within:ring-gray-400">
                     <Mail className="mr-4" />
@@ -279,11 +275,9 @@ export default function Page() {
                     Subscribe Now
                   </button>
                 </div>
-              </ScrollAnimation>
             </div>
           </div>
         </section>
-      </ScrollAnimation>
 
       <Footer />
     </>

@@ -13,11 +13,11 @@ import greenWatch from "../../../../public/images/MainProducts/greenWatch/gw2.pn
 import blueWatch from "../../../../public/images/MainProducts/blueWatch/blueWatch2.png";
 
 // Blue watches icons
-import limitedEditionBlue from '../../../../public/images/MainProducts/blueWatchIcons/limited 1.png';
-import timerWatchBlue from '../../../../public/images/MainProducts/blueWatchIcons/Blue dial inspired by Jumeirah  shoreline.png';
-import handIconBlue from '../../../../public/images/MainProducts/blueWatchIcons/Sapphire crystal for durability.png';
-import arabicNumberBlue from '../../../../public/images/MainProducts/blueWatchIcons/24_icon.png';
-import gmtIconBlue from '../../../../public/images/MainProducts/blueWatchIcons/GMT function for global  synchrony.png';
+import limitedEditionBlue from "../../../../public/images/MainProducts/blueWatchIcons/limited 1.png";
+import timerWatchBlue from "../../../../public/images/MainProducts/blueWatchIcons/Blue dial inspired by Jumeirah  shoreline.png";
+import handIconBlue from "../../../../public/images/MainProducts/blueWatchIcons/Sapphire crystal for durability.png";
+import arabicNumberBlue from "../../../../public/images/MainProducts/blueWatchIcons/24_icon.png";
+import gmtIconBlue from "../../../../public/images/MainProducts/blueWatchIcons/GMT function for global  synchrony.png";
 
 export default function WatchFeatures() {
   const [activeColor, setActiveColor] = useState("green");
@@ -25,21 +25,24 @@ export default function WatchFeatures() {
   // Auto toggle between green and blue every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveColor(prev => (prev === "green" ? "black" : "green"));
+      setActiveColor((prev) => (prev === "green" ? "black" : "green"));
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   const watchImage = activeColor === "green" ? greenWatch : blueWatch;
-  const themeColor = activeColor === "green" ? "text-green-800" : "text-black-700";
+  const themeColor =
+    activeColor === "green" ? "text-green-800" : "text-black-700";
 
-  const leftIcons = activeColor === "green"
-    ? [limitedEdition, timerWatch]
-    : [limitedEditionBlue, timerWatchBlue];
+  const leftIcons =
+    activeColor === "green"
+      ? [limitedEdition, timerWatch]
+      : [limitedEditionBlue, timerWatchBlue];
 
-  const rightIcons = activeColor === "green"
-    ? [arabicNumber, gmtIcon]
-    : [arabicNumberBlue, gmtIconBlue];
+  const rightIcons =
+    activeColor === "green"
+      ? [arabicNumber, gmtIcon]
+      : [arabicNumberBlue, gmtIconBlue];
 
   const centerIcon = activeColor === "green" ? handIcon : handIconBlue;
 
@@ -48,22 +51,34 @@ export default function WatchFeatures() {
       <div className="w-full px-4 sm:px-6 md:px-10 lg:px-20">
         {/* Responsive grid */}
         <div className="grid md:grid-cols-3 grid-cols-1 items-center max-w-6xl mx-auto gap-8 md:gap-0">
-
           {/* LEFT / TOP ON MOBILE */}
           <div className="flex flex-col items-center md:items-start justify-between h-auto md:h-[420px] gap-6 md:gap-0">
-            <SideFeature icon={leftIcons[0]} text="Limited edition caseback engraving" theme={themeColor} />
-            <SideFeature icon={leftIcons[1]} text="Blue dial inspired by Jumeirah shoreline" theme={themeColor} />
+            <SideFeature
+              icon={leftIcons[0]}
+              text="Limited edition caseback engraving"
+              theme={themeColor}
+            />
+            <SideFeature
+              icon={leftIcons[1]}
+              text="Blue dial inspired by Jumeirah shoreline"
+              theme={themeColor}
+            />
           </div>
 
           {/* CENTER */}
           <div className="flex flex-col items-center gap-10">
-            <CenterTopFeature icon={centerIcon} text="Sapphire crystal for durability" theme={themeColor} />
+            <CenterTopFeature
+              icon={centerIcon}
+              text="Sapphire crystal for durability"
+              theme={themeColor}
+            />
 
             {/* WATCH IMAGE */}
             <div
               className="relative flex justify-center items-center transition-all duration-1000 ease-in-out w-[280px] sm:w-[360px] md:w-[429px] h-[440px] sm:h-[560px] md:h-[678px]"
               style={{
-                transform: activeColor === "green" ? "rotate(50deg)" : "rotate(-50deg)",
+                transform:
+                  activeColor === "green" ? "rotate(50deg)" : "rotate(-50deg)",
               }}
             >
               <Image
@@ -82,36 +97,46 @@ export default function WatchFeatures() {
               <div
                 className={`
                   w-5 h-5 rounded-full
-                  ${activeColor === "green"
-                    ? "bg-green-800"
-                    : "bg-white border border-neutral-400"}
+                  ${
+                    activeColor === "green"
+                      ? "bg-green-800"
+                      : "bg-white border border-neutral-400"
+                  }
                 `}
               />
 
               {/* BLUE DOT */}
               <div
                 className={`
-                  w-5 h-5 rounded-full
-                  ${activeColor !== "green"
-                    ? "bg-blue-700"
-                    : "bg-white border border-neutral-400"}
-                `}
+    w-5 h-5 rounded-full
+    ${
+      activeColor !== "green"
+        ? "bg-[#2596be]"
+        : "bg-white border border-neutral-400"
+    }
+  `}
               />
             </div>
             {/* ✅ DOT SECTION END */}
-
           </div>
 
           {/* RIGHT */}
           <div className="flex flex-col items-center md:items-end justify-between h-auto md:h-[420px] gap-6 md:gap-0">
             <SideFeature
               icon={rightIcons[0]}
-              text={activeColor === "green" ? "Eastern Arabic numerals" : "24-hour bezel display"}
+              text={
+                activeColor === "green"
+                  ? "Eastern Arabic numerals"
+                  : "24-hour bezel display"
+              }
               theme={themeColor}
             />
-            <SideFeature icon={rightIcons[1]} text="GMT function for global synchrony" theme={themeColor} />
+            <SideFeature
+              icon={rightIcons[1]}
+              text="GMT function for global synchrony"
+              theme={themeColor}
+            />
           </div>
-
         </div>
       </div>
     </section>
@@ -123,7 +148,9 @@ function SideFeature({ icon, text, theme }) {
   return (
     <div className="flex flex-col items-center text-center gap-3">
       <Image src={icon} alt="" width={60} height={60} className="w-14 h-14" />
-      <p className={`text-sm leading-relaxed font-medium max-w-[180px] ${theme}`}>
+      <p
+        className={`text-sm leading-relaxed font-medium max-w-[180px] ${theme}`}
+      >
         {text}
       </p>
     </div>

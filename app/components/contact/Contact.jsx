@@ -20,7 +20,7 @@ export default function Contact() {
           
           {/* LEFT COLUMN - Image Section */}
           <div className="order-2 lg:order-1">
-            <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden shadow-md sm:shadow-lg">
+            <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden">
               <ImgContainer />
               {/* Gradient overlay for mobile */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent lg:from-black/10"></div>

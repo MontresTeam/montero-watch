@@ -257,14 +257,11 @@ const page = () => {
         </section>
       </ScrollAnimation>
 
-      <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
           <div className="mx-auto max-w-7xl">
             {/* SUBSCRIBE ROW */}
-            <ScrollAnimation animationClass="animate-fade-in-up">
               <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
                 {/* LEFT TEXT */}
-                <ScrollAnimation animationClass="animate-slide-in-left">
                   <div>
                     <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
                       Subscribe for Exclusive Updates
@@ -276,10 +273,8 @@ const page = () => {
                       the Montero team.
                     </p>
                   </div>
-                </ScrollAnimation>
 
                 {/* RIGHT */}
-                <ScrollAnimation animationClass="animate-slide-in-right">
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1">
                     <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
                       <span className="mr-3 text-gray-500">✉</span>
@@ -294,12 +289,9 @@ const page = () => {
                       Subscribe Now
                     </button>
                   </div>
-                </ScrollAnimation>
               </div>
-            </ScrollAnimation>
           </div>
         </section>
-      </ScrollAnimation>
 
       <Footer />
 

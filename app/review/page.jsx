@@ -49,9 +49,6 @@ export default function Page() {
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 py-14">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block bg-gray-100 px-3 py-1 text-xs rounded-full">
-              Production Update
-            </span>
 
             <h2 className="font-cormorant mt-6 text-3xl">
               Welcome Back, Montero Community
