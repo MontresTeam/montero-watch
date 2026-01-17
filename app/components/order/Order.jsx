@@ -15,6 +15,7 @@ import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { validateOrderForm, validateField, getCountryCode } from "@/app/utils/orderValidation";
 
 function OrderContent() {
   const router = useRouter();
@@ -27,6 +28,8 @@ function OrderContent() {
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -127,45 +130,89 @@ function OrderContent() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error when user starts typing
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const handleBlur = (fieldName) => {
+    setTouchedFields((prev) => ({ ...prev, [fieldName]: true }));
+
+    // Validate field on blur
+    const validationResult = validateField(fieldName, formData[fieldName], {
+      country: formData.country,
+      countryCode: getCountryCode(formData.country),
+    });
+
+    if (!validationResult.isValid) {
+      setFieldErrors((prev) => ({ ...prev, [fieldName]: validationResult.error }));
+    }
   };
 
   const handlePlaceOrder = async (e) => {
-    e.preventDefault(); // In case it's in a form
+    e.preventDefault();
     if (submitting) return;
 
-    // Basic Validation
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.address || !formData.city || !formData.country) {
-      toast.error("Please fill in all required fields");
+    // Comprehensive validation
+    const validation = validateOrderForm(formData);
+
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+
+      // Mark all fields as touched to show errors
+      const allTouched = Object.keys(formData).reduce((acc, key) => {
+        acc[key] = true;
+        return acc;
+      }, {});
+      setTouchedFields(allTouched);
+
+      // Show first error in toast
+      const firstError = Object.values(validation.errors)[0];
+      toast.error(firstError || "Please fix the errors in the form");
+
+      // Scroll to first error
+      const firstErrorField = Object.keys(validation.errors)[0];
+      const errorElement = document.querySelector(`[name="${firstErrorField}"]`);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        errorElement.focus();
+      }
+
       return;
     }
 
     setSubmitting(true);
     try {
+      // Use sanitized data from validation
+      const sanitized = validation.sanitizedData;
+
       const orderPayload = {
         items: [{ productId, quantity }],
         shippingAddress: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          country: formData.country,
-          state: formData.state,
-          city: formData.city,
-          address1: formData.address,
-          postalCode: formData.zipCode,
+          firstName: sanitized.firstName,
+          lastName: sanitized.lastName,
+          email: sanitized.email,
+          phone: sanitized.phone,
+          country: sanitized.country,
+          state: sanitized.state,
+          city: sanitized.city,
+          address1: sanitized.address,
+          postalCode: sanitized.zipCode,
         },
         billingAddress: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          country: formData.country,
-          state: formData.state,
-          city: formData.city,
-          address1: formData.address,
-          postalCode: formData.zipCode,
+          firstName: sanitized.firstName,
+          lastName: sanitized.lastName,
+          email: sanitized.email,
+          phone: sanitized.phone,
+          country: sanitized.country,
+          state: sanitized.state,
+          city: sanitized.city,
+          address1: sanitized.address,
+          postalCode: sanitized.zipCode,
         },
-        paymentMethod: formData.paymentMethod,
+        paymentMethod: sanitized.paymentMethod,
       };
 
       const endpoint = formData.paymentMethod === "stripe"
@@ -224,6 +271,26 @@ function OrderContent() {
   // Use backend total if available, else fallback to frontend subtotal
   const total = orderTotal || (subtotal + shippingFee);
 
+  // Helper function to get input class with error state
+  const getInputClassName = (fieldName, baseClassName) => {
+    const hasError = touchedFields[fieldName] && fieldErrors[fieldName];
+    const errorClasses = hasError ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-gray-900';
+    return `${baseClassName} ${errorClasses}`;
+  };
+
+  // Helper component for error messages
+  const FieldError = ({ fieldName }) => {
+    if (!touchedFields[fieldName] || !fieldErrors[fieldName]) return null;
+    return (
+      <p className="text-red-600 text-xs mt-1 pl-1 flex items-center gap-1">
+        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+        </svg>
+        {fieldErrors[fieldName]}
+      </p>
+    );
+  };
+
   // HEAD Styles applied to the structure
   return (
     <div className="container mx-auto px-3 py-4 mt-5 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
@@ -251,34 +318,46 @@ function OrderContent() {
               {/* Full Name Split for integration */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Full Name
+                  Full Name <span className="text-red-500">*</span>
                 </label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="First Name"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Last Name"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                    required
-                  />
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur('firstName')}
+                        placeholder="First Name"
+                        className={getInputClassName('firstName', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
+                        required
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur('lastName')}
+                        placeholder="Last Name"
+                        className={getInputClassName('lastName', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <FieldError fieldName="firstName" />
+                    <FieldError fieldName="lastName" />
+                  </div>
                 </div>
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Email Address
+                  Email Address <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -288,12 +367,13 @@ function OrderContent() {
                   className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm text-gray-500 cursor-not-allowed focus:outline-none"
                   required
                 />
+                <p className="text-xs text-gray-500 mt-1 pl-1">Email is auto-filled from your account</p>
               </div>
 
               {/* Phone Number - HEAD styles with Tail data */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Phone Number
+                  Phone Number <span className="text-red-500">*</span>
                 </label>
                 <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2">
                   <div className="relative w-full sm:w-auto sm:min-w-[120px]">
@@ -312,41 +392,46 @@ function OrderContent() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
+                    onBlur={() => handleBlur('phone')}
                     placeholder="55 123 4567"
-                    className="flex-1 bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                    className={getInputClassName('phone', 'flex-1 bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
                     required
                   />
                 </div>
+                <FieldError fieldName="phone" />
               </div>
 
               {/* Address */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Address
+                  Address <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
+                  onBlur={() => handleBlur('address')}
                   placeholder="Street address, building name..."
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                  className={getInputClassName('address', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
                   required
                 />
+                <FieldError fieldName="address" />
               </div>
 
               {/* Country & State */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                    Country
+                    Country <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <select
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none text-gray-700"
+                      onBlur={() => handleBlur('country')}
+                      className={getInputClassName('country', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent appearance-none text-gray-700')}
                     >
                       <option value="" disabled>Select country</option>
                       <option>United Arab Emirates</option>
@@ -358,6 +443,7 @@ function OrderContent() {
                       ▼
                     </div>
                   </div>
+                  <FieldError fieldName="country" />
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
@@ -369,10 +455,12 @@ function OrderContent() {
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
+                      onBlur={() => handleBlur('state')}
                       placeholder="Dubai"
-                      className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                      className={getInputClassName('state', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
                     />
                   </div>
+                  <FieldError fieldName="state" />
                 </div>
               </div>
 
@@ -380,17 +468,19 @@ function OrderContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                    City
+                    City <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
+                    onBlur={() => handleBlur('city')}
                     placeholder="Enter your city"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                    className={getInputClassName('city', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
                     required
                   />
+                  <FieldError fieldName="city" />
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
@@ -401,9 +491,11 @@ function OrderContent() {
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
+                    onBlur={() => handleBlur('zipCode')}
                     placeholder="Enter postal code"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                    className={getInputClassName('zipCode', 'w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent placeholder-gray-400')}
                   />
+                  <FieldError fieldName="zipCode" />
                 </div>
               </div>
 

@@ -18,6 +18,8 @@ function SuccessContent() {
             return;
         }
 
+        let timeoutId;
+
         const checkStatus = async () => {
             try {
                 const data = await getOrderStatus(orderId);
@@ -26,18 +28,27 @@ function SuccessContent() {
                     setStatus("paid");
                 } else {
                     setStatus("pending");
-                    // Try again after 3 seconds if still pending, up to 10 times
-                    if (attempts < 10) {
-                        setTimeout(() => setAttempts(prev => prev + 1), 3000);
+                    if (attempts < 20) {
+                        timeoutId = setTimeout(() => setAttempts(prev => prev + 1), 3000);
+                    } else {
+                        setStatus("error");
                     }
                 }
             } catch (error) {
                 console.error("Error checking order status:", error);
-                setStatus("error");
+                if (attempts < 20) {
+                    timeoutId = setTimeout(() => setAttempts(prev => prev + 1), 3000);
+                } else {
+                    setStatus("error");
+                }
             }
         };
 
         checkStatus();
+
+        return () => {
+            if (timeoutId) clearTimeout(timeoutId);
+        };
     }, [orderId, attempts]);
 
     return (
@@ -61,37 +72,51 @@ function SuccessContent() {
 
                 <h1 className="text-3xl font-extrabold text-gray-900 mb-2 font-serif">
                     {status === "paid" ? "Payment Successful!" :
-                        status === "error" ? "Something went wrong" :
+                        status === "error" ? "Verification Incomplete" :
                             "Verifying Payment..."}
                 </h1>
                 <p className="text-gray-600 mb-8">
                     {status === "paid" ? "Thank you for your purchase. Your order has been placed successfully." :
-                        status === "pending" ? "We're verifying your payment. This might take a few seconds..." :
-                            status === "error" ? "We couldn't verify your order status. Please check your email or contact support." :
-                                "Please wait while we confirm your transaction."}
+                        status === "pending" || status === "checking" ? "We're confirming your transaction with the provider. This usually takes a few seconds..." :
+                            "We couldn't automatically verify your payment status within the time limit. Don't worry, your order is likely safe."}
                 </p>
 
                 {orderId && (
-                    <div className="bg-gray-50 rounded-lg p-4 mb-8 inline-block">
-                        <span className="text-sm text-gray-500 block mb-1 uppercase tracking-wider">Order Reference</span>
+                    <div className="bg-gray-50 rounded-lg p-4 mb-8 inline-block border border-gray-100">
+                        <span className="text-xs text-gray-400 block mb-1 uppercase tracking-widest font-semibold">Order Reference</span>
                         <span className="text-lg font-mono font-bold text-gray-900">{orderId}</span>
                     </div>
                 )}
 
                 <div className="space-y-4">
-                    {status === "paid" && (
+                    {status === "paid" ? (
                         <Link
                             href="/"
-                            className="block w-full bg-black text-white px-6 py-3 rounded-none font-medium hover:bg-gray-800 transition-colors"
+                            className="block w-full bg-black text-white px-6 py-4 rounded-none font-medium hover:bg-gray-800 transition-all transform hover:scale-[1.01] active:scale-[0.99] text-center"
                         >
                             Continue Shopping
                         </Link>
+                    ) : status === "error" ? (
+                        <button
+                            onClick={() => window.location.reload()}
+                            className="block w-full bg-black text-white px-6 py-4 rounded-none font-medium hover:bg-gray-800 transition-colors text-center"
+                        >
+                            Retry Verification
+                        </button>
+                    ) : (
+                        <div className="py-2">
+                            <div className="w-full bg-gray-100 h-1 overflow-hidden">
+                                <div className="bg-blue-600 h-full animate-progress-fast"></div>
+                            </div>
+                            <p className="text-xs text-gray-400 mt-2 italic">Checking secure payment channel...</p>
+                        </div>
                     )}
+
                     <Link
                         href="/account/orders"
-                        className="block w-full bg-white border border-gray-200 text-gray-900 px-6 py-3 rounded-none font-medium hover:bg-gray-50 transition-colors"
+                        className="block w-full bg-white border border-gray-200 text-gray-900 px-6 py-4 rounded-none font-medium hover:bg-gray-50 transition-colors text-center"
                     >
-                        View Your Orders
+                        View My Orders
                     </Link>
                 </div>
 
@@ -99,6 +124,28 @@ function SuccessContent() {
                     <p className="mt-8 text-sm text-gray-400">
                         A confirmation email has been sent to your inbox.
                     </p>
+                )}
+
+                {status === "error" && (
+                    <div className="mt-10 p-6 bg-red-50 text-left border-l-4 border-red-500">
+                        <h3 className="text-red-800 font-bold mb-2">Still Verifying?</h3>
+                        <p className="text-sm text-red-700 space-y-2">
+                            Payments can sometimes take a few minutes to process.
+                            If you've received a confirmation from your bank but this page hasn't updated:
+                        </p>
+                        <ul className="text-sm text-red-700 list-disc ml-5 mt-2 space-y-1">
+                            <li>Check your email for an order confirmation</li>
+                            <li>Visit 'My Orders' in a few minutes</li>
+                            <li>Contact support at <span className="font-semibold">support@montres.ae</span></li>
+                        </ul>
+                    </div>
+                )}
+
+                {(status === "pending" || status === "checking") && attempts > 5 && (
+                    <div className="mt-8 p-4 bg-blue-50 text-blue-800 rounded-lg text-sm animate-fade-in">
+                        Taking longer than expected? The payment provider might be slow.
+                        Please don't close this window.
+                    </div>
                 )}
             </div>
         </div>
