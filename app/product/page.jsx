@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Navbar from "../components/navBar/NavBar";
 import ProductBanner from "../components/mainproduct/productBanner/ProductBanner";
@@ -9,27 +11,28 @@ import Quote from "../components/mainproduct/quote/Quote";
 import SecondQuote from "../components/mainproduct/Quote2/SecondQuote";
 import Subscribe from "../components/mainproduct/subscribe/Subscribe";
 import ClientVoices from "../components/ClientVoices/page";
-// import AboutHome from "../components/home/About/AboutHome";
+import { useTranslation } from "react-i18next";
 
-function page() {
+function Page() {
+  const { i18n } = useTranslation();
+  const isAr = i18n.language === "ar";
+
   return (
-    <>
-      <Navbar />  
+    <div className={isAr ? "lang-ar" : ""}>
+      <Navbar />
       <div className='overflow-hidden'>
-      <ProductBanner />
-      {/* <AboutHome /> */}
-      <ProductDetails />
-      <About />
-      <WatchFeatures />
-      <Quote />
-      <SecondQuote/>
-      <ClientVoices />
-      <Subscribe />
+        <ProductBanner />
+        <ProductDetails />
+        <About />
+        <WatchFeatures />
+        <Quote />
+        <SecondQuote />
+        <ClientVoices />
+        <Subscribe />
       </div>
-
       <Footer />
-    </>
+    </div>
   );
 }
 
-export default page;
+export default Page;

@@ -9,7 +9,11 @@ import Footer from '../components/home/Footer/Footer';
 import { forgotPassword } from '../../actions/auth';
 import { toast } from 'react-toastify';
 
+import { useTranslation } from 'react-i18next';
+
 export default function page() {
+    const { t, i18n } = useTranslation();
+    const isAr = i18n.language === "ar";
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
@@ -20,17 +24,17 @@ export default function page() {
 
         try {
             await forgotPassword(email);
-            toast.success("Password reset link sent to your email.");
+            toast.success(t("passwordResetLinkSent"));
             router.push("/forgot_password/sent");
         } catch (error) {
-            toast.error(error.response?.data?.message || "Something went wrong.");
+            toast.error(error.response?.data?.message || t("somethingWentWrong"));
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <>
+        <div className={isAr ? "lang-ar" : ""}>
             <Navbar />
             <div className="min-h-screen w-full bg-white flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12">
                 {/* Progress Bar */}
@@ -63,10 +67,9 @@ export default function page() {
 
                 {/* Heading Section */}
                 <div className="text-center mb-6 sm:mb-8">
-                    <h1 className="font-cormorant text-3xl sm:text-4xl text-neutral-900 mb-3 sm:mb-4">Forgot password</h1>
+                    <h1 className="font-cormorant text-3xl sm:text-4xl text-neutral-900 mb-3 sm:mb-4">{t("forgotYourPassword")}</h1>
                     <p className="monaSans text-neutral-500 text-[15px] sm:text-[17.1px] leading-[100%] tracking-[-0.01em] font-light">
-                        Reset your password securely and step back into the <br className="hidden sm:block" /><br className="hidden sm:block" />
-                        timeless Montero experience.
+                        {t("resetPasswordDesc")}
                     </p>
                 </div>
 
@@ -75,7 +78,7 @@ export default function page() {
                     <div className="relative">
                         <input
                             type="email"
-                            placeholder="Email ID"
+                            placeholder={t("emailId")}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -86,12 +89,12 @@ export default function page() {
                         disabled={loading}
                         className="w-full bg-black text-white font-medium py-4 sm:py-5 text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {loading ? "Sending..." : "Reset password"}
+                        {loading ? t("sendingBtn") : t("resetPassword")}
                     </button>
                 </form>
             </div>
             <Footer />
-        </>
+        </div>
 
     );
 }
