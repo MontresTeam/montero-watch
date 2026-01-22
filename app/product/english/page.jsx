@@ -11,14 +11,40 @@ import Blue4 from "@/public/images/BlueWatch/productBlue4.jpg";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import newCurrency from "@/public/images/newSymbole.png"
 import { useRouter } from "next/navigation";
+import { useCurrency } from "@/context/CurrencyContext";
 
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const router = useRouter();
+  const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Integrated Product ID from Tail
   const ENGLISH_PRODUCT_ID = "696293d7aed7103263e01fb5";
@@ -155,11 +181,11 @@ const Page = () => {
               {/* Price & Order Button */}
               <div className="flex flex-col items-center gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl sm:text-4xl font-bold text-gray-900">$799</span>
-                  <span className="text-xl text-gray-400 line-through">$860</span>
+                  <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
+                  <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
                   <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
                 </div>
-                <p className="text-sm text-gray-500 font-medium">Pre-Order Price (Official retail price: $860 USD)</p>
+                <p className="text-sm text-gray-500 font-medium">Pre-Order Price (Official retail price: {formatPrice(860)})</p>
               </div>
 
               {/* Order Button - Integrated with Product ID */}
@@ -563,36 +589,43 @@ const Page = () => {
             </div>
 
             {/* SUBSCRIBE ROW */}
-              <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-                {/* LEFT TEXT */}
-                  <div>
-                    <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
-                      Subscribe for Exclusive Updates
-                    </h2>
+            <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+              {/* LEFT TEXT */}
+              <div>
+                <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
+                  Subscribe for Exclusive Updates
+                </h2>
 
-                    <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                      Join our mailing list to receive early access,
-                      limited-edition alerts, and insider updates directly from
-                      the Montero team.
-                    </p>
-                  </div>
-
-                {/* RIGHT */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
-                      <Mail className="mr-4" />
-                      <input
-                        type="email"
-                        placeholder="Enter your e-mail"
-                        className="bg-transparent outline-none w-full text-xs sm:text-sm"
-                      />
-                    </div>
-
-                    <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
-                      Subscribe Now
-                    </button>
-                  </div>
+                <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                  Join our mailing list to receive early access,
+                  limited-edition alerts, and insider updates directly from
+                  the Montero team.
+                </p>
               </div>
+
+              {/* RIGHT */}
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
+                  <Mail className="mr-4" />
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter your e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
+                >
+                  {loading ? "..." : "Subscribe Now"}
+                </button>
+              </form>
+            </div>
           </div>
         </section>
       </ScrollAnimation>

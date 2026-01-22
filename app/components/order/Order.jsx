@@ -13,14 +13,15 @@ import TmaraPayment from '../../../public/images/Tamara.jpeg';
 import { useSearchParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useCurrency } from "@/context/CurrencyContext";
+import { toast } from "react-toastify";
 
 function OrderContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
   const { user, loading: authLoading } = useAuth();
+  const { formatPrice, currency } = useCurrency();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -102,6 +103,7 @@ function OrderContent() {
         const response = await api.post("/order/stripe/create-checkout", {
           items: [{ productId, quantity }],
           shippingAddress: { country: formData.country, city: formData.city || "Dubai", address1: "temp" },
+          currency: currency,
           calculateOnly: true
         });
 
@@ -143,6 +145,7 @@ function OrderContent() {
     try {
       const orderPayload = {
         items: [{ productId, quantity }],
+        currency: currency,
         shippingAddress: {
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -520,8 +523,7 @@ function OrderContent() {
                             {product.name}
                           </h3>
                           <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                            <span className="mr-1">$</span>
-                            <span>{(product.price || 860).toLocaleString()}</span>
+                            {formatPrice(product.price || 860)}
                           </div>
                         </div>
 
@@ -579,8 +581,7 @@ function OrderContent() {
                           <div className="text-right">
                             <div className="text-xs text-gray-500 mb-1">Item Total</div>
                             <div className="flex items-center justify-end text-base sm:text-lg font-bold text-gray-900">
-                              <span className="mr-1">$</span>
-                              <span>{originalSubtotal.toLocaleString()}</span>
+                              {formatPrice(originalSubtotal)}
                             </div>
                           </div>
                         </div>
@@ -603,8 +604,7 @@ function OrderContent() {
                         <span className="text-xs text-gray-500">({quantity} items)</span>
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
-                        <span className="mr-1.5">$</span>
-                        {originalSubtotal.toLocaleString()}
+                        {formatPrice(originalSubtotal)}
                       </div>
                     </div>
 
@@ -615,8 +615,7 @@ function OrderContent() {
                         <span className="text-xs text-gray-500">Standard shipping</span>
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
-                        <span className="mr-1.5">$</span>
-                        {calculating ? "..." : shippingFee.toFixed(2)}
+                        {calculating ? "..." : formatPrice(shippingFee)}
                       </div>
                     </div>
 
@@ -627,8 +626,7 @@ function OrderContent() {
                         <span className="text-xs opacity-80">7% off retail price</span>
                       </div>
                       <div className="flex items-center text-sm font-bold">
-                        <span className="mr-1">-$</span>
-                        {discountAmount.toLocaleString()}
+                        -{formatPrice(discountAmount)}
                       </div>
                     </div>
 
@@ -650,8 +648,7 @@ function OrderContent() {
                         <span className="text-[10px] text-gray-500 italic">Subtotal - Discount + Delivery</span>
                       </div>
                       <div className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
-                        <span className="mr-2">$</span>
-                        {total.toLocaleString()}
+                        {formatPrice(total)}
                       </div>
                     </div>
                   </div>
@@ -708,7 +705,6 @@ function OrderContent() {
           </div>
         </div>
       </form>
-      <ToastContainer position="bottom-right" theme="dark" />
     </div>
   );
 }

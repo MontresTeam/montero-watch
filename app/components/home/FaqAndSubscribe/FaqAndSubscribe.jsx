@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Mail } from "lucide-react";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 
 const faqs = [
   {
@@ -28,6 +30,28 @@ const faqs = [
 
 export default function FaqAndSubscribe() {
   const [openIndex, setOpenIndex] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "An error occurred.";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -39,7 +63,7 @@ export default function FaqAndSubscribe() {
 
         {/* FAQ SECTION */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-28">
-          
+
           {/* LEFT */}
           <div>
             <h2 className="text-4xl mb-6 font-cormorant font-bold">
@@ -75,9 +99,8 @@ export default function FaqAndSubscribe() {
                   </span>
 
                   <span
-                    className={`text-xl transition-transform ${
-                      openIndex === index ? "rotate-45" : ""
-                    }`}
+                    className={`text-xl transition-transform ${openIndex === index ? "rotate-45" : ""
+                      }`}
                   >
                     +
                   </span>
@@ -95,7 +118,7 @@ export default function FaqAndSubscribe() {
 
         {/* SUBSCRIBE SECTION */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* LEFT */}
           <div>
             <h2 className="font-cormorant text-4xl mb-4">
@@ -109,20 +132,27 @@ export default function FaqAndSubscribe() {
           </div>
 
           {/* RIGHT */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-              <Mail className="mr-4" />
+          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+            <div className="flex items-center bg-gray-100 border border-gray-200 focus-within:border-black focus-within:ring-1 focus-within:ring-black/5 px-4 py-3 w-full transition-all group">
+              <Mail className="mr-4 text-gray-400 group-focus-within:text-black transition-colors" size={20} />
               <input
                 type="email"
+                required
                 placeholder="Enter your e-mail"
-                className="bg-transparent outline-none w-full text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-transparent outline-none w-full text-sm placeholder:text-gray-400"
               />
             </div>
 
-            <button className="bg-black text-white px-8 py-3 whitespace-nowrap hover:opacity-90 transition">
-              Subscribe Now
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-black text-white px-8 py-3 whitespace-nowrap hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium"
+            >
+              {loading ? "..." : "Subscribe Now"}
             </button>
-          </div>
+          </form>
         </div>
 
       </div>

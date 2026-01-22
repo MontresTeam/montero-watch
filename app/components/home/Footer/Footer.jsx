@@ -1,16 +1,43 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 
 import Logo from "@/public/images/Logo/LogoFooter.png";
 import BgIcon from "@/public/images/Home/BgFooterLogo.png";
 import Instagram from "@/public/icons/home/instagram.png";
 import Whatsapp from "@/public/icons/home/whatsapp.png";
-import X from "@/public/icons/home/x.png"; // Using this icon for Threads
-import Youtube from "@/public/icons/home/sm_5b01250f7fc22.jpg"; // Make sure this icon exists
+import ThreadsIcon from "@/public/icons/home/x.png";
+import YoutubeIcon from "@/public/icons/home/sm_5b01250f7fc22.jpg";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Thank you for subscribing!");
+      setEmail("");
+    } catch (error) {
+      console.error("Subscription error:", error);
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "An error occurred. Please try again later.";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="relative bg-black text-gray-300 overflow-hidden">
       {/* Background Decorative Icon */}
@@ -64,18 +91,27 @@ const Footer = () => {
             <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium">
               Stay Updated
             </h4>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md">
-              <input
-                type="text"
-                placeholder="Enter your email"
-                className="bg-transparent border border-gray-600 px-4 py-3 text-sm w-full outline-none focus:border-white transition"
-              />
-              <button className="border border-white px-6 py-3 text-sm hover:bg-white hover:text-black transition">
-                Subscribe
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-0 sm:gap-2 max-w-md group">
+              <div className="relative flex-1">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-transparent border border-white/20 px-4 py-3.5 text-sm w-full outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all placeholder:text-gray-600 rounded-lg sm:rounded-r-none"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-white text-black px-8 py-3.5 text-sm font-semibold hover:bg-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg sm:rounded-l-none mt-2 sm:mt-0 shadow-lg active:scale-95"
+              >
+                {loading ? "..." : "Subscribe"}
               </button>
-            </div>
-            <p className="text-gray-500 text-xs mt-3">
-              Subscribe to get updates on new products and offers
+            </form>
+            <p className="text-gray-500 text-[10px] sm:text-xs mt-3 pl-1 italic">
+              Subscribe to get updates on new products and exclusive offers.
             </p>
           </div>
         </div>
@@ -105,7 +141,7 @@ const Footer = () => {
               target="_blank"
               className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
             >
-              <Image src={X} alt="Threads" width={20} height={20} />
+              <Image src={ThreadsIcon} alt="Threads" width={20} height={20} />
             </Link>
 
             {/* WhatsApp */}
@@ -123,7 +159,7 @@ const Footer = () => {
               target="_blank"
               className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
             >
-              <Image src={Youtube} alt="YouTube" width={20} height={20} />
+              <Image src={YoutubeIcon} alt="YouTube" width={20} height={20} />
             </Link>
           </div>
 

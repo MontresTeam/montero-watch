@@ -17,12 +17,36 @@ import About4 from "@/public/images/About/about4.jpg";
 import About5 from "@/public/images/About/about5.jpg";
 import About6 from "@/public/images/About/about6.jpeg";
 
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 import { Mail } from "lucide-react";
 
 export default function Page() {
   const { t, i18n } = useTranslation();
   const isAr = i18n.language?.toLowerCase() === "ar";
   const [open, setOpen] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const faqs = [
     t("faq1", { defaultValue: "Do the watches come with a warranty?" }),
