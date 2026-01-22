@@ -35,7 +35,7 @@ export const CurrencyProvider = ({ children }) => {
 
             setLoading(true);
             try {
-                const response = await axios.get("http://localhost:5000/api/user/currencyAPI", {
+                const response = await axios.get("https://api.monterowatch.com/api/user/currencyAPI", {
                     params: {
                         amount: 1,
                         from: BASE_CURRENCY,
