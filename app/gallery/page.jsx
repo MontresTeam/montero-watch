@@ -6,6 +6,7 @@ import Navbar from "../components/navBar/NavBar";
 import Footer from "../components/home/Footer/Footer";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Gallery1 from "@/public/images/Gallery/gallary1.jpg";
 import Gallery2 from "@/public/images/Gallery/gallary2.png";
 import Gallery3 from "@/public/images/Gallery/gallary3.png";
@@ -60,6 +61,7 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
 }
 
 export default function Page() {
+  const { t } = useTranslation();
   return (
     <>
       <Navbar />
@@ -72,18 +74,16 @@ export default function Page() {
           <ScrollAnimation animationClass="animate-slide-in-left">
             <div>
               <h1 className="font-cormorant text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight text-black">
-                A World Time Watch Inspired <br className="hidden sm:block" />
-                by Global Beaches
+                {t("galleryHeroTitle")}
               </h1>
 
               <p className="mt-4 sm:mt-6 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the world s most
-                iconic beaches
+                {t("galleryHeroSub")}
               </p>
 
               <Link href="/product">
                 <button className="mt-6 sm:mt-8 rounded-full bg-gray-200 px-6 sm:px-8 py-3 text-sm sm:text-base text-gray-800 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95">
-                  Pre-Order Now
+                  {t("subscribeBtn")}
                 </button>
               </Link>
             </div>
@@ -121,17 +121,16 @@ export default function Page() {
               </div>
 
               <h3 className="font-cormorant mt-6 sm:mt-8 lg:mt-10 text-xl sm:text-2xl lg:text-3xl text-black">
-                Montero English Edition
+                {t("monteroEnglishEdition")}
               </h3>
 
               <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the world s most
-                iconic beaches
+                {t("galleryHeroSub")}
               </p>
 
               <Link href="/product/english">
                 <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
-                  Pre-Order Now
+                  {t("subscribeBtn")}
                 </button>
               </Link>
             </div>
@@ -150,17 +149,16 @@ export default function Page() {
               </div>
 
               <h3 className="font-cormorant mt-6 sm:mt-8 lg:mt-10 text-xl sm:text-2xl lg:text-3xl text-black">
-                Montero Arab Edition
+                {t("monteroArabEdition")}
               </h3>
 
               <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the world s most
-                iconic beaches
+                {t("galleryHeroSub")}
               </p>
 
               <Link href="/product/arabic">
                 <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
-                  Pre-Order Now
+                  {t("subscribeBtn")}
                 </button>
               </Link>
             </div>
@@ -176,13 +174,11 @@ export default function Page() {
           {/* TITLE */}
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
-              A World Time Watch Inspired <br className="hidden sm:block" />
-              by Global Beaches
+              {t("galleryMainTitle")}
             </h2>
 
             <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600">
-              Crafted for explorers, dreamers, and lovers of the world s most
-              iconic beaches
+              {t("galleryMainSub")}
             </p>
           </div>
 
@@ -250,13 +246,11 @@ export default function Page() {
               {/* LEFT TEXT */}
                 <div>
                   <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-black transition-colors duration-300 hover:text-gray-700 leading-tight">
-                    Subscribe for Exclusive Updates
+                    {t("subscribeHeading")}
                   </h2>
 
                   <p className="mt-3 sm:mt-4 lg:mt-6 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                    Join our mailing list to receive early access,
-                    limited-edition alerts, and insider updates directly from
-                    the Montero team.
+                    {t("subscribeDesc")}
                   </p>
                 </div>
 
@@ -266,13 +260,13 @@ export default function Page() {
                     <Mail className="mr-4" />
                     <input
                       type="email"
-                      placeholder="Enter your e-mail"
+                      placeholder={t("emailPlaceholder")}
                       className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-400"
                     />
                   </div>
 
                   <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium whitespace-nowrap rounded-md transition-all duration-300 hover:bg-gray-800 hover:shadow-lg active:scale-95">
-                    Subscribe Now
+                    {t("subscribeBtn")}
                   </button>
                 </div>
             </div>

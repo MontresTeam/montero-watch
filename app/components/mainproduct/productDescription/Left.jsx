@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import watch from '../../../../public/images/MainProducts/blueWatch/halfBlueWatch.png'
 const SpecCallout = ({ label, className, lineDirection = 'right' }) => {
     return (
@@ -14,6 +15,7 @@ const SpecCallout = ({ label, className, lineDirection = 'right' }) => {
 };
 
 export default function Left() {
+    const { t } = useTranslation();
     return (
         <div className="relative w-full h-full min-h-[600px] lg:min-h-0 flex items-center bg-white overflow-hidden ">
             {/* Background Watermark */}
@@ -71,7 +73,7 @@ export default function Left() {
   <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
 
   <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
-    Stainless Steel
+    {t("stainlessSteel")}
   </span>
 
   <div className="h-px bg-black w-16 sm:w-40 md:w-32 lg:w-40" />
@@ -92,7 +94,7 @@ export default function Left() {
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
 
                     <span className="monaSans font-light text-[11px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
-                        Polished & brushed finishing
+                        {t("polishedBrushed")}
                     </span>
 
                     <div className="h-px bg-black w-14 sm:w-16 md:w-24 lg:w-32" />
@@ -104,7 +106,7 @@ export default function Left() {
             
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
                     <span className="monaSans font-light text-[11px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
-                        Case Thickness: (add your number)
+                        {t("caseThickness")}
                     </span>
                     <div className="h-px bg-black w-20 sm:w-28 md:w-40 lg:w-56" />
 
@@ -123,7 +125,7 @@ export default function Left() {
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
 
                     <span className="monaSans font-light text-[12px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
-                        Diameter: 41 mm
+                        {t("diameter")}
                     </span>
 
                     <div className="h-px bg-black w-16 sm:w-20 md:w-32 lg:w-48" />

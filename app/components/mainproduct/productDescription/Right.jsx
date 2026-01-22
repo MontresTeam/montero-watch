@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Right() {
+  const { t } = useTranslation();
   return (
     <div
       className="
@@ -23,7 +25,7 @@ export default function Right() {
           max-w-lg
         "
       >
-        Time is the vehicle that carries everything into nothing
+        {t("timeVehicle")}
       </h2>
 
       {/* DESCRIPTION */}
@@ -37,8 +39,7 @@ export default function Right() {
           max-w-md
         "
       >
-        Montero is available in two collectible editions, each designed with its
-        own identity while sharing the same world-time DNA and craftsmanship.
+        {t("monteroEditionsText")}
       </p>
 
       {/* CTA */}
@@ -57,7 +58,7 @@ export default function Right() {
               hover:bg-neutral-900 hover:text-white
             "
           >
-            Pre-Order Now
+            {t("preOrderNow")}
           </button>
         </Link>
       </div>

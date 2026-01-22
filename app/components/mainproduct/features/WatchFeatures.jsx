@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 // Green watches icons
 import limitedEdition from "../../../../public/images/MainProducts/featureIcons/limited 1.png";
@@ -20,6 +21,7 @@ import arabicNumberBlue from "../../../../public/images/MainProducts/blueWatchIc
 import gmtIconBlue from "../../../../public/images/MainProducts/blueWatchIcons/GMT function for global  synchrony.png";
 
 export default function WatchFeatures() {
+  const { t } = useTranslation();
   const [activeColor, setActiveColor] = useState("green");
 
   // Auto toggle between green and blue every 4 seconds
@@ -55,12 +57,12 @@ export default function WatchFeatures() {
           <div className="flex flex-col items-center md:items-start justify-between h-auto md:h-[420px] gap-6 md:gap-0">
             <SideFeature
               icon={leftIcons[0]}
-              text="Limited edition caseback engraving"
+              text={t("limitedEditionText")}
               theme={themeColor}
             />
             <SideFeature
               icon={leftIcons[1]}
-              text="Blue dial inspired by Jumeirah shoreline"
+              text={t("blueDailText")}
               theme={themeColor}
             />
           </div>
@@ -69,7 +71,7 @@ export default function WatchFeatures() {
           <div className="flex flex-col items-center gap-10">
             <CenterTopFeature
               icon={centerIcon}
-              text="Sapphire crystal for durability"
+              text={t("sapphireCrystal")}
               theme={themeColor}
             />
 
@@ -126,14 +128,14 @@ export default function WatchFeatures() {
               icon={rightIcons[0]}
               text={
                 activeColor === "green"
-                  ? "Eastern Arabic numerals"
-                  : "24-hour bezel display"
+                  ? t("arabicNumerals")
+                  : t("bezelDisplay24Hour")
               }
               theme={themeColor}
             />
             <SideFeature
               icon={rightIcons[1]}
-              text="GMT function for global synchrony"
+              text={t("comparison")}
               theme={themeColor}
             />
           </div>

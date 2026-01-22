@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Subscribe() {
+  const { t } = useTranslation();
   return (
       <section className="bg-white px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
         <div className="mx-auto max-w-7xl">
@@ -12,12 +14,11 @@ export default function Subscribe() {
               {/* LEFT TEXT */}
                 <div>
                   <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-                    Subscribe for Exclusive Updates
+                    {t("subscribeForExclusive")}
                   </h2>
 
                   <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                    Join our mailing list to receive early access, limited-edition
-                    alerts, and insider updates directly from the Montero team.
+                    {t("subscribeMailingList")}
                   </p>
                 </div>
 
@@ -27,13 +28,13 @@ export default function Subscribe() {
                     <Mail className="mr-4" />
                     <input
                       type="email"
-                      placeholder="Enter your e-mail"
+                      placeholder={t("enterEmail")}
                       className="bg-transparent outline-none w-full text-xs sm:text-sm"
                     />
                   </div>
 
                   <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
-                    Subscribe Now
+                    {t("subscribeBtn")}
                   </button>
                 </div>
             </div>
