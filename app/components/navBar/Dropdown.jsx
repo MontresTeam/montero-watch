@@ -19,6 +19,9 @@ function Dropdown({ onClose }) {
 
   if (!user) return null;
 
+
+
+  
   return (
     <div className={`absolute top-0 right-0 w-[280px] rounded-xl bg-white shadow-2xl border border-neutral-200 p-5 ${isAr ? 'lang-ar' : ''}`}>
       {/* Close button */}

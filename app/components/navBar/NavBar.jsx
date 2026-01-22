@@ -5,6 +5,7 @@ import { FaChevronDown, FaBars, FaTimes, FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useCurrency, SUPPORTED_CURRENCIES } from "@/context/CurrencyContext";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -19,6 +20,7 @@ import Glob from "@/public/icons/home/glob.png";
 const Navbar = () => {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { currency, setCurrency } = useCurrency();
 
   const { t, i18n } = useTranslation();
 
@@ -38,6 +40,7 @@ const Navbar = () => {
 
   const mobileMenuRef = useRef(null);
   const langRef = useRef(null);
+  const currencyRef = useRef(null);
 
 
   const navLinks = [
@@ -81,6 +84,17 @@ const Navbar = () => {
       { opacity: 1, scale: 1, y: 0, duration: 0.2, ease: "power2.out" }
     );
   }, [isLangOpen]);
+
+  /* CURRENCY DROPDOWN */
+  useEffect(() => {
+    if (!currencyRef.current || !isCurrencyOpen) return;
+
+    gsap.fromTo(
+      currencyRef.current,
+      { opacity: 0, scale: 0.95, y: -4 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.2, ease: "power2.out" }
+    );
+  }, [isCurrencyOpen]);
 
   return (
     <nav className={`fixed top-0 left-0 w-full bg-white z-50 font-mona ${selectedLang === 'ar' ? 'lang-ar' : ''}`}>
@@ -136,7 +150,10 @@ const Navbar = () => {
             {/* LANGUAGE (DESKTOP) */}
             <div className="relative hidden md:block">
               <button
-                onClick={() => setIsLangOpen((p) => !p)}
+                onClick={() => {
+                  setIsLangOpen((p) => !p);
+                  setIsCurrencyOpen(false);
+                }}
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700"
               >
                 <Image src={Glob} alt="Lang" width={18} height={18} />
@@ -150,7 +167,7 @@ const Navbar = () => {
               {isLangOpen && (
                 <div
                   ref={langRef}
-                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm"
+                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm z-50"
                 >
                   {languages.map((lang) => (
                     <button
@@ -165,6 +182,49 @@ const Navbar = () => {
                       {lang.toUpperCase()}
                     </button>
                   ))}
+                </div>
+              )}
+            </div>
+
+            {/* CURRENCY (DESKTOP) */}
+            <div className="relative hidden md:block">
+              <button
+                onClick={() => {
+                  setIsCurrencyOpen((p) => !p);
+                  setIsLangOpen(false);
+                }}
+                className="flex items-center gap-1 text-[13px] font-light text-gray-700 min-w-[50px]"
+              >
+                <span className="w-[18px] text-center font-medium">
+                  {currency === "USD" ? "$" : currency === "EUR" ? "€" : currency === "GBP" ? "£" : currency === "AED" ? "د.إ" : "¤"}
+                </span>
+                {currency}
+                <FaChevronDown
+                  className={`text-[10px] transition ${isCurrencyOpen ? "rotate-180" : ""
+                    }`}
+                />
+              </button>
+
+              {isCurrencyOpen && (
+                <div
+                  ref={currencyRef}
+                  className="absolute right-0 mt-2 w-32 max-h-60 overflow-y-auto bg-white border rounded-md shadow-lg z-50 scrollbar-thin scrollbar-thumb-gray-200"
+                >
+                  <div className="py-1">
+                    {SUPPORTED_CURRENCIES.map((curr) => (
+                      <button
+                        key={curr}
+                        onClick={() => {
+                          setCurrency(curr);
+                          setIsCurrencyOpen(false);
+                        }}
+                        className={`w-full px-4 py-2 text-left text-[13px] font-light transition-colors ${currency === curr ? "bg-gray-100 font-medium" : "hover:bg-gray-50 text-gray-600"
+                          }`}
+                      >
+                        {curr}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

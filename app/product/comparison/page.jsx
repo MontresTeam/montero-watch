@@ -11,9 +11,34 @@ import Comparison3 from "@/public/images/Comparison/comparison3.png";
 import Comparison4 from "@/public/images/Comparison/comparison4.jpg";
 import Comparison5 from "@/public/images/Comparison/comparison5.jpg";
 import Footer from "@/app/components/home/Footer/Footer";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { t } = useTranslation();
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -169,10 +194,10 @@ const page = () => {
                 </ul>
 
                 <Link href="/product/english">
-              <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
-                Pre-Order Now
-              </button>
-              </Link>
+                  <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
+                    Pre-Order Now
+                  </button>
+                </Link>
               </div>
             </ScrollAnimation>
 
@@ -227,10 +252,10 @@ const page = () => {
                 </ul>
 
                 <Link href="/product/arabic">
-              <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
-                Pre-Order Now
-              </button>
-              </Link>
+                  <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
+                    Pre-Order Now
+                  </button>
+                </Link>
               </div>
             </ScrollAnimation>
 
@@ -249,39 +274,51 @@ const page = () => {
         </section>
       </ScrollAnimation>
 
-        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-          <div className="mx-auto max-w-7xl">
-            {/* SUBSCRIBE ROW */}
-              <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-                {/* LEFT TEXT */}
-                  <div>
-                    <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-                      {t("subscribeForExclusive")}
-                    </h2>
+       <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+  <div className="mx-auto max-w-7xl">
+    {/* SUBSCRIBE ROW */}
+    <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+      
+      {/* LEFT TEXT */}
+      <div>
+        <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+          {t("subscribeForExclusive")}
+        </h2>
 
-                    <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                      {t("subscribeMailingList")}
-                    </p>
-                  </div>
+        <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+          {t("subscribeMailingList")}
+        </p>
+      </div>
 
-                {/* RIGHT */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1">
-                    <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-                      <span className="mr-3 text-gray-500">✉</span>
-                      <input
-                        type="email"
-                        placeholder={t("enterEmail")}
-                        className="bg-transparent outline-none w-full text-xs sm:text-sm"
-                      />
-                    </div>
+      {/* RIGHT */}
+      <form
+        onSubmit={handleSubscribe}
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1"
+      >
+        <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+          <span className="mr-3 text-gray-500">✉</span>
+          <input
+            type="email"
+            required
+            placeholder={t("enterEmail")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-transparent outline-none w-full text-xs sm:text-sm"
+          />
+        </div>
 
-                    <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
-                      {t("subscribeBtn")}
-                    </button>
-                  </div>
-              </div>
-          </div>
-        </section>
+        <button
+          type="submit"
+          className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition"
+        >
+          {t("subscribeBtn")}
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
 
       <Footer />
 
@@ -326,9 +363,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-all duration-700 ease-out ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>

@@ -14,14 +14,40 @@ import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
 import newCurrency from '@/public/images/newSymbole.png'
 
 import { useRouter } from "next/navigation";
+import { useCurrency } from "@/context/CurrencyContext";
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const { t } = useTranslation();
   const router = useRouter();
+  const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Integrated logic from Tail for Product ID
   const ARABIC_PRODUCT_ID = "696294b5d2b02c0550d276d1";
@@ -68,8 +94,8 @@ const Page = () => {
                   <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors w-full flex items-center justify-center gap-2 min-h-[44px]">
                     <div className="flex flex-col items-center gap-2 mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold text-white">$799</span>
-                        <span className="text-sm text-white/50 line-through">$860</span>
+                        <span className="text-xl font-bold text-white">{formatPrice(799)}</span>
+                        <span className="text-sm text-white/50 line-through">{formatPrice(860)}</span>
                         <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">7% OFF</span>
                       </div>
                     </div>
@@ -165,11 +191,11 @@ const Page = () => {
             {/* Price & Order Button */}
             <div className="flex flex-col items-center gap-2 mb-4">
               <div className="flex items-center gap-3">
-                <span className="text-3xl sm:text-4xl font-bold text-gray-900">$799</span>
-                <span className="text-xl text-gray-400 line-through">$860</span>
+                <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
+                <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
                 <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
               </div>
-              <p className="text-xs text-gray-500 font-medium">{t("pricePreOrderAr")}</p>
+              <p className="text-xs text-gray-500 font-medium">Pre-Order Price (Official retail price: {formatPrice(860)})</p>
             </div>
 
             {/* Order Button - HEAD Style, Integrated with Product ID */}
@@ -626,7 +652,7 @@ const Page = () => {
             </div>
 
             {/* RIGHT */}
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 w-full max-w-md lg:max-w-none mx-auto lg:mx-0">
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 w-full max-w-md lg:max-w-none mx-auto lg:mx-0">
               <div className="flex items-center bg-gray-100 px-3 sm:px-4 py-2 sm:py-3 w-full rounded-lg">
                 <Mail className="mr-2 sm:mr-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-500 flex-shrink-0" />
                 <input
@@ -637,10 +663,14 @@ const Page = () => {
                 />
               </div>
 
-              <button className="bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition rounded-lg min-h-[44px]">
-                {t("subscribeBtn")}
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition rounded-lg min-h-[44px] disabled:opacity-50"
+              >
+                {loading ? "..." : "Subscribe Now"}
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>

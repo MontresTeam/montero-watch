@@ -5,6 +5,8 @@ import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 import Link from "next/link";
 import Image from "next/image";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 import { Mail } from "lucide-react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
@@ -15,8 +17,29 @@ import Blog6 from "@/public/images/Blog/gmt3.jpg";
 import Blog7 from "@/public/images/Blog/gmt11.jpg";
 
 const Page = () => {
-  const { t, i18n } = useTranslation();
-  const isAr = i18n.language?.toLowerCase() === "ar";
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Thank you for subscribing!");
+      setEmail("");
+    } catch (error) {
+      console.error("Subscription error:", error);
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "An error occurred. Please try again later.";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={isAr ? "lang-ar" : ""}>
@@ -276,6 +299,29 @@ const Page = () => {
                 {t("subscribeBtn")}
               </button>
             </div>
+
+            {/* RIGHT FORM */}
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto">
+              <div className="flex items-center bg-gray-100 border border-gray-200 focus-within:border-black focus-within:ring-1 focus-within:ring-black/5 px-4 py-3 sm:py-4 w-full md:min-w-[300px] rounded-md transition-all duration-300 group">
+                <Mail className="mr-4 text-gray-400 group-focus-within:text-black transition-colors" size={20} />
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-400"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-black text-white px-8 sm:px-10 py-3 sm:py-4 text-xs sm:text-sm font-semibold whitespace-nowrap rounded-md transition-all duration-300 hover:bg-gray-900 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              >
+                {loading ? "..." : "Subscribe Now"}
+              </button>
+            </form>
           </div>
         </div>
       </section>

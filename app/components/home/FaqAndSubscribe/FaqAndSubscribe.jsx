@@ -7,6 +7,28 @@ import { useTranslation } from "react-i18next";
 export default function FaqAndSubscribe() {
   const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "An error occurred.";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const faqs = [
     {
@@ -101,9 +123,9 @@ export default function FaqAndSubscribe() {
           </div>
 
           {/* RIGHT */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-              <Mail className="mr-4" />
+          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+            <div className="flex items-center bg-gray-100 border border-gray-200 focus-within:border-black focus-within:ring-1 focus-within:ring-black/5 px-4 py-3 w-full transition-all group">
+              <Mail className="mr-4 text-gray-400 group-focus-within:text-black transition-colors" size={20} />
               <input
                 type="email"
                 placeholder={t("enterEmail")}
@@ -114,7 +136,7 @@ export default function FaqAndSubscribe() {
             <button className="bg-black text-white px-8 py-3 whitespace-nowrap hover:opacity-90 transition">
               {t("subscribeBtn")}
             </button>
-          </div>
+          </form>
         </div>
 
       </div>
