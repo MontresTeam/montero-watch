@@ -60,7 +60,7 @@ export default function Form() {
         message: ''
       });
     } catch (error) {
-      const errMsg = error?.response?.data?.message || "Something went wrong. Please try again.";
+      const errMsg = error?.response?.data?.error || error?.response?.data?.message || "Something went wrong. Please try again.";
       toast.error(errMsg);
     } finally {
       setLoading(false);

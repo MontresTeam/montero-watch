@@ -15,10 +15,34 @@ import About4 from "@/public/images/About/about4.jpg";
 import About5 from "@/public/images/About/about5.jpg";
 import About6 from "@/public/images/About/about6.jpeg";
 
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 import { Mail } from "lucide-react";
 
 export default function Page() {
   const [open, setOpen] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const faqs = [
     "Do the watches come with a warranty?",
@@ -133,94 +157,101 @@ export default function Page() {
       </ScrollAnimation>
 
       {/* ================= FAQ + SUBSCRIBE ================= */}
-        <section className="bg-white px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
-          <div className="mx-auto max-w-7xl">
-            {/* FAQ ROW */}
-            <div className="grid grid-cols-1 gap-6 lg:gap-10 md:grid-cols-2 items-start">
-              {/* LEFT TEXT */}
-              <ScrollAnimation animationClass="animate-slide-in-left">
-                <div>
-                  <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl">
-                    Frequently Asked Question
-                  </h2>
+      <section className="bg-white px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        <div className="mx-auto max-w-7xl">
+          {/* FAQ ROW */}
+          <div className="grid grid-cols-1 gap-6 lg:gap-10 md:grid-cols-2 items-start">
+            {/* LEFT TEXT */}
+            <ScrollAnimation animationClass="animate-slide-in-left">
+              <div>
+                <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl">
+                  Frequently Asked Question
+                </h2>
 
-                  <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Each beach was chosen for its cultural significance, beauty,
-                    and global reputation — together forming the emotional core
-                    of Montero.
-                  </p>
-                </div>
-              </ScrollAnimation>
+                <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed">
+                  Each beach was chosen for its cultural significance, beauty,
+                  and global reputation — together forming the emotional core
+                  of Montero.
+                </p>
+              </div>
+            </ScrollAnimation>
 
-              {/* RIGHT FAQ LIST */}
-              <ScrollAnimation animationClass="animate-slide-in-right">
-                <div className="space-y-3 sm:space-y-4">
-                  {faqs.map((q, i) => (
-                    <div
-                      key={i}
-                      className="border-b border-gray-200 pb-3 transition-all duration-300 hover:border-gray-400"
+            {/* RIGHT FAQ LIST */}
+            <ScrollAnimation animationClass="animate-slide-in-right">
+              <div className="space-y-3 sm:space-y-4">
+                {faqs.map((q, i) => (
+                  <div
+                    key={i}
+                    className="border-b border-gray-200 pb-3 transition-all duration-300 hover:border-gray-400"
+                  >
+                    <button
+                      onClick={() => setOpen(open === i ? null : i)}
+                      className="flex w-full items-center justify-between text-left text-sm sm:text-base text-black"
                     >
-                      <button
-                        onClick={() => setOpen(open === i ? null : i)}
-                        className="flex w-full items-center justify-between text-left text-sm sm:text-base text-black"
+                      <span className="pr-4">{q}</span>
+                      <span
+                        className="text-xl flex-shrink-0 transition-transform duration-300"
+                        style={{
+                          transform:
+                            open === i ? "rotate(180deg)" : "rotate(0deg)",
+                        }}
                       >
-                        <span className="pr-4">{q}</span>
-                        <span
-                          className="text-xl flex-shrink-0 transition-transform duration-300"
-                          style={{
-                            transform:
-                              open === i ? "rotate(180deg)" : "rotate(0deg)",
-                          }}
-                        >
-                          {open === i ? "−" : "+"}
-                        </span>
-                      </button>
+                        {open === i ? "−" : "+"}
+                      </span>
+                    </button>
 
-                      {open === i && (
-                        <p className="mt-2 sm:mt-3 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
-                          Yes, all Montero watches come with a comprehensive
-                          warranty covering manufacturing defects.
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </ScrollAnimation>
+                    {open === i && (
+                      <p className="mt-2 sm:mt-3 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
+                        Yes, all Montero watches come with a comprehensive
+                        warranty covering manufacturing defects.
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </ScrollAnimation>
+          </div>
+
+          {/* SUBSCRIBE ROW */}
+          <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+            {/* LEFT TEXT */}
+            <div>
+              <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                Subscribe for Exclusive Updates
+              </h2>
+
+              <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                Join our mailing list to receive early access,
+                limited-edition alerts, and insider updates directly from
+                the Montero team.
+              </p>
             </div>
 
-            {/* SUBSCRIBE ROW */}
-              <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-                {/* LEFT TEXT */}
-                  <div>
-                    <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-                      Subscribe for Exclusive Updates
-                    </h2>
-
-                    <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                      Join our mailing list to receive early access,
-                      limited-edition alerts, and insider updates directly from
-                      the Montero team.
-                    </p>
-                  </div>
-
-                {/* RIGHT */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-                      <Mail className="mr-4" />
-                      <input
-                        type="email"
-                        placeholder="Enter your e-mail"
-                        className="bg-transparent outline-none w-full text-xs sm:text-sm"
-                      />
-                    </div>
-
-                    <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
-                      Subscribe Now
-                    </button>
-                  </div>
+            {/* RIGHT */}
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+                <Mail className="mr-4" />
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                />
               </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
+              >
+                {loading ? "..." : "Subscribe Now"}
+              </button>
+            </form>
           </div>
-        </section>
+        </div>
+      </section>
 
       <Footer />
     </>
@@ -262,9 +293,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>

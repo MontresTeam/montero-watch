@@ -5,6 +5,8 @@ import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 import Link from "next/link";
 import Image from "next/image";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 import { Mail } from "lucide-react";
 import { FaArrowLeft } from "react-icons/fa6";
 import InnerBlog1 from "@/public/images/Blog/innerBlog1.jpg";
@@ -13,6 +15,30 @@ import Blog6 from "@/public/images/Blog/gmt3.jpg";
 import Blog7 from "@/public/images/Blog/gmt11.jpg";
 
 const Page = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Thank you for subscribing!");
+      setEmail("");
+    } catch (error) {
+      console.error("Subscription error:", error);
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "An error occurred. Please try again later.";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -258,40 +284,47 @@ const Page = () => {
       </ScrollAnimation>
 
       {/* SUBSCRIBE SECTION */}
-        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-              {/* LEFT TEXT */}
-                <div>
-                  <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
-                    Subscribe for Exclusive Updates
-                  </h2>
+      <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+            {/* LEFT TEXT */}
+            <div>
+              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
+                Subscribe for Exclusive Updates
+              </h2>
 
-                  <p className="mt-3 sm:mt-4 lg:mt-6 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                    Join our mailing list to receive early access,
-                    limited-edition alerts, and insider updates directly from
-                    the Montero team.
-                  </p>
-                </div>
-
-              {/* RIGHT FORM */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <div className="flex items-center bg-gray-100 px-4 py-3 sm:py-4 w-full rounded-md transition-all duration-300 hover:bg-gray-200">
-                    <Mail className="mr-4" />
-                    <input
-                      type="email"
-                      placeholder="Enter your e-mail"
-                      className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-400"
-                    />
-                  </div>
-
-                  <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium whitespace-nowrap rounded-md transition-all duration-300 hover:bg-gray-800 active:scale-95">
-                    Subscribe Now
-                  </button>
-                </div>
+              <p className="mt-3 sm:mt-4 lg:mt-6 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                Join our mailing list to receive early access,
+                limited-edition alerts, and insider updates directly from
+                the Montero team.
+              </p>
             </div>
+
+            {/* RIGHT FORM */}
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto">
+              <div className="flex items-center bg-gray-100 border border-gray-200 focus-within:border-black focus-within:ring-1 focus-within:ring-black/5 px-4 py-3 sm:py-4 w-full md:min-w-[300px] rounded-md transition-all duration-300 group">
+                <Mail className="mr-4 text-gray-400 group-focus-within:text-black transition-colors" size={20} />
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-400"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-black text-white px-8 sm:px-10 py-3 sm:py-4 text-xs sm:text-sm font-semibold whitespace-nowrap rounded-md transition-all duration-300 hover:bg-gray-900 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              >
+                {loading ? "..." : "Subscribe Now"}
+              </button>
+            </form>
           </div>
-        </section>
+        </div>
+      </section>
 
       <Footer />
     </>
@@ -335,9 +368,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-all duration-700 ease-out ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>

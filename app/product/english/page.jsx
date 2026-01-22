@@ -15,12 +15,36 @@ import { useCurrency } from "@/context/CurrencyContext";
 
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
+import api from "@/lib/api";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const router = useRouter();
   const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/user/subscribe", { email });
+      toast.success(response.data.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Integrated Product ID from Tail
   const ENGLISH_PRODUCT_ID = "696293d7aed7103263e01fb5";
@@ -580,20 +604,27 @@ const Page = () => {
               </div>
 
               {/* RIGHT */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
                   <Mail className="mr-4" />
                   <input
                     type="email"
+                    required
                     placeholder="Enter your e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="bg-transparent outline-none w-full text-xs sm:text-sm"
                   />
                 </div>
 
-                <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
-                  Subscribe Now
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
+                >
+                  {loading ? "..." : "Subscribe Now"}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </section>

@@ -14,8 +14,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function OrderContent() {
   const router = useRouter();
@@ -706,7 +705,6 @@ function OrderContent() {
           </div>
         </div>
       </form>
-      <ToastContainer position="bottom-right" theme="dark" />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import api from "@/lib/api";
 
 const CurrencyContext = createContext();
 
@@ -35,7 +35,7 @@ export const CurrencyProvider = ({ children }) => {
 
             setLoading(true);
             try {
-                const response = await axios.get("https://api.monterowatch.com/api/user/currencyAPI", {
+                const response = await api.get("/user/currencyAPI", {
                     params: {
                         amount: 1,
                         from: BASE_CURRENCY,
