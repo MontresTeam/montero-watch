@@ -7,7 +7,10 @@ import { useSearchParams } from "next/navigation";
 import img from "../../../public/images/loginimg.jpg";
 import { useAuth } from "../../../context/AuthContext";
 
+import { useTranslation } from "react-i18next";
+
 export default function LoginPage() {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,13 +26,13 @@ export default function LoginPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!email.trim()) {
-      errors.email = "Email is required";
+      errors.email = t("emailRequired");
     } else if (!emailRegex.test(email)) {
-      errors.email = "Invalid email format";
+      errors.email = t("invalidEmail");
     }
 
     if (!password) {
-      errors.password = "Password is required";
+      errors.password = t("passwordRequired");
     }
 
     setFieldErrors(errors);
@@ -45,7 +48,7 @@ export default function LoginPage() {
     try {
       await login(email, password, redirect);
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      setError(err.response?.data?.message || t("loginFailed"));
     }
   };
 
@@ -72,11 +75,10 @@ export default function LoginPage() {
         <div className="w-full lg:w-1/2 flex flex-col justify-center max-w-md mx-auto">
           <header className="mb-8 text-center lg:text-left">
             <h1 className="font-cormorant text-4xl md:text-5xl text-neutral-900 leading-tight mb-4 tracking-wide">
-              Sign In Account
+              {t("signInAccount")}
             </h1>
             <p className="monaSans text-neutral-500 text-sm md:text-base leading-relaxed tracking-tight max-w-sm">
-              Let&apos;s align our constellations! Reach out and let the magic
-              of collaboration illuminate our skies.
+              {t("signInDesc")}
             </p>
           </header>
 
@@ -87,7 +89,7 @@ export default function LoginPage() {
             <div className="relative">
               <input
                 type="email"
-                placeholder="Email ID"
+                placeholder={t("emailId")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.email ? "border-red-500" : "border-neutral-200"}`}
@@ -99,7 +101,7 @@ export default function LoginPage() {
             <div className="relative group">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder={t("password")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={`w-full bg-neutral-50 border px-5 py-4 monaSans text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors ${fieldErrors.password ? "border-red-500" : "border-neutral-200"}`}
@@ -151,25 +153,25 @@ export default function LoginPage() {
                   className="w-4 h-4 border-neutral-300 rounded focus:ring-black accent-black transition-all"
                 />
                 <span className="monaSans text-xs text-neutral-600 group-hover:text-neutral-900 transition-colors">
-                  Keep me signed in
+                  {t("keepMeSignedIn")}
                 </span>
               </label>
               <Link
                 href="/forgot_password"
                 className="monaSans text-xs text-neutral-500 hover:text-neutral-900 transition-all border-b border-neutral-400 hover:border-neutral-900"
               >
-                Forgot your password
+                {t("forgotYourPassword")}
               </Link>
             </div>
 
             <button className="w-full bg-black text-white font-medium py-5 text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-neutral-800 shadow-xl shadow-neutral-100 active:scale-[0.98]">
-              Sign In
+              {t("signIn")}
             </button>
           </form>
 
           <div className="mt-6 text-center lg:text-left">
             <p className="monaSans text-sm text-neutral-600">
-              Don’t have an account?{" "}
+              {t("dontHaveAccount")}{" "}
               <Link
                 href="/signup"
                 className="
@@ -179,7 +181,7 @@ export default function LoginPage() {
       transition-colors
     "
               >
-                Create account
+                {t("createAccount")}
               </Link>
             </p>
           </div>
@@ -188,7 +190,7 @@ export default function LoginPage() {
             <div className="relative flex items-center justify-center">
               <div className="w-full h-px bg-neutral-100" />
               <span className="absolute bg-white px-4 monaSans text-xs text-neutral-400 uppercase tracking-widest">
-                Or
+                {t("or")}
               </span>
             </div>
 

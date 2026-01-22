@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import newcurrency from "../../../public/images/dbff981dfc9f1a8358f03cc8ee71583a164e6ffc.png";
 import Link from "next/link";
 import { Mail } from "lucide-react";
@@ -20,6 +21,7 @@ import api from "@/lib/api";
 import { toast } from "react-toastify";
 
 const Page = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
@@ -55,10 +57,10 @@ const Page = () => {
   };
 
   const faqs = [
-    "Do the watches come with a warranty?",
-    "Are the watches scratch-resistant?",
-    "What materials are used to make your watches?",
-    "How can I place an order?",
+    t("faq1ArabicEditionAr"),
+    t("faq2ArabicEditionAr"),
+    t("faq3ArabicEditionAr"),
+    t("faq4ArabicEditionAr"),
   ];
 
   return (
@@ -79,11 +81,11 @@ const Page = () => {
             {/* Left Content */}
             <div className="w-full lg:max-w-xl text-center lg:text-left z-10 order-2 lg:order-1 px-2 sm:px-0">
               <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-cormorant text-white leading-tight mb-3 sm:mb-4 md:mb-6 mobile-heading">
-                A World Time Watch Inspired by Global Beaches
+                {t("arabicEditionHeroAr")}
               </h1>
 
               <p className="text-sm font-body font-extralight sm:text-base lg:text-lg text-white/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed mobile-text max-w-2xl mx-auto lg:mx-0">
-                Crafted for explorers, dreamers, and lovers of the world s most iconic beaches
+                {t("arabicEditionHeroSubAr")}
               </p>
 
               {/* Mobile-only Order Button - HEAD Style, Integrated with Product ID */}
@@ -97,7 +99,7 @@ const Page = () => {
                         <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">7% OFF</span>
                       </div>
                     </div>
-                    <span className="text-sm sm:text-base">Pre-Order Now</span>
+                    <span className="text-sm sm:text-base">{t("preOrderNow")}</span>
                   </button>
                 </Link>
               </div>
@@ -131,7 +133,7 @@ const Page = () => {
           <div className="text-center px-2 sm:px-4">
             {/* Title */}
             <h2 className="mt-2 sm:mt-4 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-cormorant text-gray-900 mb-3 sm:mb-4 mobile-heading">
-              Montero Arabic Regional Edition
+              {t("arabicRegionalEditionAr")}
             </h2>
 
             {/* Watch Image */}
@@ -154,11 +156,11 @@ const Page = () => {
             <div className="max-w-6xl mx-auto mb-4 sm:mb-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 place-items-center">
                 {[
-                  "Sapphire Crystal",
-                  "Seiko NH34 GMT Movement",
-                  "5 ATM Water Resistance",
-                  "Stainless Steel Case",
-                  "World-Time Beach Concept",
+                  t("sapphireCrystalFeatureAr"),
+                  t("seikoMovementAr"),
+                  t("waterResistanceAr"),
+                  t("stainlessSteelCaseAr"),
+                  t("worldTimeBeachAr"),
                 ].map((item) => (
                   <div key={item} className="flex items-center justify-center sm:justify-start gap-2 w-full max-w-xs sm:max-w-none">
                     <span className="w-2 h-2 bg-[#2596be] rounded-full flex-shrink-0"></span>
@@ -175,14 +177,14 @@ const Page = () => {
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-[#2596be] rounded-full"></span>
                 <p className="text-gray-700 text-xs sm:text-sm text-center mobile-small-text">
-                  Sapphire crystal for durability
+                  {t("sapphireDurabilityAr")}
                 </p>
               </div>
 
               <div className="w-2 h-2 bg-[#2596be] rounded-full hidden sm:block"></div>
 
               <p className="text-gray-700 text-xs sm:text-sm text-center mobile-small-text">
-                GMT function for global synchrony
+                {t("gmtGlobalSyncAr")}
               </p>
             </div>
 
@@ -199,7 +201,7 @@ const Page = () => {
             {/* Order Button - HEAD Style, Integrated with Product ID */}
             <Link href={`/order?productId=${ARABIC_PRODUCT_ID}`}>
               <button className="bg-black text-white px-10 sm:px-12 py-3.5 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 shadow-xl inline-flex items-center gap-2 justify-center">
-                <span>Pre-Order Now</span>
+                <span>{t("preOrderNow")}</span>
               </button>
             </Link>
             <br />
@@ -207,7 +209,7 @@ const Page = () => {
             {/* Limited Edition Badge */}
             <div className="inline-flex items-center gap-3 mt-3 sm:mt-4">
               <span className="px-3 py-1 text-xs tracking-widest font-semibold text-red-700 border border-red-600 uppercase bg-white/90 backdrop-blur-sm">
-                Limited Edition
+                {t("limitedEditionBadgeAr")}
               </span>
             </div>
           </div>
@@ -220,11 +222,10 @@ const Page = () => {
           {/* Title - Always visible */}
           <div className="w-full text-center lg:text-left mb-8 lg:mb-0">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-2 sm:mb-3 mobile-heading">
-              Technical Specifications
+              {t("technicalSpecsAr")}
             </h2>
             <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto lg:mx-0 mobile-text">
-              Seiko NH34 GMT – reliable, accurate, and trusted by global
-              enthusiasts.
+              {t("seikoDescriptionAr")}
             </p>
           </div>
 
@@ -248,12 +249,12 @@ const Page = () => {
             {/* Specifications List - Mobile */}
             <div className="space-y-4 px-2">
               {[
-                "Stainless Steel",
-                "Polished & brushed finishing",
-                "Case Thickness: 13mm",
-                "Diameter: 41 mm",
-                "Arabic Numerals Dial",
-                "Special Edition for Middle East",
+                t("stainlessSteelCase"),
+                t("polishedBrushedSpecAr"),
+                t("caseThicknessSpecAr"),
+                t("diameterSpecAr"),
+                t("arabicDialSpecAr"),
+                t("arabicSpecialEditionAr"),
               ].map((spec, i) => (
                 <div
                   key={i}
@@ -268,10 +269,10 @@ const Page = () => {
             {/* Limited Edition Text - Mobile */}
             <div className="text-center sm:text-left pt-6">
               <p className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-200 leading-tight mobile-heading">
-                LIMITED EDITION
+                {t("limitedEditionTextAr")}
               </p>
               <p className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-200 mobile-heading">
-                ONE OF 150
+                {t("oneOf150Ar")}
               </p>
             </div>
           </div>
@@ -283,7 +284,7 @@ const Page = () => {
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
                 <p className="text-sm text-gray-700 w-[160px]">
-                  Stainless Steel
+                  {t("stainlessSteelCase")}
                 </p>
                 <span className="w-56 h-px bg-gray-300" />
               </div>
@@ -294,7 +295,7 @@ const Page = () => {
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
                 <p className="text-sm text-gray-700 w-[220px]">
-                  Polished & brushed finishing
+                  {t("polishedBrushedSpecAr")}
                 </p>
                 <span className="w-64 h-px bg-gray-300" />
               </div>
@@ -302,7 +303,7 @@ const Page = () => {
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
                 <p className="text-sm text-gray-700 w-[240px]">
-                  Case Thickness: 13mm
+                  {t("caseThicknessSpecAr")}
                 </p>
                 <span className="w-72 h-px bg-gray-300" />
               </div>
@@ -311,9 +312,9 @@ const Page = () => {
             {/* FADED TEXT */}
             <div className="absolute left-12 bottom-40 pointer-events-none">
               <p className="text-6xl font-serif text-gray-200 leading-none">
-                LIMITED EDITION
+                {t("limitedEditionTextAr")}
               </p>
-              <p className="text-5xl font-serif text-gray-200">ONE OF 150</p>
+              <p className="text-5xl font-serif text-gray-200">{t("oneOf150Ar")}</p>
             </div>
 
             {/* BOTTOM LEFT SPEC */}
@@ -321,7 +322,7 @@ const Page = () => {
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
                 <p className="text-sm text-gray-700 w-[140px]">
-                  Diameter: 41 mm
+                  {t("diameterSpecAr")}
                 </p>
                 <span className="w-64 h-px bg-gray-300" />
               </div>
@@ -332,7 +333,7 @@ const Page = () => {
               <div className="flex items-center gap-4">
                 <span className="w-2 h-2 bg-black rounded-full" />
                 <p className="text-sm text-gray-700 w-[180px]">
-                  Arabic Edition Dial
+                  {t("arabicDialSpecAr")}
                 </p>
                 <span className="w-56 h-px bg-gray-300" />
               </div>
@@ -358,7 +359,7 @@ const Page = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Title */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-6 sm:mb-8 lg:mb-12 text-center lg:text-left mobile-heading">
-            How to Set Your Montero Arabic Edition Watch
+            {t("howToSetTitleAr")}
           </h2>
 
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
@@ -367,20 +368,20 @@ const Page = () => {
               {/* Section 1 */}
               <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                 <h3 className="text-sm sm:text-base font-medium text-gray-900 mb-3 sm:mb-4 mobile-small-text">
-                  Section 1 – Setting Local Time
+                  {t("section1TitleAr")}
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-gray-700 text-xs sm:text-sm">
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Pull the crown to Position 2
+                    {t("pullCrownAr")}
                   </li>
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Rotate to adjust the main hour and minute hands
+                    {t("rotateHandsAr")}
                   </li>
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Push the crown back to lock
+                    {t("pushCrownAr")}
                   </li>
                 </ul>
               </div>
@@ -388,20 +389,20 @@ const Page = () => {
               {/* Section 2 */}
               <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                 <h3 className="text-sm sm:text-base font-medium text-gray-900 mb-3 sm:mb-4 mobile-small-text">
-                  Section 2 – Setting GMT Hand
+                  {t("section2TitleAr")}
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-gray-700 text-xs sm:text-sm">
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Pull the crown to Position 1
+                    {t("pullCrownPosition1Ar")}
                   </li>
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Rotate clockwise to move the GMT hand in 1-hour increments
+                    {t("rotateClockwiseAr")}
                   </li>
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Set it to a second time zone of your choice
+                    {t("setTimeZoneAr")}
                   </li>
                 </ul>
               </div>
@@ -409,21 +410,20 @@ const Page = () => {
               {/* Section 3 */}
               <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                 <h3 className="text-sm sm:text-base font-medium text-gray-900 mb-3 sm:mb-4 mobile-small-text">
-                  Section 3 – Using the Beach Time System
+                  {t("section3TitleAr")}
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-gray-700 text-xs sm:text-sm">
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Each beach on the dial corresponds to its GMT offset
+                    {t("beachCorrespondsAr")}
                   </li>
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Choose the beach you want, match its time zone with your GMT
-                    hand, and enjoy instant global reference.
+                    {t("chooseBeachAr")}
                   </li>
                   <li className="flex gap-2 sm:gap-3">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-black rounded-full flex-shrink-0"></span>
-                    Arabic numerals provide traditional Middle Eastern elegance
+                    {t("arabicNumeralsTraditionalAr")}
                   </li>
                 </ul>
               </div>
@@ -475,13 +475,11 @@ const Page = () => {
         <div className="w-full lg:w-1/2 bg-[#1A1E28] flex flex-col justify-center px-4 sm:px-6 lg:px-12 xl:px-20 py-8 sm:py-12 lg:py-0">
           <div className="max-w-xl space-y-4 sm:space-y-6 lg:space-y-8 mx-auto lg:mx-0">
             <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-cormorant leading-tight text-white text-center lg:text-left mobile-heading">
-              A World Time Watch Inspired by Global Beaches
+              {t("worldTimeWatchWithArabicAr")}
             </h2>
 
             <p className="font-light text-base sm:text-lg lg:text-xl xl:text-2xl text-white/90 leading-relaxed text-center lg:text-left mobile-text">
-              Crafted for explorers, dreamers, and lovers of the world s most
-              iconic beaches. Now with Arabic numerals for the Middle Eastern
-              market.
+              {t("withArabicNumeralsAr")}
             </p>
 
             {/* Mobile-only CTA */}
@@ -497,7 +495,7 @@ const Page = () => {
                       sizes="20px"
                     />
                   </div>
-                  <span>Order Arabic Edition</span>
+                  <span>{t("orderArabicEditionAr")}</span>
                 </button>
               </Link>
             </div>
@@ -511,14 +509,14 @@ const Page = () => {
           <div className="flex flex-col lg:grid lg:grid-cols-4 gap-8 lg:gap-12 items-start">
             {/* LEFT CONTENT */}
             <div className="lg:col-span-1 text-center lg:text-left">
-              <p className="text-xs sm:text-sm text-gray-500 mb-3 mobile-small-text">Client Feedback</p>
+              <p className="text-xs sm:text-sm text-gray-500 mb-3 mobile-small-text">{t("clientFeedbackAr")}</p>
 
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-snug mobile-heading">
-                What They Say After Using Our Product
+                {t("whatTheySayAr")}
               </h2>
 
               <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 lg:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0 mobile-small-text">
-                Many of our members have started their earlier careers with us.
+                {t("membersFeedbackAr")}
               </p>
 
               {/* Arrows */}
@@ -554,11 +552,7 @@ const Page = () => {
 
                   {/* Text */}
                   <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 mobile-small-text">
-                    I recently purchased the Montero Arabic Edition watch, and I m
-                    extremely satisfied. The design looks premium, the Arabic
-                    numerals add a traditional touch, and it feels very
-                    comfortable on the wrist. Perfect for both formal and casual
-                    wear.
+                    {t("testimonialTextAr")}
                   </p>
 
                   {/* User */}
@@ -566,7 +560,7 @@ const Page = () => {
                     <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
                       <Image
                         src={Green6}
-                        alt={i === 0 ? "Ahmed Al-Farsi" : i === 1 ? "Mirana Marci" : "Sara Khalid"}
+                        alt={i === 0 ? t("ahmadAlFarsi") : i === 1 ? t("miranaMarci") : t("saraKhalid")}
                         fill
                         className="object-cover"
                         sizes="40px"
@@ -575,12 +569,12 @@ const Page = () => {
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-gray-900 mobile-small-text">
                         {i === 0
-                          ? "Ahmed Al-Farsi"
+                          ? t("ahmadAlFarsi")
                           : i === 1
-                            ? "Mirana Marci"
-                            : "Sara Khalid"}
+                            ? t("miranaMarci")
+                            : t("saraKhalid")}
                       </p>
-                      <p className="text-xs text-gray-500 mobile-small-text">Verified Buyer</p>
+                      <p className="text-xs text-gray-500 mobile-small-text">{t("verifiedBuyerAr")}</p>
                     </div>
                   </div>
                 </div>
@@ -598,13 +592,11 @@ const Page = () => {
             {/* LEFT TEXT */}
             <div className="text-center lg:text-left">
               <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700 mobile-heading">
-                Frequently Asked Question
+                {t("frequentlyAskedQuestionAr")}
               </h2>
 
               <p className="mt-3 sm:mt-4 lg:mt-6 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed transition-opacity duration-300 hover:opacity-80 mx-auto lg:mx-0 mobile-text">
-                Each beach was chosen for its cultural significance, beauty,
-                and global reputation — together forming the emotional core
-                of Montero Arabic Edition.
+                {t("faqDescriptionAr")}
               </p>
             </div>
 
@@ -638,9 +630,7 @@ const Page = () => {
                       id={`faq-answer-${i}`}
                       className="mt-2 sm:mt-3 lg:mt-4 max-w-md text-xs sm:text-sm text-gray-600 mobile-small-text"
                     >
-                      Yes, all Montero Arabic Edition watches come with a
-                      comprehensive warranty covering manufacturing defects
-                      and Arabic numerals quality.
+                      {t("faqWarrantyAr")}
                     </p>
                   )}
                 </div>
@@ -653,13 +643,11 @@ const Page = () => {
             {/* LEFT TEXT */}
             <div className="text-center lg:text-left">
               <h2 className="font-cormorant text-xl sm:text-2xl lg:text-3xl xl:text-4xl transition-colors duration-300 hover:text-gray-700 mobile-heading">
-                Subscribe for Exclusive Updates
+                {t("subscribeExclusiveArabicAr")}
               </h2>
 
               <p className="mt-2 sm:mt-3 lg:mt-4 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed mx-auto lg:mx-0 mobile-text">
-                Join our mailing list to receive early access,
-                limited-edition alerts, and insider updates directly from
-                the Montero Arabic Edition team.
+                {t("subscribeMailingListArabicAr")}
               </p>
             </div>
 
@@ -669,10 +657,7 @@ const Page = () => {
                 <Mail className="mr-2 sm:mr-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-500 flex-shrink-0" />
                 <input
                   type="email"
-                  required
-                  placeholder="Enter your e-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t("enterEmail")}
                   className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-500 mobile-small-text"
                   aria-label="Email address for subscription"
                 />

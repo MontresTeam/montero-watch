@@ -5,11 +5,15 @@ import { useRouter } from 'next/navigation';
 import Navbar from '../../components/navBar/NavBar';
 import Footer from '../../components/home/Footer/Footer';
 
+import { useTranslation } from 'react-i18next';
+
 export default function ForgotPasswordSentPage() {
+    const { t, i18n } = useTranslation();
+    const isAr = i18n.language === "ar";
     const router = useRouter();
 
     return (
-        <>
+        <div className={isAr ? "lang-ar" : ""}>
             <Navbar />
             <div className="min-h-screen w-full bg-neutral-50 flex items-center justify-center px-4 sm:px-6">
                 <div className="w-full max-w-md bg-white border border-neutral-200 rounded-xl px-6 sm:px-8 py-10 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)]">
@@ -24,12 +28,11 @@ export default function ForgotPasswordSentPage() {
                     {/* Text */}
                     <div className="text-center mb-8">
                         <h1 className="font-cormorant text-2xl sm:text-3xl text-neutral-900 mb-3">
-                            Reset link sent
+                            {t("resetLinkSent")}
                         </h1>
 
                         <p className="monaSans text-neutral-500 text-sm sm:text-base leading-relaxed font-light">
-                            We’ve sent a password reset link to your email address.
-                            Please check your inbox and click the link to create a new password.
+                            {t("resetLinkSentDesc")}
                         </p>
                     </div>
 
@@ -45,7 +48,7 @@ export default function ForgotPasswordSentPage() {
                             transition-all duration-200
                             hover:bg-neutral-100"
                         >
-                            Open Gmail
+                            {t("openGmail")}
                         </a>
 
                         {/* Return to Login */}
@@ -57,12 +60,12 @@ export default function ForgotPasswordSentPage() {
                             hover:bg-neutral-800
                             active:scale-[0.98]"
                         >
-                            Back to Login
+                            {t("backToLogin")}
                         </button>
                     </div>
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

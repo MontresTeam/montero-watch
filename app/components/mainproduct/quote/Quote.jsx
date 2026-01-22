@@ -2,11 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import blueprint from "../../../../public/images/MainProducts/bluePrint.png";
 import Link from "next/link";
 import RevealSection from "../../animations/RevealSection";
 
 export default function Quote() {
+  const { t } = useTranslation();
   return (
     <section className="w-full flex flex-col lg:flex-row relative">
       {/* LEFT — Image with Gradient Fade */}
@@ -34,7 +36,7 @@ export default function Quote() {
              text-3xl md:text-4xl lg:text-5xl 
              leading-[1.1] text-white"
             >
-              A World Time Watch Inspired by Global Beaches
+              {t("productHeroTitle")}
             </h2>
           </RevealSection>
 
@@ -44,8 +46,7 @@ export default function Quote() {
              text-base md:text-lg
              text-white/90 leading-relaxed"
             >
-              Crafted for explorers, dreamers, and lovers of the world’s most
-              iconic beaches
+              {t("productHeroSub")}
             </p>
           </RevealSection>
 
@@ -60,7 +61,7 @@ export default function Quote() {
                          hover:bg-white hover:text-[#7F7E62]
                          transition-all duration-300"
               >
-                Comparison
+                {t("comparison")}
               </button>
             </Link>
           </RevealSection>

@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const videos = [
   "https://www.youtube.com/embed/RvFvfoztjNo",
@@ -7,13 +10,14 @@ const videos = [
 ];
 
 const ClientVoices = () => {
+  const { t } = useTranslation();
   return (
     <section className="bg-white pt-24 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* CENTERED REVIEW BUTTON */}
         <div className="flex justify-center -mt-6 mb-4">
           <button className="bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700">
-            Review
+            {t("review")}
           </button>
         </div>
 
@@ -23,11 +27,11 @@ const ClientVoices = () => {
             style={{ fontWeight: 500 }}
             className="font-cormorant text-4xl lg:text-5xl text-gray-900 mb-4"
           >
-            Voices of Our Clients
+            {t("voicesOurClients")}
           </h2>
 
           <p className="text-sm text-gray-500 max-w-md mx-auto">
-            Real experiences from customers who wear our timepieces every day.
+            {t("clientsExperienceText")}
           </p>
         </div>
 

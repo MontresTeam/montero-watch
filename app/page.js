@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "./components/navBar/NavBar";
 import HomeBanner from "./components/home/HomeBanner/HomeBanner";
 import AboutHome from "./components/home/About/AboutHome";
@@ -11,18 +13,19 @@ import FaqAndSubscribe from "./components/home/FaqAndSubscribe/FaqAndSubscribe";
 import Footer from "./components/home/Footer/Footer";
 
 import RevealSection from "./components/animations/RevealSection";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { i18n } = useTranslation();
+  const isAr = i18n.language === "ar";
+
   return (
-    <>
+    <div className={isAr ? "lang-ar" : ""}>
       <Navbar />
 
       <HomeBanner />
 
-      <RevealSection>
-        {/* <AboutHome /> */}
-      </RevealSection>
-
+      
       <RevealSection delay={0.1}>
         <OurProducts />
       </RevealSection>
@@ -52,6 +55,6 @@ export default function Home() {
       </RevealSection>
 
       <Footer />
-    </>
+    </div>
   );
 }

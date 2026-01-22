@@ -17,6 +17,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 import { toast } from "react-toastify";
 
 function OrderContent() {
+  const { t } = useTranslation();
   const router = useRouter();
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
@@ -28,13 +29,212 @@ function OrderContent() {
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [formError, setFormError] = useState(null);
+
+  const countryCodes = [
+    { code: "+971", country: "United Arab Emirates", iso: "AE" },
+    { code: "+966", country: "Saudi Arabia", iso: "SA" },
+    { code: "+965", country: "Kuwait", iso: "KW" },
+    { code: "+974", country: "Qatar", iso: "QA" },
+    { code: "+973", country: "Bahrain", iso: "BH" },
+    { code: "+968", country: "Oman", iso: "OM" },
+    { code: "+962", country: "Jordan", iso: "JO" },
+    { code: "+961", country: "Lebanon", iso: "LB" },
+    { code: "+963", country: "Syria", iso: "SY" },
+    { code: "+964", country: "Iraq", iso: "IQ" },
+    { code: "+98", country: "Iran", iso: "IR" },
+    { code: "+967", country: "Yemen", iso: "YE" },
+    { code: "+972", country: "Israel", iso: "IL" },
+    { code: "+970", country: "Palestine", iso: "PS" },
+    { code: "+90", country: "Turkey", iso: "TR" },
+
+    // 🇸🇦 South Asia
+    { code: "+91", country: "India", iso: "IN" },
+    { code: "+92", country: "Pakistan", iso: "PK" },
+    { code: "+880", country: "Bangladesh", iso: "BD" },
+    { code: "+94", country: "Sri Lanka", iso: "LK" },
+    { code: "+977", country: "Nepal", iso: "NP" },
+    { code: "+975", country: "Bhutan", iso: "BT" },
+    { code: "+960", country: "Maldives", iso: "MV" },
+    { code: "+93", country: "Afghanistan", iso: "AF" },
+
+    // 🇨🇳 East Asia
+    { code: "+86", country: "China", iso: "CN" },
+    { code: "+81", country: "Japan", iso: "JP" },
+    { code: "+82", country: "South Korea", iso: "KR" },
+    { code: "+850", country: "North Korea", iso: "KP" },
+    { code: "+976", country: "Mongolia", iso: "MN" },
+    { code: "+886", country: "Taiwan", iso: "TW" },
+
+    // 🇸🇬 Southeast Asia
+    { code: "+65", country: "Singapore", iso: "SG" },
+    { code: "+60", country: "Malaysia", iso: "MY" },
+    { code: "+62", country: "Indonesia", iso: "ID" },
+    { code: "+66", country: "Thailand", iso: "TH" },
+    { code: "+63", country: "Philippines", iso: "PH" },
+    { code: "+84", country: "Vietnam", iso: "VN" },
+    { code: "+855", country: "Cambodia", iso: "KH" },
+    { code: "+856", country: "Laos", iso: "LA" },
+    { code: "+95", country: "Myanmar", iso: "MM" },
+    { code: "+673", country: "Brunei", iso: "BN" },
+    { code: "+670", country: "Timor-Leste", iso: "TL" },
+
+    // 🇰🇿 Central Asia
+    { code: "+7", country: "Kazakhstan", iso: "KZ" },
+    { code: "+998", country: "Uzbekistan", iso: "UZ" },
+    { code: "+993", country: "Turkmenistan", iso: "TM" },
+    { code: "+996", country: "Kyrgyzstan", iso: "KG" },
+    { code: "+992", country: "Tajikistan", iso: "TJ" },
+
+    // 🇨🇾 Caucasus
+    { code: "+374", country: "Armenia", iso: "AM" },
+    { code: "+994", country: "Azerbaijan", iso: "AZ" },
+    { code: "+995", country: "Georgia", iso: "GE" },
+
+    // 🇸🇦 Middle East
+    { code: "+967", country: "Yemen", iso: "YE" },
+    { code: "+972", country: "Israel", iso: "IL" },
+    { code: "+970", country: "Palestine", iso: "PS" },
+    { code: "+962", country: "Jordan", iso: "JO" },
+    { code: "+961", country: "Lebanon", iso: "LB" },
+    { code: "+963", country: "Syria", iso: "SY" },
+    { code: "+964", country: "Iraq", iso: "IQ" },
+    { code: "+98", country: "Iran", iso: "IR" },
+    { code: "+973", country: "Bahrain", iso: "BH" },
+    { code: "+968", country: "Oman", iso: "OM" },
+    { code: "+43", country: "Austria", iso: "AT" },
+    { code: "+32", country: "Belgium", iso: "BE" },
+    { code: "+359", country: "Bulgaria", iso: "BG" },
+    { code: "+385", country: "Croatia", iso: "HR" },
+    { code: "+357", country: "Cyprus", iso: "CY" },
+    { code: "+420", country: "Czech Republic", iso: "CZ" },
+    { code: "+45", country: "Denmark", iso: "DK" },
+    { code: "+372", country: "Estonia", iso: "EE" },
+    { code: "+358", country: "Finland", iso: "FI" },
+    { code: "+33", country: "France", iso: "FR" },
+    { code: "+49", country: "Germany", iso: "DE" },
+    { code: "+30", country: "Greece", iso: "GR" },
+    { code: "+36", country: "Hungary", iso: "HU" },
+    { code: "+354", country: "Iceland", iso: "IS" },
+    { code: "+353", country: "Ireland", iso: "IE" },
+    { code: "+39", country: "Italy", iso: "IT" },
+    { code: "+371", country: "Latvia", iso: "LV" },
+    { code: "+370", country: "Lithuania", iso: "LT" },
+    { code: "+352", country: "Luxembourg", iso: "LU" },
+    { code: "+356", country: "Malta", iso: "MT" },
+    { code: "+31", country: "Netherlands", iso: "NL" },
+    { code: "+47", country: "Norway", iso: "NO" },
+    { code: "+48", country: "Poland", iso: "PL" },
+    { code: "+351", country: "Portugal", iso: "PT" },
+    { code: "+40", country: "Romania", iso: "RO" },
+    { code: "+7", country: "Russia", iso: "RU" },
+    { code: "+421", country: "Slovakia", iso: "SK" },
+    { code: "+386", country: "Slovenia", iso: "SI" },
+    { code: "+34", country: "Spain", iso: "ES" },
+    { code: "+46", country: "Sweden", iso: "SE" },
+    { code: "+41", country: "Switzerland", iso: "CH" },
+    { code: "+44", country: "United Kingdom", iso: "GB" },
+    { code: "+380", country: "Ukraine", iso: "UA" },
+    { code: "+1", country: "United States", iso: "US" },
+    { code: "+1", country: "Canada", iso: "CA" },
+    { code: "+52", country: "Mexico", iso: "MX" },
+
+    // Central America
+    { code: "+502", country: "Guatemala", iso: "GT" },
+    { code: "+503", country: "El Salvador", iso: "SV" },
+    { code: "+504", country: "Honduras", iso: "HN" },
+    { code: "+505", country: "Nicaragua", iso: "NI" },
+    { code: "+506", country: "Costa Rica", iso: "CR" },
+    { code: "+507", country: "Panama", iso: "PA" },
+
+    // Caribbean (main ones)
+    { code: "+1-809", country: "Dominican Republic", iso: "DO" },
+    { code: "+1-876", country: "Jamaica", iso: "JM" },
+    { code: "+1-868", country: "Trinidad and Tobago", iso: "TT" },
+    { code: "+1-246", country: "Barbados", iso: "BB" },
+    { code: "+1-242", country: "Bahamas", iso: "BS" },
+
+    // South America
+    { code: "+54", country: "Argentina", iso: "AR" },
+    { code: "+55", country: "Brazil", iso: "BR" },
+    { code: "+56", country: "Chile", iso: "CL" },
+    { code: "+57", country: "Colombia", iso: "CO" },
+    { code: "+58", country: "Venezuela", iso: "VE" },
+    { code: "+51", country: "Peru", iso: "PE" },
+    { code: "+593", country: "Ecuador", iso: "EC" },
+    { code: "+591", country: "Bolivia", iso: "BO" },
+    { code: "+595", country: "Paraguay", iso: "PY" },
+    { code: "+598", country: "Uruguay", iso: "UY" }
+  ];
+
+  const [selectedCountryCode, setSelectedCountryCode] = useState("+971");
+  const [isCodeDropdownOpen, setIsCodeDropdownOpen] = useState(false);
+  const [codeSearchTerm, setCodeSearchTerm] = useState("");
+
+  const filteredCountryCodes = countryCodes.filter(c =>
+    c.country.toLowerCase().includes(codeSearchTerm.toLowerCase()) ||
+    c.code.includes(codeSearchTerm)
+  );
+
+  const handleCountryCodeSelect = (item) => {
+    setSelectedCountryCode(item.code);
+    setFormData(prev => ({ ...prev, country: item.country }));
+    setIsCodeDropdownOpen(false);
+    setCodeSearchTerm("");
+    // Clear error if exists
+    if (fieldErrors.country) {
+      setFieldErrors(prev => ({ ...prev, country: null }));
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.firstName?.trim()) errors.firstName = t("firstNameRequired");
+    if (!formData.lastName?.trim()) errors.lastName = t("lastNameRequired");
+    if (!formData.email?.trim()) {
+      errors.email = t("emailRequired");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = t("invalidEmail");
+    }
+    if (!formData.phone?.trim()) {
+      errors.phone = t("phoneRequired");
+    } else if (!/^\d{5,15}$/.test(formData.phone.replace(/[\s-]/g, ""))) {
+      errors.phone = t("invalidPhone");
+    }
+    if (!formData.address?.trim()) errors.address = t("addressRequired");
+    if (!formData.city?.trim()) errors.city = t("cityRequired");
+    if (!formData.country) errors.country = t("countryRequired");
+
+    if (Object.keys(errors).length > 0) {
+      setFormError(t("pleaseReviewFields"));
+      setFieldErrors(errors);
+      return false;
+    }
+
+    setFormError(null);
+    setFieldErrors({});
+    return true;
+  };
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsCodeDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     if (!authLoading && !user) {
-      toast.info("Please sign in to continue with your order");
+      toast.info(t("pleaseSignIn"));
       router.push(`/login?redirect=/order?productId=${productId}`);
     }
-  }, [user, authLoading, router, productId]);
+  }, [user, authLoading, router, productId, t]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -70,7 +270,7 @@ function OrderContent() {
         // However, if the user just wants to see the styles, this might block them.
         // Let's assume we proceed with Tail logic, but maybe default to a dummy product if dev/testing?
         // No, strict instructions: Integration Tail.
-        setError("No product selected");
+        setError(t("noProductSelected"));
         setLoading(false);
         return;
       }
@@ -80,11 +280,11 @@ function OrderContent() {
         if (response.data.success) {
           setProduct(response.data.product);
         } else {
-          setError("Product not found");
+          setError(t("productNotFound"));
         }
       } catch (err) {
         console.error("Error fetching product:", err);
-        setError("Failed to load product details");
+        setError(t("failedToLoadProduct"));
       } finally {
         setLoading(false);
       }
@@ -129,15 +329,20 @@ function OrderContent() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: null }));
+    }
   };
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault(); // In case it's in a form
     if (submitting) return;
 
-    // Basic Validation
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.address || !formData.city || !formData.country) {
-      toast.error("Please fill in all required fields");
+    if (!validateForm()) {
+      toast.error(t("pleaseReviewFields"), {
+        icon: "⚠️",
+      });
       return;
     }
 
@@ -150,7 +355,7 @@ function OrderContent() {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          phone: formData.phone,
+          phone: `${selectedCountryCode}${formData.phone.replace(/[\s-]/g, "")}`,
           country: formData.country,
           state: formData.state,
           city: formData.city,
@@ -161,7 +366,7 @@ function OrderContent() {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          phone: formData.phone,
+          phone: `${selectedCountryCode}${formData.phone.replace(/[\s-]/g, "")}`,
           country: formData.country,
           state: formData.state,
           city: formData.city,
@@ -178,18 +383,18 @@ function OrderContent() {
       const response = await api.post(endpoint, orderPayload);
 
       if (response.data.success) {
-        toast.success("Order initiated! Redirecting to payment...");
+        toast.success(t("orderInitiated"));
         if (response.data.checkoutUrl) {
           window.location.href = response.data.checkoutUrl;
         } else {
           router.push(`/payment-success?orderId=${response.data.order?._id || response.data.orderId}`);
         }
       } else {
-        toast.error(response.data.message || "Failed to create order");
+        toast.error(response.data.message || t("failedToCreateOrder"));
       }
     } catch (err) {
       console.error("Order error:", err.response?.data || err.message);
-      toast.error(err.response?.data?.message || "An error occurred while placing order");
+      toast.error(err.response?.data?.message || t("orderError"));
     } finally {
       setSubmitting(false);
     }
@@ -209,13 +414,13 @@ function OrderContent() {
     // Styling the error state with HEAD-ish generic container if needed, or kept simple
     return (
       <div className="flex flex-col justify-center items-center min-h-[400px] text-center px-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Oops!</h2>
-        <p className="text-gray-600">{error || "Product not found"}</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t("oops")}</h2>
+        <p className="text-gray-600">{error || t("productNotFound")}</p>
         <button
           onClick={() => window.history.back()}
           className="mt-6 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
         >
-          Go Back
+          {t("goBack")}
         </button>
       </div>
     );
@@ -239,7 +444,7 @@ function OrderContent() {
         <div className="p-2 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
           <IoArrowBackOutline size={20} />
         </div>
-        <span className="text-sm font-medium">Back to Product</span>
+        <span className="text-sm font-medium">{t("backToProduct")}</span>
       </button>
 
       <form onSubmit={(e) => handlePlaceOrder(e)}> {/* Wrap in form for enter key submission if desired */}
@@ -247,124 +452,164 @@ function OrderContent() {
           {/* Left Column - Billing Address */}
           <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-5">
             <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
-              Billing Address
+              {t("billingAddress")}
             </h2>
 
             <div className="space-y-2.5 sm:space-y-3 md:space-y-4">
               {/* Full Name Split for integration */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Full Name
+                  {t("fullName")}
                 </label>
                 <div className="flex gap-2">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="First Name"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Last Name"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                    required
-                  />
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      placeholder={t("firstName")}
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.firstName ? 'border-red-500' : 'border-gray-200'}`}
+                    />
+                    {fieldErrors.firstName && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.firstName}</p>}
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      placeholder={t("lastName")}
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.lastName ? 'border-red-500' : 'border-gray-200'}`}
+                    />
+                    {fieldErrors.lastName && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.lastName}</p>}
+                  </div>
                 </div>
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Email Address
+                  {t("emailAddress")}
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   readOnly
-                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm text-gray-500 cursor-not-allowed focus:outline-none"
-                  required
+                  className={`w-full bg-gray-100 border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm text-gray-500 cursor-not-allowed focus:outline-none ${fieldErrors.email ? 'border-red-500' : 'border-gray-200'}`}
                 />
+                {fieldErrors.email && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.email}</p>}
               </div>
 
               {/* Phone Number - HEAD styles with Tail data */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Phone Number
+                  {t("phoneNumber")}
                 </label>
-                <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2">
-                  <div className="relative w-full sm:w-auto sm:min-w-[120px]">
-                    <select className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none pr-8">
-                      <option>UAE (+971)</option>
-                      <option>SAU (+966)</option>
-                      <option>KWT (+965)</option>
-                      <option>QAT (+974)</option>
-                    </select>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs text-gray-500">
-                      ▼
+                <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 relative" ref={dropdownRef}>
+                  <div className="relative w-full sm:w-auto sm:min-w-[160px]">
+                    <div
+                      onClick={() => setIsCodeDropdownOpen(!isCodeDropdownOpen)}
+                      className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 cursor-pointer flex justify-between items-center"
+                    >
+                      <span className="truncate">
+                        {countryCodes.find(c => c.code === selectedCountryCode && c.iso === (countryCodes.find(curr => curr.code === selectedCountryCode)?.iso))?.iso || ""} {selectedCountryCode}
+                      </span>
+                      <span className="text-xs text-gray-500">▼</span>
                     </div>
+
+                    {isCodeDropdownOpen && (
+                      <div className="absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto w-full sm:w-64">
+                        <div className="p-2 sticky top-0 bg-white border-b border-gray-100">
+                          <input
+                            type="text"
+                            placeholder={t("searchPlaceholder")}
+                            value={codeSearchTerm}
+                            onChange={(e) => setCodeSearchTerm(e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full px-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-black"
+                          />
+                        </div>
+                        <div className="py-1">
+                          {filteredCountryCodes.length > 0 ? (
+                            filteredCountryCodes.map((item, idx) => (
+                              <button
+                                key={`${item.iso}-${item.code}-${idx}`}
+                                type="button"
+                                onClick={() => handleCountryCodeSelect(item)}
+                                className="w-full px-4 py-2.5 text-xs text-left hover:bg-gray-50 flex items-center justify-between border-b border-gray-50 last:border-0"
+                              >
+                                <span className="font-medium text-gray-900">{item.country}</span>
+                                <span className="text-gray-500">{item.code}</span>
+                              </button>
+                            ))
+                          ) : (
+                            <div className="px-4 py-3 text-xs text-gray-400 text-center italic">
+                              No results found
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="55 123 4567"
-                    className="flex-1 bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                    required
-                  />
+                  <div className="flex-1 relative">
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="55 123 4567"
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.phone ? 'border-red-500' : 'border-gray-200'}`}
+                    />
+                  </div>
                 </div>
+                {fieldErrors.phone && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.phone}</p>}
               </div>
 
               {/* Address */}
               <div>
                 <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                  Address
+                  {t("address")}
                 </label>
                 <input
                   type="text"
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  placeholder="Street address, building name..."
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                  required
+                  placeholder={t("streetAddress")}
+                  className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.address ? 'border-red-500' : 'border-gray-200'}`}
                 />
+                {fieldErrors.address && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.address}</p>}
               </div>
 
               {/* Country & State */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                    Country
+                    {t("country")}
                   </label>
                   <div className="relative">
                     <select
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none text-gray-700"
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none text-gray-700 ${fieldErrors.country ? 'border-red-500' : 'border-gray-200'}`}
                     >
-                      <option value="" disabled>Select country</option>
-                      <option>United Arab Emirates</option>
-                      <option>Saudi Arabia</option>
-                      <option>Kuwait</option>
-                      <option>Qatar</option>
+                      <option value="" disabled>{t("selectCountry")}</option>
+                      {[...new Set(countryCodes.map(c => c.country))].sort().map(countryName => (
+                        <option key={countryName} value={countryName}>{countryName}</option>
+                      ))}
                     </select>
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs text-gray-500">
                       ▼
                     </div>
                   </div>
+                  {fieldErrors.country && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.country}</p>}
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                    State/Emirate
+                    {t("stateEmirate")}
                   </label>
                   <div className="relative">
                     <input
@@ -372,7 +617,7 @@ function OrderContent() {
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
-                      placeholder="Dubai"
+                      placeholder={t("dubai")}
                       className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
                     />
                   </div>
@@ -383,28 +628,28 @@ function OrderContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                    City
+                    {t("city")}
                   </label>
                   <input
                     type="text"
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    placeholder="Enter your city"
-                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-                    required
+                    placeholder={t("enterYourCity")}
+                    className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.city ? 'border-red-500' : 'border-gray-200'}`}
                   />
+                  {fieldErrors.city && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.city}</p>}
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
-                    Zip/Postal Code
+                    {t("zipPostalCode")}
                   </label>
                   <input
                     type="text"
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
-                    placeholder="Enter postal code"
+                    placeholder={t("enterPostalCode")}
                     className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
                   />
                 </div>
@@ -414,7 +659,7 @@ function OrderContent() {
               <div className="pt-3 sm:pt-4 md:pt-6">
                 <div className="bg-white p-3 sm:p-4 md:p-6 rounded-xl border border-gray-200">
                   <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-3 sm:mb-4">
-                    Payment Method
+                    {t("paymentMethod")}
                   </h3>
 
                   <div className="space-y-3 sm:space-y-4">
@@ -431,9 +676,9 @@ function OrderContent() {
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                           <div className="min-w-0">
-                            <span className="font-medium text-gray-900 text-sm sm:text-base">Credit/Debit Card</span>
+                            <span className="font-medium text-gray-900 text-sm sm:text-base">{t("creditDebitCard")}</span>
                             <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
-                              Pay with Visa, Mastercard, or Amex
+                              {t("payWithCards")}
                             </p>
                           </div>
                           <div className="flex gap-1.5 sm:gap-2 mt-1 sm:mt-0">
@@ -458,9 +703,9 @@ function OrderContent() {
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                           <div className="min-w-0">
-                            <span className="font-medium text-gray-900 text-sm sm:text-base">Pay with Tamara</span>
+                            <span className="font-medium text-gray-900 text-sm sm:text-base">{t("payWithTamara")}</span>
                             <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
-                              Pay in 4 interest-free installments
+                              {t("payIn4Installments")}
                             </p>
                           </div>
                           <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0">
@@ -486,7 +731,7 @@ function OrderContent() {
             <div className="flex flex-col h-full">
               <div className="flex-1">
                 <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
-                  Your Order
+                  {t("yourOrder")}
                 </h2>
 
                 {/* Order Items Container */}
@@ -542,7 +787,7 @@ function OrderContent() {
                           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                             <div className="flex items-center gap-2">
                               <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">
-                                Quantity:
+                                {t("quantityLabel")}
                               </span>
                               <div className="flex items-center border border-gray-200 rounded-md bg-white">
                                 <button
@@ -572,14 +817,14 @@ function OrderContent() {
                                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                               </svg>
                               <div className="flex flex-col">
-                                <span className="text-xs text-gray-500">Delivery estimate:</span>
-                                <span className="text-sm font-medium text-gray-900">March 2026</span>
+                                <span className="text-xs text-gray-500">{t("deliveryEstimate")}</span>
+                                <span className="text-sm font-medium text-gray-900">{t("march2026")}</span>
                               </div>
                             </div>
                           </div>
 
                           <div className="text-right">
-                            <div className="text-xs text-gray-500 mb-1">Item Total</div>
+                            <div className="text-xs text-gray-500 mb-1">{t("itemTotal")}</div>
                             <div className="flex items-center justify-end text-base sm:text-lg font-bold text-gray-900">
                               {formatPrice(originalSubtotal)}
                             </div>
@@ -593,15 +838,15 @@ function OrderContent() {
                 {/* Order Summary Section */}
                 <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl border border-gray-200">
                   <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-4 sm:mb-5">
-                    Order Summary
+                    {t("orderSummary")}
                   </h3>
 
                   <div className="space-y-3 sm:space-y-4">
                     {/* Subtotal */}
                     <div className="flex justify-between items-center">
                       <div className="flex flex-col">
-                        <span className="text-sm text-gray-700">Subtotal</span>
-                        <span className="text-xs text-gray-500">({quantity} items)</span>
+                        <span className="text-sm text-gray-700">{t("subtotal")}</span>
+                        <span className="text-xs text-gray-500">({quantity} {t("items")})</span>
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
                         {formatPrice(originalSubtotal)}
@@ -611,8 +856,8 @@ function OrderContent() {
                     {/* Delivery */}
                     <div className="flex justify-between items-center">
                       <div className="flex flex-col">
-                        <span className="text-sm text-gray-700">Delivery</span>
-                        <span className="text-xs text-gray-500">Standard shipping</span>
+                        <span className="text-sm text-gray-700">{t("delivery")}</span>
+                        <span className="text-xs text-gray-500">{t("standardShipping")}</span>
                       </div>
                       <div className="flex items-center text-sm font-medium text-gray-900">
                         {calculating ? "..." : formatPrice(shippingFee)}
@@ -622,8 +867,8 @@ function OrderContent() {
                     {/* Discount */}
                     <div className="flex justify-between items-center text-red-600 bg-red-50/50 p-2 rounded-lg border border-red-100/50">
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold">Pre-Order Discount</span>
-                        <span className="text-xs opacity-80">7% off retail price</span>
+                        <span className="text-sm font-bold">{t("preOrderDiscount")}</span>
+                        <span className="text-xs opacity-80">{t("offRetailPrice")}</span>
                       </div>
                       <div className="flex items-center text-sm font-bold">
                         -{formatPrice(discountAmount)}
@@ -633,19 +878,19 @@ function OrderContent() {
                     {/* Estimated Delivery */}
                     <div className="flex justify-between items-center py-3 border-y border-gray-100">
                       <div className="flex flex-col">
-                        <span className="text-sm text-gray-700">Estimated Delivery</span>
-                        <span className="text-xs text-gray-500">All items in this order</span>
+                        <span className="text-sm text-gray-700">{t("estimatedDelivery")}</span>
+                        <span className="text-xs text-gray-500">{t("allItemsInOrder")}</span>
                       </div>
                       <div className="text-right">
-                        <span className="text-sm font-medium text-gray-900">March 2026</span>
+                        <span className="text-sm font-medium text-gray-900">{t("march2026")}</span>
                       </div>
                     </div>
 
                     {/* Total */}
                     <div className="flex justify-between items-center pt-3">
                       <div className="flex flex-col">
-                        <span className="text-base sm:text-lg font-bold text-gray-900">Total</span>
-                        <span className="text-[10px] text-gray-500 italic">Subtotal - Discount + Delivery</span>
+                        <span className="text-base sm:text-lg font-bold text-gray-900">{t("total")}</span>
+                        <span className="text-[10px] text-gray-500 italic">{t("subtotalMinusDiscount")}</span>
                       </div>
                       <div className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
                         {formatPrice(total)}
@@ -655,20 +900,28 @@ function OrderContent() {
 
                   {/* Action Buttons */}
                   <div className="mt-6 sm:mt-8">
+                    {formError && (
+                      <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg flex items-center gap-2 text-red-600 animate-in fade-in slide-in-from-top-1 duration-300">
+                        <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                        <p className="text-xs font-medium">{formError}</p>
+                      </div>
+                    )}
                     <div className="flex flex-col-reverse xs:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
                       <button
                         type="button"
                         onClick={() => window.history.back()}
                         className="flex-1 xs:flex-none px-5 sm:px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors xs:min-w-[140px]"
                       >
-                        Cancel Order
+                        {t("cancelOrder")}
                       </button>
                       <button
                         type="submit"
                         disabled={submitting}
                         className={`flex-1 px-5 sm:px-6 py-3 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                       >
-                        <span>{submitting ? 'Processing...' : 'Place Order & Pay'}</span>
+                        <span>{submitting ? t("processing") : t("placeOrderPay")}</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
@@ -677,7 +930,7 @@ function OrderContent() {
 
                     {formData.paymentMethod === "tamara" && (
                       <p className="text-xs text-gray-500 text-center mb-6 -mt-4 italic">
-                        You will be charged in AED at the current exchange rate.
+                        {t("chargedInAED")}
                       </p>
                     )}
 
@@ -690,10 +943,9 @@ function OrderContent() {
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900 mb-1">Secure Payment</p>
+                          <p className="text-sm font-medium text-gray-900 mb-1">{t("securePayment")}</p>
                           <p className="text-xs text-gray-600 leading-relaxed">
-                            Your payment is secure and encrypted with 256-bit SSL. We never store your credit card details.
-                            All transactions are processed through secure payment gateways.
+                            {t("securePaymentDesc")}
                           </p>
                         </div>
                       </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Blue1 from "@/public/images/BlueWatch/productBlue1.png";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
@@ -19,6 +20,8 @@ import api from "@/lib/api";
 import { toast } from "react-toastify";
 
 const Page = () => {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === "ar";
   const router = useRouter();
   const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
@@ -54,14 +57,14 @@ const Page = () => {
   };
 
   const faqs = [
-    "Do the watches come with a warranty?",
-    "Are the watches scratch-resistant?",
-    "What materials are used to make your watches?",
-    "How can I place an order?",
+    t("faq1ArabicEditionAr"),
+    t("faq2ArabicEditionAr"),
+    t("faq3ArabicEditionAr"),
+    t("faq4ArabicEditionAr"),
   ];
 
   return (
-    <>
+    <div className={isAr ? "lang-ar" : ""}>
       <Navbar />
 
       {/* ================= HERO SECTION ================= */}
@@ -79,12 +82,11 @@ const Page = () => {
               {/* Left Content */}
               <div className="max-w-xl text-center lg:text-left z-10 order-2 lg:order-1">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-cormorant text-white leading-tight mb-4 sm:mb-6">
-                  A World Time Watch Inspired by Global Beaches
+                  {t("productHeroTitle")}
                 </h1>
 
                 <p className="text-sm font-body font-extralight sm:text-base lg:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed">
-                  Crafted for explorers, dreamers, and lovers of the world s most
-                  iconic beaches
+                  {t("productHeroSub")}
                 </p>
 
                 <button
@@ -93,7 +95,7 @@ const Page = () => {
                   onClick={handlePreOrder}
                   className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
-                  Pre-Order Now
+                  {t("preOrderNow")}
                 </button>
               </div>
 
@@ -104,7 +106,7 @@ const Page = () => {
                 <div className="relative w-full h-full scale-110 sm:scale-125 lg:scale-138">
                   <Image
                     src={Blue1}
-                    alt="Green World Time Watch"
+                    alt="English Edition Watch"
                     fill
                     className="object-contain drop-shadow-2xl"
                     priority
@@ -126,7 +128,7 @@ const Page = () => {
             <div className="text-center">
               {/* Title */}
               <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-cormorant text-gray-900 mb-2 sm:mb-3">
-                Montero English Edition
+                {t("monteroEnglishEdition")}
               </h2>
 
               {/* Watch Image */}
@@ -146,11 +148,11 @@ const Page = () => {
               <div className="max-w-6xl mx-auto mb-3 sm:mb-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 place-items-center">
                   {[
-                    "Sapphire Crystal",
-                    "Seiko NH34 GMT Movement",
-                    "5 ATM Water Resistance",
-                    "Stainless Steel Case",
-                    "World-Time Beach Concept",
+                    t("sapphireCrystal"),
+                    t("seikoMovementAr"),
+                    t("waterResistanceAr"),
+                    t("stainlessSteelCase"),
+                    t("worldTimeBeachAr"),
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-[#2596be] rounded-full flex-shrink-0"></span>
@@ -167,14 +169,14 @@ const Page = () => {
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#2596be] rounded-full"></span>
                   <p className="text-gray-700 text-xs sm:text-sm text-center">
-                    Sapphire crystal for durability
+                    {t("sapphireDurabilityAr")}
                   </p>
                 </div>
 
                 <div className="w-2 h-2 bg-[#2596be] rounded-full hidden sm:block"></div>
 
                 <p className="text-gray-700 text-xs sm:text-sm text-center">
-                  GMT function for global synchrony
+                  {t("gmtGlobalSyncAr")}
                 </p>
               </div>
 
@@ -185,13 +187,16 @@ const Page = () => {
                   <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
                   <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
                 </div>
-                <p className="text-sm text-gray-500 font-medium">Pre-Order Price (Official retail price: {formatPrice(860)})</p>
+               <p className="text-sm text-gray-500 font-medium">
+  {t("pricePreOrderAr", { price: formatPrice(860) })}
+</p>
+
               </div>
 
               {/* Order Button - Integrated with Product ID */}
               <Link href={`/order?productId=${ENGLISH_PRODUCT_ID}`} className="inline-block">
                 <button className="bg-black text-white px-10 sm:px-12 py-4 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2">
-                  <span>Pre-Order Now</span>
+                  <span>{t("preOrderNow")}</span>
                 </button>
               </Link>
               <br />
@@ -199,7 +204,7 @@ const Page = () => {
               {/* Limited Edition Badge */}
               <div className="inline-flex items-center gap-3 mt-2">
                 <span className="px-3 py-1 text-xs tracking-widest font-semibold text-red-700 border border-red-600 uppercase">
-                  Limited Edition
+                  {t("limitedEdition")}
                 </span>
               </div>
             </div>
@@ -214,11 +219,10 @@ const Page = () => {
             {/* Title - Always visible */}
             <div className="max-w-md mb-8 sm:mb-0">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-3">
-                Technical Specifications
+                {t("technicalSpecsAr")}
               </h2>
               <p className="text-sm text-gray-600">
-                Seiko NH34 GMT – reliable, accurate, and trusted by global
-                enthusiasts.
+                {t("seikoDescriptionAr")}
               </p>
             </div>
 
@@ -237,10 +241,10 @@ const Page = () => {
               {/* Specifications List - Mobile */}
               <div className="space-y-4">
                 {[
-                  "Stainless Steel",
-                  "Polished & brushed finishing",
-                  "Case Thickness: 14.8mm",
-                  "Diameter: 41 mm",
+                  t("stainlessSteel"),
+                  t("polishedBrushedSpecAr"),
+                  t("caseThicknessEngSpec"),
+                  t("diameterSpecAr"),
                 ].map((spec, i) => (
                   <div
                     key={i}
@@ -255,10 +259,10 @@ const Page = () => {
               {/* Limited Edition Text - Mobile */}
               <div className="text-center sm:text-left pt-4">
                 <p className="text-4xl sm:text-5xl font-serif text-gray-200 leading-tight">
-                  LIMITED EDITION
+                  {t("limitedEdition")}
                 </p>
                 <p className="text-3xl sm:text-4xl font-serif text-gray-200">
-                  ONE OF 150
+                  {t("oneOf150")}
                 </p>
               </div>
             </div>
@@ -270,7 +274,7 @@ const Page = () => {
                 <div className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-black rounded-full" />
                   <p className="text-sm text-gray-700 w-[160px]">
-                    Stainless Steel
+                    {t("stainlessSteel")}
                   </p>
                   <span className="w-56 h-px bg-gray-300" />
                 </div>
@@ -281,7 +285,7 @@ const Page = () => {
                 <div className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-black rounded-full" />
                   <p className="text-sm text-gray-700 w-[220px]">
-                    Polished & brushed finishing
+                    {t("polishedBrushedSpecAr")}
                   </p>
                   <span className="w-64 h-px bg-gray-300" />
                 </div>
@@ -289,7 +293,7 @@ const Page = () => {
                 <div className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-black rounded-full" />
                   <p className="text-sm text-gray-700 w-[240px]">
-                    Case Thickness: 14.8mm
+                    {t("caseThicknessEngSpec")}
                   </p>
                   <span className="w-72 h-px bg-gray-300" />
                 </div>
@@ -298,9 +302,9 @@ const Page = () => {
               {/* FADED TEXT */}
               <div className="absolute left-12 bottom-40 pointer-events-none">
                 <p className="text-6xl font-serif text-gray-200 leading-none">
-                  LIMITED EDITION
+                  {t("limitedEdition")}
                 </p>
-                <p className="text-5xl font-serif text-gray-200">ONE OF 150</p>
+                <p className="text-5xl font-serif text-gray-200">{t("oneOf150")}</p>
               </div>
 
               {/* BOTTOM LEFT SPEC */}
@@ -308,7 +312,7 @@ const Page = () => {
                 <div className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-black rounded-full" />
                   <p className="text-sm text-gray-700 w-[140px]">
-                    Diameter: 41 mm
+                    {t("diameterSpecAr")}
                   </p>
                   <span className="w-64 h-px bg-gray-300" />
                 </div>
@@ -335,7 +339,7 @@ const Page = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             {/* Title */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-8 sm:mb-12">
-              How to Set Your Montero Watch
+              {t("howToSetTitleAr")}
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
@@ -344,20 +348,20 @@ const Page = () => {
                 {/* Section 1 */}
                 <div>
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-4">
-                    Section 1 – Setting Local Time
+                    {t("section1TitleAr")}
                   </h3>
                   <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>Pull the crown to Position 2</span>
+                      <span>{t("pullCrownAr")}</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>Rotate to adjust the main hour and minute hands</span>
+                      <span>{t("rotateHandsAr")}</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>Push the crown back to lock</span>
+                      <span>{t("pushCrownAr")}</span>
                     </li>
                   </ul>
                 </div>
@@ -365,22 +369,22 @@ const Page = () => {
                 {/* Section 2 */}
                 <div>
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-4">
-                    Section 2 – Setting GMT Hand
+                    {t("section2TitleAr")}
                   </h3>
                   <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>Pull the crown to Position 1</span>
+                      <span>{t("pullCrownPosition1Ar")}</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
                       <span>
-                        Rotate clockwise to move the GMT hand in 1-hour increments
+                        {t("rotateClockwiseAr")}
                       </span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>Set it to a second time zone of your choice</span>
+                      <span>{t("setTimeZoneAr")}</span>
                     </li>
                   </ul>
                 </div>
@@ -388,20 +392,19 @@ const Page = () => {
                 {/* Section 3 */}
                 <div>
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-4">
-                    Section 3 – Using the Beach Time System
+                    {t("section3TitleAr")}
                   </h3>
                   <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
                       <span>
-                        Each beach on the dial corresponds to its GMT offset
+                        {t("beachCorrespondsAr")}
                       </span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
                       <span>
-                        Choose the beach you want, match its time zone with your
-                        GMT hand, and enjoy instant global reference.
+                        {t("chooseBeachAr")}
                       </span>
                     </li>
                   </ul>
@@ -446,12 +449,11 @@ const Page = () => {
           <div className="w-full lg:w-1/2 bg-[#1A1E28] flex flex-col justify-center px-6 sm:px-8 lg:px-20 py-12 sm:py-16 lg:py-0">
             <div className="max-w-xl space-y-6 sm:space-y-8">
               <h2 className="font-serif text-3xl sm:text-4xl font-cormorant lg:text-5xl leading-tight text-white">
-                A World Time Watch Inspired by Global Beaches
+                {t("productHeroTitle")}
               </h2>
 
               <p className="font-light text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed">
-                Crafted for explorers, dreamers, and lovers of the world s most
-                iconic beaches
+                {t("productHeroSub")}
               </p>
             </div>
           </div>
@@ -465,14 +467,14 @@ const Page = () => {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 items-start">
               {/* LEFT CONTENT */}
               <div className="lg:col-span-1">
-                <p className="text-sm text-gray-500 mb-3">Client Feedback</p>
+                <p className="text-sm text-gray-500 mb-3">{t("clientFeedbackAr")}</p>
 
                 <h2 className="text-2xl sm:text-3xl font-serif text-gray-900 mb-4 sm:mb-6 leading-snug">
-                  What They Say After Using Our Product
+                  {t("whatTheySayAr")}
                 </h2>
 
                 <p className="text-gray-600 text-sm mb-6 sm:mb-8 leading-relaxed">
-                  Many of our members have started their earlier careers with us.
+                  {t("membersFeedbackAr")}
                 </p>
 
                 {/* Arrows */}
@@ -501,10 +503,7 @@ const Page = () => {
 
                     {/* Text */}
                     <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                      I recently purchased the Montero watch, and I m extremely
-                      satisfied. The design looks premium, the build quality is
-                      solid, and it feels very comfortable on the wrist. Perfect
-                      for both formal and casual wear.
+                      {t("testimonialEngEdition")}
                     </p>
 
                     {/* User */}
@@ -512,13 +511,13 @@ const Page = () => {
                       <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                         <Image
                           src={Green6}
-                          alt="Mirana Marci"
+                          alt={i === 0 ? t("ahmadAlFarsi") : i === 1 ? t("miranaMarci") : t("saraKhalid")}
                           fill
                           className="object-cover"
                         />
                       </div>
                       <p className="text-sm font-medium text-gray-900">
-                        Mirana Marci
+                        {i === 0 ? t("ahmadAlFarsi") : i === 1 ? t("miranaMarci") : t("saraKhalid")}
                       </p>
                     </div>
                   </div>
@@ -539,15 +538,11 @@ const Page = () => {
               <ScrollAnimation animationClass="animate-slide-in-left">
                 <div>
                   <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-                    Frequently Asked Question
+                    {t("frequentlyAskedQuestionAr")}
                   </h2>
 
                   <p className="mt-4 sm:mt-6 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed transition-opacity duration-300 hover:opacity-80">
-                    Each beach was chosen for its cultural significance, beauty,
-                    and global reputation — together forming the emotional core
-                    of Montero. Each beach was chosen for its cultural
-                    significance, beauty, and global reputation — together
-                    forming the emotional core of Montero.
+                    {t("faqDescriptionAr")}
                   </p>
                 </div>
               </ScrollAnimation>
@@ -578,8 +573,7 @@ const Page = () => {
 
                       {open === i && (
                         <p className="mt-3 sm:mt-4 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
-                          Yes, all Montero watches come with a comprehensive
-                          warranty covering manufacturing defects.
+                          {t("faqWarrantyAr")}
                         </p>
                       )}
                     </div>
@@ -592,46 +586,48 @@ const Page = () => {
             <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
               {/* LEFT TEXT */}
               <div>
-                <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-gray-700">
-                  Subscribe for Exclusive Updates
-                </h2>
+                <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+  {t("subscribeExclusiveArabicAr")}
+</h2>
 
-                <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                  Join our mailing list to receive early access,
-                  limited-edition alerts, and insider updates directly from
-                  the Montero team.
-                </p>
-              </div>
+<p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+  {t("subscribeMailingListArabicAr")}
+</p>
+</div>
 
-              {/* RIGHT */}
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
-                  <Mail className="mr-4" />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your e-mail"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-transparent outline-none w-full text-xs sm:text-sm"
-                  />
-                </div>
+{/* RIGHT */}
+<form
+  onSubmit={handleSubscribe}
+  className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+>
+  <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
+    <Mail className="mr-4" />
+    <input
+      type="email"
+      required
+      placeholder={t("enterEmail")}
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="bg-transparent outline-none w-full text-xs sm:text-sm"
+    />
+  </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
-                >
-                  {loading ? "..." : "Subscribe Now"}
-                </button>
-              </form>
+  <button
+    type="submit"
+    disabled={loading}
+    className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
+  >
+    {loading ? t("loading") : t("subscribeBtn")}
+  </button>
+</form>
+
             </div>
           </div>
         </section>
       </ScrollAnimation>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

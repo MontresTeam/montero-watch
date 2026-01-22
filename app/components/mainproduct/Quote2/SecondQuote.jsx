@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 // Watch images
 import bluewatchFront from "../../../../public/images/MainProducts/blueWatch/DSC08237-3-Photoroom.png";
@@ -13,6 +14,7 @@ import greenwatchBack from "../../../../public/images/MainProducts/greenWatch/gw
 import { useRouter } from "next/navigation";
 
 function SecondQuote() {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const watches = [
@@ -99,13 +101,11 @@ function SecondQuote() {
         {/* RIGHT */}
         <div className="flex-1 w-full max-w-xl text-center lg:text-left mt-12 lg:mt-0">
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-[#1A1A1A] leading-[1.1] mb-6">
-            A World Time Watch Inspired
-            <br />
-            by Global Beaches
+            {t("productHeroTitle")}
           </h2>
 
           <p className="monospace text-gray-600 text-lg md:text-xl leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0">
-            Crafted for explorers, dreamers, and lovers of the world’s most iconic beaches
+            {t("productHeroSub")}
           </p>
 
           <button
@@ -113,7 +113,7 @@ function SecondQuote() {
             className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium tracking-wide text-[#1A1A1A] border border-[#1A1A1A] rounded-full overflow-hidden transition-all duration-300 hover:text-white"
           >
             <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            <span className="relative z-10">Pre-Order Now</span>
+            <span className="relative z-10">{t("preOrderNow")}</span>
           </button>
         </div>
       </div>

@@ -5,8 +5,10 @@ import Image from "next/image";
 import WatchDisplay from "./WatchDisplay";
 import gsap from "gsap";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 function ProductBanner() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [isSwapped, setIsSwapped] = useState(false);
   const textRef = useRef(null);
@@ -58,19 +60,18 @@ function ProductBanner() {
           <h1
             className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-cormorant leading-tight"
           >
-            A World Time Watch Inspired by Global Beaches
+            {t("productHeroTitle")}
           </h1>
 
           <p className="max-w-md font-Monasans font-light text-lg sm:text-xl md:text-2xl text-gray-300">
-            Crafted for explorers, dreamers, and lovers of the world’s most
-            iconic beaches
+            {t("productHeroSub")}
           </p>
 
           <button
             onClick={handlePreOrder}
             className="px-8 py-3 sm:px-10 sm:py-4 rounded-full text-black bg-white border border-white font-medium text-sm sm:text-base hover:scale-105 transition"
           >
-            Pre-Order Now
+            {t("preOrderNow")}
           </button>
         </div>
 

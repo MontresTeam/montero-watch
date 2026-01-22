@@ -5,12 +5,14 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import ArabicImg from "@/public/images/Home/leftitemarabic.png";
 import EnglishImg from "@/public/images/Home/englishedition.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Categories = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const leftCardRef = useRef(null);
   const rightCardRef = useRef(null);
@@ -101,21 +103,21 @@ const Categories = () => {
                   transition-all duration-300 ease-out
                 "
               >
-                Pre-Order Now
+                {t("preOrderNow")}
               </button>
             </Link>
 
             <h3 className="text-white text-2xl ">
-              Explore the Arabic Edition
+              {t("exploreArabicEdition")}
             </h3>
             <p className="text-gray-200 font-body font-extralight">
-              Distinctively crafted with Eastern Arabic numerals and a bold blue dial
+              {t("exploreArabicDesc")}
             </p>
           </div>
 
           <div className="absolute bottom-2 right-4">
             <span className="bottom-text text-white text-sm font-medium">
-              Only 150 Pieces Worldwide
+              {t("only150Pieces")}
             </span>
           </div>
         </div>
@@ -146,22 +148,22 @@ const Categories = () => {
                   transition-all duration-300 ease-out
                 "
               >
-                Pre-Order Now
+                {t("preOrderNow")}
               </button>
             </Link>
 
             <h3 className="text-white text-2xl">
-              Explore the English Edition
+              {t("exploreEnglishEdition")}
             </h3>
 
             <p className="text-gray-200 max-w-md font-body font-extralight">
-              A refined classic design with modern elegance
+              {t("exploreEnglishDesc")}
             </p>
           </div>
 
           <div className="absolute bottom-2 right-4">
             <span className="bottom-text text-white text-sm font-medium">
-              Only 150 Pieces Worldwide
+              {t("only150Pieces")}
             </span>
           </div>
         </div>

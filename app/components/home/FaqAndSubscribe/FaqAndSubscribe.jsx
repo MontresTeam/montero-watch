@@ -2,33 +2,10 @@
 
 import { useState } from "react";
 import { Mail } from "lucide-react";
-import api from "@/lib/api";
-import { toast } from "react-toastify";
-
-const faqs = [
-  {
-    question: "Do the watches come with a warranty?",
-    answer:
-      "Yes, all Montero watches come with an international warranty covering manufacturing defects.",
-  },
-  {
-    question: "Are the watches scratch-resistant?",
-    answer:
-      "Our watches use scratch-resistant sapphire crystal to ensure durability.",
-  },
-  {
-    question: "What materials are used to make your watches?",
-    answer:
-      "We use premium stainless steel, sapphire crystal, and genuine leather straps.",
-  },
-  {
-    question: "How can I place an order?",
-    answer:
-      "Orders can be placed directly through our website during product launches.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function FaqAndSubscribe() {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState(null);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -53,6 +30,25 @@ export default function FaqAndSubscribe() {
     }
   };
 
+  const faqs = [
+    {
+      question: t("faqQuestion1"),
+      answer: t("faqAnswer1"),
+    },
+    {
+      question: t("faqQuestion2"),
+      answer: t("faqAnswer2"),
+    },
+    {
+      question: t("faqQuestion3"),
+      answer: t("faqAnswer3"),
+    },
+    {
+      question: t("faqQuestion4"),
+      answer: t("faqAnswer4"),
+    },
+  ];
+
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -67,19 +63,15 @@ export default function FaqAndSubscribe() {
           {/* LEFT */}
           <div>
             <h2 className="text-4xl mb-6 font-cormorant font-bold">
-              Frequently Asked Question
+              {t("frequentlyAskedQuestion")}
             </h2>
 
             <p className="text-gray-600 leading-relaxed max-w-md">
-              Each beach was chosen for its cultural significance, beauty, and
-              global reputation — together forming the emotional core of
-              Montero.
+              {t("eightBeachesDesc")}
             </p>
 
             <p className="text-gray-600 leading-relaxed max-w-md mt-4">
-              Each beach was chosen for its cultural significance, beauty, and
-              global reputation — together forming the emotional core of
-              Montero.
+              {t("eightBeachesDesc")}
             </p>
           </div>
 
@@ -122,12 +114,11 @@ export default function FaqAndSubscribe() {
           {/* LEFT */}
           <div>
             <h2 className="font-cormorant text-4xl mb-4">
-              Subscribe for Exclusive Updates
+              {t("subscribeForExclusive")}
             </h2>
 
             <p className="text-gray-600 max-w-md">
-              Join our mailing list to receive early access, limited-edition
-              alerts, and insider updates directly from the Montero team.
+              {t("subscribeMailingList")}
             </p>
           </div>
 
@@ -137,20 +128,13 @@ export default function FaqAndSubscribe() {
               <Mail className="mr-4 text-gray-400 group-focus-within:text-black transition-colors" size={20} />
               <input
                 type="email"
-                required
-                placeholder="Enter your e-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-transparent outline-none w-full text-sm placeholder:text-gray-400"
+                placeholder={t("enterEmail")}
+                className="bg-transparent outline-none w-full text-sm"
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-black text-white px-8 py-3 whitespace-nowrap hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium"
-            >
-              {loading ? "..." : "Subscribe Now"}
+            <button className="bg-black text-white px-8 py-3 whitespace-nowrap hover:opacity-90 transition">
+              {t("subscribeBtn")}
             </button>
           </form>
         </div>

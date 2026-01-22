@@ -10,7 +10,7 @@ import "@/lib/i18n";
 import { getOrderStatus } from "@/actions/order";
 import { useEffect, useState } from "react";
 
-function CancelContent() {
+function FailedContent() {
     const { t, i18n } = useTranslation();
     const isAr = i18n.language === "ar";
     const searchParams = useSearchParams();
@@ -50,10 +50,10 @@ function CancelContent() {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl font-cormorant text-gray-900 mb-2">
-                    {t("paymentCancelled")}
+                    {t("paymentFailed")}
                 </h1>
                 <p className="monaSans text-neutral-400 text-sm sm:text-[15px] leading-relaxed tracking-tight font-light mb-10 px-6">
-                    {t("paymentCancelledDesc")}
+                    {t("paymentFailedDesc")}
                 </p>
 
                 {orderId && (
@@ -90,14 +90,14 @@ function CancelContent() {
     );
 }
 
-export default function PaymentCancelPage() {
+export default function PaymentFailedPage() {
     return (
         <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
             </div>
         }>
-            <CancelContent />
+            <FailedContent />
         </Suspense>
     );
 }

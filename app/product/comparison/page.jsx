@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/navBar/NavBar";
@@ -14,6 +15,7 @@ import api from "@/lib/api";
 import { toast } from "react-toastify";
 
 const page = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -57,30 +59,24 @@ const page = () => {
             {/* TAG */}
             <ScrollAnimation animationClass="animate-fade-in-up" delay={100}>
               <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-300 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.96] active:shadow-inner">
-                Compare
+                {t("comparison")}
               </button>
             </ScrollAnimation>
 
             {/* TITLE */}
             <ScrollAnimation animationClass="animate-fade-in-up" delay={200}>
               <h2 className="font-cormorant text-4xl md:text-5xl text-black mt-6">
-                Compare the Craft of Time
+                {t("compareTheCraft")}
               </h2>
             </ScrollAnimation>
 
             {/* DESCRIPTION */}
             <ScrollAnimation animationClass="animate-fade-in-up" delay={300}>
               <p className="mt-6 max-w-3xl mx-auto text-gray-600 leading-relaxed text-sm md:text-base">
-                Montero was born from a deep appreciation for the world, its
-                diversity, and the timeless beauty of global coastlines. Each
-                detail of the watch carries inspiration from the beaches that
-                have shaped culture, adventure, and unforgettable memories.
+                {t("monteroComparisonText1")}
                 <br />
                 <br />
-                From Ibiza to Bali, Miami to Bora Bora, the Montero world-time
-                concept celebrates the connection between people and place. It
-                is more than a watch — it is a reminder that every moment holds
-                a new horizon.
+                {t("monteroComparisonText2")}
               </p>
             </ScrollAnimation>
 
@@ -93,7 +89,7 @@ const page = () => {
               >
                 <div className="text-center">
                   <h3 className="font-cormorant text-2xl mb-6">
-                    Montero English Edition
+                    {t("monteroEnglishEdition")}
                   </h3>
 
                   <div className="relative mx-auto w-[260px] h-[360px]">
@@ -114,7 +110,7 @@ const page = () => {
               >
                 <div className="text-center">
                   <h3 className="font-cormorant text-2xl mb-6">
-                    Montero Arab Edition
+                    {t("monteroArabEdition")}
                   </h3>
 
                   <div className="relative mx-auto w-[260px] h-[360px]">
@@ -151,13 +147,11 @@ const page = () => {
             <ScrollAnimation animationClass="animate-slide-in-right">
               <div>
                 <h3 className="font-cormorant text-2xl mb-4">
-                  Montero English Edition
+                  {t("monteroEnglishEdition")}
                 </h3>
 
                 <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                  Montero is available in two collectible editions each designed
-                  with its own identity while sharing the same world-time DNA
-                  and craftsmanship.
+                  {t("comparisonDescription")}
                 </p>
 
                 <ul className="grid grid-cols-2 gap-y-3 text-sm text-gray-700 mb-6">
@@ -165,37 +159,37 @@ const page = () => {
                     <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Case size
+                    {t("caseSize")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Movement
+                    {t("movement")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Materials
+                    {t("materials")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Warranty
+                    {t("warranty")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Straps
+                    {t("straps")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#2596be] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Delivery Window
+                    {t("deliveryWindow")}
                   </li>
                 </ul>
 
@@ -211,13 +205,11 @@ const page = () => {
             <ScrollAnimation animationClass="animate-slide-in-left">
               <div>
                 <h3 className="font-cormorant text-2xl mb-4">
-                  Time is the vehicle that carries everything into nothing
+                  {t("monteroArabEdition")}
                 </h3>
 
                 <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                  Montero is available in two collectible editions each designed
-                  with its own identity while sharing the same world-time DNA
-                  and craftsmanship.
+                  {t("comparisonDescription")}
                 </p>
 
                 <ul className="grid grid-cols-2 gap-y-3 text-sm text-gray-700 mb-6">
@@ -225,37 +217,37 @@ const page = () => {
                     <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Case size
+                    {t("caseSize")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Movement
+                    {t("movement")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Materials
+                    {t("materials")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Warranty
+                    {t("warranty")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Straps
+                    {t("straps")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#15493b] text-2xl leading-none">
                       ●
                     </span>{" "}
-                    Delivery Window
+                    {t("deliveryWindowAr")}
                   </li>
                 </ul>
 
@@ -282,48 +274,51 @@ const page = () => {
         </section>
       </ScrollAnimation>
 
-      <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          {/* SUBSCRIBE ROW */}
-          <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-            {/* LEFT TEXT */}
-            <div>
-              <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-                Subscribe for Exclusive Updates
-              </h2>
+       <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+  <div className="mx-auto max-w-7xl">
+    {/* SUBSCRIBE ROW */}
+    <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+      
+      {/* LEFT TEXT */}
+      <div>
+        <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+          {t("subscribeForExclusive")}
+        </h2>
 
-              <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                Join our mailing list to receive early access,
-                limited-edition alerts, and insider updates directly from
-                the Montero team.
-              </p>
-            </div>
+        <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+          {t("subscribeMailingList")}
+        </p>
+      </div>
 
-            {/* RIGHT */}
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1">
-              <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-                <span className="mr-3 text-gray-500">✉</span>
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your e-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-transparent outline-none w-full text-xs sm:text-sm"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
-              >
-                {loading ? "..." : "Subscribe Now"}
-              </button>
-            </form>
-          </div>
+      {/* RIGHT */}
+      <form
+        onSubmit={handleSubscribe}
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1"
+      >
+        <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+          <span className="mr-3 text-gray-500">✉</span>
+          <input
+            type="email"
+            required
+            placeholder={t("enterEmail")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-transparent outline-none w-full text-xs sm:text-sm"
+          />
         </div>
-      </section>
+
+        <button
+          type="submit"
+          className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition"
+        >
+          {t("subscribeBtn")}
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
 
       <Footer />
 
