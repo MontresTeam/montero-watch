@@ -14,6 +14,22 @@
 }
 
 /* =============================
+   ARABIC STYLING (CAIRO)
+   ============================= */
+[lang="ar"],
+.font-arabic {
+  font-family: var(--font-cairo), sans-serif !important;
+}
+
+/* Override Mona Sans for Arabic to ensure clarity and beauty */
+[lang="ar"] .font-mona,
+.lang-ar .font-mona {
+  font-family: var(--font-cairo), sans-serif;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+/* =============================
    CORMORANT – HEADINGS
    ============================= */
 

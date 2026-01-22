@@ -3,8 +3,13 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify';
 import { sendContactMessage } from "../../../actions/contact";
+import { useTranslation } from 'react-i18next';
+import "@/lib/i18n";
 
 export default function Form() {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language?.toLowerCase() === 'ar';
+
   const [formData, setFormData] = useState({
     lastName: '',
     firstName: '',
@@ -37,7 +42,7 @@ export default function Form() {
     e.preventDefault();
 
     if (!formData.firstName || !formData.email || !formData.message) {
-      toast.error("Please fill in all required fields.");
+      toast.error(t("fillRequired"));
       return;
     }
 
@@ -51,7 +56,7 @@ export default function Form() {
       };
 
       await sendContactMessage(contactPayload);
-      toast.success("Message sent successfully!");
+      toast.success(t("successMessage"));
       setFormData({
         lastName: '',
         firstName: '',
@@ -60,7 +65,7 @@ export default function Form() {
         message: ''
       });
     } catch (error) {
-      const errMsg = error?.response?.data?.error || error?.response?.data?.message || "Something went wrong. Please try again.";
+      const errMsg = error?.response?.data?.message || t("errorMessage");
       toast.error(errMsg);
     } finally {
       setLoading(false);
@@ -68,17 +73,16 @@ export default function Form() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div className={`w-full max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 ${isAr ? 'lang-ar' : ''}`}>
       <div className="mb-8 sm:mb-10 max-w-xl">
         {/* HEADING */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 font-cormorant tracking-tight mb-3 sm:mb-4 leading-tight">
-          Where Time Meets Conversation
+          {t("timeConversation")}
         </h2>
 
         {/* SUBHEADING */}
         <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-sans">
-          Let s align our constellations! Reach out and let the magic of
-          collaboration illuminate our skies.
+          {t("reachOut")}
         </p>
       </div>
 
@@ -87,12 +91,12 @@ export default function Form() {
         <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 sm:gap-4">
           <div className="w-full">
             <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-              First Name
+              {t("firstName")}
             </label>
             <input
               type="text"
               name="firstName"
-              placeholder="John"
+              placeholder={t("firstName")}
               value={formData.firstName}
               onChange={handleInputChange}
               className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
@@ -100,12 +104,12 @@ export default function Form() {
           </div>
           <div className="w-full">
             <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-              Last Name
+              {t("lastName")}
             </label>
             <input
               type="text"
               name="lastName"
-              placeholder="Doe"
+              placeholder={t("lastName")}
               value={formData.lastName}
               onChange={handleInputChange}
               className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
@@ -116,12 +120,12 @@ export default function Form() {
         {/* Email */}
         <div className="w-full">
           <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-            Email
+            {t("email")}
           </label>
           <input
             type="email"
             name="email"
-            placeholder="you@example.com"
+            placeholder="example@mail.com"
             value={formData.email}
             onChange={handleInputChange}
             required
@@ -132,12 +136,12 @@ export default function Form() {
         {/* Phone */}
         <div className="w-full">
           <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-            Phone Number
+            {t("phone")}
           </label>
           <input
             type="tel"
             name="phone"
-            placeholder="(123) 456-7890"
+            placeholder="+123 456 7890"
             value={formData.phone}
             onChange={handleInputChange}
             className="w-full bg-[#F2F2F2] border border-gray-300 text-gray-700 px-4 py-3.5 sm:py-3 rounded-md outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition placeholder:text-gray-400 font-light text-base sm:text-sm min-h-[52px] sm:min-h-[48px]"
@@ -147,11 +151,11 @@ export default function Form() {
         {/* Message */}
         <div className="w-full">
           <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-            Message
+            {t("message")}
           </label>
           <textarea
             name="message"
-            placeholder="Type your message here..."
+            placeholder={t("messagePlaceholder")}
             rows={4}
             value={formData.message}
             onChange={handleInputChange}
@@ -167,13 +171,13 @@ export default function Form() {
             disabled={loading}
             className="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-4 sm:py-3 rounded-sm hover:opacity-90 active:opacity-80 transition text-sm sm:text-base font-medium min-h-[52px] sm:min-h-[48px] touch-manipulation disabled:opacity-50"
           >
-            {loading ? 'Sending...' : 'Subscribe Now'}
+            {loading ? t("sending") : t("sendNow")}
           </button>
         </div>
 
         {/* Optional: Add a small note for mobile users */}
         <p className="text-xs text-gray-400 text-center sm:text-left mt-4 sm:mt-2">
-          Tap on any field to start typing
+          {t("tapField")}
         </p>
       </form>
     </div>

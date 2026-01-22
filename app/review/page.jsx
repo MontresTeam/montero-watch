@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Navbar from "../components/navBar/NavBar";
 import Footer from "../components/home/Footer/Footer";
+import { useTranslation } from "react-i18next";
+import "@/lib/i18n";
 
 import Blog1 from "@/public/images/Blog/blog1.jpg";
 import Blog2 from "@/public/images/Blog/gmt2.png";
@@ -17,8 +19,11 @@ import Blog8 from "@/public/images/Blog/gmt11.jpg";
 import { Mail, ArrowRight } from "lucide-react";
 
 export default function Page() {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language?.toLowerCase() === "ar";
+
   return (
-    <>
+    <div className={isAr ? "lang-ar" : ""}>
       <Navbar />
 
       {/* ================= HERO ================= */}
@@ -36,10 +41,10 @@ export default function Page() {
         <div className="relative z-10 flex h-full items-center justify-center px-4">
           <div className="max-w-3xl text-center text-white">
             <h1 className="font-cormorant text-[clamp(1.75rem,5vw,3.5rem)]">
-              Montero GMT – Exclusive Production Update
+              {t("reviewHeroTitle")}
             </h1>
             <p className="mt-4 text-sm sm:text-base opacity-90">
-              Enhanced Lume, Refined Details & Final Engineering Improvements
+              {t("reviewHeroSub")}
             </p>
           </div>
         </div>
@@ -51,12 +56,11 @@ export default function Page() {
           <div className="mx-auto max-w-3xl text-center">
 
             <h2 className="font-cormorant mt-6 text-3xl">
-              Welcome Back, Montero Community
+              {t("welcomeMontero")}
             </h2>
 
             <p className="mt-5 text-gray-600 text-sm leading-relaxed">
-              Thank you for your continued trust and patience. We&apos;re excited
-              to share a new exclusive production update for the Montero GMT.
+              {t("recentUpdateText", { defaultValue: "Thank you for your continued trust and patience. We're excited to share a new exclusive production update for the Montero GMT." })}
             </p>
           </div>
         </section>
@@ -69,53 +73,53 @@ export default function Page() {
 
             <div className="text-center mb-12">
               <h2 className="font-cormorant text-3xl">
-                Latest Updates & Features
+                {t("updatesTitle")}
               </h2>
               <p className="mt-2 text-gray-600 text-sm max-w-xl mx-auto">
-                Explore the latest refinements and improvements in the Montero GMT
+                {t("updatesDesc")}
               </p>
             </div>
 
             {/* 🔥 FIXED GRID */}
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              <BlogCard img={Blog2} category="Lume Upgrade" date="Production Locked"
-                title="Enhanced Super-LumiNova"
-                desc="Only land areas receive lume for higher contrast." />
+              <BlogCard img={Blog2} category={t("lumeUpgrade", { defaultValue: "Lume Upgrade" })} date={t("productionLocked")}
+                title={t("lumeTitle", { defaultValue: "Enhanced Super-LumiNova" })}
+                desc={t("lumeDesc", { defaultValue: "Only land areas receive lume for higher contrast." })} />
 
-              <BlogCard img={Blog3} category="GMT Function" date="Verified"
-                title="Improved GMT Hand Visibility"
-                desc="Enlarged red GMT pointer improves recognition." />
+              <BlogCard img={Blog3} category={t("gmtFunction", { defaultValue: "GMT Function" })} date={t("verified")}
+                title={t("gmtTitle", { defaultValue: "Improved GMT Hand Visibility" })}
+                desc={t("gmtDesc", { defaultValue: "Enlarged red GMT pointer improves recognition." })} />
 
-              <BlogCard img={Blog4} category="Design Refinement" date="Finalized"
-                title="Refined Buckle Design"
-                desc="Clean buckle with Montero logo only." />
+              <BlogCard img={Blog4} category={t("designRefinement", { defaultValue: "Design Refinement" })} date={t("finalized")}
+                title={t("buckleTitle", { defaultValue: "Refined Buckle Design" })}
+                desc={t("buckleDesc", { defaultValue: "Clean buckle with Montero logo only." })} />
 
-              <BlogCard img={Blog5} category="Ergonomics" date="Optimized"
-                title="GMT Crown Optimization"
-                desc="Partially hidden crown for better comfort." />
+              <BlogCard img={Blog5} category={t("ergonomics", { defaultValue: "Ergonomics" })} date={t("optimized")}
+                title={t("crownTitle", { defaultValue: "GMT Crown Optimization" })}
+                desc={t("crownDesc", { defaultValue: "Partially hidden crown for better comfort." })} />
 
-              <BlogCard img={Blog6} category="Construction" date="Confirmed"
-                title="Screw-Down Caseback"
-                desc="Durable caseback with limited serial numbers." />
+              <BlogCard img={Blog6} category={t("construction", { defaultValue: "Construction" })} date={t("confirmed")}
+                title={t("casebackTitle", { defaultValue: "Screw-Down Caseback" })}
+                desc={t("casebackDesc", { defaultValue: "Durable caseback with limited serial numbers." })} />
 
-              <BlogCard img={Blog7} category="Performance" date="Tested"
-                title="GMT Mechanism Verified"
-                desc="Independent and accurate time zone tracking." />
+              <BlogCard img={Blog7} category={t("performance", { defaultValue: "Performance" })} date={t("tested")}
+                title={t("mechanismTitle", { defaultValue: "GMT Mechanism Verified" })}
+                desc={t("mechanismDesc", { defaultValue: "Independent and accurate time zone tracking." })} />
 
-              <BlogCard img={Blog8} category="Engineering" date="Completed"
-                title="Movement Precision Tuned"
-                desc="±2 seconds per day accuracy." />
+              <BlogCard img={Blog8} category={t("engineering", { defaultValue: "Engineering" })} date={t("completed")}
+                title={t("precisionTitle", { defaultValue: "Movement Precision Tuned" })}
+                desc={t("precisionDesc", { defaultValue: "±2 seconds per day accuracy." })} />
 
-              <BlogCard img={Blog2} category="Materials" date="Upgraded"
-                title="Ceramic Bezel"
-                desc="Scratch-resistant ceramic bezel." />
+              <BlogCard img={Blog2} category={t("materials", { defaultValue: "Materials" })} date={t("upgraded")}
+                title={t("ceramicTitle", { defaultValue: "Ceramic Bezel" })}
+                desc={t("ceramicDesc", { defaultValue: "Scratch-resistant ceramic bezel." })} />
             </div>
           </div>
         </section>
       </ScrollAnimation>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
@@ -142,6 +146,7 @@ function ScrollAnimation({ children, animationClass }) {
 /* ================= BLOG CARD ================= */
 function BlogCard({ img, category, date, title, desc }) {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition">
@@ -175,7 +180,7 @@ function BlogCard({ img, category, date, title, desc }) {
           onClick={() => setOpen(!open)}
           className="mt-3 text-xs text-gray-500 hover:text-black flex items-center gap-1"
         >
-          {open ? "Read less" : "Read more"}
+          {open ? t("readLess") : t("readMore")}
           <ArrowRight className={`h-3 w-3 ${open && "rotate-90"}`} />
         </button>
       </div>
