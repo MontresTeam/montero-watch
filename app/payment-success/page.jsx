@@ -40,7 +40,7 @@ function SuccessContent() {
     // Redirect when time runs out
     useEffect(() => {
         if (timeLeft === 0 && (status === "checking" || status === "pending")) {
-            router.push(`/payment-cancel?orderId=${orderId}`);
+            router.push(`/payment-failed?orderId=${orderId}`);
         }
     }, [timeLeft, status, orderId, router]);
 
@@ -60,7 +60,7 @@ function SuccessContent() {
                 if (data.paymentStatus === "paid") {
                     setStatus("paid");
                 } else if (data.paymentStatus === "failed") {
-                    router.push(`/payment-cancel?orderId=${orderId}`);
+                    router.push(`/payment-failed?orderId=${orderId}`);
                 } else {
                     setStatus("pending");
                     if (attempts < MAX_ATTEMPTS) {
