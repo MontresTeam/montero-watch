@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
+import { Geist, Geist_Mono, Cormorant_Garamond, Cairo } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals/globals.css";
 import { AuthProvider } from "../context/AuthContext";
@@ -17,6 +17,12 @@ const geistMono = Geist_Mono({
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
+  display: "swap",
+});
+
+const cairo = Cairo({
+  subsets: ["arabic"],
+  variable: "--font-cairo",
   display: "swap",
 });
 
@@ -65,6 +71,7 @@ export default function RootLayout({ children }) {
           ${geistMono.variable}
           ${monaSans.variable}
           ${cormorant.variable}
+          ${cairo.variable}
           antialiased
         `}
       >

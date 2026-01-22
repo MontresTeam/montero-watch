@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import userAvatar from '../../../public/images/Avatar.png';
 import { useAuth } from '@/context/AuthContext';
+import { useTranslation } from "react-i18next";
 import {
   FiUser,
   FiSettings,
@@ -13,11 +14,13 @@ import {
 
 function Dropdown({ onClose }) {
   const { user, logout } = useAuth();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language?.toLowerCase() === 'ar';
 
   if (!user) return null;
 
   return (
-    <div className="absolute top-0 right-0  w-[280px] rounded-xl bg-white shadow-2xl border border-neutral-200 p-5">
+    <div className={`absolute top-0 right-0 w-[280px] rounded-xl bg-white shadow-2xl border border-neutral-200 p-5 ${isAr ? 'lang-ar' : ''}`}>
       {/* Close button */}
       <button
         className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 transition-colors"
@@ -39,7 +42,7 @@ function Dropdown({ onClose }) {
 
         <div className="flex flex-col min-w-0">
           <p className="text-[14px] font-semibold text-neutral-900 truncate tracking-tight leading-none">
-            {user.name || 'User'}
+            {user.name || t("user") || 'User'}
           </p>
           <p className="text-[12px] text-neutral-500 font-light truncate mt-1">
             {user.email}
@@ -54,27 +57,27 @@ function Dropdown({ onClose }) {
       <div className="space-y-0.5">
         <MenuItem
           icon={<FiUser size={17} />}
-          label="My Profile"
+          label={t("myProfile")}
           right={<FiChevronRight size={14} className="text-neutral-300" />}
         />
 
         <MenuItem
           icon={<FiSettings size={17} />}
-          label="Settings"
+          label={t("settings")}
           right={<FiChevronRight size={14} className="text-neutral-300" />}
         />
 
         <MenuItem
           icon={<FiBell size={17} />}
-          label="Notification"
-          right={<span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">New</span>}
+          label={t("notification")}
+          right={<span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{t("new")}</span>}
         />
 
         <div className="h-px bg-neutral-100 -mx-5 my-2" />
 
         <MenuItem
           icon={<FiLogOut size={17} />}
-          label="Log Out"
+          label={t("logout")}
           variant="danger"
           onClick={() => {
             logout();

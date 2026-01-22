@@ -7,6 +7,8 @@ import Footer from "../components/home/Footer/Footer";
 
 // ICONS
 import { FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
+import "@/lib/i18n";
 
 import About1 from "@/public/images/About/gmt compass image.jpg";
 import About2 from "@/public/images/About/gmt compass image2.jpg";
@@ -18,17 +20,19 @@ import About6 from "@/public/images/About/about6.jpeg";
 import { Mail } from "lucide-react";
 
 export default function Page() {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language?.toLowerCase() === "ar";
   const [open, setOpen] = useState(null);
 
   const faqs = [
-    "Do the watches come with a warranty?",
-    "Are the watches scratch-resistant?",
-    "What materials are used to make your watches?",
-    "How can I place an order?",
+    t("faq1", { defaultValue: "Do the watches come with a warranty?" }),
+    t("faq2", { defaultValue: "Are the watches scratch-resistant?" }),
+    t("faq3", { defaultValue: "What materials are used to make your watches?" }),
+    t("faq4", { defaultValue: "How can I place an order?" }),
   ];
 
   return (
-    <>
+    <div className={isAr ? "lang-ar" : ""}>
       <Navbar />
 
       {/* ================= HERO ================= */}
@@ -45,12 +49,11 @@ export default function Page() {
           <div className="relative z-10 flex h-full items-center justify-center px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl text-center text-white animate-fade-in-up">
               <h1 className="font-cormorant text-[clamp(1.6rem,5vw,3.2rem)] leading-[1.15]">
-                A World Time Watch Inspired by Global Beaches
+                {t("aboutHeroHeading")}
               </h1>
 
               <p className="mt-2 text-sm sm:text-base lg:text-lg opacity-90 animate-fade-in-up-delayed">
-                Crafted for explorers, dreamers, and lovers of the world’s
-                iconic beaches
+                {t("aboutHeroSub")}
               </p>
             </div>
           </div>
@@ -64,25 +67,15 @@ export default function Page() {
             <ScrollAnimation animationClass="animate-slide-in-left">
               <div>
                 <button className="inline-block bg-gray-200 px-4 py-1 text-xs sm:text-sm text-gray-700 shadow-sm">
-                  About us
+                  {t("aboutStoryLabel")}
                 </button>
 
                 <h2 className="font-cormorant mt-3 sm:mt-4 text-3xl sm:text-4xl lg:text-5xl">
-                  The Story Behind Montero
+                  {t("aboutStoryTitle")}
                 </h2>
 
                 <p className="mt-3 sm:mt-4 max-w-xl text-sm sm:text-base text-gray-700 leading-relaxed">
-                  Montero was born from a passion for time, travel, and
-                  exploration. Inspired by iconic beaches, global journeys, and
-                  the freedom of adventure, Montero represents moments where
-                  time is lived, not rushed. Backed by over 35 years of
-                  watchmaking experience, Montero focuses on what truly matters
-                  - quality, reliability, and thoughtful design. Each Montero
-                  watch blends precise engineering with purposeful detail,
-                  created for those who value craftsmanship and believe time is
-                  measured through experiences. Montero is not just about where
-                  time takes you, it’s about choosing your direction before
-                  time.
+                  {t("aboutStoryText")}
                 </p>
               </div>
             </ScrollAnimation>
@@ -108,24 +101,24 @@ export default function Page() {
             <ScrollAnimation animationClass="animate-slide-in-up" delay={0}>
               <ValueCard
                 img={About3}
-                title="Adventure"
-                text="For those who never stop exploring"
+                title={t("valueAdventure")}
+                text={t("valueAdventureText")}
               />
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={200}>
               <ValueCard
                 img={About4}
-                title="Precision"
-                text="Powered by reliable world-time engineering"
+                title={t("valuePrecision")}
+                text={t("valuePrecisionText")}
               />
             </ScrollAnimation>
 
             <ScrollAnimation animationClass="animate-slide-in-up" delay={400}>
               <ValueCard
                 img={About5}
-                title="Culture"
-                text="Celebrating iconic beaches across the globe"
+                title={t("valueCulture")}
+                text={t("valueCultureText")}
               />
             </ScrollAnimation>
           </div>
@@ -133,97 +126,92 @@ export default function Page() {
       </ScrollAnimation>
 
       {/* ================= FAQ + SUBSCRIBE ================= */}
-        <section className="bg-white px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
-          <div className="mx-auto max-w-7xl">
-            {/* FAQ ROW */}
-            <div className="grid grid-cols-1 gap-6 lg:gap-10 md:grid-cols-2 items-start">
-              {/* LEFT TEXT */}
-              <ScrollAnimation animationClass="animate-slide-in-left">
-                <div>
-                  <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl">
-                    Frequently Asked Question
-                  </h2>
+      <section className="bg-white px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        <div className="mx-auto max-w-7xl">
+          {/* FAQ ROW */}
+          <div className="grid grid-cols-1 gap-6 lg:gap-10 md:grid-cols-2 items-start">
+            {/* LEFT TEXT */}
+            <ScrollAnimation animationClass="animate-slide-in-left">
+              <div>
+                <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl">
+                  {t("faqTitle")}
+                </h2>
 
-                  <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Each beach was chosen for its cultural significance, beauty,
-                    and global reputation — together forming the emotional core
-                    of Montero.
-                  </p>
-                </div>
-              </ScrollAnimation>
+                <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 leading-relaxed">
+                  {t("faqDesc")}
+                </p>
+              </div>
+            </ScrollAnimation>
 
-              {/* RIGHT FAQ LIST */}
-              <ScrollAnimation animationClass="animate-slide-in-right">
-                <div className="space-y-3 sm:space-y-4">
-                  {faqs.map((q, i) => (
-                    <div
-                      key={i}
-                      className="border-b border-gray-200 pb-3 transition-all duration-300 hover:border-gray-400"
+            {/* RIGHT FAQ LIST */}
+            <ScrollAnimation animationClass="animate-slide-in-right">
+              <div className="space-y-3 sm:space-y-4">
+                {faqs.map((q, i) => (
+                  <div
+                    key={i}
+                    className="border-b border-gray-200 pb-3 transition-all duration-300 hover:border-gray-400"
+                  >
+                    <button
+                      onClick={() => setOpen(open === i ? null : i)}
+                      className="flex w-full items-center justify-between text-left text-sm sm:text-base text-black"
                     >
-                      <button
-                        onClick={() => setOpen(open === i ? null : i)}
-                        className="flex w-full items-center justify-between text-left text-sm sm:text-base text-black"
+                      <span className="pr-4">{q}</span>
+                      <span
+                        className="text-xl flex-shrink-0 transition-transform duration-300"
+                        style={{
+                          transform:
+                            open === i ? "rotate(180deg)" : "rotate(0deg)",
+                        }}
                       >
-                        <span className="pr-4">{q}</span>
-                        <span
-                          className="text-xl flex-shrink-0 transition-transform duration-300"
-                          style={{
-                            transform:
-                              open === i ? "rotate(180deg)" : "rotate(0deg)",
-                          }}
-                        >
-                          {open === i ? "−" : "+"}
-                        </span>
-                      </button>
+                        {open === i ? "−" : "+"}
+                      </span>
+                    </button>
 
-                      {open === i && (
-                        <p className="mt-2 sm:mt-3 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
-                          Yes, all Montero watches come with a comprehensive
-                          warranty covering manufacturing defects.
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </ScrollAnimation>
+                    {open === i && (
+                      <p className="mt-2 sm:mt-3 max-w-md text-xs sm:text-sm text-gray-600 animate-fade-in-down">
+                        {t("faqAnswer")}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </ScrollAnimation>
+          </div>
+
+          {/* SUBSCRIBE ROW */}
+          <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+            {/* LEFT TEXT */}
+            <div>
+              <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                {t("subscribeHeading")}
+              </h2>
+
+              <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                {t("subscribeDesc")}
+              </p>
             </div>
 
-            {/* SUBSCRIBE ROW */}
-              <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-                {/* LEFT TEXT */}
-                  <div>
-                    <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-                      Subscribe for Exclusive Updates
-                    </h2>
-
-                    <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-                      Join our mailing list to receive early access,
-                      limited-edition alerts, and insider updates directly from
-                      the Montero team.
-                    </p>
-                  </div>
-
-                {/* RIGHT */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-                      <Mail className="mr-4" />
-                      <input
-                        type="email"
-                        placeholder="Enter your e-mail"
-                        className="bg-transparent outline-none w-full text-xs sm:text-sm"
-                      />
-                    </div>
-
-                    <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
-                      Subscribe Now
-                    </button>
-                  </div>
+            {/* RIGHT */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+                <Mail className="mr-4" />
+                <input
+                  type="email"
+                  placeholder={t("emailPlaceholder")}
+                  className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                />
               </div>
+
+              <button className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition">
+                {t("subscribeBtn")}
+              </button>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
@@ -262,9 +250,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>
@@ -274,15 +261,15 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
 /* ================= COMPONENTS ================= */
 
 function BlueInfoCard() {
+  const { t } = useTranslation();
   return (
     <div className="w-[300px] sm:w-[320px] h-[360px] sm:h-[400px] bg-[#0f1e33] p-6 sm:p-8 text-white flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
       <div>
         <h3 className="font-cormorant text-xl">Della R. Thomas</h3>
-        <p className="text-sm opacity-80">CEO</p>
+        <p className="text-sm opacity-80">{t("ceo", { defaultValue: "CEO" })}</p>
 
         <p className="mt-6 text-sm opacity-70 leading-relaxed">
-          Each beach was chosen for its cultural significance, beauty, and
-          global reputation — together forming the emotional core of Montero.
+          {t("faqDesc")}
         </p>
       </div>
 
@@ -336,3 +323,4 @@ function ValueCard({ img, title, text }) {
     </div>
   );
 }
+

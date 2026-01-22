@@ -9,6 +9,8 @@ import Image from "next/image";
 import gsap from "gsap";
 
 import Dropdown from "./Dropdown";
+import "@/lib/i18n";
+import { useTranslation } from "react-i18next";
 
 import Avatar from "../../../public/images/Avatar.png";
 import Logo from "@/public/images/Logo/LogoNav.png";
@@ -18,24 +20,36 @@ const Navbar = () => {
   const pathname = usePathname();
   const { user } = useAuth();
 
+  const { t, i18n } = useTranslation();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState("EN");
+  const [selectedLang, setSelectedLang] = useState(i18n.language?.toLowerCase() || "en");
+
+  // Sync HTML lang attribute and layout direction
+  useEffect(() => {
+    const lang = i18n.language?.toLowerCase() || "en";
+    document.documentElement.lang = lang;
+    // We keep dir="ltr" as per user request to not change alignment
+    document.documentElement.dir = "ltr";
+  }, [i18n.language]);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const mobileMenuRef = useRef(null);
   const langRef = useRef(null);
 
+
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Products", href: "/product" },
-    { name: "About Us", href: "/about" },
-    { name: "Blog", href: "/review" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Contact Us", href: "/contact" },
+    { name: t("home"), href: "/" },
+    { name: t("products"), href: "/product" },
+    { name: t("aboutUs"), href: "/about" },
+    { name: t("blog"), href: "/review" },
+    { name: t("gallery"), href: "/gallery" },
+    { name: t("contactUs"), href: "/contact" },
   ];
 
-  const languages = ["EN", "AR"];
+  const languages = ["en", "ar"];
 
   /* MOBILE MENU ANIMATION */
   useEffect(() => {
@@ -69,7 +83,7 @@ const Navbar = () => {
   }, [isLangOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white z-50 font-mona">
+    <nav className={`fixed top-0 left-0 w-full bg-white z-50 font-mona ${selectedLang === 'ar' ? 'lang-ar' : ''}`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className="relative h-16 flex items-center justify-between">
           {/* LEFT MENU */}
@@ -88,19 +102,17 @@ const Navbar = () => {
                   className="relative text-[13px] tracking-wide group"
                 >
                   <span
-                    className={`transition-all duration-300 ${
-                      isActive
-                        ? "font-semibold text-black"
-                        : "font-light text-gray-500 group-hover:text-black"
-                    }`}
+                    className={`transition-all duration-300 ${isActive
+                      ? "font-semibold text-black"
+                      : "font-light text-gray-500 group-hover:text-black"
+                      }`}
                   >
                     {link.name}
                   </span>
 
                   <span
-                    className={`absolute left-0 -bottom-1 h-[1.5px] bg-black transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
+                    className={`absolute left-0 -bottom-1 h-[1.5px] bg-black transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
                   ></span>
                 </Link>
               );
@@ -128,11 +140,10 @@ const Navbar = () => {
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700"
               >
                 <Image src={Glob} alt="Lang" width={18} height={18} />
-                {selectedLang}
+                {selectedLang.toUpperCase()}
                 <FaChevronDown
-                  className={`text-[10px] transition ${
-                    isLangOpen ? "rotate-180" : ""
-                  }`}
+                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -146,11 +157,12 @@ const Navbar = () => {
                       key={lang}
                       onClick={() => {
                         setSelectedLang(lang);
+                        i18n.changeLanguage(lang);
                         setIsLangOpen(false);
                       }}
                       className="w-full px-3 py-2 text-left text-[13px] font-light hover:bg-gray-100"
                     >
-                      {lang}
+                      {lang.toUpperCase()}
                     </button>
                   ))}
                 </div>
@@ -188,13 +200,12 @@ const Navbar = () => {
             {!user && (
               <Link
                 href="/login"
-                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${
-                  pathname === "/login"
-                    ? "bg-black text-white"
-                    : "hover:bg-black hover:text-white"
-                }`}
+                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/login"
+                  ? "bg-black text-white"
+                  : "hover:bg-black hover:text-white"
+                  }`}
               >
-                Sign In
+                {t("signIn")}
               </Link>
             )}
 
@@ -256,9 +267,8 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-light ${
-                  isActive ? "text-black" : "text-gray-600"
-                }`}
+                className={`text-base font-light ${isActive ? "text-black" : "text-gray-600"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -266,19 +276,21 @@ const Navbar = () => {
           })}
 
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-500 mb-2">Language</p>
+            <p className="text-sm text-gray-500 mb-2">{t("language")}</p>
             <div className="flex gap-3">
               {languages.map((lang) => (
                 <button
                   key={lang}
-                  onClick={() => setSelectedLang(lang)}
-                  className={`px-4 py-1 rounded-full border text-sm ${
-                    selectedLang === lang
-                      ? "bg-black text-white border-black"
-                      : "border-gray-300"
-                  }`}
+                  onClick={() => {
+                    setSelectedLang(lang);
+                    i18n.changeLanguage(lang);
+                  }}
+                  className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
+                    ? "bg-black text-white border-black"
+                    : "border-gray-300"
+                    }`}
                 >
-                  {lang}
+                  {lang.toUpperCase()}
                 </button>
               ))}
             </div>
@@ -290,7 +302,7 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
             >
-              Sign In
+              {t("signIn")}
             </Link>
           )}
         </div>
