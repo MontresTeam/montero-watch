@@ -13,11 +13,13 @@ import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
 import newCurrency from '@/public/images/newSymbole.png'
 
 import { useRouter } from "next/navigation";
+import { useCurrency } from "@/context/CurrencyContext";
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 
 const Page = () => {
   const router = useRouter();
+  const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
 
@@ -66,8 +68,8 @@ const Page = () => {
                   <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors w-full flex items-center justify-center gap-2 min-h-[44px]">
                     <div className="flex flex-col items-center gap-2 mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold text-white">$799</span>
-                        <span className="text-sm text-white/50 line-through">$860</span>
+                        <span className="text-xl font-bold text-white">{formatPrice(799)}</span>
+                        <span className="text-sm text-white/50 line-through">{formatPrice(860)}</span>
                         <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">7% OFF</span>
                       </div>
                     </div>
@@ -163,11 +165,11 @@ const Page = () => {
             {/* Price & Order Button */}
             <div className="flex flex-col items-center gap-2 mb-4">
               <div className="flex items-center gap-3">
-                <span className="text-3xl sm:text-4xl font-bold text-gray-900">$799</span>
-                <span className="text-xl text-gray-400 line-through">$860</span>
+                <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
+                <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
                 <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
               </div>
-              <p className="text-xs text-gray-500 font-medium">Pre-Order Price (Official retail price: $860 USD)</p>
+              <p className="text-xs text-gray-500 font-medium">Pre-Order Price (Official retail price: {formatPrice(860)})</p>
             </div>
 
             {/* Order Button - HEAD Style, Integrated with Product ID */}

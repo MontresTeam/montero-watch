@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals/globals.css";
 import { AuthProvider } from "../context/AuthContext";
+import { CurrencyProvider } from "../context/CurrencyContext";
 import ToasterProvider from "./components/ToasterProvider";
 
 const geistSans = Geist({
@@ -69,8 +70,10 @@ export default function RootLayout({ children }) {
         `}
       >
         <AuthProvider>
-          <ToasterProvider />
-          {children}
+          <CurrencyProvider>
+            <ToasterProvider />
+            {children}
+          </CurrencyProvider>
         </AuthProvider>
       </body>
     </html>

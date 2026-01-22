@@ -5,6 +5,7 @@ import { FaChevronDown, FaBars, FaTimes, FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useCurrency, SUPPORTED_CURRENCIES } from "@/context/CurrencyContext";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -17,14 +18,17 @@ import Glob from "@/public/icons/home/glob.png";
 const Navbar = () => {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { currency, setCurrency } = useCurrency();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState("EN");
+  const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const mobileMenuRef = useRef(null);
   const langRef = useRef(null);
+  const currencyRef = useRef(null);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -68,6 +72,17 @@ const Navbar = () => {
     );
   }, [isLangOpen]);
 
+  /* CURRENCY DROPDOWN */
+  useEffect(() => {
+    if (!currencyRef.current || !isCurrencyOpen) return;
+
+    gsap.fromTo(
+      currencyRef.current,
+      { opacity: 0, scale: 0.95, y: -4 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.2, ease: "power2.out" }
+    );
+  }, [isCurrencyOpen]);
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white z-50 font-mona">
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
@@ -88,19 +103,17 @@ const Navbar = () => {
                   className="relative text-[13px] tracking-wide group"
                 >
                   <span
-                    className={`transition-all duration-300 ${
-                      isActive
-                        ? "font-semibold text-black"
-                        : "font-light text-gray-500 group-hover:text-black"
-                    }`}
+                    className={`transition-all duration-300 ${isActive
+                      ? "font-semibold text-black"
+                      : "font-light text-gray-500 group-hover:text-black"
+                      }`}
                   >
                     {link.name}
                   </span>
 
                   <span
-                    className={`absolute left-0 -bottom-1 h-[1.5px] bg-black transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
+                    className={`absolute left-0 -bottom-1 h-[1.5px] bg-black transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
                   ></span>
                 </Link>
               );
@@ -124,22 +137,24 @@ const Navbar = () => {
             {/* LANGUAGE (DESKTOP) */}
             <div className="relative hidden md:block">
               <button
-                onClick={() => setIsLangOpen((p) => !p)}
+                onClick={() => {
+                  setIsLangOpen((p) => !p);
+                  setIsCurrencyOpen(false);
+                }}
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700"
               >
                 <Image src={Glob} alt="Lang" width={18} height={18} />
                 {selectedLang}
                 <FaChevronDown
-                  className={`text-[10px] transition ${
-                    isLangOpen ? "rotate-180" : ""
-                  }`}
+                  className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
               {isLangOpen && (
                 <div
                   ref={langRef}
-                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm"
+                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm z-50"
                 >
                   {languages.map((lang) => (
                     <button
@@ -153,6 +168,49 @@ const Navbar = () => {
                       {lang}
                     </button>
                   ))}
+                </div>
+              )}
+            </div>
+
+            {/* CURRENCY (DESKTOP) */}
+            <div className="relative hidden md:block">
+              <button
+                onClick={() => {
+                  setIsCurrencyOpen((p) => !p);
+                  setIsLangOpen(false);
+                }}
+                className="flex items-center gap-1 text-[13px] font-light text-gray-700 min-w-[50px]"
+              >
+                <span className="w-[18px] text-center font-medium">
+                  {currency === "USD" ? "$" : currency === "EUR" ? "€" : currency === "GBP" ? "£" : currency === "AED" ? "د.إ" : "¤"}
+                </span>
+                {currency}
+                <FaChevronDown
+                  className={`text-[10px] transition ${isCurrencyOpen ? "rotate-180" : ""
+                    }`}
+                />
+              </button>
+
+              {isCurrencyOpen && (
+                <div
+                  ref={currencyRef}
+                  className="absolute right-0 mt-2 w-32 max-h-60 overflow-y-auto bg-white border rounded-md shadow-lg z-50 scrollbar-thin scrollbar-thumb-gray-200"
+                >
+                  <div className="py-1">
+                    {SUPPORTED_CURRENCIES.map((curr) => (
+                      <button
+                        key={curr}
+                        onClick={() => {
+                          setCurrency(curr);
+                          setIsCurrencyOpen(false);
+                        }}
+                        className={`w-full px-4 py-2 text-left text-[13px] font-light transition-colors ${currency === curr ? "bg-gray-100 font-medium" : "hover:bg-gray-50 text-gray-600"
+                          }`}
+                      >
+                        {curr}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -188,11 +246,10 @@ const Navbar = () => {
             {!user && (
               <Link
                 href="/login"
-                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${
-                  pathname === "/login"
-                    ? "bg-black text-white"
-                    : "hover:bg-black hover:text-white"
-                }`}
+                className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/login"
+                  ? "bg-black text-white"
+                  : "hover:bg-black hover:text-white"
+                  }`}
               >
                 Sign In
               </Link>
@@ -256,9 +313,8 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-light ${
-                  isActive ? "text-black" : "text-gray-600"
-                }`}
+                className={`text-base font-light ${isActive ? "text-black" : "text-gray-600"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -266,21 +322,44 @@ const Navbar = () => {
           })}
 
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-500 mb-2">Language</p>
-            <div className="flex gap-3">
-              {languages.map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setSelectedLang(lang)}
-                  className={`px-4 py-1 rounded-full border text-sm ${
-                    selectedLang === lang
-                      ? "bg-black text-white border-black"
-                      : "border-gray-300"
-                  }`}
-                >
-                  {lang}
-                </button>
-              ))}
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm font-medium text-gray-900 mb-3">Language</p>
+                <div className="flex flex-wrap gap-2">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => setSelectedLang(lang)}
+                      className={`px-5 py-1.5 rounded-full border text-sm transition-all duration-200 ${selectedLang === lang
+                        ? "bg-black text-white border-black shadow-md"
+                        : "border-gray-200 text-gray-600 hover:border-gray-400"
+                        }`}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-900 mb-3">Currency</p>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                  {SUPPORTED_CURRENCIES.map((curr) => (
+                    <button
+                      key={curr}
+                      onClick={() => {
+                        setCurrency(curr);
+                        // Optional: close menu on selection if desired, but maybe keep open for exploration
+                      }}
+                      className={`px-2 py-1.5 rounded-lg border text-xs text-center transition-all ${currency === curr
+                        ? "bg-black text-white border-black shadow-sm"
+                        : "border-gray-100 text-gray-500 bg-gray-50/50 hover:bg-white hover:border-gray-300"
+                        }`}
+                    >
+                      {curr}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
