@@ -185,11 +185,11 @@ const Page = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
                   <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
-                  <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
+                  <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% {t("off")}</span>
                 </div>
-               <p className="text-sm text-gray-500 font-medium">
-  {t("pricePreOrderAr", { price: formatPrice(860) })}
-</p>
+                <p className="text-sm text-gray-500 font-medium">
+                  {t("pricePreOrderAr", { price: formatPrice(860) })}
+                </p>
 
               </div>
 
@@ -587,39 +587,39 @@ const Page = () => {
               {/* LEFT TEXT */}
               <div>
                 <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-  {t("subscribeExclusiveArabicAr")}
-</h2>
+                  {t("subscribeExclusiveArabicAr")}
+                </h2>
 
-<p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-  {t("subscribeMailingListArabicAr")}
-</p>
-</div>
+                <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                  {t("subscribeMailingListArabicAr")}
+                </p>
+              </div>
 
-{/* RIGHT */}
-<form
-  onSubmit={handleSubscribe}
-  className="flex flex-col sm:flex-row gap-3 sm:gap-4"
->
-  <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
-    <Mail className="mr-4" />
-    <input
-      type="email"
-      required
-      placeholder={t("enterEmail")}
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      className="bg-transparent outline-none w-full text-xs sm:text-sm"
-    />
-  </div>
+              {/* RIGHT */}
+              <form
+                onSubmit={handleSubscribe}
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+              >
+                <div className="flex items-center bg-gray-200 px-4 py-3 w-full sm:flex-1">
+                  <Mail className="mr-4" />
+                  <input
+                    type="email"
+                    required
+                    placeholder={t("enterEmail")}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                  />
+                </div>
 
-  <button
-    type="submit"
-    disabled={loading}
-    className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
-  >
-    {loading ? t("loading") : t("subscribeBtn")}
-  </button>
-</form>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition disabled:opacity-50"
+                >
+                  {loading ? t("loading") : t("subscribeBtn")}
+                </button>
+              </form>
 
             </div>
           </div>
