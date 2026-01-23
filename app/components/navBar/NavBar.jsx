@@ -26,15 +26,24 @@ const Navbar = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState(i18n.language?.toLowerCase() || "en");
+  const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState("en");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    if (i18n.language) {
+      setSelectedLang(i18n.language.toLowerCase());
+    }
+  }, [i18n.language]);
 
   // Sync HTML lang attribute and layout direction
   useEffect(() => {
+    if (!mounted) return;
     const lang = i18n.language?.toLowerCase() || "en";
     document.documentElement.lang = lang;
-    // We keep dir="ltr" as per user request to not change alignment
     document.documentElement.dir = "ltr";
-  }, [i18n.language]);
+  }, [i18n.language, mounted]);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -102,7 +111,7 @@ const Navbar = () => {
         <div className="relative h-16 flex items-center justify-between">
           {/* LEFT MENU */}
           <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => {
+            {mounted && navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
                 pathname.startsWith(`/en${link.href}`) ||
@@ -157,7 +166,7 @@ const Navbar = () => {
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700"
               >
                 <Image src={Glob} alt="Lang" width={18} height={18} />
-                {selectedLang.toUpperCase()}
+                {mounted ? selectedLang.toUpperCase() : "EN"}
                 <FaChevronDown
                   className={`text-[10px] transition ${isLangOpen ? "rotate-180" : ""
                     }`}
@@ -196,9 +205,9 @@ const Navbar = () => {
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700 min-w-[50px]"
               >
                 <span className="w-[18px] text-center font-medium">
-                  {currency === "USD" ? "$" : currency === "EUR" ? "€" : currency === "GBP" ? "£" : currency === "AED" ? "د.إ" : "¤"}
+                  {mounted ? (currency === "USD" ? "$" : currency === "EUR" ? "€" : currency === "GBP" ? "£" : currency === "AED" ? "د.إ" : "¤") : "$"}
                 </span>
-                {currency}
+                {mounted ? currency : "USD"}
                 <FaChevronDown
                   className={`text-[10px] transition ${isCurrencyOpen ? "rotate-180" : ""
                     }`}
@@ -231,7 +240,7 @@ const Navbar = () => {
 
             {/* USER PROFILE/ICON (DESKTOP) */}
             <div className="hidden md:block">
-              {user ? (
+              {mounted && (user ? (
                 <button
                   onClick={() => setIsDropdownOpen((p) => !p)}
                   className="flex items-center gap-2"
@@ -253,11 +262,11 @@ const Navbar = () => {
                 >
                   <FaRegUser size={16} className="text-gray-700" />
                 </button>
-              )}
+              ))}
             </div>
 
             {/* SIGN IN */}
-            {!user && (
+            {mounted && !user && (
               <Link
                 href="/login"
                 className={`hidden sm:block border border-black rounded-full px-6 py-[6px] text-[13px] font-light transition ${pathname === "/login"
@@ -277,7 +286,7 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full overflow-hidden bg-neutral-200"
               >
                 <Image
-                  src={user?.profilePic || Avatar}
+                  src={(mounted && user?.profilePic) || Avatar}
                   alt="User Avatar"
                   width={40}
                   height={40}
@@ -320,7 +329,7 @@ const Navbar = () => {
         style={{ height: 0, opacity: 0 }}
       >
         <div className="flex flex-col px-6 py-5 space-y-4">
-          {navLinks.map((link) => {
+          {mounted && navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
@@ -336,7 +345,7 @@ const Navbar = () => {
           })}
 
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-500 mb-2">{t("language")}</p>
+            <div className="text-sm text-gray-500 mb-2">{t("language")}</div>
             <div className="flex gap-3">
               {languages.map((lang) => (
                 <button
@@ -345,7 +354,7 @@ const Navbar = () => {
                     setSelectedLang(lang);
                     i18n.changeLanguage(lang);
                   }}
-                  className={`px-4 py-1 rounded-full border text-sm ${selectedLang === lang
+                  className={`px-4 py-1 rounded-full border text-sm ${mounted && selectedLang === lang
                     ? "bg-black text-white border-black"
                     : "border-gray-300"
                     }`}
@@ -356,7 +365,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {!user && (
+          {mounted && !user && (
             <Link
               href="/login"
               onClick={() => setIsMobileMenuOpen(false)}

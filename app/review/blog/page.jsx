@@ -279,9 +279,9 @@ const Page = () => {
                 {t("subscribeHeading")}
               </h2>
 
-              <p className="mt-3 sm:mt-4 lg:mt-6 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+              <div className="mt-3 sm:mt-4 lg:mt-6 max-w-md text-xs sm:text-sm lg:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
                 {t("subscribeDesc")}
-              </p>
+              </div>
             </div>
 
             {/* RIGHT FORM */}
