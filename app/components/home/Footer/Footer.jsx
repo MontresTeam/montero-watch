@@ -5,33 +5,34 @@ import Image from "next/image";
 import Link from "next/link";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { FaYoutube, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { RiTwitterXFill } from "react-icons/ri";
 
 import Logo from "@/public/images/Logo/LogoFooter.png";
 import BgIcon from "@/public/images/Home/BgFooterLogo.png";
-import Instagram from "@/public/icons/home/instagram.png";
-import Whatsapp from "@/public/icons/home/whatsapp.png";
-import ThreadsIcon from "@/public/icons/home/x.png";
-import YoutubeIcon from "@/public/icons/home/sm_5b01250f7fc22.jpg";
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language?.startsWith("ar");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
     if (!email) {
-      toast.error("Please enter a valid email address");
+      toast.error(isAr ? "يرجى إدخال بريد إلكتروني صالح" : "Please enter a valid email address");
       return;
     }
 
     setLoading(true);
     try {
       const response = await api.post("/user/subscribe", { email });
-      toast.success(response.data.message || "Thank you for subscribing!");
+      toast.success(response.data.message || (isAr ? "شكراً لاشتراكك!" : "Thank you for subscribing!"));
       setEmail("");
     } catch (error) {
       console.error("Subscription error:", error);
-      const errorMessage = error.response?.data?.error || error.response?.data?.message || "An error occurred. Please try again later.";
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || (isAr ? "حدث خطأ. يرجى المحاولة مرة أخرى لاحقاً." : "An error occurred. Please try again later.");
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -39,135 +40,142 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-black text-gray-300 overflow-hidden">
+    <footer className="relative bg-[#050505] text-gray-300 overflow-hidden" dir={isAr ? "rtl" : "ltr"}>
       {/* Background Decorative Icon */}
       <Image
         src={BgIcon}
         alt="Background Icon"
-        className="absolute left-0 bottom-0 w-32 sm:w-48 md:w-64 opacity-50 pointer-events-none"
+        className={`absolute ${isAr ? 'right-0' : 'left-0'} bottom-0 w-32 sm:w-48 md:w-64 opacity-20 pointer-events-none grayscale`}
       />
 
-      {/* Logo */}
-      <div className="mt-12 sm:mt-16 md:mt-20 flex justify-center items-center px-4">
+      {/* Logo Section */}
+      <div className="mt-16 sm:mt-24 flex justify-center items-center px-4 relative z-10">
         <Image
           src={Logo}
           alt="Montero Logo"
-          className="w-48 sm:w-64 md:w-80"
+          className="w-48 sm:w-64 md:w-80 hover:opacity-90 transition-opacity duration-300"
           priority
         />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-10 pb-8 sm:pb-10">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 py-12 sm:py-16 md:py-20">
         {/* TOP GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-start">
-          {/* LEFT */}
-          <div>
-            <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium">
-              Get in Touch
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
+
+          {/* LEFT - About/Contact */}
+          <div className="space-y-6">
+            <h4 className="text-white text-xl font-semibold tracking-wider uppercase border-b border-white/10 pb-2 inline-block">
+              {t('footerGetInTouch')}
             </h4>
-            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed max-w-sm">
-              If you have any questions about your order, warranty, or Montero
-              products, we’re here to help.
+            <p className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-sm">
+              {t('footerGetInTouchDesc')}
             </p>
           </div>
 
-          {/* CENTER */}
-          <div>
-            <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium md:hidden">
-              Quick Links
+          {/* CENTER - Quick Links */}
+          <div className="space-y-6">
+            <h4 className="text-white text-xl font-semibold tracking-wider uppercase border-b border-white/10 pb-2 inline-block">
+              {t('footerQuickLinks')}
             </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
-              <Link href="/" className="hover:text-white transition">Home</Link>
-              <Link href="/product" className="hover:text-white transition">Products</Link>
-              <Link href="/about" className="hover:text-white transition">About Us</Link>
-              <Link href="/review" className="hover:text-white transition">Blog</Link>
-              <Link href="/gallery" className="hover:text-white transition">Gallery</Link>
-              <Link href="/contact" className="hover:text-white transition">Contact Us</Link>
+            <div className={`grid grid-cols-2 gap-x-8 gap-y-4 text-sm sm:text-base`}>
+              <Link href="/" className="hover:text-white transition-colors duration-200">{t('home')}</Link>
+              <Link href="/product" className="hover:text-white transition-colors duration-200">{t('products')}</Link>
+              <Link href="/about" className="hover:text-white transition-colors duration-200">{t('aboutUs')}</Link>
+              <Link href="/review/blog" className="hover:text-white transition-colors duration-200">{t('blog')}</Link>
+              <Link href="/gallery" className="hover:text-white transition-colors duration-200">{t('gallery')}</Link>
+              <Link href="/contact" className="hover:text-white transition-colors duration-200">{t('contactUs')}</Link>
             </div>
           </div>
 
-          {/* RIGHT */}
-          <div>
-            <h4 className="text-white text-lg sm:text-xl mb-3 sm:mb-4 font-medium">
-              Stay Updated
+          {/* RIGHT - Subscribe */}
+          <div className="space-y-6">
+            <h4 className="text-white text-xl font-semibold tracking-wider uppercase border-b border-white/10 pb-2 inline-block">
+              {t('footerStayUpdated')}
             </h4>
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-0 sm:gap-2 max-w-md group">
-              <div className="relative flex-1">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-transparent border border-white/20 px-4 py-3.5 text-sm w-full outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all placeholder:text-gray-600 rounded-lg sm:rounded-r-none"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-white text-black px-8 py-3.5 text-sm font-semibold hover:bg-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg sm:rounded-l-none mt-2 sm:mt-0 shadow-lg active:scale-95"
-              >
-                {loading ? "..." : "Subscribe"}
-              </button>
-            </form>
-            <p className="text-gray-500 text-[10px] sm:text-xs mt-3 pl-1 italic">
-              Subscribe to get updates on new products and exclusive offers.
-            </p>
+            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+              <form onSubmit={handleSubscribe} className="space-y-4">
+                <div className="relative group">
+                  <input
+                    type="email"
+                    placeholder={t('footerSubscribePlaceholder')}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={`bg-black/40 border border-white/10 px-4 py-4 text-sm w-full outline-none focus:border-white/40 focus:ring-1 focus:ring-white/5 transition-all placeholder:text-gray-600 rounded-xl ${isAr ? 'text-right' : 'text-left'}`}
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-white text-black w-full py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-xl shadow-xl active:scale-95 flex items-center justify-center gap-2"
+                >
+                  {loading ? t('footerSubscribing') : t('footerSubscribeBtn')}
+                </button>
+              </form>
+              <p className={`text-gray-500 text-[11px] mt-4 leading-relaxed ${isAr ? 'text-right' : 'text-left'}`}>
+                {t('footerSubscribeDesc')}
+              </p>
+            </div>
           </div>
         </div>
 
         {/* DIVIDER */}
-        <div className="my-12 border-t border-white/20" />
+        <div className="my-16 border-t border-white/5" />
 
-        {/* SOCIAL LINKS */}
-        <div className="flex flex-col items-center">
-          <p className="text-gray-400 text-sm mb-6">
-            Connect with us on social media
-          </p>
+        {/* SOCIAL LINKS & COPYRIGHT */}
+        <div className="flex flex-col items-center space-y-10">
+          <div className="text-center">
+            <p className="text-gray-400 text-sm mb-8 tracking-widest uppercase">
+              {t('footerConnectSocial')}
+            </p>
 
-          <div className="flex gap-6">
-            {/* Instagram */}
-            <Link
-              href="https://www.instagram.com/montero.watch/"
-              target="_blank"
-              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
-            >
-              <Image src={Instagram} alt="Instagram" width={20} height={20} />
-            </Link>
+            <div className="flex gap-8">
+              <Link
+                href="https://www.instagram.com/montero.watch/"
+                target="_blank"
+                className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-125"
+                aria-label="Instagram"
+              >
+                <FaInstagram size={26} />
+              </Link>
 
-            {/* Threads */}
-            <Link
-              href="https://www.threads.com/@montero.watch"
-              target="_blank"
-              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
-            >
-              <Image src={ThreadsIcon} alt="Threads" width={20} height={20} />
-            </Link>
+              <Link
+                href="https://www.threads.net/@montero.watch"
+                target="_blank"
+                className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-125"
+                aria-label="Threads"
+              >
+                <RiTwitterXFill size={26} />
+              </Link>
 
-            {/* WhatsApp */}
-            <Link
-              href="https://wa.me/97142671124"
-              target="_blank"
-              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
-            >
-              <Image src={Whatsapp} alt="WhatsApp" width={20} height={20} />
-            </Link>
+              <Link
+                href="https://wa.me/97142671124"
+                target="_blank"
+                className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-125"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp size={26} />
+              </Link>
 
-            {/* YouTube */}
-            <Link
-              href="https://www.youtube.com/@MontresOfficial"
-              target="_blank"
-              className="hover:opacity-70 transition p-2 rounded-full hover:bg-white/10"
-            >
-              <Image src={YoutubeIcon} alt="YouTube" width={20} height={20} />
-            </Link>
+              <Link
+                href="https://www.youtube.com/@MontresOfficial"
+                target="_blank"
+                className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-125"
+                aria-label="YouTube"
+              >
+                <FaYoutube size={26} />
+              </Link>
+            </div>
           </div>
 
-          {/* COPYRIGHT */}
-          <div className="mt-8 pt-6 border-t border-white/10 w-full">
-            <p className="text-center text-xs text-gray-500">
-              © {new Date().getFullYear()} Montero. All rights reserved.
+          <div className="w-full pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-xs text-gray-600 tracking-wide order-2 md:order-1">
+              {t('footerCopyright', { year: new Date().getFullYear() })}
             </p>
+            <div className="flex gap-6 text-[10px] uppercase tracking-widest text-gray-600 order-1 md:order-2">
+              <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -176,3 +184,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

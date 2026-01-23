@@ -42,7 +42,8 @@ const Navbar = () => {
     if (!mounted) return;
     const lang = i18n.language?.toLowerCase() || "en";
     document.documentElement.lang = lang;
-    document.documentElement.dir = "ltr";
+    // Set direction to RTL for Arabic, otherwise LTR
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   }, [i18n.language, mounted]);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -108,9 +109,9 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 w-full bg-white z-50 font-mona ${selectedLang === 'ar' ? 'lang-ar' : ''}`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
-        <div className="relative h-16 flex items-center justify-between">
-          {/* LEFT MENU */}
-          <div className="hidden md:flex items-center space-x-6">
+        <div className={`relative h-16 flex items-center justify-between ${selectedLang === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+          {/* LEFT MENU (Visually Left even in AR) */}
+          <div className={`hidden md:flex items-center space-x-6 ${selectedLang === 'ar' ? 'space-x-reverse' : ''}`}>
             {mounted && navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -176,7 +177,7 @@ const Navbar = () => {
               {isLangOpen && (
                 <div
                   ref={langRef}
-                  className="absolute right-0 mt-2 w-24 bg-white border rounded-md shadow-sm z-50"
+                  className={`absolute ${selectedLang === 'ar' ? 'left-0' : 'right-0'} mt-2 w-24 bg-white border rounded-md shadow-sm z-50`}
                 >
                   {languages.map((lang) => (
                     <button
@@ -186,7 +187,7 @@ const Navbar = () => {
                         i18n.changeLanguage(lang);
                         setIsLangOpen(false);
                       }}
-                      className="w-full px-3 py-2 text-left text-[13px] font-light hover:bg-gray-100"
+                      className={`w-full px-3 py-2 ${selectedLang === 'ar' ? 'text-right' : 'text-left'} text-[13px] font-light hover:bg-gray-100`}
                     >
                       {lang.toUpperCase()}
                     </button>
@@ -217,7 +218,7 @@ const Navbar = () => {
               {isCurrencyOpen && (
                 <div
                   ref={currencyRef}
-                  className="absolute right-0 mt-2 w-32 max-h-60 overflow-y-auto bg-white border rounded-md shadow-lg z-50 scrollbar-thin scrollbar-thumb-gray-200"
+                  className={`absolute ${selectedLang === 'ar' ? 'left-0' : 'right-0'} mt-2 w-32 max-h-60 overflow-y-auto bg-white border rounded-md shadow-lg z-50 scrollbar-thin scrollbar-thumb-gray-200`}
                 >
                   <div className="py-1">
                     {SUPPORTED_CURRENCIES.map((curr) => (
@@ -227,7 +228,7 @@ const Navbar = () => {
                           setCurrency(curr);
                           setIsCurrencyOpen(false);
                         }}
-                        className={`w-full px-4 py-2 text-left text-[13px] font-light transition-colors ${currency === curr ? "bg-gray-100 font-medium" : "hover:bg-gray-50 text-gray-600"
+                        className={`w-full px-4 py-2 ${selectedLang === 'ar' ? 'text-right' : 'text-left'} text-[13px] font-light transition-colors ${currency === curr ? "bg-gray-100 font-medium" : "hover:bg-gray-50 text-gray-600"
                           }`}
                       >
                         {curr}
@@ -308,12 +309,12 @@ const Navbar = () => {
             {isDropdownOpen && (
               <>
                 {/* DESKTOP */}
-                <div className="hidden md:block absolute right-0 top-10 z-[999]">
+                <div className={`hidden md:block absolute ${selectedLang === 'ar' ? 'left-0' : 'right-0'} top-10 z-[999]`}>
                   <Dropdown onClose={() => setIsDropdownOpen(false)} />
                 </div>
 
                 {/* MOBILE */}
-                <div className="md:hidden absolute right-0 top-14 z-[999]">
+                <div className={`md:hidden absolute ${selectedLang === 'ar' ? 'left-0' : 'right-0'} top-14 z-[999]`}>
                   <Dropdown onClose={() => setIsDropdownOpen(false)} />
                 </div>
               </>
@@ -328,7 +329,7 @@ const Navbar = () => {
         className="md:hidden overflow-hidden bg-white border-t"
         style={{ height: 0, opacity: 0 }}
       >
-        <div className="flex flex-col px-6 py-5 space-y-4">
+        <div className={`flex flex-col px-6 py-5 space-y-4 ${selectedLang === 'ar' ? 'items-start text-right' : 'items-start text-left'}`}>
           {mounted && navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -336,7 +337,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-light ${isActive ? "text-black" : "text-gray-600"
+                className={`text-base font-light w-full ${isActive ? "text-black" : "text-gray-600"
                   }`}
               >
                 {link.name}
@@ -344,9 +345,9 @@ const Navbar = () => {
             );
           })}
 
-          <div className="border-t pt-4">
-            <div className="text-sm text-gray-500 mb-2">{t("language")}</div>
-            <div className="flex gap-3">
+          <div className="border-t pt-4 w-full">
+            <div className={`text-sm text-gray-500 mb-2 ${selectedLang === 'ar' ? 'text-right' : 'text-left'}`}>{t("language")}</div>
+            <div className={`flex gap-3 ${selectedLang === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
               {languages.map((lang) => (
                 <button
                   key={lang}
