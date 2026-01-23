@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
-import { IoCloseCircleOutline, IoArrowBackOutline } from "react-icons/io5";
+import { IoArrowBackOutline } from "react-icons/io5";
 import newCurrencySymbol from '../../../public/images/newSymbole.png';
 import {
   FaCcVisa,
@@ -50,7 +50,7 @@ function OrderContent() {
     { code: "+970", country: "Palestine", iso: "PS" },
     { code: "+90", country: "Turkey", iso: "TR" },
 
-    // 🇸🇦 South Asia
+    // ≡ƒç╕≡ƒçª South Asia
     { code: "+91", country: "India", iso: "IN" },
     { code: "+92", country: "Pakistan", iso: "PK" },
     { code: "+880", country: "Bangladesh", iso: "BD" },
@@ -60,7 +60,7 @@ function OrderContent() {
     { code: "+960", country: "Maldives", iso: "MV" },
     { code: "+93", country: "Afghanistan", iso: "AF" },
 
-    // 🇨🇳 East Asia
+    // ≡ƒç¿≡ƒç│ East Asia
     { code: "+86", country: "China", iso: "CN" },
     { code: "+81", country: "Japan", iso: "JP" },
     { code: "+82", country: "South Korea", iso: "KR" },
@@ -68,7 +68,7 @@ function OrderContent() {
     { code: "+976", country: "Mongolia", iso: "MN" },
     { code: "+886", country: "Taiwan", iso: "TW" },
 
-    // 🇸🇬 Southeast Asia
+    // ≡ƒç╕≡ƒç¼ Southeast Asia
     { code: "+65", country: "Singapore", iso: "SG" },
     { code: "+60", country: "Malaysia", iso: "MY" },
     { code: "+62", country: "Indonesia", iso: "ID" },
@@ -81,19 +81,19 @@ function OrderContent() {
     { code: "+673", country: "Brunei", iso: "BN" },
     { code: "+670", country: "Timor-Leste", iso: "TL" },
 
-    // 🇰🇿 Central Asia
+    // ≡ƒç░≡ƒç┐ Central Asia
     { code: "+7", country: "Kazakhstan", iso: "KZ" },
     { code: "+998", country: "Uzbekistan", iso: "UZ" },
     { code: "+993", country: "Turkmenistan", iso: "TM" },
     { code: "+996", country: "Kyrgyzstan", iso: "KG" },
     { code: "+992", country: "Tajikistan", iso: "TJ" },
 
-    // 🇨🇾 Caucasus
+    // ≡ƒç¿≡ƒç╛ Caucasus
     { code: "+374", country: "Armenia", iso: "AM" },
     { code: "+994", country: "Azerbaijan", iso: "AZ" },
     { code: "+995", country: "Georgia", iso: "GE" },
 
-    // 🇸🇦 Middle East
+    // ≡ƒç╕≡ƒçª Middle East
     { code: "+967", country: "Yemen", iso: "YE" },
     { code: "+972", country: "Israel", iso: "IL" },
     { code: "+970", country: "Palestine", iso: "PS" },
@@ -342,7 +342,7 @@ function OrderContent() {
 
     if (!validateForm()) {
       toast.error(t("pleaseReviewFields"), {
-        icon: "⚠️",
+        icon: "ΓÜá∩╕Å",
       });
       return;
     }
@@ -435,7 +435,7 @@ function OrderContent() {
 
   // HEAD Styles applied to the structure
   return (
-    <div className="container mx-auto px-3 py-4 mt-5 sm:py-6 md:py-8 lg:py-12 max-w-7xl font-mona">
+    <div className="container mx-auto px-3 py-4 mt-5 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
       {/* Back Button */}
       <button
         type="button"
@@ -445,510 +445,501 @@ function OrderContent() {
         <div className="p-2 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
           <IoArrowBackOutline size={20} />
         </div>
-        <span className="text-sm font-medium uppercase tracking-widest font-black">{t("backToProduct")}</span>
+        <span className="text-sm font-medium">{t("backToProduct")}</span>
       </button>
 
-      <form onSubmit={(e) => handlePlaceOrder(e)}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
+      <form onSubmit={(e) => handlePlaceOrder(e)}> {/* Wrap in form for enter key submission if desired */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+          {/* Left Column - Billing Address */}
+          <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-5 order-2 lg:order-1">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
+              {t("billingAddress")}
+            </h2>
 
-          {/* Right Column - Your Order (First on mobile, Second on desktop) */}
-          <div className="lg:col-span-7 order-1 lg:order-2">
-            <div className="bg-gray-50/50 backdrop-blur-sm p-4 sm:p-6 lg:p-10 rounded-2xl border border-gray-100 shadow-sm transition-all duration-500 hover:shadow-md">
-              <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-6 flex items-center gap-3 uppercase tracking-tight">
-                <span className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-sm shadow-lg">1</span>
-                {t("yourOrder")}
-              </h2>
-
-              {/* Order Items Container */}
-              <div className="space-y-4 mb-8">
-                {/* Product Card */}
-                <div className="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 shadow-sm relative group hover:shadow-md transition-all duration-300">
-                  <button
-                    type="button"
-                    onClick={() => window.history.back()}
-                    className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-red-600 transition-colors z-10 bg-white rounded-full p-1.5 shadow-sm border border-gray-100"
-                    aria-label="Remove item"
-                  >
-                    <IoCloseCircleOutline size={22} />
-                  </button>
-
-                  <div className="flex flex-col sm:flex-row gap-6">
-                    {/* Product Image */}
-                    <div className="w-full sm:w-32 lg:w-40 h-48 sm:h-32 lg:h-40 shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-4">
-                      <Image
-                        src={product.images?.[0]?.url || "/images/placeholder.png"}
-                        alt={product.name}
-                        width={160}
-                        height={160}
-                        className="object-contain w-full h-full transform transition-transform duration-500 group-hover:scale-110"
-                        priority
-                      />
-                    </div>
-
-                    {/* Product Details */}
-                    <div className="flex-1 min-w-0 flex flex-col justify-between font-mona">
-                      <div>
-                        {/* Product Title & Price */}
-                        <div className="flex flex-col xs:flex-row xs:items-start justify-between gap-3 mb-4">
-                          <h3 className="font-black text-gray-900 text-lg sm:text-xl md:text-2xl pr-8 sm:pr-10 leading-none uppercase tracking-tighter">
-                            {t(product.name)}
-                          </h3>
-                          <div className="text-2xl sm:text-3xl font-black text-black">
-                            {formatPrice(product.price || 860)}
-                          </div>
-                        </div>
-
-                        {/* Product Features */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 bg-gray-50/80 p-4 rounded-xl border border-gray-100/50">
-                          {product.features?.map((feature, idx) => (
-                            <div key={idx} className="flex items-center gap-2.5">
-                              <div className="w-1.5 h-1.5 rounded-full bg-black/20 group-hover:bg-blue-600 transition-colors shrink-0"></div>
-                              <span className="text-xs sm:text-sm text-gray-600 font-bold uppercase tracking-wide">
-                                {t(feature)}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Quantity Control & Delivery Estimate */}
-                      <div className="flex flex-col xs:flex-row xs:items-end justify-between gap-5 pt-5 border-t border-gray-100">
-                        <div className="flex flex-wrap items-center gap-6">
-                          <div className="flex items-center gap-3">
-                            <span className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">
-                              {t("quantityLabel")}
-                            </span>
-                            <div className="flex items-center border border-gray-200 rounded-xl bg-gray-50/50 overflow-hidden shadow-sm">
-                              <button
-                                type="button"
-                                onClick={() => handleQuantityChange(-1)}
-                                className="px-4 py-2 text-gray-400 hover:bg-white hover:text-black transition-all font-black text-lg"
-                                aria-label="Decrease quantity"
-                              >
-                                -
-                              </button>
-                              <span className="px-5 py-2 text-sm text-black font-black min-w-[3.5rem] text-center border-x border-gray-200 bg-white shadow-inner">
-                                {quantity}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => handleQuantityChange(1)}
-                                className="px-4 py-2 text-gray-400 hover:bg-white hover:text-black transition-all font-black text-lg"
-                                aria-label="Increase quantity"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-3 px-4 py-2 bg-black/5 rounded-xl border border-black/5">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse shadow-glow"></div>
-                            <div className="flex flex-col">
-                              <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest leading-none mb-1">{t("deliveryEstimate")}</span>
-                              <span className="text-xs font-black text-gray-900 leading-none">{t("march2026")}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-right">
-                          <div className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-1">{t("itemTotal")}</div>
-                          <div className="text-2xl font-black text-black">
-                            {formatPrice(originalSubtotal)}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Order Summary Section */}
-              <div className="bg-white p-5 sm:p-8 rounded-2xl border border-gray-200 shadow-sm font-mona">
-                <h3 className="text-lg sm:text-xl font-black text-gray-900 mb-6 flex items-center justify-between uppercase tracking-tight">
-                  {t("orderSummary")}
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">{quantity} {t("items")}</span>
-                </h3>
-
-                <div className="space-y-4">
-                  {/* Subtotal */}
-                  <div className="flex justify-between items-center text-gray-500">
-                    <span className="text-sm sm:text-base font-bold uppercase tracking-wider">{t("subtotal")}</span>
-                    <span className="text-base sm:text-lg font-black text-gray-900">
-                      {formatPrice(originalSubtotal)}
-                    </span>
-                  </div>
-
-                  {/* Delivery */}
-                  <div className="flex justify-between items-center text-gray-500">
-                    <span className="text-sm sm:text-base font-bold uppercase tracking-wider">{t("delivery")}</span>
-                    <span className="text-base sm:text-lg font-black text-gray-900">
-                      {calculating ? "..." : formatPrice(shippingFee)}
-                    </span>
-                  </div>
-
-                  {/* Discount */}
-                  <div className="flex justify-between items-center p-4 bg-red-50/50 rounded-2xl border border-red-100">
-                    <div className="flex flex-col">
-                      <span className="text-sm font-black text-red-900 uppercase tracking-tight">{t("preOrderDiscount")}</span>
-                      <span className="text-[10px] text-red-500 font-black uppercase tracking-widest mt-0.5">{t("offRetailPrice")}</span>
-                    </div>
-                    <div className="text-xl sm:text-2xl font-black text-red-700">
-                      -{formatPrice(discountAmount)}
-                    </div>
-                  </div>
-
-                  {/* Total */}
-                  <div className="flex justify-between items-center pt-8 mt-4 border-t-2 border-dashed border-gray-100">
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-black text-gray-900 uppercase tracking-tighter leading-none">{t("total")}</span>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">{t("subtotalMinusDiscount")}</span>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-black text-black text-right">
-                      {formatPrice(total)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Left Column - Billing Address (Second on mobile, First on desktop) */}
-          <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="bg-white p-4 sm:p-6 lg:p-10 rounded-2xl border border-gray-200 shadow-2xl overflow-hidden group">
-              <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-8 flex items-center gap-3 uppercase tracking-tight">
-                <span className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-sm shadow-lg">2</span>
-                {t("billingAddress")}
-              </h2>
-
-              <div className="space-y-6">
-                {/* Full Name Split */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                      {t("firstName")}
-                    </label>
+            <div className="space-y-2.5 sm:space-y-3 md:space-y-4">
+              {/* Full Name Split for integration */}
+              <div>
+                <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                  {t("fullName")}
+                </label>
+                <div className="flex gap-2">
+                  <div className="flex-1">
                     <input
                       type="text"
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder={t("firstName")}
-                      className={`w-full bg-gray-50 border-2 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all ${fieldErrors.firstName ? 'border-red-500 bg-red-50' : 'border-gray-50 hover:bg-gray-100/50'}`}
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.firstName ? 'border-red-500' : 'border-gray-200'}`}
                     />
-                    {fieldErrors.firstName && <p className="text-red-600 text-[9px] mt-2 font-black uppercase tracking-wider pl-1">{fieldErrors.firstName}</p>}
+                    {fieldErrors.firstName && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.firstName}</p>}
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                      {t("lastName")}
-                    </label>
+                  <div className="flex-1">
                     <input
                       type="text"
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
                       placeholder={t("lastName")}
-                      className={`w-full bg-gray-50 border-2 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all ${fieldErrors.lastName ? 'border-red-500 bg-red-50' : 'border-gray-50 hover:bg-gray-100/50'}`}
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.lastName ? 'border-red-500' : 'border-gray-200'}`}
                     />
-                    {fieldErrors.lastName && <p className="text-red-600 text-[9px] mt-2 font-black uppercase tracking-wider pl-1">{fieldErrors.lastName}</p>}
+                    {fieldErrors.lastName && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.lastName}</p>}
                   </div>
                 </div>
+              </div>
 
-                {/* Email */}
-                <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                    {t("emailAddress")}
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    readOnly
-                    className="w-full bg-gray-100 border-2 border-gray-100 rounded-xl px-5 py-4 text-sm font-bold text-gray-400 cursor-not-allowed shadow-inner"
-                  />
-                </div>
+              {/* Email */}
+              <div>
+                <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                  {t("emailAddress")}
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  readOnly
+                  className={`w-full bg-gray-100 border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm text-gray-500 cursor-not-allowed focus:outline-none ${fieldErrors.email ? 'border-red-500' : 'border-gray-200'}`}
+                />
+                {fieldErrors.email && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.email}</p>}
+              </div>
 
-                {/* Phone Number */}
-                <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                    {t("phoneNumber")}
-                  </label>
-                  <div className="flex flex-col xs:flex-row gap-3 relative" ref={dropdownRef}>
-                    <div className="relative w-full xs:w-44">
-                      <div
-                        onClick={() => setIsCodeDropdownOpen(!isCodeDropdownOpen)}
-                        className="w-full bg-gray-50 border-2 border-gray-100 rounded-xl px-4 py-4 text-sm font-black focus:outline-none focus:ring-4 focus:ring-black/5 cursor-pointer flex justify-between items-center group transition-all hover:bg-gray-100"
-                      >
-                        <span className="flex items-center gap-2">
-                          <span className="text-gray-400 font-medium">{countryCodes.find(c => c.code === selectedCountryCode)?.iso || "AE"}</span>
-                          <span>{selectedCountryCode}</span>
-                        </span>
-                        <span className="text-[10px] text-gray-300 group-hover:text-black transform transition-transform group-hover:translate-y-0.5">▼</span>
-                      </div>
+              {/* Phone Number - HEAD styles with Tail data */}
+              <div>
+                <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                  {t("phoneNumber")}
+                </label>
+                <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 relative" ref={dropdownRef}>
+                  <div className="relative w-full sm:w-auto sm:min-w-[160px]">
+                    <div
+                      onClick={() => setIsCodeDropdownOpen(!isCodeDropdownOpen)}
+                      className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 cursor-pointer flex justify-between items-center"
+                    >
+                      <span className="truncate">
+                        {countryCodes.find(c => c.code === selectedCountryCode && c.iso === (countryCodes.find(curr => curr.code === selectedCountryCode)?.iso))?.iso || ""} {selectedCountryCode}
+                      </span>
 
-                      {isCodeDropdownOpen && (
-                        <div className="absolute z-50 left-0 right-0 mt-3 bg-white border border-gray-200 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] max-h-72 overflow-y-auto w-full xs:w-80 animate-in fade-in slide-in-from-top-4 duration-300">
-                          <div className="p-4 sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 group">
-                            <input
-                              type="text"
-                              placeholder={t("searchPlaceholder")}
-                              value={codeSearchTerm}
-                              onChange={(e) => setCodeSearchTerm(e.target.value)}
-                              onClick={(e) => e.stopPropagation()}
-                              className="w-full px-5 py-3 text-xs bg-gray-50 border-2 border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:bg-white transition-all font-bold"
-                            />
-                          </div>
-                          <div className="py-2">
-                            {filteredCountryCodes.length > 0 ? (
-                              filteredCountryCodes.map((item, idx) => (
-                                <button
-                                  key={`${item.iso}-${item.code}-${idx}`}
-                                  type="button"
-                                  onClick={() => handleCountryCodeSelect(item)}
-                                  className="w-full px-6 py-4 text-xs text-left hover:bg-gray-50 flex items-center justify-between border-b border-gray-50 last:border-0 group/item transition-colors"
-                                >
-                                  <div className="flex flex-col">
-                                    <span className="font-black text-gray-900 group-hover/item:text-black">{item.country}</span>
-                                    <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-1 opacity-60">{item.iso}</span>
-                                  </div>
-                                  <span className="text-black font-black bg-gray-100 px-2.5 py-1 rounded-lg group-hover/item:bg-black group-hover/item:text-white transition-all">{item.code}</span>
-                                </button>
-                              ))
-                            ) : (
-                              <div className="px-5 py-8 text-xs text-gray-400 text-center font-bold italic opacity-50 uppercase tracking-widest">
-                                No results found
-                              </div>
-                            )}
-                          </div>
+                    </div>
+
+                    {isCodeDropdownOpen && (
+                      <div className="absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto w-full sm:w-64">
+                        <div className="p-2 sticky top-0 bg-white border-b border-gray-100">
+                          <input
+                            type="text"
+                            placeholder={t("searchPlaceholder")}
+                            value={codeSearchTerm}
+                            onChange={(e) => setCodeSearchTerm(e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full px-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-black"
+                          />
                         </div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="551234567"
-                        className={`w-full bg-gray-50 border-2 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all ${fieldErrors.phone ? 'border-red-500 bg-red-50' : 'border-gray-50 hover:bg-gray-100/50'}`}
-                      />
-                    </div>
-                  </div>
-                  {fieldErrors.phone && <p className="text-red-600 text-[9px] mt-2 font-black uppercase tracking-wider pl-1">{fieldErrors.phone}</p>}
-                </div>
-
-                {/* Address */}
-                <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                    {t("address")}
-                  </label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    placeholder={t("streetAddress")}
-                    className={`w-full bg-gray-50 border-2 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all ${fieldErrors.address ? 'border-red-500 bg-red-50' : 'border-gray-50 hover:bg-gray-100/50'}`}
-                  />
-                  {fieldErrors.address && <p className="text-red-600 text-[9px] mt-2 font-black uppercase tracking-wider pl-1">{fieldErrors.address}</p>}
-                </div>
-
-                {/* Country & State */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                      {t("country")}
-                    </label>
-                    <div className="relative">
-                      <select
-                        name="country"
-                        value={formData.country}
-                        onChange={handleInputChange}
-                        className={`w-full bg-gray-50 border-2 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black appearance-none transition-all ${fieldErrors.country ? 'border-red-500 bg-red-50' : 'border-gray-50 hover:bg-gray-100/50'}`}
-                      >
-                        <option value="" disabled>{t("selectCountry")}</option>
-                        {[...new Set(countryCodes.map(c => c.country))].sort().map(countryName => (
-                          <option key={countryName} value={countryName}>{countryName}</option>
-                        ))}
-                      </select>
-                      <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] text-gray-300">
-                        ▼
+                        <div className="py-1">
+                          {filteredCountryCodes.length > 0 ? (
+                            filteredCountryCodes.map((item, idx) => (
+                              <button
+                                key={`${item.iso}-${item.code}-${idx}`}
+                                type="button"
+                                onClick={() => handleCountryCodeSelect(item)}
+                                className="w-full px-4 py-2.5 text-xs text-left hover:bg-gray-50 flex items-center justify-between border-b border-gray-50 last:border-0"
+                              >
+                                <span className="font-medium text-gray-900">{item.country}</span>
+                                <span className="text-gray-500">{item.code}</span>
+                              </button>
+                            ))
+                          ) : (
+                            <div className="px-4 py-3 text-xs text-gray-400 text-center italic">
+                              No results found
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    {fieldErrors.country && <p className="text-red-600 text-[9px] mt-2 font-black uppercase tracking-wider pl-1">{fieldErrors.country}</p>}
+                    )}
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                      {t("stateEmirate")}
-                    </label>
+                  <div className="flex-1 relative">
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="55 123 4567"
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.phone ? 'border-red-500' : 'border-gray-200'}`}
+                    />
+                  </div>
+                </div>
+                {fieldErrors.phone && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.phone}</p>}
+              </div>
+
+              {/* Address */}
+              <div>
+                <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                  {t("address")}
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  placeholder={t("streetAddress")}
+                  className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.address ? 'border-red-500' : 'border-gray-200'}`}
+                />
+                {fieldErrors.address && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.address}</p>}
+              </div>
+
+              {/* Country & State */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
+                <div>
+                  <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                    {t("country")}
+                  </label>
+                  <div className="relative">
+                    <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none text-gray-700 ${fieldErrors.country ? 'border-red-500' : 'border-gray-200'}`}
+                    >
+                      <option value="" disabled>{t("selectCountry")}</option>
+                      {[...new Set(countryCodes.map(c => c.country))].sort().map(countryName => (
+                        <option key={countryName} value={countryName}>{countryName}</option>
+                      ))}
+                    </select>
+
+                  </div>
+                  {fieldErrors.country && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.country}</p>}
+                </div>
+                <div>
+                  <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                    {t("stateEmirate")}
+                  </label>
+                  <div className="relative">
                     <input
                       type="text"
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
                       placeholder={t("dubai")}
-                      className="w-full bg-gray-50 border-2 border-gray-100 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all hover:bg-gray-100/50"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
                     />
                   </div>
                 </div>
+              </div>
 
-                {/* City & Zip Code */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                      {t("city")}
+              {/* City & Zip Code */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
+                <div>
+                  <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                    {t("city")}
+                  </label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    placeholder={t("enterYourCity")}
+                    className={`w-full bg-white border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400 ${fieldErrors.city ? 'border-red-500' : 'border-gray-200'}`}
+                  />
+                  {fieldErrors.city && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.city}</p>}
+                </div>
+                <div>
+                  <label className="block text-xs sm:text-sm text-gray-600 mb-1 pl-1">
+                    {t("zipPostalCode")}
+                  </label>
+                  <input
+                    type="text"
+                    name="zipCode"
+                    value={formData.zipCode}
+                    onChange={handleInputChange}
+                    placeholder={t("enterPostalCode")}
+                    className="w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                  />
+                </div>
+              </div>
+
+              {/* Payment Method Section - HEAD Styles with Tail Logic */}
+              <div className="pt-3 sm:pt-4 md:pt-6">
+                <div className="bg-white p-3 sm:p-4 md:p-6 rounded-xl border border-gray-200">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-3 sm:mb-4">
+                    {t("paymentMethod")}
+                  </h3>
+
+                  <div className="space-y-3 sm:space-y-4">
+                    {/* Stripe/Card Option */}
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg cursor-pointer transition-colors ${formData.paymentMethod === 'stripe' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200 hover:border-gray-300'}`}>
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="stripe"
+                        checked={formData.paymentMethod === 'stripe'}
+                        onChange={handleInputChange}
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                          <div className="min-w-0">
+                            <span className="font-medium text-gray-900 text-sm sm:text-base">{t("creditDebitCard")}</span>
+                            <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
+                              {t("payWithCards")}
+                            </p>
+                          </div>
+                          <div className="flex gap-1.5 sm:gap-2 mt-1 sm:mt-0">
+                            <FaCcVisa className="text-xl sm:text-2xl text-blue-900 shrink-0" />
+                            <FaCcMastercard className="text-xl sm:text-2xl text-red-600 shrink-0" />
+                            <FaCcAmex className="text-xl sm:text-2xl text-blue-600 shrink-0" />
+                          </div>
+                        </div>
+                      </div>
                     </label>
-                    <input
-                      type="text"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleInputChange}
-                      placeholder={t("enterYourCity")}
-                      className={`w-full bg-gray-50 border-2 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all ${fieldErrors.city ? 'border-red-500 bg-red-50' : 'border-gray-50 hover:bg-gray-100/50'}`}
-                    />
-                    {fieldErrors.city && <p className="text-red-600 text-[9px] mt-2 font-black uppercase tracking-wider pl-1">{fieldErrors.city}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2.5 pl-1">
-                      {t("zipPostalCode")}
+
+                    {/* Tamara Option */}
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg cursor-pointer transition-colors ${formData.paymentMethod === 'tamara' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200 hover:border-gray-300'}`}>
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="tamara"
+                        checked={formData.paymentMethod === 'tamara'}
+                        onChange={handleInputChange}
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                          <div className="min-w-0">
+                            <span className="font-medium text-gray-900 text-sm sm:text-base">{t("payWithTamara")}</span>
+                            <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
+                              {t("payIn4Installments")}
+                            </p>
+                          </div>
+                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0">
+                            <Image
+                              src={TmaraPayment}
+                              alt="Tamara Payment"
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 640px) 56px, 64px"
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </label>
-                    <input
-                      type="text"
-                      name="zipCode"
-                      value={formData.zipCode}
-                      onChange={handleInputChange}
-                      placeholder={t("enterPostalCode")}
-                      className="w-full bg-gray-50 border-2 border-gray-100 rounded-xl px-5 py-4 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all hover:bg-gray-100/50"
-                    />
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                {/* Payment Method Section */}
-                <div className="pt-8">
-                  <div className="bg-gray-50 p-5 sm:p-6 rounded-2xl border border-gray-100">
-                    <h3 className="text-sm sm:text-base font-black text-gray-900 uppercase tracking-tight mb-5">
-                      {t("paymentMethod")}
-                    </h3>
+          {/* Right Column - Your Order */}
+          <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-7 order-1 lg:order-2">
+            <div className="flex flex-col h-full">
+              <div className="flex-1">
+                <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
+                  {t("yourOrder")}
+                </h2>
 
-                    <div className="space-y-4">
-                      {/* Stripe/Card Option */}
-                      <label className={`flex items-start gap-5 p-5 bg-white border-2 rounded-2xl cursor-pointer transition-all duration-300 ${formData.paymentMethod === 'stripe' ? 'border-black shadow-xl scale-[1.02] ring-8 ring-black/5' : 'border-transparent hover:border-gray-200 opacity-60 hover:opacity-100'}`}>
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="stripe"
-                          checked={formData.paymentMethod === 'stripe'}
-                          onChange={handleInputChange}
-                          className="mt-1.5 w-5 h-5 text-black border-gray-300 focus:ring-black accent-black"
+                {/* Order Items Container */}
+                <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                  {/* Product Card */}
+                  <div className="bg-white p-3 sm:p-4 rounded-xl border border-gray-200 shadow-sm relative group">
+
+
+                    <div className="flex gap-3 sm:gap-4">
+                      {/* Product Image */}
+                      <div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 shrink-0 bg-gray-50 rounded-lg flex items-center justify-center p-2">
+                        <Image
+                          src={product.images?.[0]?.url || "/images/placeholder.png"}
+                          alt={product.name}
+                          width={96}
+                          height={96}
+                          className="object-contain w-full h-full"
+                          priority
                         />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-4">
-                            <div className="min-w-0">
-                              <span className="font-black text-gray-900 text-base sm:text-lg uppercase tracking-tight">{t("creditDebitCard")}</span>
-                              <p className="text-[10px] text-gray-400 mt-1 font-bold uppercase tracking-widest leading-relaxed">
-                                {t("payWithCards")}
-                              </p>
+                      </div>
+
+                      {/* Product Details */}
+                      <div className="flex-1 min-w-0">
+                        {/* Product Title & Price */}
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-2 sm:mb-3">
+                          <h3 className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg line-clamp-2">
+                            {t(product.name)}
+                          </h3>
+                          <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
+                            {formatPrice(product.price || 860)}
+                          </div>
+                        </div>
+
+                        {/* Product Features */}
+                        <div className="grid grid-cols-1 xs:grid-cols-2 gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                          {product.features?.map((feature, idx) => (
+                            <div key={idx} className="flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-900 shrink-0"></span>
+                              <span className="text-xs text-gray-600 truncate">{t(feature)}</span>
                             </div>
-                            <div className="flex gap-3 bg-gray-50 p-2 rounded-xl">
-                              <FaCcVisa className="text-3xl text-blue-800" />
-                              <FaCcMastercard className="text-3xl text-red-500" />
-                              <FaCcAmex className="text-3xl text-blue-600" />
+                          ))}
+                        </div>
+
+                        {/* Quantity Control & Delivery Estimate */}
+                        <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-3 pt-3 border-t border-gray-100">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                                {t("quantityLabel")}
+                              </span>
+                              <div className="flex items-center border border-gray-200 rounded-md bg-white">
+                                <button
+                                  type="button"
+                                  onClick={() => handleQuantityChange(-1)}
+                                  className="px-2.5 py-1 text-gray-500 hover:text-black transition-colors"
+                                  aria-label="Decrease quantity"
+                                >
+                                  -
+                                </button>
+                                <span className="px-2.5 py-1 text-sm text-gray-700 font-medium min-w-[2rem] text-center border-x border-gray-200">
+                                  {quantity}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => handleQuantityChange(1)}
+                                  className="px-2.5 py-1 text-gray-500 hover:text-black transition-colors"
+                                  aria-label="Increase quantity"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <svg className="w-4 h-4 text-gray-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                              </svg>
+                              <div className="flex flex-col">
+                                <span className="text-xs text-gray-500">{t("deliveryEstimate")}</span>
+                                <span className="text-sm font-medium text-gray-900">{t("march2026")}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="text-right">
+                            <div className="text-xs text-gray-500 mb-1">{t("itemTotal")}</div>
+                            <div className="flex items-center justify-end text-base sm:text-lg font-bold text-gray-900">
+                              {formatPrice(originalSubtotal)}
                             </div>
                           </div>
                         </div>
-                      </label>
-
-                      {/* Tamara Option */}
-                      <label className={`flex items-start gap-4 p-4 bg-white border-2 rounded-xl cursor-pointer transition-all ${formData.paymentMethod === 'tamara' ? 'border-teal-500 ring-4 ring-teal-500/5' : 'border-transparent hover:border-gray-200'}`}>
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="tamara"
-                          checked={formData.paymentMethod === 'tamara'}
-                          onChange={handleInputChange}
-                          className="mt-1 w-5 h-5 text-teal-600 border-gray-300 focus:ring-teal-500 accent-teal-600"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-3">
-                            <div className="min-w-0">
-                              <span className="font-black text-gray-900 text-sm sm:text-base">{t("payWithTamara")}</span>
-                              <p className="text-xs text-gray-500 mt-1 font-medium italic">
-                                {t("payIn4Installments")}
-                              </p>
-                            </div>
-                            <div className="relative w-16 h-6">
-                              <Image
-                                src={TmaraPayment}
-                                alt="Tamara Payment"
-                                fill
-                                className="object-contain"
-                                sizes="64px"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </label>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Actions */}
-                <div className="pt-8">
-                  {formError && (
-                    <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg flex items-center gap-3 text-red-700 animate-in fade-in slide-in-from-top-2">
-                      <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                      </svg>
-                      <p className="text-xs font-black uppercase tracking-wide">{formError}</p>
-                    </div>
-                  )}
+                {/* Order Summary Section */}
+                <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl border border-gray-200">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-4 sm:mb-5">
+                    {t("orderSummary")}
+                  </h3>
 
-                  <div className="flex flex-col gap-4">
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className={`w-full py-5 bg-black text-white rounded-2xl text-base font-black uppercase tracking-widest hover:bg-gray-900 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed`}
-                    >
-                      {submitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                          <span>{t("processing")}</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>{t("placeOrderPay")}</span>
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <div className="space-y-3 sm:space-y-4">
+                    {/* Subtotal */}
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-col">
+                        <span className="text-sm text-gray-700">{t("subtotal")}</span>
+                        <span className="text-xs text-gray-500">({quantity} {t("items")})</span>
+                      </div>
+                      <div className="flex items-center text-sm font-medium text-gray-900">
+                        {formatPrice(originalSubtotal)}
+                      </div>
+                    </div>
+
+                    {/* Delivery */}
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-col">
+                        <span className="text-sm text-gray-700">{t("delivery")}</span>
+                        <span className="text-xs text-gray-500">{t("standardShipping")}</span>
+                      </div>
+                      <div className="flex items-center text-sm font-medium text-gray-900">
+                        {calculating ? "..." : formatPrice(shippingFee)}
+                      </div>
+                    </div>
+
+                    {/* Discount */}
+                    <div className="flex justify-between items-center text-red-600 bg-red-50/50 p-2 rounded-lg border border-red-100/50">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold">{t("preOrderDiscount")}</span>
+                        <span className="text-xs opacity-80">{t("offRetailPrice")}</span>
+                      </div>
+                      <div className="flex items-center text-sm font-bold">
+                        -{formatPrice(discountAmount)}
+                      </div>
+                    </div>
+
+                    {/* Estimated Delivery */}
+                    <div className="flex justify-between items-center py-3 border-y border-gray-100">
+                      <div className="flex flex-col">
+                        <span className="text-sm text-gray-700">{t("estimatedDelivery")}</span>
+                        <span className="text-xs text-gray-500">{t("allItemsInOrder")}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-sm font-medium text-gray-900">{t("march2026")}</span>
+                      </div>
+                    </div>
+
+                    {/* Total */}
+                    <div className="flex justify-between items-center pt-3">
+                      <div className="flex flex-col">
+                        <span className="text-base sm:text-lg font-bold text-gray-900">{t("total")}</span>
+                        <span className="text-[10px] text-gray-500 italic">{t("subtotalMinusDiscount")}</span>
+                      </div>
+                      <div className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
+                        {formatPrice(total)}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="mt-6 sm:mt-8">
+                    {formError && (
+                      <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg flex items-center gap-2 text-red-600 animate-in fade-in slide-in-from-top-1 duration-300">
+                        <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                        <p className="text-xs font-medium">{formError}</p>
+                      </div>
+                    )}
+                    <div className="flex flex-col-reverse xs:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
+                      <button
+                        type="button"
+                        onClick={() => window.history.back()}
+                        className="flex-1 xs:flex-none px-5 sm:px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors xs:min-w-[140px]"
+                      >
+                        {t("cancelOrder")}
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        className={`flex-1 px-5 sm:px-6 py-3 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      >
+                        <span>{submitting ? t("processing") : t("placeOrderPay")}</span>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {formData.paymentMethod === "tamara" && (
+                      <p className="text-xs text-gray-500 text-center mb-6 -mt-4 italic">
+                        {t("chargedInAED")}
+                      </p>
+                    )}
+
+                    {/* Security Note */}
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="flex items-start gap-3">
+                        <div className="bg-green-50 rounded-full p-1.5 shrink-0">
+                          <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
-                        </>
-                      )}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => window.history.back()}
-                      className="w-full py-4 text-gray-400 font-bold uppercase tracking-widest text-xs hover:text-black transition-colors"
-                    >
-                      {t("cancelOrder")}
-                    </button>
-                  </div>
-
-                  {formData.paymentMethod === "tamara" && (
-                    <p className="text-[10px] text-gray-400 text-center mt-6 font-medium italic">
-                      {t("chargedInAED")}
-                    </p>
-                  )}
-
-                  {/* Security Note */}
-                  <div className="mt-8 pt-6 border-t border-gray-100 flex items-start gap-4">
-                    <div className="bg-green-50 rounded-xl p-2.5 shrink-0 border border-green-100">
-                      <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="text-xs font-black text-gray-900 uppercase tracking-widest mb-1">{t("securePayment")}</div>
-                      <div className="text-[10px] text-gray-500 leading-relaxed font-medium">
-                        {t("securePaymentDesc")}
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-gray-900 mb-1">{t("securePayment")}</div>
+                          <div className="text-xs text-gray-600 leading-relaxed">
+                            {t("securePaymentDesc")}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
