@@ -858,30 +858,30 @@ function OrderContent() {
                       </label>
 
                       {/* Tamara Option */}
-                      <label className={`flex items-start gap-5 p-5 bg-white border-2 rounded-2xl cursor-pointer transition-all duration-300 ${formData.paymentMethod === 'tamara' ? 'border-[#00D1C1] shadow-xl scale-[1.02] ring-8 ring-[#00D1C1]/5' : 'border-transparent hover:border-gray-200 opacity-60 hover:opacity-100'}`}>
+                      <label className={`flex items-start gap-4 p-4 bg-white border-2 rounded-xl cursor-pointer transition-all ${formData.paymentMethod === 'tamara' ? 'border-teal-500 ring-4 ring-teal-500/5' : 'border-transparent hover:border-gray-200'}`}>
                         <input
                           type="radio"
                           name="paymentMethod"
                           value="tamara"
                           checked={formData.paymentMethod === 'tamara'}
                           onChange={handleInputChange}
-                          className="mt-1.5 w-5 h-5 text-[#00D1C1] border-gray-300 focus:ring-[#00D1C1] accent-[#00D1C1]"
+                          className="mt-1 w-5 h-5 text-teal-600 border-gray-300 focus:ring-teal-500 accent-teal-600"
                         />
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-4">
+                          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-3">
                             <div className="min-w-0">
-                              <span className="font-black text-gray-900 text-base sm:text-lg uppercase tracking-tight">{t("payWithTamara")}</span>
-                              <p className="text-[10px] text-gray-400 mt-1 font-bold uppercase tracking-widest leading-relaxed">
+                              <span className="font-black text-gray-900 text-sm sm:text-base">{t("payWithTamara")}</span>
+                              <p className="text-xs text-gray-500 mt-1 font-medium italic">
                                 {t("payIn4Installments")}
                               </p>
                             </div>
-                            <div className="relative w-20 h-8 bg-gray-50 p-2 rounded-xl flex items-center justify-center">
+                            <div className="relative w-16 h-6">
                               <Image
                                 src={TmaraPayment}
                                 alt="Tamara Payment"
                                 fill
-                                className="object-contain p-1"
-                                sizes="80px"
+                                className="object-contain"
+                                sizes="64px"
                               />
                             </div>
                           </div>
@@ -892,15 +892,13 @@ function OrderContent() {
                 </div>
 
                 {/* Bottom Actions */}
-                <div className="pt-10 font-mona">
+                <div className="pt-8">
                   {formError && (
-                    <div className="mb-8 p-5 bg-red-50 border-l-4 border-red-600 rounded-2xl flex items-center gap-4 text-red-700 animate-in fade-in slide-in-from-top-4 duration-500">
-                      <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-                        <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <p className="text-xs font-black uppercase tracking-[0.1em]">{formError}</p>
+                    <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg flex items-center gap-3 text-red-700 animate-in fade-in slide-in-from-top-2">
+                      <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      </svg>
+                      <p className="text-xs font-black uppercase tracking-wide">{formError}</p>
                     </div>
                   )}
 
@@ -908,51 +906,48 @@ function OrderContent() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className={`w-full py-6 bg-black text-white rounded-2xl text-lg font-black uppercase tracking-[0.3em] overflow-hidden group/btn relative transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed`}
+                      className={`w-full py-5 bg-black text-white rounded-2xl text-base font-black uppercase tracking-widest hover:bg-gray-900 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed`}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover/btn:opacity-10 transition-opacity duration-500"></div>
-                      <div className="relative z-10 flex items-center justify-center gap-4">
-                        {submitting ? (
-                          <>
-                            <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
-                            <span className="animate-pulse">{t("processing")}</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>{t("placeOrderPay")}</span>
-                            <svg className="w-6 h-6 transform group-hover/btn:translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                          </>
-                        )}
-                      </div>
+                      {submitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          <span>{t("processing")}</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>{t("placeOrderPay")}</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </>
+                      )}
                     </button>
 
                     <button
                       type="button"
                       onClick={() => window.history.back()}
-                      className="w-full py-4 text-gray-400 font-black uppercase tracking-[0.3em] text-[10px] hover:text-black transition-all duration-300 border-2 border-transparent hover:border-gray-100 rounded-2xl"
+                      className="w-full py-4 text-gray-400 font-bold uppercase tracking-widest text-xs hover:text-black transition-colors"
                     >
                       {t("cancelOrder")}
                     </button>
                   </div>
 
                   {formData.paymentMethod === "tamara" && (
-                    <p className="text-[9px] text-gray-400 text-center mt-10 font-black uppercase tracking-[0.2em] opacity-40">
+                    <p className="text-[10px] text-gray-400 text-center mt-6 font-medium italic">
                       {t("chargedInAED")}
                     </p>
                   )}
 
                   {/* Security Note */}
-                  <div className="mt-12 pt-8 border-t border-gray-100 flex items-start gap-5 group/sec">
-                    <div className="bg-green-50 rounded-2xl p-3.5 shrink-0 border border-green-100 group-hover/sec:bg-green-100 transition-colors duration-500">
-                      <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="mt-8 pt-6 border-t border-gray-100 flex items-start gap-4">
+                    <div className="bg-green-50 rounded-xl p-2.5 shrink-0 border border-green-100">
+                      <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                     </div>
                     <div>
-                      <div className="text-xs font-black text-gray-900 uppercase tracking-[0.2em] mb-2">{t("securePayment")}</div>
-                      <div className="text-[10px] text-gray-500 leading-relaxed font-bold uppercase tracking-widest opacity-60">
+                      <div className="text-xs font-black text-gray-900 uppercase tracking-widest mb-1">{t("securePayment")}</div>
+                      <div className="text-[10px] text-gray-500 leading-relaxed font-medium">
                         {t("securePaymentDesc")}
                       </div>
                     </div>
