@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import { IoCloseCircleOutline, IoArrowBackOutline } from "react-icons/io5";
 import newCurrencySymbol from '../../../public/images/newSymbole.png';
@@ -14,6 +14,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 function OrderContent() {
@@ -744,7 +745,7 @@ function OrderContent() {
                       className="absolute top-3 right-3 sm:top-4 sm:right-4 text-[#9B1111] hover:text-red-600 transition-colors z-10 bg-white rounded-full p-0.5"
                       aria-label="Remove item"
                     >
-
+                      <IoCloseCircleOutline size={24} />
                     </button>
 
                     <div className="flex gap-3 sm:gap-4">

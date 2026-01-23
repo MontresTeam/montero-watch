@@ -96,7 +96,7 @@ const Page = () => {
                       <div className="flex items-center gap-2">
                         <span className="text-xl font-bold text-white">{formatPrice(799)}</span>
                         <span className="text-sm text-white/50 line-through">{formatPrice(860)}</span>
-                        <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">7% OFF</span>
+                        <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">7% {t("off")}</span>
                       </div>
                     </div>
                     <span className="text-sm sm:text-base">{t("preOrderNow")}</span>
@@ -193,9 +193,9 @@ const Page = () => {
               <div className="flex items-center gap-3">
                 <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
                 <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
-                <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% OFF</span>
+                <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% {t("off")}</span>
               </div>
-              <p className="text-xs text-gray-500 font-medium">Pre-Order Price (Official retail price: {formatPrice(860)})</p>
+              <p className="text-xs text-gray-500 font-medium">{t("pricePreOrder", { price: formatPrice(860) })}</p>
             </div>
 
             {/* Order Button - HEAD Style, Integrated with Product ID */}
@@ -668,7 +668,7 @@ const Page = () => {
                 disabled={loading}
                 className="bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition rounded-lg min-h-[44px] disabled:opacity-50"
               >
-                {loading ? "..." : "Subscribe Now"}
+                {loading ? t("loading") : t("subscribeBtn")}
               </button>
             </form>
           </div>

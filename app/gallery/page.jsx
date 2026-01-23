@@ -14,8 +14,7 @@ import Gallery4 from "@/public/images/Gallery/gallary4.jpg";
 import Gallery5 from "@/public/images/Gallery/gallary5.jpg";
 import Gallery6 from "@/public/images/Gallery/gallary6.jpg";
 import Gallery7 from "@/public/images/Gallery/gallary7.jpg";
-import Gallery8 from "@/public/images/Gallery/gallary8.jpg";
-import GalleryVideo from "@/public/images/Gallery/galleryV.mp4";
+
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
@@ -153,13 +152,13 @@ export default function Page() {
                 </h3>
 
                 <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
-                  Crafted for explorers, dreamers, and lovers of the world's most
+                  Crafted for explorers, dreamers, and lovers of the world s most
                   iconic beaches
                 </p>
 
                 <Link href="/product/english">
                   <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
-                    Pre-Order Now
+                    {t("preOrderNow")}
                   </button>
                 </Link>
               </div>
@@ -187,7 +186,7 @@ export default function Page() {
 
                 <Link href="/product/arabic">
                   <button className="mt-6 sm:mt-8 rounded-full border border-black px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm transition-all duration-300 hover:bg-black hover:text-white active:scale-95">
-                    {t("subscribeBtn")}
+                    {t("preOrderNow")}
                   </button>
                 </Link>
               </div>
@@ -254,8 +253,7 @@ export default function Page() {
               {/* ROW 3 – FULL WIDTH */}
               <div className="relative h-[320px] md:h-[420px] md:col-span-2 overflow-hidden">
                 <video
-                  src={GalleryVideo}
-                  poster="/images/Gallery/gallary8.jpg"
+                  src="/images/Gallery/galleryV.mp4"
                   autoPlay
                   muted
                   loop

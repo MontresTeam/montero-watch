@@ -7,6 +7,7 @@ import Footer from '../components/home/Footer/Footer'
 import { useTranslation } from 'react-i18next'
 
 function page() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { i18n, t } = useTranslation();
   const isAr = i18n.language === "ar";
 

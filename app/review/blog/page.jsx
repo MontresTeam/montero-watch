@@ -17,6 +17,8 @@ import Blog6 from "@/public/images/Blog/gmt3.jpg";
 import Blog7 from "@/public/images/Blog/gmt11.jpg";
 
 const Page = () => {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === "ar";
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -284,21 +286,6 @@ const Page = () => {
               </div>
             </div>
 
-            {/* RIGHT FORM */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <div className="flex items-center bg-gray-100 px-4 py-3 sm:py-4 w-full rounded-md transition-all duration-300 hover:bg-gray-200">
-                <Mail className="mr-4" />
-                <input
-                  type="email"
-                  placeholder={t("emailPlaceholder")}
-                  className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-400"
-                />
-              </div>
-
-              <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium whitespace-nowrap rounded-md transition-all duration-300 hover:bg-gray-800 active:scale-95">
-                {t("subscribeBtn")}
-              </button>
-            </div>
 
             {/* RIGHT FORM */}
             <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto">
@@ -307,7 +294,7 @@ const Page = () => {
                 <input
                   type="email"
                   required
-                  placeholder="Enter your e-mail"
+                  placeholder={t("emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-transparent outline-none w-full text-xs sm:text-sm placeholder:text-gray-400"
@@ -319,7 +306,7 @@ const Page = () => {
                 disabled={loading}
                 className="bg-black text-white px-8 sm:px-10 py-3 sm:py-4 text-xs sm:text-sm font-semibold whitespace-nowrap rounded-md transition-all duration-300 hover:bg-gray-900 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
               >
-                {loading ? "..." : "Subscribe Now"}
+                {loading ? t("loading") : t("subscribeBtn")}
               </button>
             </form>
           </div>
