@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "../components/navBar/NavBar";
 import Footer from "../components/home/Footer/Footer";
 import { useTranslation } from "react-i18next";
@@ -27,7 +28,7 @@ export default function Page() {
       <Navbar />
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[65vh] sm:h-screen w-full overflow-hidden">
+      <section className="relative h-[65vh] sm:h-[75vh] w-full overflow-hidden">
         <Image
           src={Blog1}
           alt="Montero GMT Hero"
@@ -40,10 +41,10 @@ export default function Page() {
 
         <div className="relative z-10 flex h-full items-center justify-center px-4">
           <div className="max-w-3xl text-center text-white">
-            <h1 className="font-cormorant text-[clamp(1.75rem,5vw,3.5rem)]">
+            <h1 className="font-cormorant text-[clamp(2rem,6vw,4.5rem)] leading-tight">
               {t("reviewHeroTitle")}
             </h1>
-            <p className="mt-4 text-sm sm:text-base opacity-90">
+            <p className="mt-6 text-sm sm:text-lg opacity-90 max-w-2xl mx-auto font-light tracking-wide">
               {t("reviewHeroSub")}
             </p>
           </div>
@@ -52,15 +53,13 @@ export default function Page() {
 
       {/* ================= INTRO ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
-        <section className="bg-white px-4 py-14">
-          <div className="mx-auto max-w-3xl text-center">
-
-            <h2 className="font-cormorant mt-6 text-3xl">
+        <section className="bg-white px-4 py-20 sm:py-28">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="font-cormorant text-3xl sm:text-5xl mb-8">
               {t("welcomeMontero")}
             </h2>
-
-            <p className="mt-5 text-gray-600 text-sm leading-relaxed">
-              {t("recentUpdateText", { defaultValue: "Thank you for your continued trust and patience. We're excited to share a new exclusive production update for the Montero GMT." })}
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              {t("recentUpdateText")}
             </p>
           </div>
         </section>
@@ -68,51 +67,90 @@ export default function Page() {
 
       {/* ================= BLOG GRID ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
-        <section className="bg-white px-4 pb-20">
+        <section className="bg-white px-4 pb-28">
           <div className="mx-auto max-w-7xl">
-
-            <div className="text-center mb-12">
-              <h2 className="font-cormorant text-3xl">
+            <div className="text-center mb-16">
+              <h2 className="font-cormorant text-3xl sm:text-5xl mb-4">
                 {t("updatesTitle")}
               </h2>
-              <p className="mt-2 text-gray-600 text-sm max-w-xl mx-auto">
+              <p className="text-gray-500 text-sm sm:text-base max-w-xl mx-auto">
                 {t("updatesDesc")}
               </p>
             </div>
 
             {/* 🔥 FIXED GRID */}
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              <BlogCard img={Blog2} category={t("lumeUpgrade", { defaultValue: "Lume Upgrade" })} date={t("productionLocked")}
-                title={t("lumeTitle", { defaultValue: "Enhanced Super-LumiNova" })}
-                desc={t("lumeDesc", { defaultValue: "Only land areas receive lume for higher contrast." })} />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+              <BlogCard
+                img={Blog2}
+                category={t("lumeUpgrade")}
+                date={t("productionLocked")}
+                title={t("lumeTitle")}
+                desc={t("lumeDesc")}
+                href="/review/blog#lume"
+              />
 
-              <BlogCard img={Blog3} category={t("gmtFunction", { defaultValue: "GMT Function" })} date={t("verified")}
-                title={t("gmtTitle", { defaultValue: "Improved GMT Hand Visibility" })}
-                desc={t("gmtDesc", { defaultValue: "Enlarged red GMT pointer improves recognition." })} />
+              <BlogCard
+                img={Blog3}
+                category={t("gmtFunction")}
+                date={t("verified")}
+                title={t("gmtTitle")}
+                desc={t("gmtDesc")}
+                href="/review/blog#mechanism"
+              />
 
-              <BlogCard img={Blog4} category={t("designRefinement", { defaultValue: "Design Refinement" })} date={t("finalized")}
-                title={t("buckleTitle", { defaultValue: "Refined Buckle Design" })}
-                desc={t("buckleDesc", { defaultValue: "Clean buckle with Montero logo only." })} />
+              <BlogCard
+                img={Blog4}
+                category={t("designRefinement")}
+                date={t("finalized")}
+                title={t("buckleTitle")}
+                desc={t("buckleDesc")}
+                href="/review/blog#buckle"
+              />
 
-              <BlogCard img={Blog5} category={t("ergonomics", { defaultValue: "Ergonomics" })} date={t("optimized")}
-                title={t("crownTitle", { defaultValue: "GMT Crown Optimization" })}
-                desc={t("crownDesc", { defaultValue: "Partially hidden crown for better comfort." })} />
+              <BlogCard
+                img={Blog5}
+                category={t("ergonomics")}
+                date={t("optimized")}
+                title={t("crownTitle")}
+                desc={t("crownDesc")}
+                href="/review/blog#crown"
+              />
 
-              <BlogCard img={Blog6} category={t("construction", { defaultValue: "Construction" })} date={t("confirmed")}
-                title={t("casebackTitle", { defaultValue: "Screw-Down Caseback" })}
-                desc={t("casebackDesc", { defaultValue: "Durable caseback with limited serial numbers." })} />
+              <BlogCard
+                img={Blog6}
+                category={t("construction")}
+                date={t("confirmed")}
+                title={t("casebackTitle")}
+                desc={t("casebackDesc")}
+                href="/review/blog#caseback"
+              />
 
-              <BlogCard img={Blog7} category={t("performance", { defaultValue: "Performance" })} date={t("tested")}
-                title={t("mechanismTitle", { defaultValue: "GMT Mechanism Verified" })}
-                desc={t("mechanismDesc", { defaultValue: "Independent and accurate time zone tracking." })} />
+              <BlogCard
+                img={Blog7}
+                category={t("performance")}
+                date={t("tested")}
+                title={t("mechanismTitle")}
+                desc={t("mechanismDesc")}
+                href="/review/blog#mechanism"
+              />
 
-              <BlogCard img={Blog8} category={t("engineering", { defaultValue: "Engineering" })} date={t("completed")}
-                title={t("precisionTitle", { defaultValue: "Movement Precision Tuned" })}
-                desc={t("precisionDesc", { defaultValue: "±2 seconds per day accuracy." })} />
+              <BlogCard
+                img={Blog8}
+                category={t("engineering")}
+                date={t("completed")}
+                title={t("precisionTitle")}
+                desc={t("precisionDesc")}
+                href="/review/blog"
+              />
 
-              <BlogCard img={Blog2} category={t("materials", { defaultValue: "Materials" })} date={t("upgraded")}
-                title={t("ceramicTitle", { defaultValue: "Ceramic Bezel" })}
-                desc={t("ceramicDesc", { defaultValue: "Scratch-resistant ceramic bezel." })} />
+              <BlogCard
+                img={Blog2}
+                category={t("materials")}
+                date={t("upgraded")}
+                title={t("ceramicTitle")}
+                desc={t("ceramicDesc")}
+                href="/review/blog"
+              />
             </div>
           </div>
         </section>
@@ -130,60 +168,79 @@ function ScrollAnimation({ children, animationClass }) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setShow(true),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShow(true);
+          observer.unobserve(entry.target);
+        }
+      },
       { threshold: 0.15 }
     );
-    ref.current && observer.observe(ref.current);
+    if (ref.current) observer.observe(ref.current);
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
   }, []);
 
   return (
-    <div ref={ref} className={`${show ? animationClass : "opacity-0 translate-y-6"} transition-all duration-700`}>
+    <div
+      ref={ref}
+      className={`${show ? animationClass : "opacity-0 translate-y-10"
+        } transition-all duration-1000 ease-out`}
+    >
       {children}
     </div>
   );
 }
 
 /* ================= BLOG CARD ================= */
-function BlogCard({ img, category, date, title, desc }) {
-  const [open, setOpen] = useState(false);
+function BlogCard({ img, category, date, title, desc, href }) {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition">
-
-      {/* ✅ IMAGE FIX */}
-      <div className="relative w-full aspect-[4/3] bg-gray-100">
+    <Link
+      href={href}
+      className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
+    >
+      {/* IMAGE */}
+      <div className="relative w-full aspect-square overflow-hidden bg-white p-4">
         <Image
           src={img}
           alt={title}
           fill
-          sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw"
-          className="object-cover"
+          sizes="(max-width:640px) 50vw, (max-width:1024px) 50vw, 25vw"
+          className="object-contain transition-transform duration-700 group-hover:scale-110"
         />
+        <div className="absolute inset-0 bg-black/[0.02] group-hover:bg-black/0 transition-colors" />
+
+        {/* Wishlist Icon */}
+        <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white hover:text-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+        </button>
       </div>
 
-      <div className="p-4">
-        <div className="flex gap-2 text-[11px] text-gray-500 mb-2">
-          <span className="bg-gray-100 px-2 py-1 rounded">{category}</span>
-          <span>{date}</span>
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
+          <span className="bg-gray-100 text-gray-600 text-[9px] sm:text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full w-fit">
+            {category}
+          </span>
+          <span className="text-[10px] sm:text-[11px] text-gray-400 font-light">{date}</span>
         </div>
 
-        <h3 className="font-semibold text-sm mb-2 line-clamp-2">
+        <h3 className="font-semibold text-sm sm:text-lg mb-2 leading-tight group-hover:text-gray-700 transition-colors line-clamp-2">
           {title}
         </h3>
 
-        <p className={`text-xs text-gray-600 leading-relaxed ${open ? "" : "line-clamp-3"}`}>
+        <p className="text-[11px] sm:text-sm text-gray-500 leading-relaxed line-clamp-2 mb-4 sm:mb-6 font-light">
           {desc}
         </p>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="mt-3 text-xs text-gray-500 hover:text-black flex items-center gap-1"
-        >
-          {open ? t("readLess") : t("readMore")}
-          <ArrowRight className={`h-3 w-3 ${open && "rotate-90"}`} />
-        </button>
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-black group-hover:gap-4 transition-all">
+          {t("readMore")}
+          <ArrowRight className="h-3 sm:h-3.5 w-3 sm:w-3.5 transition-transform" />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

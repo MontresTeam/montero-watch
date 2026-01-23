@@ -12,8 +12,12 @@ import MapImage from "@/public/images/Home/map.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Locations = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const sectionRef = useRef(null);
+
+  // Get current language
+  const currentLanguage = i18n.language || 'en';
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -71,13 +75,14 @@ const Locations = () => {
       </div>
 
       {/* Map Image */}
-      <div className="max-w-7xl mx-auto px-4 py-20 about-images">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <Image
           src={MapImage}
           width={1200}
           height={800}
-          alt="locations"
-          className="locations-map mb-10 w-full h-auto"
+          alt={currentLanguage === 'ar' ? 'خريطة المواقع' : 'locations map'}
+          className="locations-map mb-6 sm:mb-8 lg:mb-10 w-full h-auto rounded-lg shadow-lg"
+          priority
         />
       </div>
 

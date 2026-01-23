@@ -148,12 +148,11 @@ export default function Page() {
                 </div>
 
                 <h3 className="font-cormorant mt-6 sm:mt-8 lg:mt-10 text-xl sm:text-2xl lg:text-3xl text-black">
-                  Montero English Edition
+                  {t("monteroEnglishEdition")}
                 </h3>
 
                 <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
-                  Crafted for explorers, dreamers, and lovers of the world s most
-                  iconic beaches
+                  {t("galleryHeroSub")}
                 </p>
 
                 <Link href="/product/english">

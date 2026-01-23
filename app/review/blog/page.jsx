@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
-import { Mail } from "lucide-react";
+import { Mail, ArrowRight } from "lucide-react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 import "@/lib/i18n";
@@ -53,9 +53,9 @@ const Page = () => {
           <div className="mx-auto max-w-7xl">
             {/* TOP BAR */}
             <div className="mb-8 sm:mb-10 flex items-center gap-4 sm:gap-6">
-              {/* BACK BUTTON - Fixed to go back to reviews page */}
+              {/* BACK BUTTON - Fixed to go back to review page */}
               <Link
-                href="/reviews" // Changed from "/review" to "/reviews" (assuming this is your reviews page)
+                href="/review"
                 className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-gray-300 transition-all duration-300 hover:bg-gray-100 hover:border-gray-400"
               >
                 <FaArrowLeft className="text-xs sm:text-sm" />
@@ -75,24 +75,22 @@ const Page = () => {
         </section>
       </ScrollAnimation>
 
-      {/* HERO IMAGE - Fixed with proper image configuration */}
+      {/* HERO IMAGE */}
       <ScrollAnimation animationClass="animate-slide-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
           <div className="mx-auto max-w-7xl">
-            <div className="relative h-[280px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-lg">
+            <div className="relative h-[300px] sm:h-[450px] md:h-[550px] lg:h-[650px] w-full overflow-hidden rounded-2xl shadow-2xl">
               <Image
-                src={InnerBlog1} // Ensure this image is high-resolution in your public folder
+                src={InnerBlog1}
                 alt={t("heroAlt")}
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                sizes="(max-width: 768px) 100vw, 1200px"
                 className="object-cover"
-                quality={90} // Increased quality
-                placeholder="blur" // Add blur placeholder if image supports it
+                quality={100}
               />
             </div>
-            {/* Optional: Add image caption */}
-            <p className="text-xs text-gray-500 mt-2 text-center italic">
+            <p className="text-xs text-gray-400 mt-4 text-center italic tracking-wide">
               {t("heroImageCaption", { defaultValue: "Montero GMT - Final Production Sample" })}
             </p>
           </div>
@@ -103,169 +101,184 @@ const Page = () => {
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-4xl">
-            <div className="space-y-5 sm:space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed">
-              <p>{t("byMontero")}</p>
+            <div className="space-y-8 sm:space-y-10 text-gray-700 text-base sm:text-lg leading-relaxed font-light">
+              <p className="font-medium text-black">{t("byMontero")}</p>
 
-              <hr className="my-6 border-gray-300" />
+              <hr className="border-gray-100" />
 
-              <p>{t("welcomeMontero")}</p>
-
-              <p>
-                {t("monteroIntro1", { defaultValue: "Thank you for your continued trust and patience. Were excited to share a new exclusive production update for the Montero GMT, following weeks of intensive refinement, testing, and collaboration." })}
+              <p className="text-xl sm:text-2xl font-cormorant italic text-gray-800">
+                {t("welcomeMontero")}
               </p>
 
               <p>
-                {t("monteroIntro2", { defaultValue: "Over the past period, our focus has been on enhancing legibility, night visibility, and overall functional precision, while maintaining the distinctive identity that defines Montero." })}
+                {t("monteroIntro1")}
               </p>
 
               <p>
-                {t("monteroIntro3", { defaultValue: "Below are the latest confirmed updates now locked into production." })}
+                {t("monteroIntro2")}
+              </p>
+
+              <p>
+                {t("monteroIntro3")}
               </p>
 
               {/* Enhanced Lume Section */}
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
-                {t("lumeHeading")}
-              </h2>
-              <p>
-                {t("lumeText", { defaultValue: "We ve refined the lume application to ensure superior night-time readability while preserving visual balance during the day." })}
-              </p>
-              <ul className="list-disc list-inside space-y-2">
-                <li>
-                  {t("lumeListItem1", { defaultValue: "Earth map: Only the land areas are treated with Super-LumiNova for improved contrast and a cleaner night appearance." })}
-                </li>
-                <li>{t("lumeListItem2", { defaultValue: "Blue Edition: Emits a blue lume glow at night." })}</li>
-                <li>{t("lumeListItem3", { defaultValue: "Green Edition: Emits a green lume glow at night." })}</li>
-                <li>
-                  {t("lumeListItem4", { defaultValue: "GMT Red Pointer: Now larger, more legible, and filled with red lume for instant GMT reference." })}
-                </li>
-              </ul>
+              <div id="lume" className="pt-8 scroll-mt-24">
+                <h2 className="font-cormorant text-2xl sm:text-4xl mb-6 text-black border-l-4 border-black pl-6">
+                  {t("lumeHeading")}
+                </h2>
+                <p className="mb-4">
+                  {t("lumeText")}
+                </p>
+                <ul className="space-y-3 pl-6">
+                  {["lumeListItem1", "lumeListItem2", "lumeListItem3", "lumeListItem4"].map((item, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="text-black mt-1.5">•</span>
+                      <span>{t(item)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* GMT Hand Visibility */}
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
-                {t("gmtVisibilityHeading")}
-              </h2>
-              <p>
-                {t("gmtHandText", { defaultValue: "The red GMT pointer has been intentionally enlarged to improve readability across time zones, especially in low-light conditions." })}
-              </p>
-              <ul className="list-disc list-inside space-y-2">
-                <li>{t("gmtListItem1", { defaultValue: "Faster GMT recognition" })}</li>
-                <li>{t("gmtListItem2", { defaultValue: "Balanced dial proportions" })}</li>
-                <li>{t("gmtListItem3", { defaultValue: "Enhanced night performance" })}</li>
-              </ul>
+              <div id="gmt" className="pt-8 scroll-mt-24">
+                <h2 className="font-cormorant text-2xl sm:text-4xl mb-6 text-black border-l-4 border-black pl-6">
+                  {t("gmtVisibilityHeading")}
+                </h2>
+                <p className="mb-4">
+                  {t("gmtHandText")}
+                </p>
+                <ul className="space-y-3 pl-6">
+                  {["gmtListItem1", "gmtListItem2", "gmtListItem3"].map((item, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="text-black mt-1.5">•</span>
+                      <span>{t(item)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* Buckle Design */}
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
-                {t("buckleHeading")}
-              </h2>
-              <ul className="list-disc list-inside space-y-2">
-                <li>{t("buckleListItem1", { defaultValue: "The buckle will feature the Montero logo only" })}</li>
-                <li>
-                  {t("buckleListItem2", { defaultValue: "All additional markings have been removed for a refined finish" })}
-                </li>
-              </ul>
+              <div id="buckle" className="pt-8 scroll-mt-24">
+                <h2 className="font-cormorant text-2xl sm:text-4xl mb-6 text-black border-l-4 border-black pl-6">
+                  {t("buckleHeading")}
+                </h2>
+                <ul className="space-y-3 pl-6">
+                  {["buckleListItem1", "buckleListItem2"].map((item, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="text-black mt-1.5">•</span>
+                      <span>{t(item)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* GMT Crown */}
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
-                {t("crownHeading")}
-              </h2>
-              <ul className="list-disc list-inside space-y-2">
-                <li>
-                  {t("crownListItem1", { defaultValue: "The GMT crown will be partially or fully hidden, depending on final ergonomic validation" })}
-                </li>
-                <li>{t("crownListItem2", { defaultValue: "This improves wearability without affecting functionality" })}</li>
-              </ul>
+              <div id="crown" className="pt-8 scroll-mt-24">
+                <h2 className="font-cormorant text-2xl sm:text-4xl mb-6 text-black border-l-4 border-black pl-6">
+                  {t("crownHeading")}
+                </h2>
+                <ul className="space-y-3 pl-6">
+                  {["crownListItem1", "crownListItem2"].map((item, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="text-black mt-1.5">•</span>
+                      <span>{t(item)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* Caseback */}
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
-                {t("casebackHeading")}
-              </h2>
-              <ul className="list-disc list-inside space-y-2">
-                <li>{t("casebackListItem1", { defaultValue: "Improved durability" })}</li>
-                <li>{t("casebackListItem2", { defaultValue: "Secure construction" })}</li>
-                <li>{t("casebackListItem3", { defaultValue: "Long-term reliability" })}</li>
-                <li>{t("casebackListItem4", { defaultValue: "Limited Edition serial numbering" })}</li>
-                <li>{t("casebackListItem5", { defaultValue: "Clear English & Arabic lettering" })}</li>
-                <li>
-                  {t("casebackListItem6", { defaultValue: "Optimized font size and engraving depth for clarity" })}
-                </li>
-              </ul>
+              <div id="caseback" className="pt-8 scroll-mt-24">
+                <h2 className="font-cormorant text-2xl sm:text-4xl mb-6 text-black border-l-4 border-black pl-6">
+                  {t("casebackHeading")}
+                </h2>
+                <ul className="space-y-3 pl-6">
+                  {["casebackListItem1", "casebackListItem2", "casebackListItem3", "casebackListItem4", "casebackListItem5", "casebackListItem6"].map((item, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="text-black mt-1.5">•</span>
+                      <span>{t(item)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* GMT Function */}
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl mt-8">
-                {t("mechanismHeading")}
-              </h2>
-              <p>
-                {t("mechanismText1", { defaultValue: "We confirm that the GMT mechanism is working accurately and independently, ensuring correct time zone tracking without interference." })}
-              </p>
-              <p>
-                {t("mechanismText2", { defaultValue: "This was a critical functional checkpoint and is now fully validated." })}
-              </p>
+              <div id="mechanism" className="pt-8 scroll-mt-24">
+                <h2 className="font-cormorant text-2xl sm:text-4xl mb-6 text-black border-l-4 border-black pl-6">
+                  {t("mechanismHeading")}
+                </h2>
+                <p className="mb-4">
+                  {t("mechanismText1")}
+                </p>
+                <p>
+                  {t("mechanismText2")}
+                </p>
+              </div>
 
-              <p className="mt-6">
-                {t("closingUpdate", { defaultValue: "We ll continue sharing transparent updates as we move closer to delivery." })}
-              </p>
+              <div className="pt-10 space-y-4">
+                <p className="italic">
+                  {t("closingUpdate")}
+                </p>
+                <p className="font-medium">{t("partOfJourney")}</p>
+              </div>
 
-              <p>{t("partOfJourney", { defaultValue: "Thank you for being part of the Montero journey" })}</p>
-
-              <p className="mt-6 font-cormorant text-lg">
-                {t("byMontero")}
-                <br />
-                {t("tagline")}
-              </p>
+              <div className="pt-12">
+                <p className="font-cormorant text-2xl leading-tight">
+                  {t("byMontero")}
+                  <br />
+                  <span className="text-gray-400 text-lg font-light">{t("tagline")}</span>
+                </p>
+              </div>
             </div>
           </div>
         </section>
       </ScrollAnimation>
 
-      {/* POPULAR POST SECTION - Fixed links to connect properly */}
+      {/* POPULAR POST SECTION */}
       <ScrollAnimation animationClass="animate-fade-in-up">
-        <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <section className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 sm:mb-12 flex items-center justify-between">
-              <h2 className="font-cormorant text-2xl sm:text-3xl lg:text-4xl">
-                {t("popularPosts")}
-              </h2>
+            <div className="mb-12 flex items-end justify-between">
+              <div>
+                <h2 className="font-cormorant text-3xl sm:text-5xl mb-4">
+                  {t("popularPosts")}
+                </h2>
+                <div className="h-1 w-20 bg-black" />
+              </div>
 
-              <Link href="/reviews"> {/* Fixed to /reviews */}
-                <button className="bg-black text-white px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm rounded-md transition-all duration-300 hover:bg-gray-800 active:scale-95">
+              <Link href="/review">
+                <button className="border border-black text-black px-8 py-3 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-500">
                   {t("viewAll")}
                 </button>
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
-              <ScrollAnimation animationClass="animate-slide-in-up" delay={0}>
-                <BlogCard
-                  img={Blog5}
-                  category={t("watches")}
-                  date={t("blogDate1")}
-                  title={t("blogTitle1")}
-                  desc={t("blogDesc1")}
-                  href="/reviews/gmt-evolution" // Added href prop
-                />
-              </ScrollAnimation>
-
-              <ScrollAnimation animationClass="animate-slide-in-up" delay={100}>
-                <BlogCard
-                  img={Blog6}
-                  category={t("design")}
-                  date={t("blogDate2")}
-                  title={t("blogTitle2")}
-                  desc={t("blogDesc2")}
-                  href="/reviews/design-philosophy" // Added href prop
-                />
-              </ScrollAnimation>
-
-              <ScrollAnimation animationClass="animate-slide-in-up" delay={200}>
-                <BlogCard
-                  img={Blog7}
-                  category={t("technology")}
-                  date={t("blogDate3")}
-                  title={t("blogTitle3")}
-                  desc={t("blogDesc3")}
-                  href="/reviews/lume-technology" // Added href prop
-                />
-              </ScrollAnimation>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+              <BlogCard
+                img={Blog5}
+                category={t("watches")}
+                date={t("blogDate1")}
+                title={t("blogTitle1")}
+                desc={t("blogDesc1")}
+                href="/review/blog"
+              />
+              <BlogCard
+                img={Blog6}
+                category={t("design")}
+                date={t("blogDate2")}
+                title={t("blogTitle2")}
+                desc={t("blogDesc2")}
+                href="/review/blog"
+              />
+              <BlogCard
+                img={Blog7}
+                category={t("technology")}
+                date={t("blogDate3")}
+                title={t("blogTitle3")}
+                desc={t("blogDesc3")}
+                href="/review/blog"
+              />
             </div>
           </div>
         </section>
@@ -363,40 +376,52 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   );
 }
 
-/* ================= BLOG CARD COMPONENT - Updated ================= */
+/* ================= BLOG CARD COMPONENT ================= */
 function BlogCard({ img, category, date, title, desc, href = "#" }) {
   const { t } = useTranslation();
+
   return (
-    <Link href={href} className="group cursor-pointer block">
-      <div className="relative h-[220px] sm:h-[240px] lg:h-[260px] w-full overflow-hidden rounded-lg">
+    <Link
+      href={href}
+      className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
+    >
+      {/* IMAGE */}
+      <div className="relative w-full aspect-square overflow-hidden bg-white p-4">
         <Image
           src={img}
           alt={title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          quality={85}
+          sizes="(max-width:640px) 50vw, (max-width:1024px) 50vw, 25vw"
+          className="object-contain transition-transform duration-700 group-hover:scale-110"
         />
+        <div className="absolute inset-0 bg-black/[0.02] group-hover:bg-black/0 transition-colors" />
+
+        {/* Wishlist Icon */}
+        <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white hover:text-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+        </button>
       </div>
 
-      <div className="mt-4 sm:mt-5 flex gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500">
-        <span className="transition-colors duration-300 hover:text-gray-700">
-          {category}
-        </span>
-        <span>•</span>
-        <span>{date}</span>
-      </div>
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
+          <span className="bg-gray-100 text-gray-600 text-[9px] sm:text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full w-fit">
+            {category}
+          </span>
+          <span className="text-[10px] sm:text-[11px] text-gray-400 font-light">{date}</span>
+        </div>
 
-      <h3 className="mt-2 sm:mt-3 font-mona text-base sm:text-lg lg:text-xl leading-snug transition-colors duration-300 group-hover:text-gray-700">
-        {title}
-      </h3>
+        <h3 className="font-semibold text-sm sm:text-lg mb-2 leading-tight group-hover:text-gray-700 transition-colors line-clamp-2">
+          {title}
+        </h3>
 
-      <p className="mt-2 sm:mt-3 text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
-        {desc}
-      </p>
+        <p className="text-[11px] sm:text-sm text-gray-500 leading-relaxed line-clamp-2 mb-4 sm:mb-6 font-light">
+          {desc}
+        </p>
 
-      <div className="mt-3 sm:mt-4 inline-block text-xs sm:text-sm text-blue-600 transition-all duration-300 hover:text-blue-700 hover:underline group-hover:translate-x-1">
-        {t("readMore")}...
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-black group-hover:gap-4 transition-all">
+          {t("readMore")}
+          <ArrowRight className="h-3 sm:h-3.5 w-3 sm:w-3.5 transition-transform" />
+        </div>
       </div>
     </Link>
   );

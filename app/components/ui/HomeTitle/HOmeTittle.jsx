@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import Link from "next/link";
 gsap.registerPlugin(ScrollTrigger);
 
 const HOmeTittle = ({ title, description }) => {
+  const { t } = useTranslation();
   const wrapperRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
@@ -68,7 +70,7 @@ const HOmeTittle = ({ title, description }) => {
             ref={ctaRef}
             className="bg-black text-white px-10 py-3 rounded-full text-base font-medium hover:opacity-80 transition"
           >
-            View Details
+            {t("viewDetails")}
           </button>
         </Link>
       </div>
