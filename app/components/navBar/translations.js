@@ -1098,13 +1098,5 @@ export const translations = {
         date: "التاريخ",
         item: "عنصر",
         items: "عناصر",
-        "NH34 GMT Movement": "حركة NH34 GMT",
-        "World Time Bezel": "إطار التوقيت العالمي",
-        "Sapphire Crystal": "كريستال الياقوت",
-        "5 ATM Water Resistance": "مقاومة الماء 5 ATM",
-        "41mm Case Diameter": "قطر العلبة 41 ملم",
-        "Polished & Brushed Finishing": "لمسات نهائية مصقولة وغير لامعة",
-        "Screw-Down Caseback": "غطاء خلفي ببراغي",
-        "Limited Edition Engraving": "نقش إصدار محدود",
     },
 };
