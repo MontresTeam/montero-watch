@@ -141,14 +141,7 @@ function SuccessContent() {
                             {t("continueShopping")}
                         </Link>
                     )}
-                    {(status === "paid" || status === "error") && (
-                        <Link
-                            href="/account/orders"
-                            className="w-full border border-neutral-300 text-neutral-700 py-3.5 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium transition-all duration-200 hover:bg-neutral-100 flex items-center justify-center"
-                        >
-                            {t("viewYourOrders")}
-                        </Link>
-                    )}
+                   
                 </div>
 
                 {status === "paid" && (
