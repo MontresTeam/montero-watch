@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
-import { IoCloseCircleOutline, IoArrowBackOutline } from "react-icons/io5";
+import { IoArrowBackOutline } from "react-icons/io5";
 import newCurrencySymbol from '../../../public/images/newSymbole.png';
 import {
   FaCcVisa,
@@ -451,7 +451,7 @@ function OrderContent() {
       <form onSubmit={(e) => handlePlaceOrder(e)}> {/* Wrap in form for enter key submission if desired */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
           {/* Left Column - Billing Address */}
-          <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-5">
+          <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-5 order-2 lg:order-1">
             <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
               {t("billingAddress")}
             </h2>
@@ -517,7 +517,7 @@ function OrderContent() {
                       <span className="truncate">
                         {countryCodes.find(c => c.code === selectedCountryCode && c.iso === (countryCodes.find(curr => curr.code === selectedCountryCode)?.iso))?.iso || ""} {selectedCountryCode}
                       </span>
-                      <span className="text-xs text-gray-500">Γû╝</span>
+
                     </div>
 
                     {isCodeDropdownOpen && (
@@ -602,9 +602,7 @@ function OrderContent() {
                         <option key={countryName} value={countryName}>{countryName}</option>
                       ))}
                     </select>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs text-gray-500">
-                      Γû╝
-                    </div>
+
                   </div>
                   {fieldErrors.country && <p className="text-red-500 text-[10px] mt-1">{fieldErrors.country}</p>}
                 </div>
@@ -728,7 +726,7 @@ function OrderContent() {
           </div>
 
           {/* Right Column - Your Order */}
-          <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-7">
+          <div className="bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 rounded-xl lg:rounded-2xl lg:col-span-7 order-1 lg:order-2">
             <div className="flex flex-col h-full">
               <div className="flex-1">
                 <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
@@ -739,14 +737,7 @@ function OrderContent() {
                 <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                   {/* Product Card */}
                   <div className="bg-white p-3 sm:p-4 rounded-xl border border-gray-200 shadow-sm relative group">
-                    <button
-                      type="button"
-                      onClick={() => window.history.back()}
-                      className="absolute top-3 right-3 sm:top-4 sm:right-4 text-[#9B1111] hover:text-red-600 transition-colors z-10 bg-white rounded-full p-0.5"
-                      aria-label="Remove item"
-                    >
-                      <IoCloseCircleOutline size={24} />
-                    </button>
+
 
                     <div className="flex gap-3 sm:gap-4">
                       {/* Product Image */}
@@ -765,8 +756,8 @@ function OrderContent() {
                       <div className="flex-1 min-w-0">
                         {/* Product Title & Price */}
                         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-2 sm:mb-3">
-                          <h3 className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg pr-8 sm:pr-10 line-clamp-2">
-                            {product.name}
+                          <h3 className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg line-clamp-2">
+                            {t(product.name)}
                           </h3>
                           <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
                             {formatPrice(product.price || 860)}
@@ -778,7 +769,7 @@ function OrderContent() {
                           {product.features?.map((feature, idx) => (
                             <div key={idx} className="flex items-center gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-blue-900 shrink-0"></span>
-                              <span className="text-xs text-gray-600 truncate">{feature}</span>
+                              <span className="text-xs text-gray-600 truncate">{t(feature)}</span>
                             </div>
                           ))}
                         </div>

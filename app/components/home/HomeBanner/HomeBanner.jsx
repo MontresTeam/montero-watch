@@ -122,6 +122,7 @@ export default function HomeBanner() {
   return (
     <section
       ref={sectionRef}
+      dir="ltr"
       className="relative min-h-screen overflow-hidden text-white"
     >
       {/* BACKGROUND */}
