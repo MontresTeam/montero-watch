@@ -943,10 +943,10 @@ function OrderContent() {
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900 mb-1">{t("securePayment")}</p>
-                          <p className="text-xs text-gray-600 leading-relaxed">
+                          <div className="text-sm font-medium text-gray-900 mb-1">{t("securePayment")}</div>
+                          <div className="text-xs text-gray-600 leading-relaxed">
                             {t("securePaymentDesc")}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>
