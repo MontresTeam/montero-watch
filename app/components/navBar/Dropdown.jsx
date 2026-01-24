@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import userAvatar from '../../../public/images/Avatar.png';
 import { useAuth } from '@/context/AuthContext';
@@ -14,6 +15,7 @@ import {
 
 function Dropdown({ onClose }) {
   const { user, logout } = useAuth();
+  const router = useRouter();
   const { t, i18n } = useTranslation();
   const isAr = i18n.language?.toLowerCase() === 'ar';
 
@@ -21,7 +23,7 @@ function Dropdown({ onClose }) {
 
 
 
-  
+
   return (
     <div className={`absolute top-0 right-0 w-[280px] rounded-xl bg-white shadow-2xl border border-neutral-200 p-5 ${isAr ? 'lang-ar' : ''}`}>
       {/* Close button */}
@@ -62,6 +64,10 @@ function Dropdown({ onClose }) {
           icon={<FiUser size={17} />}
           label={t("myProfile")}
           right={<FiChevronRight size={14} className="text-neutral-300" />}
+          onClick={() => {
+            router.push('/profile');
+            onClose();
+          }}
         />
 
         <MenuItem
