@@ -433,7 +433,7 @@ export const translations = {
         // Arabic Edition Product Page
         arabicEditionHeroAr: "A World Time Watch Inspired by Global Beaches",
         arabicEditionHeroSubAr: "Crafted for explorers, dreamers, and lovers of the world's most iconic beaches",
-        arabicRegionalEditionAr: "Montero Arabic Regional Edition",
+        arabicRegionalEditionAr: "Regional Arabic Edition",
         sapphireCrystalFeatureAr: "Sapphire Crystal",
         seikoMovementAr: "Seiko NH34 GMT Movement",
         waterResistanceAr: "5 ATM Water Resistance",

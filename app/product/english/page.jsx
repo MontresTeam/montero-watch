@@ -148,18 +148,18 @@ const Page = () => {
               </div>
 
               {/* Version Selector - Montero Section */}
-              <div className="flex justify-center gap-4 mt-2 mb-6 z-20">
+              <div className="flex justify-center gap-8 mt-2 mb-10 z-20">
                 {/* English Blue Option (Active) */}
                 <div className="relative cursor-pointer group">
-                  <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-blue-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-500">
-                    <Image src={Watch1} alt="English Edition" fill className="object-contain p-1" />
+                  <div className="w-28 h-28 rounded-2xl overflow-hidden border-2 border-blue-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-500">
+                    <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
                   </div>
                 </div>
 
                 {/* Arabic Green Option */}
                 <Link href="/product/arabic" className="group relative">
-                  <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white group-hover:border-emerald-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
-                    <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-1" />
+                  <div className="w-28 h-28 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-emerald-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
+                    <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
                   </div>
                 </Link>
               </div>

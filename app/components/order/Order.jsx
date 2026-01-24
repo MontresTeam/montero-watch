@@ -401,6 +401,43 @@ function OrderContent() {
     }
   };
 
+  const renderOrderButtons = (isTop = false) => (
+    <div className={`mt-4 ${isTop ? 'mb-6' : 'mb-8'}`}>
+      {formError && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg flex items-center gap-2 text-red-600 animate-in fade-in slide-in-from-top-1 duration-300">
+          <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+          </svg>
+          <p className="text-xs font-medium">{formError}</p>
+        </div>
+      )}
+      <div className="flex flex-col-reverse xs:flex-row gap-3 sm:gap-4">
+        <button
+          type="button"
+          onClick={() => window.history.back()}
+          className="flex-1 xs:flex-none px-5 sm:px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors xs:min-w-[140px]"
+        >
+          {t("cancelOrder")}
+        </button>
+        <button
+          type="submit"
+          disabled={submitting}
+          className={`flex-1 px-5 sm:px-6 py-3 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+        >
+          <span>{submitting ? t("processing") : t("placeOrderPay")}</span>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+      </div>
+      {formData.paymentMethod === "tamara" && (
+        <p className="text-xs text-gray-500 text-center mt-3 italic">
+          {t("chargedInAED")}
+        </p>
+      )}
+    </div>
+  );
+
   if (loading || authLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -721,6 +758,11 @@ function OrderContent() {
                     </label>
                   </div>
                 </div>
+
+                {/* Mobile-only checkout buttons after payment method */}
+                <div className="lg:hidden">
+                  {renderOrderButtons()}
+                </div>
               </div>
             </div>
           </div>
@@ -732,6 +774,7 @@ function OrderContent() {
                 <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
                   {t("yourOrder")}
                 </h2>
+
 
                 {/* Order Items Container */}
                 <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
@@ -878,67 +921,25 @@ function OrderContent() {
                       </div>
                     </div>
 
-                    {/* Total */}
-                    <div className="flex justify-between items-center pt-3">
-                      <div className="flex flex-col">
-                        <span className="text-base sm:text-lg font-bold text-gray-900">{t("total")}</span>
-                        <span className="text-[10px] text-gray-500 italic">{t("subtotalMinusDiscount")}</span>
-                      </div>
-                      <div className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
-                        {formatPrice(total)}
-                      </div>
-                    </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="mt-6 sm:mt-8">
-                    {formError && (
-                      <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg flex items-center gap-2 text-red-600 animate-in fade-in slide-in-from-top-1 duration-300">
-                        <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  {/* Desktop-only checkout buttons */}
+                  <div className="hidden lg:block">
+                    {renderOrderButtons()}
+                  </div>
+
+                  {/* Security Note */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="flex items-start gap-3">
+                      <div className="bg-green-50 rounded-full p-1.5 shrink-0">
+                        <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
-                        <p className="text-xs font-medium">{formError}</p>
                       </div>
-                    )}
-                    <div className="flex flex-col-reverse xs:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
-                      <button
-                        type="button"
-                        onClick={() => window.history.back()}
-                        className="flex-1 xs:flex-none px-5 sm:px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors xs:min-w-[140px]"
-                      >
-                        {t("cancelOrder")}
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className={`flex-1 px-5 sm:px-6 py-3 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
-                      >
-                        <span>{submitting ? t("processing") : t("placeOrderPay")}</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </button>
-                    </div>
-
-                    {formData.paymentMethod === "tamara" && (
-                      <p className="text-xs text-gray-500 text-center mb-6 -mt-4 italic">
-                        {t("chargedInAED")}
-                      </p>
-                    )}
-
-                    {/* Security Note */}
-                    <div className="pt-4 border-t border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="bg-green-50 rounded-full p-1.5 shrink-0">
-                          <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium text-gray-900 mb-1">{t("securePayment")}</div>
-                          <div className="text-xs text-gray-600 leading-relaxed">
-                            {t("securePaymentDesc")}
-                          </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900 mb-1">{t("securePayment")}</div>
+                        <div className="text-xs text-gray-600 leading-relaxed">
+                          {t("securePaymentDesc")}
                         </div>
                       </div>
                     </div>
