@@ -36,7 +36,7 @@ function SecondQuote() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % watches.length);
-    }, 3000);
+    }, 5000); // Slower interval for better UX
     return () => clearInterval(interval);
   }, []);
 
@@ -49,62 +49,74 @@ function SecondQuote() {
         {/* LEFT */}
         <div className="flex-1 w-full relative flex flex-col items-center">
 
-          {/* WATCHES */}
-          <div className="flex justify-center items-center gap-6 md:gap-12 relative z-10">
-            <div className="relative w-[160px] md:w-[280px] aspect-[3/5] drop-shadow-2xl">
-              <Image
-                key={currentWatch.front.src}
-                src={currentWatch.front}
-                alt="Watch Front"
-                fill
-                className="object-contain transition-transform duration-1000 hover:scale-105"
-                priority
-              />
+          {/* WATCHES - SMOOTH TRANSITION */}
+          <div className="flex justify-center items-center gap-4 sm:gap-6 md:gap-12 relative z-10 w-full max-w-[600px] h-[300px] sm:h-[400px] md:h-[500px]">
+            {/* Front Image Container */}
+            <div className="relative w-[45%] h-full">
+              {watches.map((watch, idx) => (
+                <div
+                  key={`front-${idx}`}
+                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${currentIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+                    }`}
+                >
+                  <Image
+                    src={watch.front}
+                    alt="Watch Front"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority={idx === 0}
+                  />
+                </div>
+              ))}
             </div>
 
-            <div className="relative w-[160px] md:w-[280px] aspect-[3/5] drop-shadow-2xl">
-              <Image
-                key={currentWatch.back.src}
-                src={currentWatch.back}
-                alt="Watch Back"
-                fill
-                className="object-contain transition-transform duration-1000 hover:scale-105"
-              />
+            {/* Back Image Container */}
+            <div className="relative w-[45%] h-full">
+              {watches.map((watch, idx) => (
+                <div
+                  key={`back-${idx}`}
+                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${currentIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+                    }`}
+                >
+                  <Image
+                    src={watch.back}
+                    alt="Watch Back"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority={idx === 0}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
           {/* ✅ FIXED COLOR DOTS */}
-          <div className="flex items-center gap-4 mt-8 md:mt-12">
+          <div className="flex items-center gap-4 mt-8 md:mt-12 z-20">
             {watches.map((watch, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Select ${idx === 0 ? "Green" : "Blue"} Watch`}
-                className={`w-6 h-6 rounded-full border transition-transform hover:scale-110 focus:outline-none ${
-                  idx === currentIndex
-                    ? "scale-110"
-                    : "bg-white border-gray-400 hover:border-gray-900"
-                }`}
-                style={
-                  idx === currentIndex
-                    ? {
-                        backgroundColor: watch.color,
-                        borderColor: watch.color,
-                      }
-                    : {}
-                }
+                className={`w-6 h-6 rounded-full border transition-all duration-300 focus:outline-none ${idx === currentIndex
+                    ? "scale-110 ring-2 ring-offset-2 ring-gray-300"
+                    : "bg-white border-gray-400 hover:border-gray-900 scale-100"
+                  }`}
+                style={{
+                  backgroundColor: watch.color,
+                  borderColor: watch.color,
+                }}
               />
             ))}
           </div>
         </div>
 
         {/* RIGHT */}
-        <div className="flex-1 w-full max-w-xl text-center lg:text-left mt-12 lg:mt-0">
-          <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-[#1A1A1A] leading-[1.1] mb-6">
+        <div className="flex-1 w-full max-w-xl text-center lg:text-left mt-8 lg:mt-0 px-4">
+          <h2 className="font-cormorant text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1A1A1A] leading-[1.1] mb-6 transition-all duration-500">
             {t("productHeroTitle")}
           </h2>
 
-          <p className="monospace text-gray-600 text-lg md:text-xl leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0">
+          <p className="monospace text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0 transition-all duration-500">
             {t("productHeroSub")}
           </p>
 
@@ -112,7 +124,7 @@ function SecondQuote() {
             onClick={handlePreOrder}
             className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium tracking-wide text-[#1A1A1A] border border-[#1A1A1A] rounded-full overflow-hidden transition-all duration-300 hover:text-white"
           >
-            <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
             <span className="relative z-10">{t("preOrderNow")}</span>
           </button>
         </div>

@@ -11,7 +11,10 @@ import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
+import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import newCurrency from '@/public/images/newSymbole.png'
+import Watch1 from "@/public/images/Home/watch1.png";
+import Watch2 from "@/public/images/Home/watch2.png";
 
 import { useRouter } from "next/navigation";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -78,45 +81,35 @@ const Page = () => {
         {/* Content Container */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-8 sm:py-12 lg:py-0">
           <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-6 sm:gap-8 lg:gap-12">
-            {/* Left Content */}
             <div className="w-full lg:max-w-xl text-center lg:text-left z-10 order-2 lg:order-1 px-2 sm:px-0">
               <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-cormorant text-white leading-tight mb-3 sm:mb-4 md:mb-6 mobile-heading">
                 {t("arabicEditionHeroAr")}
               </h1>
 
-              <p className="text-sm font-body font-extralight sm:text-base lg:text-lg text-white/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed mobile-text max-w-2xl mx-auto lg:mx-0">
+              <p className="text-sm font-body font-extralight sm:text-base lg:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed mobile-text max-w-2xl mx-auto lg:mx-0">
                 {t("arabicEditionHeroSubAr")}
               </p>
 
-              {/* Mobile-only Order Button - HEAD Style, Integrated with Product ID */}
-              <div className="lg:hidden mt-4">
-                <Link href={`/order?productId=${ARABIC_PRODUCT_ID}`} className="inline-block w-full max-w-xs mx-auto">
-                  <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors w-full flex items-center justify-center gap-2 min-h-[44px]">
-                    <div className="flex flex-col items-center gap-2 mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold text-white">{formatPrice(799)}</span>
-                        <span className="text-sm text-white/50 line-through">{formatPrice(860)}</span>
-                        <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">7% {t("off")}</span>
-                      </div>
-                    </div>
-                    <span className="text-sm sm:text-base">{t("preOrderNow")}</span>
-                  </button>
-                </Link>
-              </div>
+              <button
+                href={`/order?productId=${ARABIC_PRODUCT_ID}`}
+                onClick={handlePreOrder}
+                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-emerald-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                {t("preOrderNow")}
+              </button>
             </div>
 
             {/* Right Watch Image */}
-            <div className="relative w-full max-w-[240px] xs:max-w-[280px] sm:max-w-[350px] md:max-w-[480px] lg:max-w-[600px] xl:max-w-[700px] aspect-square order-1 lg:order-2 mx-auto lg:mx-0">
-              <div className="absolute inset-0 bg-gradient-radial from-emerald-400/20 to-transparent rounded-full blur-lg sm:blur-xl md:blur-2xl"></div>
+            <div className="relative w-full max-w-[280px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[600px] xl:max-w-[700px] aspect-square order-1 lg:order-2">
+              <div className="absolute inset-0 bg-gradient-radial from-emerald-400/20 to-transparent rounded-full blur-2xl"></div>
 
-              <div className="relative w-full h-full scale-105 sm:scale-110 md:scale-125 lg:scale-138">
+              <div className="relative w-full h-full scale-110 sm:scale-125 lg:scale-138">
                 <Image
                   src={Green1}
                   alt="Green World Time Watch"
                   fill
-                  className="object-contain drop-shadow-xl sm:drop-shadow-2xl"
+                  className="object-contain drop-shadow-2xl"
                   priority
-                  sizes="(max-width: 480px) 240px, (max-width: 768px) 280px, (max-width: 1024px) 380px, 600px"
                 />
               </div>
             </div>
@@ -149,6 +142,23 @@ const Page = () => {
                   className="object-contain"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 100vw, 50vw"
                 />
+              </div>
+            </div>
+
+            {/* Version Selector - Montero Section */}
+            <div className="flex justify-center gap-4 mb-6 z-20">
+              {/* English Blue Option */}
+              <Link href="/product/english" className="group relative">
+                <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white group-hover:border-blue-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
+                  <Image src={Watch1} alt="English Edition" fill className="object-contain p-1" />
+                </div>
+              </Link>
+
+              {/* Arabic Green Option (Active) */}
+              <div className="relative cursor-pointer group">
+                <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-emerald-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-emerald-500">
+                  <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-1" />
+                </div>
               </div>
             </div>
 

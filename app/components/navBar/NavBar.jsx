@@ -27,6 +27,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+  const [isMobileCurrencyOpen, setIsMobileCurrencyOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState("en");
   const [mounted, setMounted] = useState(false);
 
@@ -48,6 +49,7 @@ const Navbar = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const navRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const langRef = useRef(null);
   const currencyRef = useRef(null);
@@ -106,8 +108,25 @@ const Navbar = () => {
     );
   }, [isCurrencyOpen]);
 
+  /* CLICK OUTSIDE TO CLOSE MENUS */
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+        setIsLangOpen(false);
+        setIsCurrencyOpen(false);
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <nav className={`fixed top-0 left-0 w-full bg-white z-50 font-mona ${selectedLang === 'ar' ? 'lang-ar' : ''}`}>
+    <nav ref={navRef} className={`fixed top-0 left-0 w-full bg-white z-50 font-mona ${selectedLang === 'ar' ? 'lang-ar' : ''}`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className={`relative h-16 flex items-center justify-between ${selectedLang === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
           {/* LEFT MENU (Visually Left even in AR) */}
@@ -363,6 +382,43 @@ const Navbar = () => {
                   {lang.toUpperCase()}
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="border-t pt-4 w-full">
+            <button
+              onClick={() => setIsMobileCurrencyOpen(!isMobileCurrencyOpen)}
+              className={`flex items-center justify-between w-full py-1 ${selectedLang === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}
+            >
+              <span className={`text-sm text-gray-500 ${selectedLang === 'ar' ? 'text-right' : 'text-left'}`}>{t("currency")}</span>
+              <div className={`flex items-center gap-2 ${selectedLang === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <span className="text-sm font-medium uppercase text-black">{mounted ? currency : "USD"}</span>
+                <FaChevronDown
+                  className={`text-[10px] text-gray-500 transition-transform duration-300 ${isMobileCurrencyOpen ? "rotate-180" : ""}`}
+                />
+              </div>
+            </button>
+
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${isMobileCurrencyOpen ? "max-h-60 opacity-100 mt-3" : "max-h-0 opacity-0"}`}
+            >
+              <div className={`grid grid-cols-3 gap-2 ${selectedLang === 'ar' ? 'text-right' : 'text-left'}`}>
+                {SUPPORTED_CURRENCIES.map((curr) => (
+                  <button
+                    key={curr}
+                    onClick={() => {
+                      setCurrency(curr);
+                      setIsMobileCurrencyOpen(false);
+                    }}
+                    className={`px-2 py-2 rounded-md text-[13px] border text-center transition-colors ${mounted && currency === curr
+                      ? "bg-black text-white border-black"
+                      : "border-gray-200 text-gray-600 hover:bg-gray-50"
+                      }`}
+                  >
+                    {curr}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 

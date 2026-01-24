@@ -36,9 +36,9 @@ const ClientVoices = () => {
         </div>
 
         {/* Videos Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-12 md:gap-8">
           {videos.map((src, index) => (
-            <div key={index} className="relative h-[520px] overflow-hidden">
+            <div key={index} className="relative w-full aspect-[9/16] md:h-[520px] md:aspect-auto overflow-hidden rounded-lg md:rounded-none shadow-lg md:shadow-none">
               <iframe
                 src={src}
                 title={`Client review ${index + 1}`}
