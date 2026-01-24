@@ -98,7 +98,7 @@ const OurProducts = () => {
             ref={ctaRef}
             className="bg-black text-white px-6 sm:px-8 md:px-10 py-3 sm:py-3 rounded-full text-sm sm:text-base font-medium hover:opacity-80 transition w-full sm:w-auto"
           >
-            {t("viewDetails")}
+            {t("discoverMontero")}
           </button>
         </Link>
       </div>

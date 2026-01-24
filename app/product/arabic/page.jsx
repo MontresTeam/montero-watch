@@ -6,16 +6,16 @@ import { useTranslation } from "react-i18next";
 import newcurrency from "../../../public/images/dbff981dfc9f1a8358f03cc8ee71583a164e6ffc.png";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import ArabicEditionMain from "@/public/images/DSC08225-3-Photoroom.png";
 import Green1 from "@/public/images/GreenWatch/productGreen1.png";
 import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
-import newCurrency from '@/public/images/newSymbole.png'
+import EnglishEditionMain from "@/public/images/DSC08237-3-Photoroom (1).png";
 import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
-
 import { useRouter } from "next/navigation";
 import { useCurrency } from "@/context/CurrencyContext";
 import Navbar from "@/app/components/navBar/NavBar";
@@ -130,12 +130,12 @@ const Page = () => {
             </h2>
 
             {/* Watch Image */}
-            <div className="relative mb-3 sm:mb-4 overflow-hidden">
+            <div className="relative mb-8 sm:mb-12 overflow-hidden">
               <div
-                className="relative transform scale-200 z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]"
+                className="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px]"
               >
                 <Image
-                  src={Green2}
+                  src={ArabicEditionMain}
                   alt="Montero Arabic Regional Edition Watch"
                   fill
                   priority
@@ -205,7 +205,7 @@ const Page = () => {
                 <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
                 <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% {t("off")}</span>
               </div>
-              <p className="text-xs text-gray-500 font-medium">{t("pricePreOrder", { price: formatPrice(860) })}</p>
+              <p className="text-xs text-gray-500 font-medium">{t("pricePreOrderAr", { price: formatPrice(860) })}</p>
             </div>
 
             {/* Order Button - HEAD Style, Integrated with Product ID */}
