@@ -99,10 +99,9 @@ export default function WatchFeatures() {
               <div
                 className={`
                   w-5 h-5 rounded-full
-                  ${
-                    activeColor === "green"
-                      ? "bg-green-800"
-                      : "bg-white border border-neutral-400"
+                  ${activeColor === "green"
+                    ? "bg-green-800"
+                    : "bg-white border border-neutral-400"
                   }
                 `}
               />
@@ -111,11 +110,10 @@ export default function WatchFeatures() {
               <div
                 className={`
     w-5 h-5 rounded-full
-    ${
-      activeColor !== "green"
-        ? "bg-[#2596be]"
-        : "bg-white border border-neutral-400"
-    }
+    ${activeColor !== "green"
+                    ? "bg-[#2596be]"
+                    : "bg-white border border-neutral-400"
+                  }
   `}
               />
             </div>

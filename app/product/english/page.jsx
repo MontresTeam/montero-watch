@@ -10,7 +10,11 @@ import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
 import Blue4 from "@/public/images/BlueWatch/productBlue4.jpg";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
+import Green1 from "@/public/images/GreenWatch/productGreen1.png";
+import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
 import newCurrency from "@/public/images/newSymbole.png"
+import Watch1 from "@/public/images/Home/watch1.png";
+import Watch2 from "@/public/images/Home/watch2.png";
 import { useRouter } from "next/navigation";
 import { useCurrency } from "@/context/CurrencyContext";
 
@@ -77,11 +81,11 @@ const Page = () => {
           </div>
 
           {/* Content Container */}
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-12 lg:py-0">
-            <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-8 sm:py-12 lg:py-0">
+            <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-6 sm:gap-8 lg:gap-12">
               {/* Left Content */}
-              <div className="max-w-xl text-center lg:text-left z-10 order-2 lg:order-1">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-cormorant text-white leading-tight mb-4 sm:mb-6">
+              <div className="w-full lg:max-w-xl text-center lg:text-left z-10 order-2 lg:order-1 px-2 sm:px-0">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-cormorant text-white leading-tight mb-3 sm:mb-4 md:mb-6 mobile-heading">
                   {t("productHeroTitle")}
                 </h1>
 
@@ -142,6 +146,23 @@ const Page = () => {
                     className="object-contain"
                   />
                 </div>
+              </div>
+
+              {/* Version Selector - Montero Section */}
+              <div className="flex justify-center gap-4 mt-20 sm:mt-24 mb-6 z-20">
+                {/* English Blue Option (Active) */}
+                <div className="relative cursor-pointer group">
+                  <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-blue-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-500">
+                    <Image src={Watch1} alt="English Edition" fill className="object-contain p-1" />
+                  </div>
+                </div>
+
+                {/* Arabic Green Option */}
+                <Link href="/product/arabic" className="group relative">
+                  <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white group-hover:border-emerald-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
+                    <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-1" />
+                  </div>
+                </Link>
               </div>
 
               {/* Features Grid */}
