@@ -63,7 +63,7 @@ function WatchDisplay({ isSwapped, setIsSwapped }) {
 
     gsap.fromTo(
       smallRef.current,
-      { opacity: 0, scale: 0.9, x: -40 },
+      { opacity: 0, scale: 0.9, x: 40 },
       { opacity: 0.9, scale: 1, x: 0, duration: 1.2, ease: "power3.out" }
     );
   }, [isSwapped]);
@@ -76,7 +76,7 @@ function WatchDisplay({ isSwapped, setIsSwapped }) {
       {/* SMALL WATCH */}
       <div
         ref={smallRef}
-        className="absolute left-5 top-1/2 -translate-y-1/2 z-10 rotate-12 sm:rotate-15 md:rotate-20"
+        className="absolute left-2 sm:left-4 md:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-10 rotate-12 sm:rotate-15 md:rotate-20"
       >
         <Image
           src={smallImage}
@@ -87,7 +87,7 @@ function WatchDisplay({ isSwapped, setIsSwapped }) {
 
       {/* TOP ARROW */}
       <svg
-        className="absolute left-20 top-[28%] w-36 h-20 lg:w-[220px] lg:h-[100px]"
+        className="absolute left-14 sm:left-16 lg:left-24 top-[28%] w-36 h-20 lg:w-[220px] lg:h-[100px]"
         viewBox="0 0 220 140"
       >
         <path
@@ -106,27 +106,27 @@ function WatchDisplay({ isSwapped, setIsSwapped }) {
         className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
       >
         <Image
-  src={mainImage}
-  alt="Main Watch"
-  className="
+          src={mainImage}
+          alt="Main Watch"
+          className="
     w-[320px] h-[320px]
     sm:w-[380px] sm:h-[380px]
     md:w-[520px] md:h-[520px]
     lg:w-[720px] lg:h-[720px]
     xl:w-[780px] xl:h-[780px]
-    ml-[120px] md:ml-[160px] lg:ml-[220px]
+    ml-[60px] md:ml-[100px] lg:ml-[160px]
     mt-[20px] md:mt-[40px] lg:mt-[60px]
     object-contain
     rotate-[30deg]
   "
-/>
+        />
 
 
       </div>
 
       {/* BOTTOM ARROW */}
       <svg
-        className="absolute left-24 top-[58%] w-40 h-24 lg:w-[220px] lg:h-[100px]"
+        className="absolute left-18 sm:left-20 lg:left-28 top-[58%] w-40 h-24 lg:w-[220px] lg:h-[100px]"
         viewBox="0 0 240 160"
       >
         <path

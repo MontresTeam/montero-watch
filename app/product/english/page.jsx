@@ -5,14 +5,13 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import EnglishEditionMain from "@/public/images/DSC08237-3-Photoroom (1).png";
+import ArabicEditionMain from "@/public/images/DSC08225-3-Photoroom.png";
 import Blue1 from "@/public/images/BlueWatch/productBlue1.png";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
 import Blue4 from "@/public/images/BlueWatch/productBlue4.jpg";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
-import Green1 from "@/public/images/GreenWatch/productGreen1.png";
-import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
-import newCurrency from "@/public/images/newSymbole.png"
 import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
 import { useRouter } from "next/navigation";
@@ -136,10 +135,10 @@ const Page = () => {
               </h2>
 
               {/* Watch Image */}
-              <div className="relative mb-1 sm:mb-2 overflow-hidden">
-                <div className="relative transform scale-200 z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[160px] sm:h-[240px] md:h-[300px] lg:h-[360px]">
+              <div className="relative mb-8 sm:mb-12 overflow-hidden">
+                <div className="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px]">
                   <Image
-                    src={Blue2}
+                    src={EnglishEditionMain}
                     alt="Montero English Edition Watch"
                     fill
                     priority
@@ -149,7 +148,7 @@ const Page = () => {
               </div>
 
               {/* Version Selector - Montero Section */}
-              <div className="flex justify-center gap-4 mt-20 sm:mt-24 mb-6 z-20">
+              <div className="flex justify-center gap-4 mt-2 mb-6 z-20">
                 {/* English Blue Option (Active) */}
                 <div className="relative cursor-pointer group">
                   <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-blue-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-500">
