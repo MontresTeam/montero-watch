@@ -107,7 +107,7 @@ const OurProducts = () => {
       <div ref={contentRef} className="max-w-7xl mx-auto w-full mt-10 md:mt-16">
         <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-16">
           {/* LEFT PRODUCT */}
-          <div className="product-item">
+          <div className="product-item flex-1">
             <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-8">
               {/* TEXT */}
               <div className="space-y-3 text-center md:text-left order-2 md:order-1 px-4 sm:px-6 md:px-0">
@@ -130,7 +130,7 @@ const OurProducts = () => {
           </div>
 
           {/* RIGHT PRODUCT */}
-          <div className="product-item mt-8 md:mt-0">
+          <div className="product-item flex-1 mt-8 md:mt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-8">
               {/* IMAGE */}
               <div className="flex justify-center md:justify-start order-1 md:order-1">
