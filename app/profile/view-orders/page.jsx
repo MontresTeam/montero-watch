@@ -174,8 +174,8 @@ function ViewOrdersPage() {
 
                                         <div className="flex items-end lg:justify-end pt-4 lg:pt-0">
                                             <button
-                                                onClick={() => router.push(`/profile/view-orders/tracking/${order.orderId}`)}
-                                                className="w-full sm:w-auto bg-stone-900 text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-stone-200 hover:bg-stone-800 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 active:scale-95"
+                                                disabled
+                                                className="w-full sm:w-auto bg-stone-200 text-stone-400 px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] cursor-not-allowed flex items-center justify-center gap-2"
                                             >
                                                 {t("trackOrder") || "Track Shipment"}
                                                 <FiExternalLink />
@@ -184,6 +184,11 @@ function ViewOrdersPage() {
                                     </div>
 
                                 </div>
+                            </div>
+                            <div className="w-full bg-stone-50 border-t border-stone-100 p-4 text-center">
+                                <p className="text-[12px] text-stone-500 font-medium tracking-wide">
+                                    {t("deliveryStartInfo") || "Delivery has commenced as scheduled in March 2026. Tracking details will be provided once your order is dispatched."}
+                                </p>
                             </div>
                         </div>
                     ))
