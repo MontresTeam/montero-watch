@@ -6,11 +6,10 @@ import { useAuth } from '@/context/AuthContext';
 import { useTranslation } from "react-i18next";
 import {
   FiUser,
-  FiSettings,
-  FiBell,
   FiLogOut,
   FiChevronRight,
-  FiX
+  FiX,
+  FiShoppingBag
 } from 'react-icons/fi';
 
 function Dropdown({ onClose }) {
@@ -71,16 +70,15 @@ function Dropdown({ onClose }) {
         />
 
         <MenuItem
-          icon={<FiSettings size={17} />}
-          label={t("settings")}
+          icon={<FiShoppingBag size={17} />}
+          label={t("myOrders")}
           right={<FiChevronRight size={14} className="text-neutral-300" />}
+          onClick={() => {
+            router.push('/profile/view-orders');
+            onClose();
+          }}
         />
 
-        <MenuItem
-          icon={<FiBell size={17} />}
-          label={t("notification")}
-          right={<span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{t("new")}</span>}
-        />
 
         <div className="h-px bg-neutral-100 -mx-5 my-2" />
 

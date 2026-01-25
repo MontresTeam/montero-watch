@@ -539,6 +539,7 @@ export const translations = {
         discoverCollection: "Discover The Collection",
         needOrderAssistance: "Questions Regarding Your Order?",
         conciergeDesc: "Our concierge team is at your disposal for any delivery or custom requests.",
+        deliveryStartInfo: "Delivery has commenced as scheduled in March 2026. Tracking details will be provided once your order is dispatched.",
     },
     AR: {
         home: "الرئيسية",
@@ -1152,5 +1153,6 @@ export const translations = {
         discoverCollection: "اكتشف المجموعة",
         needOrderAssistance: "هل لديك أسئلة بخصوص طلبك؟",
         conciergeDesc: "فريق الكونسيرج لدينا في تصرفك لأي طلبات توصيل أو طلبات مخصصة.",
+        deliveryStartInfo: "بدأ التسليم كما هو مقرر في مارس 2026. سيتم توفير تفاصيل التتبع بمجرد إرسال طلبك.",
     },
 };

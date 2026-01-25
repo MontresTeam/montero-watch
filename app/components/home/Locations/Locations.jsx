@@ -75,7 +75,7 @@ const Locations = () => {
       </div>
 
       {/* Map Image */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20">
         <Image
           src={MapImage}
           width={1200}
@@ -88,7 +88,7 @@ const Locations = () => {
 
       {/* Bottom Title */}
       <div
-        className="max-w-4xl mx-auto text-center space-y-5 px-4 mt-16"
+        className="max-w-4xl mx-auto text-center space-y-5 px-4 mt-8"
       >
         <p className="text-lg text-gray-600 font-body font-extralight">
           {t("beachesWorldMap")}
