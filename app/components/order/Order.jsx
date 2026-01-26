@@ -180,7 +180,17 @@ function OrderContent() {
 
   const handleCountryCodeSelect = (item) => {
     setSelectedCountryCode(item.code);
-    setFormData(prev => ({ ...prev, country: item.country }));
+
+    // Check if the selected country supports Tamara
+    const isTamaraSupported = ["+971", "+966", "+973"].includes(item.code);
+
+    setFormData(prev => ({
+      ...prev,
+      country: item.country,
+      // If currently selected payment is Tamara but new country doesn't support it, switch to stripe
+      paymentMethod: (prev.paymentMethod === 'tamara' && !isTamaraSupported) ? 'stripe' : prev.paymentMethod
+    }));
+
     setIsCodeDropdownOpen(false);
     setCodeSearchTerm("");
     // Clear error if exists
@@ -690,13 +700,14 @@ function OrderContent() {
                     </label>
 
                     {/* Tamara Option */}
-                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg cursor-pointer transition-colors ${formData.paymentMethod === 'tamara' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200 hover:border-gray-300'}`}>
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg transition-colors ${!["+971", "+966", "+973"].includes(selectedCountryCode) ? 'opacity-50 cursor-not-allowed bg-gray-50' : 'cursor-pointer hover:border-gray-300'} ${formData.paymentMethod === 'tamara' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200'}`}>
                       <input
                         type="radio"
                         name="paymentMethod"
                         value="tamara"
                         checked={formData.paymentMethod === 'tamara'}
                         onChange={handleInputChange}
+                        disabled={!["+971", "+966", "+973"].includes(selectedCountryCode)}
                         className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
                       />
                       <div className="flex-1 min-w-0">
@@ -706,6 +717,11 @@ function OrderContent() {
                             <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
                               {t("payIn4Installments")}
                             </p>
+                            {!["+971", "+966", "+973"].includes(selectedCountryCode) && (
+                              <p className="text-[10px] text-red-500 mt-1 font-medium">
+                                Only available in Saudi Arabia, UAE, and Bahrain
+                              </p>
+                            )}
                           </div>
                           <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0">
                             <Image
