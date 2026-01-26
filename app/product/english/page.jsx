@@ -11,6 +11,9 @@ import Blue1 from "@/public/images/BlueWatch/productBlue1.png";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
 import Blue4 from "@/public/images/BlueWatch/productBlue4.jpg";
+import BlueV from "@/public/images/BlueWatch/v.png";
+import Gallery2 from "@/public/images/Gallery/gallary2.png";
+import Gallery4 from "@/public/images/Gallery/gallary4.jpg";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
@@ -31,6 +34,19 @@ const Page = () => {
   const [open, setOpen] = useState(null);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Gallery Images for English Edition
+  const englishGallery = [
+    EnglishEditionMain,
+    Blue1,
+    Blue2,
+    Blue3,
+    Blue4,
+    BlueV,
+    Gallery2,
+  ];
+
+  const [selectedImage, setSelectedImage] = useState(EnglishEditionMain);
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -124,108 +140,156 @@ const Page = () => {
         </section>
       </ScrollAnimation>
 
-      {/* ================= MONTERO EDITION SECTION ================= */}
+      {/* ================= MONTERO EDITION SECTION (Professional PDP Layout) ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
-        <section className="relative w-full min-h-fit bg-gray-50 flex items-center justify-center py-4 sm:py-5 lg:py-6">
+        <section className="relative w-full min-h-fit bg-gray-50 py-12 sm:py-20 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="text-center">
-              {/* Title */}
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-cormorant text-gray-900 mb-2 sm:mb-3">
+            {/* Mobile Title - Visible only on mobile */}
+            <div className="lg:hidden text-center mb-8">
+              <h2 className="text-3xl sm:text-4xl font-cormorant text-gray-900 leading-tight">
                 {t("monteroEnglishEdition")}
               </h2>
+            </div>
 
-              {/* Watch Image */}
-              <div className="relative mb-8 sm:mb-12 overflow-hidden">
-                <div className="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px]">
-                  <Image
-                    src={EnglishEditionMain}
-                    alt="Montero English Edition Watch"
-                    fill
-                    priority
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Version Selector - Montero Section */}
-              <div className="flex justify-center gap-8 mt-2 mb-10 z-20">
-                {/* English Blue Option (Active) */}
-                <div className="relative cursor-pointer group">
-                  <div className="w-28 h-28 rounded-2xl overflow-hidden border-2 border-blue-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-500">
-                    <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start justify-center">
+              {/* Left Column: Interactive Product Gallery */}
+              <div className="w-full lg:w-[45%] flex flex-col lg:flex-row gap-3 sm:gap-4">
+                {/* Thumbnails - Left Side on Desktop, Bottom Row on Mobile */}
+                <div className="order-2 lg:order-1 w-full lg:w-auto overflow-x-auto lg:overflow-x-visible">
+                  <div className="flex flex-row lg:flex-col gap-2 lg:gap-3 py-2 justify-center lg:justify-start">
+                    {englishGallery.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setSelectedImage(img)}
+                        className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${selectedImage === img
+                          ? "border-blue-600 ring-4 ring-blue-50 scale-105"
+                          : "border-transparent bg-white hover:border-blue-200"
+                          }`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`Thumbnail ${idx + 1}`}
+                          fill
+                          className="object-contain p-0.5"
+                          sizes="80px"
+                        />
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                {/* Arabic Green Option */}
-                <Link href="/product/arabic" className="group relative">
-                  <div className="w-28 h-28 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-emerald-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
-                    <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
-                  </div>
-                </Link>
-              </div>
-
-              {/* Features Grid */}
-              <div className="max-w-6xl mx-auto mb-3 sm:mb-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 place-items-center">
-                  {[
-                    t("sapphireCrystal"),
-                    t("seikoMovementAr"),
-                    t("waterResistanceAr"),
-                    t("stainlessSteelCase"),
-                    t("worldTimeBeachAr"),
-                  ].map((item) => (
-                    <div key={item} className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-[#2596be] rounded-full flex-shrink-0"></span>
-                      <p className="text-gray-700 text-xs sm:text-sm text-center">
-                        {item}
-                      </p>
+                {/* Main Image Viewer */}
+                <div className="order-1 lg:order-2 w-full lg:flex-1 relative aspect-square group">
+                  <div className="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden flex items-center justify-center">
+                    <Image
+                      src={selectedImage}
+                      alt="Montero English Edition"
+                      fill
+                      priority
+                      className="object-contain p-6 sm:p-12 transition-all duration-1000 ease-out transform group-hover:scale-110"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                    {/* Premium Tag */}
+                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-blue-600/10 backdrop-blur-md border border-blue-600/20 rounded-full">
+                      <span className="text-[9px] font-bold text-blue-700 tracking-[0.2em] uppercase">
+                        English Global Edition
+                      </span>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Additional Features */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4 px-4">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-[#2596be] rounded-full"></span>
-                  <p className="text-gray-700 text-xs sm:text-sm text-center">
-                    {t("sapphireDurabilityAr")}
-                  </p>
+              {/* Right Column: Information & Actions */}
+              <div className="w-full lg:w-[55%] text-center lg:text-left space-y-8">
+                {/* Desktop Title & Pricing Note */}
+                <div className="space-y-4">
+                  <h2 className="hidden lg:block text-3xl sm:text-4xl lg:text-5xl font-cormorant text-gray-900 leading-tight">
+                    {t("monteroEnglishEdition")}
+                  </h2>
+
+                  <div className="space-y-1 pt-2">
+                    <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                      Pre-order Price (Official Price: {formatPrice(860)})
+                    </p>
+                    <div className="flex items-center justify-center lg:justify-start gap-3">
+                      <span className="text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
+                      <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">7% OFF</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="w-2 h-2 bg-[#2596be] rounded-full hidden sm:block"></div>
+                {/* Version Selector */}
+                <div className="space-y-4 pt-4 border-t border-gray-100">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{t("chooseYourMontero")}</p>
+                  <div className="flex justify-center lg:justify-start gap-6">
+                    {/* English Blue Option (Active) */}
+                    <div className="relative group cursor-pointer">
+                      <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-blue-600 bg-white shadow-md shadow-blue-100 scale-105 transition-all">
+                        <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
+                      </div>
+                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-blue-600">English</span>
+                    </div>
 
-                <p className="text-gray-700 text-xs sm:text-sm text-center">
-                  {t("gmtGlobalSyncAr")}
-                </p>
-              </div>
-
-              {/* Price & Order Button */}
-              <div className="flex flex-col items-center gap-4 mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
-                  <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
-                  <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% {t("off")}</span>
+                    {/* Arabic Green Option */}
+                    <Link href="/product/arabic" className="group relative">
+                      <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-emerald-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-105">
+                        <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
+                      </div>
+                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">Arabic</span>
+                    </Link>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-500 font-medium">
-                  {t("pricePreOrderAr", { price: formatPrice(860) })}
-                </p>
 
-              </div>
+                {/* Features List */}
+                <div className="space-y-6 pt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-4">
+                    {[
+                      t("sapphireCrystal"),
+                      t("seikoMovementAr"),
+                      t("waterResistanceAr"),
+                      t("stainlessSteel"),
+                      t("worldTimeBeachAr"),
+                    ].map((item) => (
+                      <div key={item} className="flex items-center justify-center lg:justify-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                          <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                        </div>
+                        <p className="text-gray-700 text-sm font-medium">{item}</p>
+                      </div>
+                    ))}
+                  </div>
 
-              {/* Order Button - Integrated with Product ID */}
-              <Link href={`/order?productId=${ENGLISH_PRODUCT_ID}`} className="inline-block">
-                <button className="bg-black text-white px-10 sm:px-12 py-4 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2">
-                  <span>{t("preOrderNow")}</span>
-                </button>
-              </Link>
-              <br />
+                  {/* Additional Highlights */}
+                  <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1 h-1 bg-blue-400 rounded-full"></span>
+                      <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("sapphireDurabilityAr")}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-1 h-1 bg-blue-400 rounded-full"></span>
+                      <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("gmtGlobalSyncAr")}</p>
+                    </div>
+                  </div>
+                </div>
 
-              {/* Limited Edition Badge */}
-              <div className="inline-flex items-center gap-3 mt-2">
-                <span className="px-3 py-1 text-xs tracking-widest font-semibold text-red-700 border border-red-600 uppercase">
-                  {t("limitedEdition")}
-                </span>
+                {/* Action Buttons */}
+                <div className="space-y-4 pt-6">
+                  <Link href={`/order?productId=${ENGLISH_PRODUCT_ID}`} className="block">
+                    <button className="w-full bg-black text-white px-8 py-5 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-[1.02] shadow-2xl flex items-center justify-center gap-3 active:scale-95 group">
+                      <span>{t("preOrderNow")}</span>
+                      <svg className="w-6 h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </button>
+                  </Link>
+
+                  <div className="flex items-center justify-center lg:justify-start gap-4">
+                    <span className="px-4 py-1.5 text-[10px] tracking-[0.2em] font-bold text-red-700 border border-red-200 uppercase bg-red-50 rounded-sm">
+                      {t("limitedEdition")}
+                    </span>
+                    <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">{t("oneOf150")}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
