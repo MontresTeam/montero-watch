@@ -486,6 +486,8 @@ export const translations = {
         ahmadAlFarsi: "Ahmad Al Farsi",
         miranaMarci: "Mirana Marci",
         saraKhalid: "Sara Khalid",
+        exquisiteDetailsTitle: "Exquisite Details",
+        exquisiteDetailsSub: "Every angle of the Montero Arabic Edition tells a story of craftsmanship and precision.",
         // Footer
         footerGetInTouch: "Get in Touch",
         footerGetInTouchDesc: "If you have any questions about your order, warranty, or Montero products, we’re here to help.",
@@ -1073,6 +1075,8 @@ export const translations = {
         faq4ArabicEditionAr: "كيف يمكنني تقديم طلب؟",
         subscribeExclusiveArabicAr: "اشترك للحصول على تحديثات حصرية",
         subscribeMailingListArabicAr: "انضم إلى قائمتنا البريدية للحصول على وصول مبكر، وتنبيهات الإصدارات المحدودة، وتحديثات حصرية مباشرة من فريق طبعة مونتيرو العربية.",
+        exquisiteDetailsTitle: "تفاصيل رائعة",
+        exquisiteDetailsSub: "كل زاوية من طبعة مونتيرو العربية تحكي قصة الحرفية والدقة.",
         // Footer
         footerGetInTouch: "ابق على تواصل",
         footerGetInTouchDesc: "إذا كان لديك أي أسئلة حول طلبك أو الضمان أو منتجات مونتيرو، فنحن هنا للمساعدة.",

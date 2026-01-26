@@ -12,6 +12,10 @@ import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
+import Green2Full from "@/public/images/GreenWatch/productGreen2.png";
+import Green8 from "@/public/images/GreenWatch/z.png";
+import GreenDetail1 from "@/public/images/GreenWatch/DSC08333-1.png";
+import GreenDetail2 from "@/public/images/GreenWatch/DSC08333-2.png";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import EnglishEditionMain from "@/public/images/DSC08237-3-Photoroom (1).png";
 import Watch1 from "@/public/images/Home/watch1.png";
@@ -23,6 +27,15 @@ import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
+import Gallery1 from "@/public/images/Gallery/gallary1.jpg";
+import Gallery2 from "@/public/images/Gallery/gallary2.png";
+import Gallery3 from "@/public/images/Gallery/gallary3.png";
+import Gallery4 from "@/public/images/Gallery/gallary4.jpg";
+import Gallery5 from "@/public/images/Gallery/gallary5.jpg";
+import Gallery6 from "@/public/images/Gallery/gallary6.jpg";
+import Gallery7 from "@/public/images/Gallery/gallary7.jpg";
+import Gallery8 from "@/public/images/Gallery/gallary8.jpg";
+
 const Page = () => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -31,6 +44,19 @@ const Page = () => {
   const [open, setOpen] = useState(null);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Gallery Images for Arabic Edition
+  const arabicGallery = [
+    ArabicEditionMain,
+    Green1,
+    Green2,
+    Green2Full,
+    Green3,
+    GreenDetail1,
+    GreenDetail2,
+  ];
+
+  const [selectedImage, setSelectedImage] = useState(ArabicEditionMain);
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -120,111 +146,156 @@ const Page = () => {
         <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-24 md:h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
       </section>
 
-      {/* Second Section - Montero Arabic Edition */}
-      <section className="relative w-full min-h-fit bg-gray-50 flex items-center justify-center py-6 sm:py-8 lg:py-10">
+      {/* Second Section - Montero Arabic Edition (Professional PDP Layout) */}
+      <section className="relative w-full min-h-fit bg-gray-50 py-12 sm:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="text-center px-2 sm:px-4">
-            {/* Title */}
-            <h2 className="mt-2 sm:mt-4 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-cormorant text-gray-900 mb-3 sm:mb-4 mobile-heading">
+          {/* Mobile Title - Visible only on mobile */}
+          <div className="lg:hidden text-center mb-8">
+            <h2 className="text-3xl sm:text-4xl font-cormorant text-gray-900 leading-tight">
               {t("arabicRegionalEditionAr")}
             </h2>
+          </div>
 
-            {/* Watch Image */}
-            <div className="relative mb-8 sm:mb-12 overflow-hidden">
-              <div
-                className="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px]"
-              >
-                <Image
-                  src={ArabicEditionMain}
-                  alt="Montero Arabic Regional Edition Watch"
-                  fill
-                  priority
-                  className="object-contain"
-                  sizes="(max-width: 640px) 280px, (max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            {/* Version Selector - Montero Section */}
-            <div className="flex justify-center gap-8 mb-10 z-20">
-              {/* English Blue Option */}
-              <Link href="/product/english" className="group relative">
-                <div className="w-28 h-28 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-blue-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
-                  <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
-                </div>
-              </Link>
-
-              {/* Arabic Green Option (Active) */}
-              <div className="relative cursor-pointer group">
-                <div className="w-28 h-28 rounded-2xl overflow-hidden border-2 border-emerald-600 bg-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-emerald-500">
-                  <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start justify-center">
+            {/* Left Column: Interactive Product Gallery */}
+            <div className="w-full lg:w-[45%] flex flex-col lg:flex-row gap-3 sm:gap-4">
+              {/* Thumbnails - Left Side on Desktop, Bottom Row on Mobile */}
+              <div className="order-2 lg:order-1 w-full lg:w-auto overflow-x-auto lg:overflow-x-visible">
+                <div className="flex flex-row lg:flex-col gap-2 lg:gap-3 py-2 justify-center lg:justify-start">
+                  {arabicGallery.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImage(img)}
+                      className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${selectedImage === img
+                        ? "border-emerald-600 ring-4 ring-emerald-50 scale-105"
+                        : "border-transparent bg-white hover:border-emerald-200"
+                        }`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`Thumbnail ${idx + 1}`}
+                        fill
+                        className="object-contain p-0.5"
+                        sizes="80px"
+                      />
+                    </button>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            {/* Features Grid */}
-            <div className="max-w-6xl mx-auto mb-4 sm:mb-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 place-items-center">
-                {[
-                  t("sapphireCrystalFeatureAr"),
-                  t("seikoMovementAr"),
-                  t("waterResistanceAr"),
-                  t("stainlessSteelCaseAr"),
-                  t("worldTimeBeachAr"),
-                ].map((item) => (
-                  <div key={item} className="flex items-center justify-center sm:justify-start gap-2 w-full max-w-xs sm:max-w-none">
-                    <span className="w-2 h-2 bg-[#2596be] rounded-full flex-shrink-0"></span>
-                    <p className="text-gray-700 text-xs sm:text-sm text-center sm:text-left mobile-small-text">
-                      {item}
-                    </p>
+              {/* Main Image Viewer */}
+              <div className="order-1 lg:order-2 w-full lg:flex-1 relative aspect-square group">
+                <div className="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden flex items-center justify-center">
+                  <Image
+                    src={selectedImage}
+                    alt="Montero Arabic Edition"
+                    fill
+                    priority
+                    className="object-contain p-6 sm:p-12 transition-all duration-1000 ease-out transform group-hover:scale-110"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                  {/* Premium Tag */}
+                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-emerald-600/10 backdrop-blur-md border border-emerald-600/20 rounded-full">
+                    <span className="text-[9px] font-bold text-emerald-700 tracking-[0.2em] uppercase">
+                      Arabic Regional Edition
+                    </span>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
 
-            {/* Additional Features */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6 px-2">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-[#2596be] rounded-full"></span>
-                <p className="text-gray-700 text-xs sm:text-sm text-center mobile-small-text">
-                  {t("sapphireDurabilityAr")}
-                </p>
+            {/* Right Column: Information & Actions */}
+            <div className="w-full lg:w-[55%] text-center lg:text-left space-y-8">
+              {/* Desktop Title & Pricing Note */}
+              <div className="space-y-4">
+                <h2 className="hidden lg:block text-3xl sm:text-4xl lg:text-5xl font-cormorant text-gray-900 leading-tight">
+                  {t("arabicRegionalEditionAr")}
+                </h2>
+                <div className="space-y-1 pt-2">
+                  <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                    Pre-order Price (Official Price: {formatPrice(860)})
+                  </p>
+                  <div className="flex items-center justify-center lg:justify-start gap-3">
+                    <span className="text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
+                    <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">7% OFF</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="w-2 h-2 bg-[#2596be] rounded-full hidden sm:block"></div>
+              {/* Version Selector */}
+              <div className="space-y-4 pt-4 border-t border-gray-100">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{t("chooseYourMontero")}</p>
+                <div className="flex justify-center lg:justify-start gap-6">
+                  <Link href="/product/english" className="group relative">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-blue-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-105">
+                      <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
+                    </div>
+                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">English</span>
+                  </Link>
 
-              <p className="text-gray-700 text-xs sm:text-sm text-center mobile-small-text">
-                {t("gmtGlobalSyncAr")}
-              </p>
-            </div>
-
-            {/* Price & Order Button */}
-            <div className="flex flex-col items-center gap-2 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl sm:text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
-                <span className="text-xl text-gray-400 line-through">{formatPrice(860)}</span>
-                <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">7% {t("off")}</span>
+                  <div className="relative group cursor-pointer">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-emerald-600 bg-white shadow-md shadow-emerald-100 scale-105 transition-all">
+                      <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
+                    </div>
+                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-emerald-600">Arabic</span>
+                  </div>
+                </div>
               </div>
-              <p className="text-xs text-gray-500 font-medium">{t("pricePreOrderAr", { price: formatPrice(860) })}</p>
-            </div>
 
-            {/* Order Button - HEAD Style, Integrated with Product ID */}
-            <Link href={`/order?productId=${ARABIC_PRODUCT_ID}`}>
-              <button className="bg-black text-white px-10 sm:px-12 py-3.5 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 shadow-xl inline-flex items-center gap-2 justify-center">
-                <span>{t("preOrderNow")}</span>
-              </button>
-            </Link>
-            <br />
+              {/* Features List */}
+              <div className="space-y-6 pt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-4">
+                  {[
+                    t("sapphireCrystalFeatureAr"),
+                    t("seikoMovementAr"),
+                    t("waterResistanceAr"),
+                    t("stainlessSteelCaseAr"),
+                    t("worldTimeBeachAr"),
+                  ].map((item) => (
+                    <div key={item} className="flex items-center justify-center lg:justify-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                        <div className="w-1.5 h-1.5 bg-emerald-600 rounded-full"></div>
+                      </div>
+                      <p className="text-gray-700 text-sm font-medium">{item}</p>
+                    </div>
+                  ))}
+                </div>
 
-            {/* Limited Edition Badge */}
-            <div className="inline-flex items-center gap-3 mt-3 sm:mt-4">
-              <span className="px-3 py-1 text-xs tracking-widest font-semibold text-red-700 border border-red-600 uppercase bg-white/90 backdrop-blur-sm">
-                {t("limitedEditionBadgeAr")}
-              </span>
+                {/* Additional Highlights */}
+                <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1 h-1 bg-emerald-400 rounded-full"></span>
+                    <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("sapphireDurabilityAr")}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1 h-1 bg-emerald-400 rounded-full"></span>
+                    <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("gmtGlobalSyncAr")}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-6">
+                <Link href={`/order?productId=${ARABIC_PRODUCT_ID}`} className="block">
+                  <button className="w-full bg-black text-white px-8 py-5 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-[1.02] shadow-2xl flex items-center justify-center gap-3 active:scale-95 group">
+                    <span>{t("preOrderNow")}</span>
+                    <svg className="w-6 h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
+                </Link>
+
+                <div className="flex items-center justify-center lg:justify-start gap-4">
+                  <span className="px-4 py-1.5 text-[10px] tracking-[0.2em] font-bold text-red-700 border border-red-200 uppercase bg-red-50 rounded-sm">
+                    {t("limitedEditionBadgeAr")}
+                  </span>
+                  <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">{t("oneOf150Ar")}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Section 3 - Technical Specifications */}
       <section className="bg-white py-10 sm:py-14 lg:py-24 relative overflow-hidden">

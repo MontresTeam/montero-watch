@@ -60,7 +60,7 @@ function OrderContent() {
     { code: "+960", country: "Maldives", iso: "MV" },
     { code: "+93", country: "Afghanistan", iso: "AF" },
 
-    // ≡ƒç¿≡ƒç│ East Asia
+    // ≡ƒç¿≡ƒç│ East
     { code: "+86", country: "China", iso: "CN" },
     { code: "+81", country: "Japan", iso: "JP" },
     { code: "+82", country: "South Korea", iso: "KR" },
