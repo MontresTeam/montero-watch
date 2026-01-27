@@ -48,7 +48,7 @@ const Page = () => {
     Sub4,
     Sub5,
     Sub6
-   
+
   ];
 
   const [selectedImage, setSelectedImage] = useState(ArabicEditionMain);
@@ -293,142 +293,117 @@ const Page = () => {
 
 
       {/* Section 3 - Technical Specifications */}
-      <section className="bg-white py-10 sm:py-14 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
-          {/* Title - Always visible */}
-          <div className="w-full text-center lg:text-left mb-8 lg:mb-0">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-2 sm:mb-3 mobile-heading">
-              {t("technicalSpecsAr")}
-            </h2>
-            <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto lg:mx-0 mobile-text">
-              {t("seikoDescriptionAr")}
-            </p>
+      <ScrollAnimation animationClass="animate-fade-in-up">
+        <section className="bg-white py-12 sm:py-16 lg:py-32 relative overflow-hidden">
+          {/* Large Background Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+            <div className="opacity-[0.02] flex flex-col items-center">
+              <span className="text-[80px] sm:text-[120px] lg:text-[160px] font-serif leading-none whitespace-nowrap uppercase tracking-tighter">
+                {t("limitedEditionBadgeAr")}
+              </span>
+              <span className="text-[60px] sm:text-[100px] lg:text-[130px] font-serif leading-none whitespace-nowrap uppercase tracking-tighter">
+                {t("oneOf150Ar")}
+              </span>
+            </div>
           </div>
 
-          {/* Mobile/Tablet View - Stack layout */}
-          <div className="lg:hidden mt-8 space-y-8">
-            {/* Watch Image Container with Rectangle Background */}
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center">
-              {/* Main Watch Image */}
-              <div className="relative z-10 w-full h-full max-w-xs sm:max-w-sm md:max-w-md flex items-center justify-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative h-full">
+            {/* Title Section */}
+            <div className="max-w-2xl mb-8 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-cormorant text-gray-900 mb-2 tracking-tight">
+                {t("technicalSpecsAr")}
+              </h2>
+              <p className="text-sm text-gray-500 font-light max-w-sm leading-relaxed">
+                {t("seikoDescriptionAr")}
+              </p>
+            </div>
+
+            <div className="relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px]">
+              {/* Desktop Specifications (Callout Layout) */}
+              <div className="hidden lg:block absolute inset-0 z-20">
+                {/* SPEC 1: Stainless Steel - Pointing to crown/upper bezel */}
+                <div className="absolute right-[26%] top-[15%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                      {t("stainlessSteelCaseAr")}
+                    </p>
+                    <div className="w-28 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
+
+                {/* SPEC 2: Polished & Brushed - Pointing to middle case body */}
+                <div className="absolute right-[32%] top-[35%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                      {t("polishedBrushedSpecAr")}
+                    </p>
+                    <div className="w-36 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
+
+                {/* SPEC 3: Case Thickness - Pointing to the side profile */}
+                <div className="absolute right-[35%] top-[55%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                      {t("caseThicknessSpecAr")}
+                    </p>
+                    <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
+
+                {/* SPEC 4: Diameter - Pointing to the Arabic dial */}
+                <div className="absolute right-[29%] bottom-[15%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4">
+                      {t("diameterSpecAr")}
+                    </p>
+                    <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Watch Image - Arabic Edition - Further refined positioning */}
+              <div className="lg:absolute lg:right-[-10%] lg:top-[-40px] w-full lg:w-[460px] h-[400px] sm:h-[500px] lg:h-[720px] relative z-10 flex items-center justify-center lg:block overflow-visible">
                 <Image
-                  src={Green3}
-                  alt="Montero Watch"
+                  src={ArabicEditionMain}
+                  alt="Montero Arabic Edition"
                   fill
-                  className="object-contain"
                   priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain transform transition-all duration-1000 ease-out hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 460px"
                 />
               </div>
-            </div>
 
-            {/* Specifications List - Mobile */}
-            <div className="space-y-4 px-2">
-              {[
-                t("stainlessSteelCase"),
-                t("polishedBrushedSpecAr"),
-                t("caseThicknessSpecAr"),
-                t("diameterSpecAr"),
-                t("arabicDialSpecAr"),
-                t("arabicSpecialEditionAr"),
-              ].map((spec, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 pb-3 border-b border-gray-200"
-                >
-                  <span className="w-2 h-2 bg-black rounded-full flex-shrink-0"></span>
-                  <p className="text-sm text-gray-700 flex-1 mobile-small-text">{spec}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Limited Edition Text - Mobile */}
-            <div className="text-center sm:text-left pt-6">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-200 leading-tight mobile-heading">
-                {t("limitedEditionTextAr")}
-              </p>
-              <p className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-200 mobile-heading">
-                {t("oneOf150Ar")}
-              </p>
+              {/* Mobile Specifications */}
+              <div className="lg:hidden mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-20">
+                {[
+                  t("stainlessSteelCaseAr"),
+                  t("polishedBrushedSpecAr"),
+                  t("caseThicknessSpecAr"),
+                  t("diameterSpecAr"),
+                ].map((spec, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col gap-3 p-5 bg-white/70 backdrop-blur-lg rounded-2xl border border-gray-100 shadow-sm transition-all active:scale-[0.98] group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="w-8 h-[1px] bg-black group-hover:w-12 transition-all" />
+                      <span className="text-[10px] font-bold text-gray-300">0{i + 1}</span>
+                    </div>
+                    <p className="text-[11px] font-bold text-gray-900 uppercase tracking-[0.15em] leading-relaxed">
+                      {spec}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          {/* Desktop View - Original positioned layout */}
-          <div className="hidden lg:block min-h-[700px]">
-            {/* RIGHT TOP SPEC */}
-            <div className="absolute right-[120px] top-36">
-              <div className="flex items-center gap-4">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[160px]">
-                  {t("stainlessSteelCase")}
-                </p>
-                <span className="w-56 h-px bg-gray-300" />
-              </div>
-            </div>
-
-            {/* LEFT MIDDLE SPECS */}
-            <div className="absolute left-[480px] top-72 space-y-16">
-              <div className="flex items-center gap-4">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[220px]">
-                  {t("polishedBrushedSpecAr")}
-                </p>
-                <span className="w-64 h-px bg-gray-300" />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[240px]">
-                  {t("caseThicknessSpecAr")}
-                </p>
-                <span className="w-72 h-px bg-gray-300" />
-              </div>
-            </div>
-
-            {/* FADED TEXT */}
-            <div className="absolute left-12 bottom-40 pointer-events-none">
-              <p className="text-6xl font-serif text-gray-200 leading-none">
-                {t("limitedEditionTextAr")}
-              </p>
-              <p className="text-5xl font-serif text-gray-200">{t("oneOf150Ar")}</p>
-            </div>
-
-            {/* BOTTOM LEFT SPEC */}
-            <div className="absolute left-[620px] bottom-10">
-              <div className="flex items-center gap-4">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[140px]">
-                  {t("diameterSpecAr")}
-                </p>
-                <span className="w-64 h-px bg-gray-300" />
-              </div>
-            </div>
-
-            {/* Arabic Edition Spec */}
-            <div className="absolute right-[120px] bottom-36">
-              <div className="flex items-center gap-4">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                <p className="text-sm text-gray-700 w-[180px]">
-                  {t("arabicDialSpecAr")}
-                </p>
-                <span className="w-56 h-px bg-gray-300" />
-              </div>
-            </div>
-
-            {/* WATCH IMAGE - Desktop */}
-            <div className="absolute left-[800px] top-[-250px] w-[900px] h-[1250px] z-10">
-              <Image
-                src={Green3}
-                alt="Montero Watch"
-                fill
-                priority
-                className="object-contain -rotate-[70deg] scale-110 transition-transform duration-700 ease-out"
-                sizes="900px"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </ScrollAnimation>
 
       {/* Section 4 - How to Set */}
       <section className="bg-white py-10 sm:py-14 lg:py-20">
