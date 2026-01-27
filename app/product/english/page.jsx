@@ -6,14 +6,10 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import EnglishEditionMain from "@/public/images/DSC08237-3-Photoroom (1).png";
-import ArabicEditionMain from "@/public/images/DSC08225-3-Photoroom.png";
 import Blue1 from "@/public/images/BlueWatch/productBlue1.png";
 import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
 import Blue3 from "@/public/images/BlueWatch/productBlue3.png";
 import Blue4 from "@/public/images/BlueWatch/productBlue4.jpg";
-import BlueV from "@/public/images/BlueWatch/v.png";
-import Gallery2 from "@/public/images/Gallery/gallary2.png";
-import Gallery4 from "@/public/images/Gallery/gallary4.jpg";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
@@ -24,6 +20,13 @@ import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
+
+import Sub3 from '../../../public/images/BlueWatch/sub/DSC08241-4.png'
+import Sub4 from '../../../public/images/BlueWatch/sub/DSC08296-3.png'
+import Sub5 from '../../../public/images/BlueWatch/sub/DSC08471-3.png'
+import Sub6 from '../../../public/images/BlueWatch/sub/DSC08504-4.png'
+import Sub7 from '../../../public/images/BlueWatch/sub/DSC08511-4.png'
+import Sub8 from '../../../public/images/BlueWatch/sub/DSC08526-3.png'
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -38,12 +41,15 @@ const Page = () => {
   // Gallery Images for English Edition
   const englishGallery = [
     EnglishEditionMain,
-    Blue1,
     Blue2,
-    Blue3,
-    Blue4,
-    BlueV,
-    Gallery2,
+    Sub3,
+    Sub4,
+    Sub5,
+    Sub6,
+    Sub7,
+    Sub8
+
+   
   ];
 
   const [selectedImage, setSelectedImage] = useState(EnglishEditionMain);

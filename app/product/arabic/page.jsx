@@ -12,12 +12,6 @@ import Green2 from "@/public/images/GreenWatch/Arabic edition.png";
 import Green3 from "@/public/images/GreenWatch/productGreen3.png";
 import Green6 from "@/public/images/GreenWatch/productGreen6.png";
 import Green7 from "@/public/images/GreenWatch/productGreen7.jpg";
-import Green2Full from "@/public/images/GreenWatch/productGreen2.png";
-import Green8 from "@/public/images/GreenWatch/z.png";
-import GreenDetail1 from "@/public/images/GreenWatch/DSC08333-1.png";
-import GreenDetail2 from "@/public/images/GreenWatch/DSC08333-2.png";
-import Blue2 from "@/public/images/BlueWatch/productBlue2.png";
-import EnglishEditionMain from "@/public/images/DSC08237-3-Photoroom (1).png";
 import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
 import { useRouter } from "next/navigation";
@@ -27,14 +21,13 @@ import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
-import Gallery1 from "@/public/images/Gallery/gallary1.jpg";
-import Gallery2 from "@/public/images/Gallery/gallary2.png";
-import Gallery3 from "@/public/images/Gallery/gallary3.png";
-import Gallery4 from "@/public/images/Gallery/gallary4.jpg";
-import Gallery5 from "@/public/images/Gallery/gallary5.jpg";
-import Gallery6 from "@/public/images/Gallery/gallary6.jpg";
-import Gallery7 from "@/public/images/Gallery/gallary7.jpg";
-import Gallery8 from "@/public/images/Gallery/gallary8.jpg";
+import Sub1 from '../../../public/images/GreenWatch/Sub/DSC08256-4.png'
+import Sub2 from '../../../public/images/GreenWatch/Sub/DSC08293-1.png'
+import Sub3 from '../../../public/images/GreenWatch/Sub/DSC08483-3.png'
+import Sub4 from '../../../public/images/GreenWatch/Sub/DSC08494-4.png'
+import Sub5 from '../../../public/images/GreenWatch/Sub/DSC08501-4.png'
+import Sub6 from '../../../public/images/GreenWatch/Sub/DSC08523-3.png'
+
 
 const Page = () => {
   const { t } = useTranslation();
@@ -48,12 +41,14 @@ const Page = () => {
   // Gallery Images for Arabic Edition
   const arabicGallery = [
     ArabicEditionMain,
-    Green1,
     Green2,
-    Green2Full,
-    Green3,
-    GreenDetail1,
-    GreenDetail2,
+    Sub1,
+    Sub2,
+    Sub3,
+    Sub4,
+    Sub5,
+    Sub6
+   
   ];
 
   const [selectedImage, setSelectedImage] = useState(ArabicEditionMain);
