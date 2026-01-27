@@ -21,12 +21,16 @@ import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
-import Sub3 from '../../../public/images/BlueWatch/sub/DSC08241-4.png'
-import Sub4 from '../../../public/images/BlueWatch/sub/DSC08296-3.png'
-import Sub5 from '../../../public/images/BlueWatch/sub/DSC08471-3.png'
-import Sub6 from '../../../public/images/BlueWatch/sub/DSC08504-4.png'
-import Sub7 from '../../../public/images/BlueWatch/sub/DSC08511-4.png'
-import Sub8 from '../../../public/images/BlueWatch/sub/DSC08526-3.png'
+import image1 from '@/public/images/BlueWatch/sub/image1B.png'
+import image2 from '@/public/images/BlueWatch/sub/image2B.png'
+import image3 from '@/public/images/BlueWatch/sub/image3B.png'
+import image4 from '@/public/images/BlueWatch/sub/image4B.png'
+import image5 from '@/public/images/BlueWatch/sub/image5B.png'
+import image6 from '@/public/images/BlueWatch/sub/image6B.png'
+import image7 from '@/public/images/BlueWatch/sub/image7B.png'
+import image8 from '@/public/images/BlueWatch/sub/image8B.png'
+import image9 from '@/public/images/BlueWatch/sub/image9B.png'
+import image10 from '@/public/images/BlueWatch/sub/image10B.png'
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -40,16 +44,16 @@ const Page = () => {
 
   // Gallery Images for English Edition
   const englishGallery = [
-    EnglishEditionMain,
-    Blue2,
-    Sub3,
-    Sub4,
-    Sub5,
-    Sub6,
-    Sub7,
-    Sub8
-
-
+    image1,
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8,
+    image9,
+    image10
   ];
 
   const [selectedImage, setSelectedImage] = useState(EnglishEditionMain);

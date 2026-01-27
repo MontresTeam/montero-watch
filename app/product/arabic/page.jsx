@@ -21,12 +21,16 @@ import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
-import Sub1 from '../../../public/images/GreenWatch/Sub/DSC08256-4.png'
-import Sub2 from '../../../public/images/GreenWatch/Sub/DSC08293-1.png'
-import Sub3 from '../../../public/images/GreenWatch/Sub/DSC08483-3.png'
-import Sub4 from '../../../public/images/GreenWatch/Sub/DSC08494-4.png'
-import Sub5 from '../../../public/images/GreenWatch/Sub/DSC08501-4.png'
-import Sub6 from '../../../public/images/GreenWatch/Sub/DSC08523-3.png'
+import image1 from '@/public/images/GreenWatch/sub/image1G.png'
+import image2 from '@/public/images/GreenWatch/sub/image2G.png'
+import image3 from '@/public/images/GreenWatch/sub/image3G.png'
+import image4 from '@/public/images/GreenWatch/sub/image4G.png'
+import image5 from '@/public/images/GreenWatch/sub/image5G.png'
+import image6 from '@/public/images/GreenWatch/sub/image6G.png'
+import image7 from '@/public/images/GreenWatch/sub/image7G.png'
+import image8 from '@/public/images/GreenWatch/sub/image8G.png'
+import image9 from '@/public/images/GreenWatch/sub/image9G.png'
+import image10 from '@/public/images/GreenWatch/sub/image10G.png'
 
 
 const Page = () => {
@@ -40,14 +44,16 @@ const Page = () => {
 
   // Gallery Images for Arabic Edition
   const arabicGallery = [
-    ArabicEditionMain,
-    Green2,
-    Sub1,
-    Sub2,
-    Sub3,
-    Sub4,
-    Sub5,
-    Sub6
+    image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        image6,
+        image7,
+        image8,
+        image9,
+        image10
 
   ];
 
