@@ -77,12 +77,12 @@ export default function SignupPage() {
 
 
     return (
-        <div className="mt-8 min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-10 md:pt-0">
-            <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 px-6 py-12 lg:py-0">
+        <div className="min-h-screen w-full bg-white flex items-center justify-center overflow-x-hidden pt-24 pb-12 lg:pt-32 lg:pb-24">
+            <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 px-6">
 
                 {/* Image Section */}
                 <div className="w-full lg:w-1/2 flex items-center justify-center">
-                    <div className="relative w-full max-w-[500px] aspect-square overflow-hidden shadow-2xl rounded-sm group">
+                    <div className="relative w-full max-w-[500px] aspect-[4/3] lg:aspect-square overflow-hidden shadow-2xl rounded-sm group">
                         <Image
                             src={img}
                             alt="Montero Watch Premium Display"

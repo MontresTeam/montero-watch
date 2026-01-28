@@ -36,7 +36,7 @@ export default function page() {
     return (
         <div className={isAr ? "lang-ar" : ""}>
             <Navbar />
-            <div className="min-h-screen w-full bg-white flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12">
+            <div className="min-h-screen w-full bg-white flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 pt-24 pb-12 lg:pt-32 lg:pb-24">
                 {/* Progress Bar */}
 
                 <div className="flex items-center justify-center mb-8 sm:mb-12">

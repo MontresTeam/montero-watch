@@ -9,6 +9,8 @@ export default function Right() {
       className="
         w-full h-full
         flex flex-col justify-center
+        items-center lg:items-start
+        text-center lg:text-left
         px-6 sm:px-8 lg:px-12
         space-y-6 sm:space-y-7
         bg-white
