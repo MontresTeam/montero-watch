@@ -134,21 +134,22 @@ function SuccessContent() {
 
                 <div className="flex flex-col gap-3">
                     {status === "paid" && (
-                        <Link
-                            href="/"
-                            className="w-full bg-black text-white py-4 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium transition-all duration-300 hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center"
-                        >
-                            {t("continueShopping")}
-                        </Link>
+                        <>
+                            <Link
+                                href="/"
+                                className="w-full bg-black text-white py-4 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium transition-all duration-300 hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center"
+                            >
+                                {t("continueShopping")}
+                            </Link>
+                            <Link
+                                href="/profile/view-orders"
+                                className="w-full bg-white text-black border border-neutral-200 py-4 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium transition-all duration-300 hover:bg-neutral-50 active:scale-[0.98] flex items-center justify-center"
+                            >
+                                {t("viewYourOrders") || "View Orders"}
+                            </Link>
+                        </>
                     )}
-                    {(status === "paid" || status === "error") && (
-                        <Link
-                            href="/account/orders"
-                            className="w-full border border-neutral-300 text-neutral-700 py-3.5 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium transition-all duration-200 hover:bg-neutral-100 flex items-center justify-center"
-                        >
-                            {t("viewYourOrders")}
-                        </Link>
-                    )}
+
                 </div>
 
                 {status === "paid" && (

@@ -45,7 +45,7 @@ function WatchDisplay({ isSwapped, setIsSwapped }) {
         ease: "power3.inOut",
         onComplete: () => setIsSwapped((prev) => !prev),
       });
-    }, 4500);
+    }, 4000);
 
     return () => {
       clearInterval(interval);

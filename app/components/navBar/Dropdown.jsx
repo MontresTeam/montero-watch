@@ -1,19 +1,20 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import userAvatar from '../../../public/images/Avatar.png';
 import { useAuth } from '@/context/AuthContext';
 import { useTranslation } from "react-i18next";
 import {
   FiUser,
-  FiSettings,
-  FiBell,
   FiLogOut,
   FiChevronRight,
-  FiX
+  FiX,
+  FiShoppingBag
 } from 'react-icons/fi';
 
 function Dropdown({ onClose }) {
   const { user, logout } = useAuth();
+  const router = useRouter();
   const { t, i18n } = useTranslation();
   const isAr = i18n.language?.toLowerCase() === 'ar';
 
@@ -21,7 +22,7 @@ function Dropdown({ onClose }) {
 
 
 
-  
+
   return (
     <div className={`absolute top-0 right-0 w-[280px] rounded-xl bg-white shadow-2xl border border-neutral-200 p-5 ${isAr ? 'lang-ar' : ''}`}>
       {/* Close button */}
@@ -62,19 +63,22 @@ function Dropdown({ onClose }) {
           icon={<FiUser size={17} />}
           label={t("myProfile")}
           right={<FiChevronRight size={14} className="text-neutral-300" />}
+          onClick={() => {
+            router.push('/profile');
+            onClose();
+          }}
         />
 
         <MenuItem
-          icon={<FiSettings size={17} />}
-          label={t("settings")}
+          icon={<FiShoppingBag size={17} />}
+          label={t("myOrders")}
           right={<FiChevronRight size={14} className="text-neutral-300" />}
+          onClick={() => {
+            router.push('/profile/view-orders');
+            onClose();
+          }}
         />
 
-        <MenuItem
-          icon={<FiBell size={17} />}
-          label={t("notification")}
-          right={<span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{t("new")}</span>}
-        />
 
         <div className="h-px bg-neutral-100 -mx-5 my-2" />
 
