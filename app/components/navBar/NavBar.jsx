@@ -426,7 +426,7 @@ const Navbar = () => {
             <Link
               href="/login"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-4 text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
+              className="mt-4 block w-full text-center border border-black rounded-full py-2 hover:bg-black hover:text-white"
             >
               {t("signIn")}
             </Link>

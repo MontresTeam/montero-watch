@@ -53,12 +53,12 @@ function ProductDetails() {
       <div className="flex h-full w-full max-w-7xl mx-auto flex-col lg:flex-row items-stretch">
 
         {/* LEFT — 65% */}
-        <div ref={leftRef} className="h-1/2 lg:h-full w-full lg:w-[65%] ml-10">
+        <div ref={leftRef} className="h-auto lg:h-full w-full lg:w-[65%] ml-0 lg:ml-10">
           <Left />
         </div>
 
         {/* RIGHT — 35% */}
-        <div ref={rightRef} className="h-1/2 lg:h-full w-full lg:w-[35%] flex items-center justify-center">
+        <div ref={rightRef} className="h-auto lg:h-full w-full lg:w-[35%] flex items-center justify-center mt-8 lg:mt-0">
           <Right />
         </div>
 

@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Cormorant_Garamond, Cairo } from "next/font/google";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals/globals.css";
 import { AuthProvider } from "../context/AuthContext";
 import { CurrencyProvider } from "../context/CurrencyContext";
@@ -27,7 +28,7 @@ const cairo = Cairo({
   display: "swap",
 });
 
-/* ✅ CORRECT: Mona Sans Variable */
+/* ✅ Mona Sans Variable */
 const monaSans = localFont({
   src: [
     {
@@ -57,6 +58,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Font Awesome */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -64,7 +66,25 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+
+       {/* ===== GA4 Measurement ID: G-N1LE9CT3M6 ===== */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-N1LE9CT3M6"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-N1LE9CT3M6', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
       </head>
+
       <body
         suppressHydrationWarning
         className={`

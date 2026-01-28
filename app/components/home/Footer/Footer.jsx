@@ -173,8 +173,8 @@ const Footer = () => {
               {t('footerCopyright', { year: new Date().getFullYear() })}
             </p>
             <div className="flex gap-6 text-[10px] uppercase tracking-widest text-gray-600 order-1 md:order-2">
-              <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
+              <Link href="/components/privacyPolicy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
+              <Link href="/components/termsConditions" className="hover:text-gray-400 transition-colors">Terms & Conditions</Link>
             </div>
           </div>
         </div>

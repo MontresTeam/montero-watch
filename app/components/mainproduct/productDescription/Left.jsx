@@ -19,7 +19,8 @@ export default function Left() {
     return (
         <div className="relative w-full h-full min-h-[600px] lg:min-h-0 flex items-center bg-white overflow-hidden ">
             {/* Background Watermark */}
-            <div className="absolute left-10 md:left-14 bottom-32 md:bottom-40 z-0 pointer-events-none select-none opacity-30">
+            {/* Background Watermark */}
+            <div className="absolute left-4 md:left-14 bottom-10 md:bottom-40 z-0 pointer-events-none select-none opacity-30">
                 <h3 className="font-cormorant text-3xl md:text-6xl lg:text-7xl text-neutral-200 uppercase tracking-[0.25em] leading-none mb-4">
                     {t("limitedEdition")}
                 </h3>
@@ -35,8 +36,8 @@ export default function Left() {
     w-[75%] sm:w-[65%] md:w-[65%]
     h-[90%] sm:h-[85%] md:h-[80%]
     z-10
-    translate-x-[14%]
-    mr-4 sm:mr-6 md:mr-8
+    translate-x-0 md:translate-x-[14%]
+    mr-0 sm:mr-6 md:mr-8
     mask-[linear-gradient(to_right,transparent_0%,black_12%,black_100%)]
   "
             >
@@ -58,14 +59,14 @@ export default function Left() {
 
 
             {/* Callouts Container - Precisely aligned and responsive */}
-            <div className="relative z-20 w-full h-full flex flex-col justify-center space-y-10 sm:space-y-12 lg:space-y-20 pl-6 sm:pl-8 md:pl-16 lg:pl-20">
+            <div className="relative z-20 w-full h-full flex flex-col justify-center space-y-6 sm:space-y-12 lg:space-y-20 pl-4 sm:pl-8 md:pl-16 lg:pl-20">
 
                 {/* Stainless Steel */}
                 <div
                     className="
     
     flex items-center gap-2 sm:gap-4
-    translate-x-[30%] sm:translate-x-[40%] mr-[145px] md:translate-x-[50%] lg:translate-x-[60%]
+    translate-x-[5%] sm:translate-x-[40%] mr-4 md:translate-x-[50%] lg:translate-x-[60%]
     md:mr-20 lg:mr-[338px]
     transition-transform duration-500 hover:scale-105
   "
@@ -76,7 +77,7 @@ export default function Left() {
                         {t("stainlessSteel")}
                     </span>
 
-                    <div className="h-px bg-black w-16 sm:w-40 md:w-32 lg:w-40" />
+                    <div className="h-px bg-black w-10 sm:w-40 md:w-32 lg:w-40" />
                 </div>
 
 
@@ -84,8 +85,8 @@ export default function Left() {
                 <div
                     className="
     flex items-center gap-2 sm:gap-4
-    translate-x-[10%] sm:translate-x-[15%] md:translate-x-[25%] lg:translate-x-[35%]
-    mr-0 sm:mr-10 md:mr-20 lg:mr-[300px]
+    translate-x-0 sm:translate-x-[15%] md:translate-x-[25%] lg:translate-x-[35%]
+    mr-4 sm:mr-10 md:mr-20 lg:mr-[300px]
 
     hover:scale-[1.15] transition-transform duration-300 ease-out
 
@@ -97,18 +98,18 @@ export default function Left() {
                         {t("polishedBrushed")}
                     </span>
 
-                    <div className="h-px bg-black w-14 sm:w-16 md:w-24 lg:w-32" />
+                    <div className="h-px bg-black w-10 sm:w-16 md:w-24 lg:w-32" />
                 </div>
 
 
                 {/* Case Thickness */}
-                <div className="flex hover:scale-[1.15] transition-transform duration-300 ease-out items-center gap-2 sm:gap-4 translate-x-[-15%] sm:translate-x-[-15%] md:translate-x-[-10%] lg:translate-x-[-15%] mr-10 md:mr-20 lg:ml-[60px]">
+                <div className="flex hover:scale-[1.15] transition-transform duration-300 ease-out items-center gap-2 sm:gap-4 translate-x-[-5%] sm:translate-x-[-15%] md:translate-x-[-10%] lg:translate-x-[-15%] mr-4 md:mr-20 lg:ml-[60px]">
 
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black shadow-sm shrink-0" />
                     <span className="monaSans font-light text-[11px] sm:text-[13px] md:text-sm text-neutral-700 whitespace-nowrap uppercase tracking-wider">
                         {t("caseThickness")}
                     </span>
-                    <div className="h-px bg-black w-20 sm:w-28 md:w-40 lg:w-56" />
+                    <div className="h-px bg-black w-12 sm:w-28 md:w-40 lg:w-56" />
 
                 </div>
 
@@ -116,9 +117,9 @@ export default function Left() {
                 <div
                     className="
     flex items-center gap-2 sm:gap-4
-    translate-x-[15%] sm:translate-x-[20%] md:translate-x-[35%] lg:translate-x-[50%]
+    translate-x-[5%] sm:translate-x-[20%] md:translate-x-[35%] lg:translate-x-[50%]
     pt-4 sm:pt-8
-    mr-10 md:mr-20 lg:mr-[369px]
+    mr-4 md:mr-20 lg:mr-[369px]
         hover:scale-[1.15] transition-transform duration-300 ease-out
   "
                 >
@@ -128,7 +129,7 @@ export default function Left() {
                         {t("diameter")}
                     </span>
 
-                    <div className="h-px bg-black w-16 sm:w-20 md:w-32 lg:w-48" />
+                    <div className="h-px bg-black w-10 sm:w-20 md:w-32 lg:w-48" />
                 </div>
 
 
