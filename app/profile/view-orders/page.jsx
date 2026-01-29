@@ -180,6 +180,15 @@ function ViewOrdersPage() {
                                                 {t("trackOrder") || "Track Shipment"}
                                                 <FiExternalLink />
                                             </button>
+
+                                            {(order.status === "DELIVERED" || order.status === "COMPLETED") && (
+                                                <button
+                                                    onClick={() => router.push(`/review/write?orderId=${order.orderId}`)}
+                                                    className="w-full sm:w-auto bg-white text-stone-900 border border-stone-200 px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-stone-900 hover:text-white transition-all flex items-center justify-center gap-2 mt-3 lg:mt-0 lg:ml-3"
+                                                >
+                                                    {t("writeReview") || "Write a Review"}
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
 
