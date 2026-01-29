@@ -134,9 +134,9 @@ export default function HomeBanner() {
 
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-24 lg:pt-32 flex">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-24 lg:pt-32 flex flex-col lg:flex-row">
         {/* LEFT TEXT */}
-        <div className="space-y-6 w-[55%] mt-10">
+        <div className="space-y-6 w-full lg:w-[55%] mt-10">
           <h1
             ref={titleRef}
             className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-cormorant leading-tight"
@@ -161,40 +161,40 @@ export default function HomeBanner() {
           </Link>
         </div>
 
-        {/* RIGHT TEXT */}
-        <div className="relative hidden lg:block w-[45%]">
-          <div ref={rightTextRef} className="absolute top-24 right-0 max-w-xs">
-            <h4 className="font-semibold">{t("elegantTimekeeping")}</h4>
-            <p className="text-sm text-gray-300">
+        {/* RIGHT TEXT - Top Feature */}
+        <div className="relative w-full lg:w-[45%] pointer-events-none lg:pointer-events-auto">
+          <div ref={rightTextRef} className="absolute top-[44%] right-[5%] lg:top-24 lg:right-0 max-w-[150px] lg:max-w-xs text-right lg:text-left z-20">
+            <h4 className="font-semibold text-sm lg:text-base">{t("elegantTimekeeping")}</h4>
+            <p className="text-xs lg:text-sm text-gray-300">
               {t("precisionInspired")}
             </p>
           </div>
         </div>
       </div>
 
-      {/* LEFT ARROW  */}
+      {/* LEFT ARROW (Top Arrow on Mobile) */}
       <div
         ref={leftArrowRef}
-        className="absolute top-[32%] right-[25%] hidden lg:block z-10 w-36 h-36"
+        className="absolute top-[54%] right-[5%] lg:top-[32%] lg:right-[25%] block z-10 w-24 h-24 lg:w-36 lg:h-36"
       >
         <Image
           src={LeftArrow}
           alt="Left Arrow"
           fill
-          className="object-contain scale-150"
+          className="object-contain scale-125 lg:scale-150 -rotate-15 lg:rotate-0"
         />
       </div>
 
-      {/* RIGHT ARROW */}
+      {/* RIGHT ARROW (Bottom Arrow on Mobile) */}
       <div
         ref={rightArrowRef}
-        className="absolute bottom-[24%] left-[50%] hidden lg:block z-10 w-24 h-24 overflow-visible"
+        className="absolute bottom-[15%] left-[8%] lg:bottom-[24%] lg:left-[50%] block z-10 w-16 h-16 lg:w-24 lg:h-24 overflow-visible"
       >
         <Image
           src={RightArrow}
           alt="Right Arrow"
           fill
-          className="object-contain scale-[2.8]"
+          className="object-contain scale-150 lg:scale-[2.8] rotate-12 lg:rotate-0"
         />
       </div>
 
@@ -211,13 +211,13 @@ export default function HomeBanner() {
         />
       </div>
 
-      {/* LEFT FEATURE */}
+      {/* LEFT FEATURE (Bottom Feature) */}
       <div
         ref={leftFeatureRef}
-        className="absolute bottom-[20%] left-[38%] hidden lg:block z-10 max-w-xs"
+        className="absolute bottom-[25%] left-[5%] lg:bottom-[20%] lg:left-[38%] block z-20 max-w-[150px] lg:max-w-xs"
       >
-        <h4 className="font-semibold">{t("elegantTimekeeping")}</h4>
-        <p className="text-sm text-gray-300">
+        <h4 className="font-semibold text-sm lg:text-base">{t("elegantTimekeeping")}</h4>
+        <p className="text-xs lg:text-sm text-gray-300">
           {t("designedForPrecision")}
         </p>
       </div>
