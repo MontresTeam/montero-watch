@@ -10,6 +10,7 @@ import {
   FaCcAmex,
 } from "react-icons/fa";
 import TmaraPayment from '../../../public/images/Tamara.jpeg';
+import TabbyPayment from '../../../public/images/tabby.png';
 import { useSearchParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
@@ -737,33 +738,66 @@ function OrderContent() {
                     </label>
 
                     {/* Tamara Option */}
-                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg transition-colors ${!["+971", "+966", "+973"].includes(selectedCountryCode) ? 'opacity-50 cursor-not-allowed bg-gray-50' : 'cursor-pointer hover:border-gray-300'} ${formData.paymentMethod === 'tamara' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200'}`}>
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg transition-colors opacity-60 cursor-not-allowed bg-gray-50 border-gray-200`}>
                       <input
                         type="radio"
                         name="paymentMethod"
                         value="tamara"
-                        checked={formData.paymentMethod === 'tamara'}
-                        onChange={handleInputChange}
-                        disabled={!["+971", "+966", "+973"].includes(selectedCountryCode)}
-                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
+                        checked={false}
+                        onChange={() => { }}
+                        disabled={true}
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-gray-400 border-gray-300 shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                           <div className="min-w-0">
-                            <span className="font-medium text-gray-900 text-sm sm:text-base">{t("payWithTamara")}</span>
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium text-gray-500 text-sm sm:text-base">{t("payWithTamara")}</span>
+                              <span className="text-[10px] bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded font-medium">Integration Ongoing</span>
+                            </div>
                             <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
                               {t("payIn4Installments")}
                             </p>
-                            {!["+971", "+966", "+973"].includes(selectedCountryCode) && (
-                              <p className="text-[10px] text-red-500 mt-1 font-medium">
-                                Only available in Saudi Arabia, UAE, and Bahrain
-                              </p>
-                            )}
                           </div>
-                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0">
+                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0 opacity-60">
                             <Image
                               src={TmaraPayment}
                               alt="Tamara Payment"
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 640px) 56px, 64px"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </label>
+
+                    {/* Tabby Option */}
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg transition-colors opacity-60 cursor-not-allowed bg-gray-50 border-gray-200`}>
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="tabby"
+                        checked={false}
+                        onChange={() => { }}
+                        disabled={true}
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-gray-400 border-gray-300 shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium text-gray-500 text-sm sm:text-base">Tabby</span>
+                              <span className="text-[10px] bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded font-medium">Integration Ongoing</span>
+                            </div>
+                            <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
+                              {t("payIn4Installments")}
+                            </p>
+                          </div>
+                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0 opacity-60">
+                            <Image
+                              src={TabbyPayment}
+                              alt="Tabby Payment"
                               fill
                               className="object-contain"
                               sizes="(max-width: 640px) 56px, 64px"

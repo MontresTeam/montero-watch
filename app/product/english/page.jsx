@@ -559,48 +559,65 @@ const Page = () => {
                   {t("membersFeedbackAr")}
                 </p>
 
-                {/* Arrows */}
-                <div className="flex items-center gap-4">
-                  <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition">
-                    ←
-                  </button>
-                  <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition">
-                    →
+                {/* Arrows & Action */}
+                <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                  <div className="flex items-center gap-4">
+                    <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition text-gray-600">
+                      ←
+                    </button>
+                    <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition shadow-lg">
+                      →
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => toast.info("Please login to your dashboard to submit a verified review.")}
+                    className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+                  >
+                    <span>Write a Review</span>
+                    <span className="w-4 h-[1px] bg-gray-300 group-hover:bg-black transition-colors"></span>
                   </button>
                 </div>
               </div>
 
               {/* TESTIMONIAL CARDS */}
               <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-                {[1, 2, 3].map((_, i) => (
-                  <div key={i} className="border-b pb-6 sm:pb-8">
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(5)].map((_, j) => (
-                        <span key={j} className="text-orange-500 text-sm">
-                          ★
-                        </span>
-                      ))}
+                {[
+                  { name: t("ahmadAlFarsi"), text: t("testimonialEngEdition"), image: Green6 },
+                  { name: t("miranaMarci"), text: t("testimonialEngEdition"), image: Green6 },
+                  { name: t("saraKhalid"), text: t("testimonialEngEdition"), image: Green6 }
+                ].map((review, i) => (
+                  <div key={i} className="border-b border-gray-100 pb-6 sm:pb-8 flex flex-col justify-between h-full">
+                    <div>
+                      {/* Stars */}
+                      <div className="flex gap-1 mb-4">
+                        {[...Array(5)].map((_, j) => (
+                          <span key={j} className="text-orange-400 text-xs">
+                            ★
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Text */}
+                      <p className="text-gray-600 text-sm leading-relaxed mb-6 font-light">
+                        &ldquo;{review.text}&rdquo;
+                      </p>
                     </div>
 
-                    {/* Text */}
-                    <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                      {t("testimonialEngEdition")}
-                    </p>
-
                     {/* User */}
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                    <div className="flex items-center gap-3 mt-auto">
+                      <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-gray-100">
                         <Image
-                          src={Green6}
-                          alt={i === 0 ? t("ahmadAlFarsi") : i === 1 ? t("miranaMarci") : t("saraKhalid")}
+                          src={review.image}
+                          alt={review.name}
                           fill
                           className="object-cover"
                         />
                       </div>
-                      <p className="text-sm font-medium text-gray-900">
-                        {i === 0 ? t("ahmadAlFarsi") : i === 1 ? t("miranaMarci") : t("saraKhalid")}
-                      </p>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">{review.name}</p>
+                        <p className="text-[9px] text-gray-400 uppercase tracking-wider">Verified Owner</p>
+                      </div>
                     </div>
                   </div>
                 ))}
