@@ -59,7 +59,7 @@ const Navbar = () => {
     { name: t("home"), href: "/" },
     { name: t("products"), href: "/product" },
     { name: t("aboutUs"), href: "/about" },
-    { name: t("blog"), href: "/review" },
+    { name: t("blog"), href: "/review/blog" },
     { name: t("gallery"), href: "/gallery" },
     { name: t("contactUs"), href: "/contact" },
   ];
@@ -130,7 +130,7 @@ const Navbar = () => {
       <div className="mx-auto px-4 sm:px-6 lg:px-[6%]">
         <div className={`relative h-16 flex items-center justify-between ${selectedLang === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
           {/* LEFT MENU (Visually Left even in AR) */}
-          <div className={`hidden md:flex items-center space-x-6 ${selectedLang === 'ar' ? 'space-x-reverse' : ''}`}>
+          <div className={`hidden md:flex items-center gap-6`}>
             {mounted && navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -142,7 +142,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="relative text-[13px] tracking-wide group"
+                  className="relative text-[13px] tracking-wide group py-2"
                 >
                   <span
                     className={`transition-all duration-300 ${isActive
@@ -154,8 +154,9 @@ const Navbar = () => {
                   </span>
 
                   <span
-                    className={`absolute left-0 -bottom-1 h-[1.5px] bg-black transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
-                      }`}
+                    className={`absolute bottom-1 h-[1.5px] bg-black transition-all duration-300 
+                      ${selectedLang === 'ar' ? 'right-0' : 'left-0'} 
+                      ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
                   ></span>
                 </Link>
               );
@@ -182,6 +183,7 @@ const Navbar = () => {
                 onClick={() => {
                   setIsLangOpen((p) => !p);
                   setIsCurrencyOpen(false);
+                  setIsDropdownOpen(false);
                 }}
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700"
               >
@@ -221,6 +223,7 @@ const Navbar = () => {
                 onClick={() => {
                   setIsCurrencyOpen((p) => !p);
                   setIsLangOpen(false);
+                  setIsDropdownOpen(false);
                 }}
                 className="flex items-center gap-1 text-[13px] font-light text-gray-700 min-w-[50px]"
               >
@@ -262,7 +265,11 @@ const Navbar = () => {
             <div className="hidden md:block">
               {mounted && (user ? (
                 <button
-                  onClick={() => setIsDropdownOpen((p) => !p)}
+                  onClick={() => {
+                    setIsDropdownOpen((p) => !p);
+                    setIsCurrencyOpen(false);
+                    setIsLangOpen(false);
+                  }}
                   className="flex items-center gap-2"
                 >
                   <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
@@ -277,7 +284,11 @@ const Navbar = () => {
                 </button>
               ) : (
                 <button
-                  onClick={() => setIsDropdownOpen((p) => !p)}
+                  onClick={() => {
+                    setIsDropdownOpen((p) => !p);
+                    setIsCurrencyOpen(false);
+                    setIsLangOpen(false);
+                  }}
                   className="flex items-center"
                 >
                   <FaRegUser size={16} className="text-gray-700" />
@@ -348,7 +359,7 @@ const Navbar = () => {
         className="md:hidden overflow-hidden bg-white border-t"
         style={{ height: 0, opacity: 0 }}
       >
-        <div className={`flex flex-col px-6 py-5 space-y-4 ${selectedLang === 'ar' ? 'items-start text-right' : 'items-start text-left'}`}>
+        <div className={`flex flex-col px-6 py-5 gap-4 ${selectedLang === 'ar' ? 'items-start text-right' : 'items-start text-left'}`}>
           {mounted && navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -356,7 +367,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-light w-full ${isActive ? "text-black" : "text-gray-600"
+                className={`text-base font-light w-full block ${isActive ? "text-black" : "text-gray-600"
                   }`}
               >
                 {link.name}
