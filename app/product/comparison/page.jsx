@@ -32,7 +32,10 @@ const page = () => {
       toast.success(response.data.message || "Subscribed successfully!");
       setEmail("");
     } catch (error) {
-      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Failed to subscribe";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -41,17 +44,23 @@ const page = () => {
 
   return (
     <>
-      <Navbar />
-      <section className="relative h-screen w-full overflow-hidden">
-        <Image
-          src={Comparison1}
-          alt="Hero"
-          fill
-          priority
-          className="object-cover object-[center_10%] transition-transform duration-[8000ms] ease-out hover:scale-105"
-        />
-      </section>
+    <Navbar />
+    <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-screen overflow-hidden">
+  <Image
+    src={Comparison1}
+    alt="Hero"
+    fill
+    priority
+    sizes="(max-width: 640px) 100vw,
+           (max-width: 768px) 100vw,
+           (max-width: 1024px) 100vw,
+           100vw"
+    className="object-cover object-center"
+  />
 
+  {/* Optional subtle overlay */}
+  <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+</section>
       {/* ================= COMPARE SECTION ================= */}
       <ScrollAnimation animationClass="animate-fade-in-up">
         <section className="bg-white px-6 py-28">
@@ -274,51 +283,48 @@ const page = () => {
         </section>
       </ScrollAnimation>
 
-       <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-  <div className="mx-auto max-w-7xl">
-    {/* SUBSCRIBE ROW */}
-    <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
-      
-      {/* LEFT TEXT */}
-      <div>
-        <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
-          {t("subscribeForExclusive")}
-        </h2>
+      <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          {/* SUBSCRIBE ROW */}
+          <div className="mt-16 sm:mt-24 lg:mt-32 grid grid-cols-1 items-center gap-8 lg:gap-12 md:grid-cols-2">
+            {/* LEFT TEXT */}
+            <div>
+              <h2 className="font-cormorant text-3xl sm:text-4xl lg:text-5xl transition-colors duration-300 hover:text-gray-700">
+                {t("subscribeForExclusive")}
+              </h2>
 
-        <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
-          {t("subscribeMailingList")}
-        </p>
-      </div>
+              <p className="mt-3 sm:mt-4 max-w-md text-sm sm:text-base text-gray-600 transition-opacity duration-300 hover:opacity-80 leading-relaxed">
+                {t("subscribeMailingList")}
+              </p>
+            </div>
 
-      {/* RIGHT */}
-      <form
-        onSubmit={handleSubscribe}
-        className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1"
-      >
-        <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
-          <span className="mr-3 text-gray-500">✉</span>
-          <input
-            type="email"
-            required
-            placeholder={t("enterEmail")}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="bg-transparent outline-none w-full text-xs sm:text-sm"
-          />
+            {/* RIGHT */}
+            <form
+              onSubmit={handleSubscribe}
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-1"
+            >
+              <div className="flex items-center bg-gray-200 px-4 py-3 w-full">
+                <span className="mr-3 text-gray-500">✉</span>
+                <input
+                  type="email"
+                  required
+                  placeholder={t("enterEmail")}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-transparent outline-none w-full text-xs sm:text-sm"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition"
+              >
+                {t("subscribeBtn")}
+              </button>
+            </form>
+          </div>
         </div>
-
-        <button
-          type="submit"
-          className="bg-black text-white px-6 sm:px-8 py-3 text-xs sm:text-sm whitespace-nowrap hover:opacity-90 transition"
-        >
-          {t("subscribeBtn")}
-        </button>
-      </form>
-
-    </div>
-  </div>
-</section>
-
+      </section>
 
       <Footer />
 
@@ -346,7 +352,7 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
       {
         threshold: 0.1,
         rootMargin: "50px",
-      }
+      },
     );
 
     if (ref.current) {
@@ -363,8 +369,9 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${isVisible ? animationClass : "opacity-0"
-        }`}
+      className={`transition-all duration-700 ease-out ${
+        isVisible ? animationClass : "opacity-0"
+      }`}
     >
       {children}
     </div>

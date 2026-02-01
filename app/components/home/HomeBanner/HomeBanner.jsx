@@ -5,7 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 
 // Images
 import WatchImage from "@/public/images/Home/bannerWatch.png";
@@ -15,7 +14,6 @@ import RightArrow from "@/public/images/Home/bannerrigth.png";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeBanner() {
-  const { t } = useTranslation();
   const sectionRef = useRef(null);
 
   const titleRef = useRef(null);
@@ -122,15 +120,14 @@ export default function HomeBanner() {
   return (
     <section
       ref={sectionRef}
-      dir="ltr"
       className="relative min-h-screen overflow-hidden text-white"
     >
       {/* BACKGROUND */}
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#004770] via-[#0C2636] to-[#000106]" />
+    {/* Background */}
+<div className="absolute inset-0 bg-gradient-to-br from-[#004770] via-[#0C2636] to-[#000106]" />
 
-      {/* Reduced bottom fade */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent" />
+{/* Reduced bottom fade */}
+<div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent" />
 
 
       {/* CONTENT */}
@@ -141,14 +138,15 @@ export default function HomeBanner() {
             ref={titleRef}
             className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-cormorant leading-tight"
           >
-            {t("homeBannerTitle")}
+            A World Time Watch Inspired by Global Beaches
           </h1>
 
           <p
             ref={descRef}
             className="max-w-md font-Monasans font-light text-[24px] text-gray-300"
           >
-            {t("homeBannerDesc")}
+            Crafted for explorers, dreamers, and lovers of the world’s most
+            iconic beaches
           </p>
 
           <Link href="/product">
@@ -156,17 +154,17 @@ export default function HomeBanner() {
               ref={buttonRef}
               className="px-6 py-3 rounded-full text-black bg-white border border-white font-medium hover:scale-105 transition"
             >
-              {t("preOrderNow")}
+              Pre-Order Now
             </button>
           </Link>
         </div>
 
-        {/* RIGHT TEXT - Top Feature */}
-        <div className="relative w-full lg:w-[45%] pointer-events-none lg:pointer-events-auto">
-          <div ref={rightTextRef} className="absolute top-[44%] right-[5%] lg:top-24 lg:right-0 max-w-[150px] lg:max-w-xs text-right lg:text-left z-20">
-            <h4 className="font-semibold text-sm lg:text-base">{t("elegantTimekeeping")}</h4>
-            <p className="text-xs lg:text-sm text-gray-300">
-              {t("precisionInspired")}
+        {/* RIGHT TEXT */}
+        <div className="relative hidden lg:block w-[45%]">
+          <div ref={rightTextRef} className="absolute top-24 right-0 max-w-xs">
+            <h4 className="font-semibold">Elegant Timekeeping</h4>
+            <p className="text-sm text-gray-300">
+              Precision inspired by the world
             </p>
           </div>
         </div>
@@ -216,11 +214,13 @@ export default function HomeBanner() {
         ref={leftFeatureRef}
         className="absolute bottom-[25%] left-[5%] lg:bottom-[20%] lg:left-[38%] block z-20 max-w-[150px] lg:max-w-xs"
       >
-        <h4 className="font-semibold text-sm lg:text-base">{t("elegantTimekeeping")}</h4>
-        <p className="text-xs lg:text-sm text-gray-300">
-          {t("designedForPrecision")}
+        <h4 className="font-semibold">Elegant Timekeeping</h4>
+        <p className="text-sm text-gray-300">
+          Designed for precision and beauty
         </p>
       </div>
     </section>
   );
 }
+
+// done or not
