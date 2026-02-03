@@ -21,17 +21,16 @@ import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
-import image1 from '@/public/images/GreenWatch/sub/image1G.png'
-import image2 from '@/public/images/GreenWatch/sub/image2G.png'
-import image3 from '@/public/images/GreenWatch/sub/image3G.png'
-import image4 from '@/public/images/GreenWatch/sub/image4G.png'
-import image5 from '@/public/images/GreenWatch/sub/image5G.png'
-import image6 from '@/public/images/GreenWatch/sub/image6G.png'
-import image7 from '@/public/images/GreenWatch/sub/image7G.png'
-import image8 from '@/public/images/GreenWatch/sub/image8G.png'
-import image9 from '@/public/images/GreenWatch/sub/image9G.png'
-import image10 from '@/public/images/GreenWatch/sub/image10G.png'
-
+import image1 from "@/public/images/GreenWatch/sub/image1G.png";
+import image2 from "@/public/images/GreenWatch/sub/image2G.png";
+import image3 from "@/public/images/GreenWatch/sub/image3G.png";
+import image4 from "@/public/images/GreenWatch/sub/image4G.png";
+import image5 from "@/public/images/GreenWatch/sub/image5G.png";
+import image6 from "@/public/images/GreenWatch/sub/image6G.png";
+import image7 from "@/public/images/GreenWatch/sub/image7G.png";
+import image8 from "@/public/images/GreenWatch/sub/image8G.png";
+import image9 from "@/public/images/GreenWatch/sub/image9G.png";
+import image10 from "@/public/images/GreenWatch/sub/image10G.png";
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -46,16 +45,15 @@ const Page = () => {
   // Gallery Images for Arabic Edition
   const arabicGallery = [
     image1,
-        image2,
-        image3,
-        image4,
-        image5,
-        image6,
-        image7,
-        image8,
-        image9,
-        image10
-
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8,
+    image9,
+    image10,
   ];
 
   const [selectedImage, setSelectedImage] = useState(ArabicEditionMain);
@@ -73,7 +71,10 @@ const Page = () => {
       toast.success(response.data.message || "Subscribed successfully!");
       setEmail("");
     } catch (error) {
-      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Failed to subscribe";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -168,10 +169,11 @@ const Page = () => {
                     <button
                       key={idx}
                       onClick={() => setSelectedImage(img)}
-                      className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${selectedImage === img
-                        ? "border-emerald-600 ring-4 ring-emerald-50 scale-105"
-                        : "border-transparent bg-white hover:border-emerald-200"
-                        }`}
+                      className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${
+                        selectedImage === img
+                          ? "border-emerald-600 ring-4 ring-emerald-50 scale-105"
+                          : "border-transparent bg-white hover:border-emerald-200"
+                      }`}
                     >
                       <Image
                         src={img}
@@ -218,28 +220,48 @@ const Page = () => {
                     Pre-order Price (Official Price: {formatPrice(860)})
                   </p>
                   <div className="flex items-center justify-center lg:justify-start gap-3">
-                    <span className="text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
-                    <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">7% OFF</span>
+                    <span className="text-4xl font-bold text-gray-900">
+                      {formatPrice(799)}
+                    </span>
+                    <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                      7% OFF
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Version Selector */}
               <div className="space-y-4 pt-4 border-t border-gray-100">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{t("chooseYourMontero")}</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  {t("chooseYourMontero")}
+                </p>
                 <div className="flex justify-center lg:justify-start gap-6">
                   <Link href="/product/english" className="group relative">
                     <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-blue-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-105">
-                      <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
+                      <Image
+                        src={Watch1}
+                        alt="English Edition"
+                        fill
+                        className="object-contain p-2"
+                      />
                     </div>
-                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">English</span>
+                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                      English
+                    </span>
                   </Link>
 
                   <div className="relative group cursor-pointer">
                     <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-emerald-600 bg-white shadow-md shadow-emerald-100 scale-105 transition-all">
-                      <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
+                      <Image
+                        src={Watch2}
+                        alt="Arabic Edition"
+                        fill
+                        className="object-contain p-2"
+                      />
                     </div>
-                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-emerald-600">Arabic</span>
+                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-emerald-600">
+                      Arabic
+                    </span>
                   </div>
                 </div>
               </div>
@@ -254,11 +276,16 @@ const Page = () => {
                     t("stainlessSteelCaseAr"),
                     t("worldTimeBeachAr"),
                   ].map((item) => (
-                    <div key={item} className="flex items-center justify-center lg:justify-start gap-3">
+                    <div
+                      key={item}
+                      className="flex items-center justify-center lg:justify-start gap-3"
+                    >
                       <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
                         <div className="w-1.5 h-1.5 bg-emerald-600 rounded-full"></div>
                       </div>
-                      <p className="text-gray-700 text-sm font-medium">{item}</p>
+                      <p className="text-gray-700 text-sm font-medium">
+                        {item}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -267,21 +294,38 @@ const Page = () => {
                 <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
                   <div className="flex items-center gap-2">
                     <span className="w-1 h-1 bg-emerald-400 rounded-full"></span>
-                    <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("sapphireDurabilityAr")}</p>
+                    <p className="text-[11px] text-gray-500 uppercase tracking-tighter">
+                      {t("sapphireDurabilityAr")}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-1 h-1 bg-emerald-400 rounded-full"></span>
-                    <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("gmtGlobalSyncAr")}</p>
+                    <p className="text-[11px] text-gray-500 uppercase tracking-tighter">
+                      {t("gmtGlobalSyncAr")}
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4 pt-6">
-                <Link href={`/order?productId=${ARABIC_PRODUCT_ID}`} className="block">
+                <Link
+                  href={`/order?productId=${ARABIC_PRODUCT_ID}`}
+                  className="block"
+                >
                   <button className="w-full bg-black text-white px-8 py-5 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-[1.02] shadow-2xl flex items-center justify-center gap-3 active:scale-95 group">
                     <span>{t("preOrderNow")}</span>
-                    <svg className="w-6 h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <svg
+                      className="w-6 h-6 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </button>
                 </Link>
@@ -290,14 +334,15 @@ const Page = () => {
                   <span className="px-4 py-1.5 text-[10px] tracking-[0.2em] font-bold text-red-700 border border-red-200 uppercase bg-red-50 rounded-sm">
                     {t("limitedEditionBadgeAr")}
                   </span>
-                  <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">{t("oneOf150Ar")}</p>
+                  <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">
+                    {t("oneOf150Ar")}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
 
       {/* Section 3 - Technical Specifications */}
       <ScrollAnimation animationClass="animate-fade-in-up">
@@ -328,51 +373,50 @@ const Page = () => {
             <div className="relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px]">
               {/* Desktop Specifications (Callout Layout) */}
               <div className="hidden lg:block absolute inset-0 z-20">
-  {/* SPEC 1: Stainless Steel - Pointing to crown/upper bezel */}
-  <div className="absolute right-[26%] top-[15%] group">
-    <div className="flex items-center gap-0">
-      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
-        {t("stainlessSteelCaseAr")}
-      </p>
-      <div className="w-28 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-    </div>
-  </div>
+                {/* SPEC 1: Stainless Steel - Pointing to crown/upper bezel */}
+                <div className="absolute right-[26%] top-[15%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                      {t("stainlessSteelCaseAr")}
+                    </p>
+                    <div className="w-28 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
 
-  {/* SPEC 2: Polished & Brushed - Pointing to middle case body */}
-  <div className="absolute right-[32%] top-[35%] group">
-    <div className="flex items-center gap-0">
-      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
-        {t("polishedBrushedSpecAr")}
-      </p>
-      <div className="w-36 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-    </div>
-  </div>
+                {/* SPEC 2: Polished & Brushed - Pointing to middle case body */}
+                <div className="absolute right-[32%] top-[35%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                      {t("polishedBrushedSpecAr")}
+                    </p>
+                    <div className="w-36 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
 
-  {/* SPEC 3: Case Thickness - Pointing to the side profile */}
-  <div className="absolute right-[35%] top-[55%] group">
-    <div className="flex items-center gap-0">
-      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
-        {t("caseThicknessSpecAr")}
-      </p>
-      <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-    </div>
-  </div>
+                {/* SPEC 3: Case Thickness - Pointing to the side profile */}
+                <div className="absolute right-[35%] top-[55%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                      {t("caseThicknessSpecAr")}
+                    </p>
+                    <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
 
-  {/* SPEC 4: Diameter - Pointing to the Arabic dial */}
-  <div className="absolute right-[29%] bottom-[15%] group">
-    <div className="flex items-center gap-0">
-      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4">
-        {t("diameterSpecAr")}
-      </p>
-      <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-    </div>
-  </div>
-</div>
-
+                {/* SPEC 4: Diameter - Pointing to the Arabic dial */}
+                <div className="absolute right-[29%] bottom-[15%] group">
+                  <div className="flex items-center gap-0">
+                    <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4">
+                      {t("diameterSpecAr")}
+                    </p>
+                    <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                  </div>
+                </div>
+              </div>
 
               {/* Main Watch Image - Arabic Edition - Further refined positioning */}
               <div className="lg:absolute lg:right-[-10%] lg:top-[-40px] w-full lg:w-[460px] h-[400px] sm:h-[500px] lg:h-[720px] relative z-10 flex items-center justify-center lg:block overflow-visible">
@@ -400,7 +444,9 @@ const Page = () => {
                   >
                     <div className="flex items-center justify-between">
                       <span className="w-8 h-[1px] bg-black group-hover:w-12 transition-all" />
-                      <span className="text-[10px] font-bold text-gray-300">0{i + 1}</span>
+                      <span className="text-[10px] font-bold text-gray-300">
+                        0{i + 1}
+                      </span>
                     </div>
                     <p className="text-[11px] font-bold text-gray-900 uppercase tracking-[0.15em] leading-relaxed">
                       {spec}
@@ -489,8 +535,8 @@ const Page = () => {
             </div>
 
             {/* RIGHT IMAGE */}
-            <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[420px] flex items-center justify-center order-1 lg:order-2 mb-4 lg:mb-0">
-              <div className="relative w-full h-full max-w-sm md:max-w-md rounded-xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-[300px] sm:h-[420px] md:h-[520px] lg:h-[600px] flex items-center justify-center order-1 lg:order-2 mb-4 lg:mb-0">
+              <div className="relative w-full h-full max-w-md md:max-w-lg lg:max-w-xl rounded-xl overflow-hidden shadow-lg">
                 {/* Image */}
                 <video
                   src="/images/Gallery/galleryV.mp4"
@@ -503,11 +549,11 @@ const Page = () => {
                   aria-label="Watch setting tutorial video"
                 />
                 {/* Play button overlay for mobile */}
-                <div className="absolute inset-0 flex items-center justify-center lg:hidden">
+                {/* <div className="absolute inset-0 flex items-center justify-center lg:hidden">
                   <div className="w-16 h-16 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm">
                     <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-transparent border-l-white ml-1"></div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -543,7 +589,10 @@ const Page = () => {
 
             {/* Mobile-only CTA */}
             <div className="lg:hidden pt-4">
-              <Link href={`/order?productId=${ARABIC_PRODUCT_ID}`} className="inline-block w-full">
+              <Link
+                href={`/order?productId=${ARABIC_PRODUCT_ID}`}
+                className="inline-block w-full"
+              >
                 <button className="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors w-full flex items-center justify-center gap-2 min-h-[44px]">
                   <div className="relative w-4 h-4">
                     <Image
@@ -568,7 +617,9 @@ const Page = () => {
           <div className="flex flex-col lg:grid lg:grid-cols-4 gap-8 lg:gap-12 items-start">
             {/* LEFT CONTENT */}
             <div className="lg:col-span-1 text-center lg:text-left">
-              <p className="text-xs sm:text-sm text-gray-500 mb-3 mobile-small-text">{t("clientFeedbackAr")}</p>
+              <p className="text-xs sm:text-sm text-gray-500 mb-3 mobile-small-text">
+                {t("clientFeedbackAr")}
+              </p>
 
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-snug mobile-heading">
                 {t("whatTheySayAr")}
@@ -599,11 +650,17 @@ const Page = () => {
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {/* CARD */}
               {[1, 2, 3].map((_, i) => (
-                <div key={i} className="border-b lg:border-b-0 pb-4 sm:pb-6 lg:pb-0">
+                <div
+                  key={i}
+                  className="border-b lg:border-b-0 pb-4 sm:pb-6 lg:pb-0"
+                >
                   {/* Stars */}
                   <div className="flex gap-1 mb-3 sm:mb-4 justify-center sm:justify-start">
                     {[...Array(5)].map((_, j) => (
-                      <span key={j} className="text-orange-500 text-xs sm:text-sm">
+                      <span
+                        key={j}
+                        className="text-orange-500 text-xs sm:text-sm"
+                      >
                         ★
                       </span>
                     ))}
@@ -619,7 +676,13 @@ const Page = () => {
                     <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
                       <Image
                         src={Green6}
-                        alt={i === 0 ? t("ahmadAlFarsi") : i === 1 ? t("miranaMarci") : t("saraKhalid")}
+                        alt={
+                          i === 0
+                            ? t("ahmadAlFarsi")
+                            : i === 1
+                              ? t("miranaMarci")
+                              : t("saraKhalid")
+                        }
                         fill
                         className="object-cover"
                         sizes="40px"
@@ -633,7 +696,9 @@ const Page = () => {
                             ? t("miranaMarci")
                             : t("saraKhalid")}
                       </p>
-                      <p className="text-xs text-gray-500 mobile-small-text">{t("verifiedBuyerAr")}</p>
+                      <p className="text-xs text-gray-500 mobile-small-text">
+                        {t("verifiedBuyerAr")}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -711,7 +776,10 @@ const Page = () => {
             </div>
 
             {/* RIGHT */}
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 w-full max-w-md lg:max-w-none mx-auto lg:mx-0">
+            <form
+              onSubmit={handleSubscribe}
+              className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 w-full max-w-md lg:max-w-none mx-auto lg:mx-0"
+            >
               <div className="flex items-center bg-gray-100 px-3 sm:px-4 py-2 sm:py-3 w-full rounded-lg">
                 <Mail className="mr-2 sm:mr-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-500 flex-shrink-0" />
                 <input
@@ -759,7 +827,7 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
       {
         threshold: 0.1,
         rootMargin: "50px",
-      }
+      },
     );
 
     if (ref.current) {
@@ -776,41 +844,11 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
-        }`}
+      className={`transition-opacity ${
+        isVisible ? animationClass : "opacity-0"
+      }`}
     >
       {children}
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

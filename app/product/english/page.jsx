@@ -554,8 +554,8 @@ const Page = () => {
               </div>
 
               {/* RIGHT VIDEO */}
-              <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[420px] flex items-center justify-center order-1 lg:order-2">
-                <div className="relative w-full h-full max-w-md mx-auto">
+              <div className="relative w-full h-[350px] sm:h-[450px] md:h-[520px] lg:h-[600px] flex items-center justify-center order-1 lg:order-2">
+                <div className="relative w-full h-full max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
                   <video
                     src="/images/Gallery/galleryV.mp4"
                     autoPlay
