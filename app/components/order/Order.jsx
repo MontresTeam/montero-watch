@@ -973,7 +973,6 @@ function OrderContent() {
                     <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-2">
                       <div className="flex flex-col">
                         <span className="text-base font-bold text-gray-900 uppercase tracking-tight">{t("total")}</span>
-                        <span className="text-[10px] text-gray-400 font-normal">{t("vatIncluded") || "VAT included"}</span>
                       </div>
                       <div className="flex flex-col items-end">
                         <span className="text-xl sm:text-2xl font-black text-gray-900 leading-none">
