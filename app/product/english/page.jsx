@@ -21,16 +21,16 @@ import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
-import image1 from '@/public/images/BlueWatch/sub/image1B.png'
-import image2 from '@/public/images/BlueWatch/sub/image2B.png'
-import image3 from '@/public/images/BlueWatch/sub/image3B.png'
-import image4 from '@/public/images/BlueWatch/sub/image4B.png'
-import image5 from '@/public/images/BlueWatch/sub/image5B.png'
-import image6 from '@/public/images/BlueWatch/sub/image6B.png'
-import image7 from '@/public/images/BlueWatch/sub/image7B.png'
-import image8 from '@/public/images/BlueWatch/sub/image8B.png'
-import image9 from '@/public/images/BlueWatch/sub/image9B.png'
-import image10 from '@/public/images/BlueWatch/sub/image10B.png'
+import image1 from "@/public/images/BlueWatch/sub/image1B.png";
+import image2 from "@/public/images/BlueWatch/sub/image2B.png";
+import image3 from "@/public/images/BlueWatch/sub/image3B.png";
+import image4 from "@/public/images/BlueWatch/sub/image4B.png";
+import image5 from "@/public/images/BlueWatch/sub/image5B.png";
+import image6 from "@/public/images/BlueWatch/sub/image6B.png";
+import image7 from "@/public/images/BlueWatch/sub/image7B.png";
+import image8 from "@/public/images/BlueWatch/sub/image8B.png";
+import image9 from "@/public/images/BlueWatch/sub/image9B.png";
+import image10 from "@/public/images/BlueWatch/sub/image10B.png";
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -53,7 +53,7 @@ const Page = () => {
     image7,
     image8,
     image9,
-    image10
+    image10,
   ];
 
   const [selectedImage, setSelectedImage] = useState(EnglishEditionMain);
@@ -71,7 +71,10 @@ const Page = () => {
       toast.success(response.data.message || "Subscribed successfully!");
       setEmail("");
     } catch (error) {
-      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Failed to subscribe";
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Failed to subscribe";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -171,10 +174,11 @@ const Page = () => {
                       <button
                         key={idx}
                         onClick={() => setSelectedImage(img)}
-                        className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${selectedImage === img
-                          ? "border-blue-600 ring-4 ring-blue-50 scale-105"
-                          : "border-transparent bg-white hover:border-blue-200"
-                          }`}
+                        className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${
+                          selectedImage === img
+                            ? "border-blue-600 ring-4 ring-blue-50 scale-105"
+                            : "border-transparent bg-white hover:border-blue-200"
+                        }`}
                       >
                         <Image
                           src={img}
@@ -222,30 +226,50 @@ const Page = () => {
                       Pre-order Price (Official Price: {formatPrice(860)})
                     </p>
                     <div className="flex items-center justify-center lg:justify-start gap-3">
-                      <span className="text-4xl font-bold text-gray-900">{formatPrice(799)}</span>
-                      <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">7% OFF</span>
+                      <span className="text-4xl font-bold text-gray-900">
+                        {formatPrice(799)}
+                      </span>
+                      <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                        7% OFF
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 {/* Version Selector */}
                 <div className="space-y-4 pt-4 border-t border-gray-100">
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{t("chooseYourMontero")}</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    {t("chooseYourMontero")}
+                  </p>
                   <div className="flex justify-center lg:justify-start gap-6">
                     {/* English Blue Option (Active) */}
                     <div className="relative group cursor-pointer">
                       <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-blue-600 bg-white shadow-md shadow-blue-100 scale-105 transition-all">
-                        <Image src={Watch1} alt="English Edition" fill className="object-contain p-2" />
+                        <Image
+                          src={Watch1}
+                          alt="English Edition"
+                          fill
+                          className="object-contain p-2"
+                        />
                       </div>
-                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-blue-600">English</span>
+                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-blue-600">
+                        English
+                      </span>
                     </div>
 
                     {/* Arabic Green Option */}
                     <Link href="/product/arabic" className="group relative">
                       <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-200 bg-white group-hover:border-emerald-500 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-105">
-                        <Image src={Watch2} alt="Arabic Edition" fill className="object-contain p-2" />
+                        <Image
+                          src={Watch2}
+                          alt="Arabic Edition"
+                          fill
+                          className="object-contain p-2"
+                        />
                       </div>
-                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">Arabic</span>
+                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Arabic
+                      </span>
                     </Link>
                   </div>
                 </div>
@@ -260,11 +284,16 @@ const Page = () => {
                       t("stainlessSteel"),
                       t("worldTimeBeachAr"),
                     ].map((item) => (
-                      <div key={item} className="flex items-center justify-center lg:justify-start gap-3">
+                      <div
+                        key={item}
+                        className="flex items-center justify-center lg:justify-start gap-3"
+                      >
                         <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
                           <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
                         </div>
-                        <p className="text-gray-700 text-sm font-medium">{item}</p>
+                        <p className="text-gray-700 text-sm font-medium">
+                          {item}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -273,22 +302,39 @@ const Page = () => {
                   <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
                     <div className="flex items-center gap-2">
                       <span className="w-1 h-1 bg-blue-400 rounded-full"></span>
-                      <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("sapphireDurabilityAr")}</p>
+                      <p className="text-[11px] text-gray-500 uppercase tracking-tighter">
+                        {t("sapphireDurabilityAr")}
+                      </p>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-1 h-1 bg-blue-400 rounded-full"></span>
-                      <p className="text-[11px] text-gray-500 uppercase tracking-tighter">{t("gmtGlobalSyncAr")}</p>
+                      <p className="text-[11px] text-gray-500 uppercase tracking-tighter">
+                        {t("gmtGlobalSyncAr")}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
                 <div className="space-y-4 pt-6">
-                  <Link href={`/order?productId=${ENGLISH_PRODUCT_ID}`} className="block">
+                  <Link
+                    href={`/order?productId=${ENGLISH_PRODUCT_ID}`}
+                    className="block"
+                  >
                     <button className="w-full bg-black text-white px-8 py-5 rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-[1.02] shadow-2xl flex items-center justify-center gap-3 active:scale-95 group">
                       <span>{t("preOrderNow")}</span>
-                      <svg className="w-6 h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <svg
+                        className="w-6 h-6 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
                       </svg>
                     </button>
                   </Link>
@@ -297,7 +343,9 @@ const Page = () => {
                     <span className="px-4 py-1.5 text-[10px] tracking-[0.2em] font-bold text-red-700 border border-red-200 uppercase bg-red-50 rounded-sm">
                       {t("limitedEdition")}
                     </span>
-                    <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">{t("oneOf150")}</p>
+                    <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">
+                      {t("oneOf150")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -338,44 +386,56 @@ const Page = () => {
                 {/* SPEC 1: Stainless Steel - Pointing to upper bezel/lug area */}
                 <div className="absolute right-[26%] top-[15%] group">
                   <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                    <p
+                      className={`font-bold text-gray-900 uppercase tracking-[0.2em] pr-4 
+        ${i18n.language === "ar" ? "text-[16px]" : "text-[12px]"}`}
+                    >
                       {t("stainlessSteel")}
                     </p>
-                    <div className="w-28 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                    <div className="w-32 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-2 h-2 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
                   </div>
                 </div>
 
                 {/* SPEC 2: Polished & Brushed - Pointing to case side */}
                 <div className="absolute right-[32%] top-[35%] group">
                   <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                    <p
+                      className={`font-bold text-gray-900 uppercase tracking-[0.2em] pr-4 
+        ${i18n.language === "ar" ? "text-[16px]" : "text-[12px]"}`}
+                    >
                       {t("polishedBrushedSpecAr")}
                     </p>
-                    <div className="w-36 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                    <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-2 h-2 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
                   </div>
                 </div>
 
                 {/* SPEC 3: Case Thickness - Pointing to profile */}
                 <div className="absolute right-[35%] top-[55%] group">
                   <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+                    <p
+                      className={`font-bold text-gray-900 uppercase tracking-[0.2em] pr-4 
+        ${i18n.language === "ar" ? "text-[16px]" : "text-[12px]"}`}
+                    >
                       {t("caseThicknessEngSpec")}
                     </p>
-                    <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                    <div className="w-48 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-2 h-2 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
                   </div>
                 </div>
 
                 {/* SPEC 4: Diameter - Pointing to the blue dial */}
                 <div className="absolute right-[29%] bottom-[15%] group">
                   <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4">
+                    <p
+                      className={`font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4 
+        ${i18n.language === "ar" ? "text-[16px]" : "text-[12px]"}`}
+                    >
                       {t("diameterSpecAr")}
                     </p>
-                    <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+                    <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+                    <div className="w-2 h-2 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
                   </div>
                 </div>
               </div>
@@ -406,7 +466,9 @@ const Page = () => {
                   >
                     <div className="flex items-center justify-between">
                       <span className="w-8 h-[1px] bg-black group-hover:w-12 transition-all" />
-                      <span className="text-[10px] font-bold text-gray-300">0{i + 1}</span>
+                      <span className="text-[10px] font-bold text-gray-300">
+                        0{i + 1}
+                      </span>
                     </div>
                     <p className="text-[11px] font-bold text-gray-900 uppercase tracking-[0.15em] leading-relaxed">
                       {spec}
@@ -464,9 +526,7 @@ const Page = () => {
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>
-                        {t("rotateClockwiseAr")}
-                      </span>
+                      <span>{t("rotateClockwiseAr")}</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
@@ -483,15 +543,11 @@ const Page = () => {
                   <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>
-                        {t("beachCorrespondsAr")}
-                      </span>
+                      <span>{t("beachCorrespondsAr")}</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>
-                      <span>
-                        {t("chooseBeachAr")}
-                      </span>
+                      <span>{t("chooseBeachAr")}</span>
                     </li>
                   </ul>
                 </div>
@@ -553,7 +609,9 @@ const Page = () => {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 items-start">
               {/* LEFT CONTENT */}
               <div className="lg:col-span-1">
-                <p className="text-sm text-gray-500 mb-3">{t("clientFeedbackAr")}</p>
+                <p className="text-sm text-gray-500 mb-3">
+                  {t("clientFeedbackAr")}
+                </p>
 
                 <h2 className="text-2xl sm:text-3xl font-serif text-gray-900 mb-4 sm:mb-6 leading-snug">
                   {t("whatTheySayAr")}
@@ -575,7 +633,11 @@ const Page = () => {
                   </div>
 
                   <button
-                    onClick={() => toast.info("Please login to your dashboard to submit a verified review.")}
+                    onClick={() =>
+                      toast.info(
+                        "Please login to your dashboard to submit a verified review.",
+                      )
+                    }
                     className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
                   >
                     <span>Write a Review</span>
@@ -587,11 +649,26 @@ const Page = () => {
               {/* TESTIMONIAL CARDS */}
               <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
                 {[
-                  { name: t("ahmadAlFarsi"), text: t("testimonialEngEdition"), image: Green6 },
-                  { name: t("miranaMarci"), text: t("testimonialEngEdition"), image: Green6 },
-                  { name: t("saraKhalid"), text: t("testimonialEngEdition"), image: Green6 }
+                  {
+                    name: t("ahmadAlFarsi"),
+                    text: t("testimonialEngEdition"),
+                    image: Green6,
+                  },
+                  {
+                    name: t("miranaMarci"),
+                    text: t("testimonialEngEdition"),
+                    image: Green6,
+                  },
+                  {
+                    name: t("saraKhalid"),
+                    text: t("testimonialEngEdition"),
+                    image: Green6,
+                  },
                 ].map((review, i) => (
-                  <div key={i} className="border-b border-gray-100 pb-6 sm:pb-8 flex flex-col justify-between h-full">
+                  <div
+                    key={i}
+                    className="border-b border-gray-100 pb-6 sm:pb-8 flex flex-col justify-between h-full"
+                  >
                     <div>
                       {/* Stars */}
                       <div className="flex gap-1 mb-4">
@@ -619,8 +696,12 @@ const Page = () => {
                         />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-gray-900">{review.name}</p>
-                        <p className="text-[9px] text-gray-400 uppercase tracking-wider">Verified Owner</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {review.name}
+                        </p>
+                        <p className="text-[9px] text-gray-400 uppercase tracking-wider">
+                          Verified Owner
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -723,7 +804,6 @@ const Page = () => {
                   {loading ? t("loading") : t("subscribeBtn")}
                 </button>
               </form>
-
             </div>
           </div>
         </section>
@@ -754,7 +834,7 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
       {
         threshold: 0.1,
         rootMargin: "50px",
-      }
+      },
     );
 
     if (ref.current) {
@@ -771,8 +851,9 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
-        }`}
+      className={`transition-opacity ${
+        isVisible ? animationClass : "opacity-0"
+      }`}
     >
       {children}
     </div>

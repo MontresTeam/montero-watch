@@ -34,8 +34,9 @@ import image10 from '@/public/images/GreenWatch/sub/image10G.png'
 
 
 const Page = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const router = useRouter();
+  const isAr = i18n.language === "ar";
   const { formatPrice } = useCurrency();
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(null);
@@ -94,7 +95,7 @@ const Page = () => {
   ];
 
   return (
-    <>
+    <div className={isAr ? "lang-ar" : ""}>
       <Navbar />
 
       {/* First Section - Hero */}
@@ -327,50 +328,51 @@ const Page = () => {
             <div className="relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px]">
               {/* Desktop Specifications (Callout Layout) */}
               <div className="hidden lg:block absolute inset-0 z-20">
-                {/* SPEC 1: Stainless Steel - Pointing to crown/upper bezel */}
-                <div className="absolute right-[26%] top-[15%] group">
-                  <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
-                      {t("stainlessSteelCaseAr")}
-                    </p>
-                    <div className="w-28 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-                  </div>
-                </div>
+  {/* SPEC 1: Stainless Steel - Pointing to crown/upper bezel */}
+  <div className="absolute right-[26%] top-[15%] group">
+    <div className="flex items-center gap-0">
+      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+        {t("stainlessSteelCaseAr")}
+      </p>
+      <div className="w-28 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+    </div>
+  </div>
 
-                {/* SPEC 2: Polished & Brushed - Pointing to middle case body */}
-                <div className="absolute right-[32%] top-[35%] group">
-                  <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
-                      {t("polishedBrushedSpecAr")}
-                    </p>
-                    <div className="w-36 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-                  </div>
-                </div>
+  {/* SPEC 2: Polished & Brushed - Pointing to middle case body */}
+  <div className="absolute right-[32%] top-[35%] group">
+    <div className="flex items-center gap-0">
+      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+        {t("polishedBrushedSpecAr")}
+      </p>
+      <div className="w-36 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+    </div>
+  </div>
 
-                {/* SPEC 3: Case Thickness - Pointing to the side profile */}
-                <div className="absolute right-[35%] top-[55%] group">
-                  <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
-                      {t("caseThicknessSpecAr")}
-                    </p>
-                    <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-                  </div>
-                </div>
+  {/* SPEC 3: Case Thickness - Pointing to the side profile */}
+  <div className="absolute right-[35%] top-[55%] group">
+    <div className="flex items-center gap-0">
+      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] pr-4">
+        {t("caseThicknessSpecAr")}
+      </p>
+      <div className="w-44 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+    </div>
+  </div>
 
-                {/* SPEC 4: Diameter - Pointing to the Arabic dial */}
-                <div className="absolute right-[29%] bottom-[15%] group">
-                  <div className="flex items-center gap-0">
-                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4">
-                      {t("diameterSpecAr")}
-                    </p>
-                    <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
-                    <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
-                  </div>
-                </div>
-              </div>
+  {/* SPEC 4: Diameter - Pointing to the Arabic dial */}
+  <div className="absolute right-[29%] bottom-[15%] group">
+    <div className="flex items-center gap-0">
+      <p className="text-xs [html[lang='ar']_&]:text-sm lg:[html[lang='ar']_&]:text-base font-bold text-gray-900 uppercase tracking-[0.2em] whitespace-nowrap pr-4">
+        {t("diameterSpecAr")}
+      </p>
+      <div className="w-40 h-px bg-gray-200 group-hover:bg-black transition-all duration-500" />
+      <div className="w-1.5 h-1.5 bg-black rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
+    </div>
+  </div>
+</div>
+
 
               {/* Main Watch Image - Arabic Edition - Further refined positioning */}
               <div className="lg:absolute lg:right-[-10%] lg:top-[-40px] w-full lg:w-[460px] h-[400px] sm:h-[500px] lg:h-[720px] relative z-10 flex items-center justify-center lg:block overflow-visible">
@@ -733,7 +735,7 @@ const Page = () => {
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
