@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import { IoArrowBackOutline } from "react-icons/io5";
-import newCurrencySymbol from '../../../public/images/newSymbole.png';
 import {
   FaCcVisa,
   FaCcMastercard,
@@ -258,7 +257,7 @@ function OrderContent() {
     state: "",
     country: "United Arab Emirates",
     zipCode: "",
-    paymentMethod: "stripe",
+    paymentMethod: "tamara",
   });
 
   // Keep email synced if user loads later
@@ -738,28 +737,26 @@ function OrderContent() {
                     </label>
 
                     {/* Tamara Option */}
-                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg transition-colors opacity-60 cursor-not-allowed bg-gray-50 border-gray-200`}>
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg cursor-pointer transition-colors ${formData.paymentMethod === 'tamara' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200 hover:border-gray-300'}`}>
                       <input
                         type="radio"
                         name="paymentMethod"
                         value="tamara"
-                        checked={false}
-                        onChange={() => { }}
-                        disabled={true}
-                        className="mt-0.5 sm:mt-1 w-4 h-4 text-gray-400 border-gray-300 shrink-0"
+                        checked={formData.paymentMethod === 'tamara'}
+                        onChange={handleInputChange}
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
-                              <span className="font-medium text-gray-500 text-sm sm:text-base">{t("payWithTamara")}</span>
-                              <span className="text-[10px] bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded font-medium">Integration Ongoing</span>
+                              <span className="font-medium text-gray-900 text-sm sm:text-base">{t("payWithTamara")}</span>
                             </div>
                             <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
                               {t("payIn4Installments")}
                             </p>
                           </div>
-                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0 opacity-60">
+                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0">
                             <Image
                               src={TmaraPayment}
                               alt="Tamara Payment"
@@ -852,9 +849,7 @@ function OrderContent() {
                           <h3 className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg line-clamp-2">
                             {t(product.name)}
                           </h3>
-                          <div className="flex items-center text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                            {formatPrice(product.price || 860)}
-                          </div>
+
                         </div>
 
                         {/* Product Features */}
@@ -908,10 +903,17 @@ function OrderContent() {
                             </div>
                           </div>
 
-                          <div className="text-right">
+                          <div className="text-right shrink-0">
                             <div className="text-xs text-gray-500 mb-1">{t("itemTotal")}</div>
-                            <div className="flex items-center justify-end text-base sm:text-lg font-bold text-gray-900">
-                              {formatPrice(originalSubtotal)}
+                            <div className="flex flex-col items-end">
+                              {discountAmount > 0 && (
+                                <div className="text-[10px] sm:text-xs text-gray-400 line-through leading-none mb-0.5">
+                                  {formatPrice(originalSubtotal)}
+                                </div>
+                              )}
+                              <div className="text-base sm:text-lg font-bold text-gray-900 leading-none">
+                                {formatPrice(subtotal)}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -927,14 +929,32 @@ function OrderContent() {
                   </h3>
 
                   <div className="space-y-3 sm:space-y-4">
-                    {/* Subtotal */}
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-col">
-                        <span className="text-sm text-gray-700">{t("subtotal")}</span>
-                        <span className="text-xs text-gray-500">({quantity} {t("items")})</span>
+                    {/* Subtotal Calculation */}
+                    <div className="space-y-2">
+                      {/* Retail Price */}
+                      <div className="flex justify-between items-center text-gray-500">
+                        <span className="text-sm">{t("retailPrice") || "Retail Price"}</span>
+                        <span className="text-sm line-through">{formatPrice(originalSubtotal)}</span>
                       </div>
-                      <div className="flex items-center text-sm font-medium text-gray-900">
-                        {formatPrice(originalSubtotal)}
+
+                      {/* Discount */}
+                      <div className="flex justify-between items-center text-red-600 bg-red-50/50 p-2.5 rounded-lg border border-red-100/50">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-bold">{t("preOrderDiscount")}</span>
+                          <span className="text-[10px] opacity-80 uppercase tracking-wider">{t("offRetailPrice")}</span>
+                        </div>
+                        <div className="flex items-center text-sm font-bold">
+                          -{formatPrice(discountAmount)}
+                        </div>
+                      </div>
+
+                      {/* Net Subtotal */}
+                      <div className="flex justify-between items-center py-2 border-t border-gray-100 mt-1">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-bold text-gray-900">{t("subtotal")}</span>
+                          <span className="text-[10px] text-gray-500">({quantity} {t("items")})</span>
+                        </div>
+                        <span className="text-sm font-bold text-gray-900">{formatPrice(subtotal)}</span>
                       </div>
                     </div>
 
@@ -949,19 +969,26 @@ function OrderContent() {
                       </div>
                     </div>
 
-                    {/* Discount */}
-                    <div className="flex justify-between items-center text-red-600 bg-red-50/50 p-2 rounded-lg border border-red-100/50">
+                    {/* Order Total Highlight */}
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-2">
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold">{t("preOrderDiscount")}</span>
-                        <span className="text-xs opacity-80">{t("offRetailPrice")}</span>
+                        <span className="text-base font-bold text-gray-900 uppercase tracking-tight">{t("total")}</span>
+                        <span className="text-[10px] text-gray-400 font-normal">{t("vatIncluded") || "VAT included"}</span>
                       </div>
-                      <div className="flex items-center text-sm font-bold">
-                        -{formatPrice(discountAmount)}
+                      <div className="flex flex-col items-end">
+                        <span className="text-xl sm:text-2xl font-black text-gray-900 leading-none">
+                          {calculating ? "..." : formatPrice(total)}
+                        </span>
+                        {discountAmount > 0 && (
+                          <span className="text-[10px] text-green-600 font-bold mt-1 bg-green-50 px-1.5 py-0.5 rounded">
+                            {t("youSaved") || "You Saved"} {formatPrice(discountAmount)}
+                          </span>
+                        )}
                       </div>
                     </div>
 
                     {/* Estimated Delivery */}
-                    <div className="flex justify-between items-center py-3 border-y border-gray-100">
+                    <div className="flex justify-between items-center py-3 border-y border-gray-100 mt-4">
                       <div className="flex flex-col">
                         <span className="text-sm text-gray-700">{t("estimatedDelivery")}</span>
                         <span className="text-xs text-gray-500">{t("allItemsInOrder")}</span>
