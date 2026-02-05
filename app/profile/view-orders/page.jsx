@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { FiPackage, FiTruck, FiCheckCircle, FiArrowLeft, FiArrowRight, FiExternalLink, FiClock } from "react-icons/fi";
+import { FiPackage, FiTruck, FiCheckCircle, FiArrowLeft, FiArrowRight, FiExternalLink, FiClock, FiCreditCard } from "react-icons/fi";
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
 import "@/lib/i18n";
@@ -151,7 +151,7 @@ function ViewOrdersPage() {
                                     </div>
 
                                     {/* Row 2: Timeline Grid */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6 border-t border-stone-50">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-6 border-t border-stone-50">
                                         <div className="space-y-1.5">
                                             <label className="block text-[10px] text-stone-400 uppercase tracking-[0.2em] font-bold">
                                                 {t("orderDate") || "Ordered"}
@@ -169,6 +169,21 @@ function ViewOrdersPage() {
                                             <div className="text-[14px] text-stone-800 font-medium flex items-center gap-2">
                                                 <FiTruck className="text-stone-300" />
                                                 March 01, 2026
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-1.5">
+                                            <label className="block text-[10px] text-stone-400 uppercase tracking-[0.2em] font-bold">
+                                                {t("paymentMethod") || "Payment"}
+                                            </label>
+                                            <div className="text-[14px] text-stone-800 font-medium flex items-center gap-2">
+                                                <FiCreditCard className="text-stone-300" />
+                                                {order.paymentMethod ? (
+                                                    order.paymentMethod === "stripe" ? t("creditDebitCard") :
+                                                        order.paymentMethod === "tamara" ? t("payWithTamara") :
+                                                            order.paymentMethod === "tabby" ? "Tabby" :
+                                                                order.paymentMethod
+                                                ) : "-"}
                                             </div>
                                         </div>
 
