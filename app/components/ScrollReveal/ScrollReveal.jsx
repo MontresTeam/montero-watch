@@ -14,16 +14,17 @@ export default function ScrollReveal({
   start = "top bottom",
   end = "bottom center",
   className = "",
+  as: Component = "div", // 👈 KEY FIX (default block, can be span)
 }) {
   const containerRef = useRef(null);
 
-  // Split text into words
+  // Split text into words (INLINE SAFE)
   const splitText = useMemo(() => {
     if (typeof children !== "string") return children;
 
     return children.split(/(\s+)/).map((word, index) =>
       word.trim() ? (
-        <span className="sr-word" key={index}>
+        <span className="sr-word inline-block" key={index}>
           {word}
         </span>
       ) : (
@@ -61,8 +62,8 @@ export default function ScrollReveal({
   }, [baseOpacity, blurStrength, stagger, start, end]);
 
   return (
-    <div ref={containerRef} className={className}>
+    <Component ref={containerRef} className={className}>
       {splitText}
-    </div>
+    </Component>
   );
 }

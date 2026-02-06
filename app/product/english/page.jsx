@@ -15,6 +15,7 @@ import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
 import { useRouter } from "next/navigation";
 import { useCurrency } from "@/context/CurrencyContext";
+import Script from "next/script";
 
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
@@ -95,8 +96,44 @@ const Page = () => {
     t("faq4ArabicEditionAr"),
   ];
 
+  const initTabby = () => {
+    if (window.TabbyPromo) {
+      if (typeof window.TabbyPromo === 'function') {
+        window.TabbyPromo({
+          selector: '#TabbyPromo',
+          currency: 'AED',
+          price: 799,
+          installmentsCount: 4,
+          lang: 'en',
+          source: 'product',
+          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+        });
+      } else {
+        // Fallback for older versions if it's a constructor
+        new window.TabbyPromo({
+          selector: '#TabbyPromo',
+          currency: 'AED',
+          price: 799,
+          installmentsCount: 4,
+          lang: 'en',
+          source: 'product',
+          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    initTabby();
+  }, []);
+
   return (
     <div className={isAr ? "lang-ar" : ""}>
+      <Script
+        src="https://checkout.tabby.ai/promos/v1/tabby-promo.js"
+        strategy="afterInteractive"
+        onLoad={initTabby}
+      />
       <Navbar />
 
       {/* ================= HERO SECTION ================= */}
@@ -174,11 +211,10 @@ const Page = () => {
                       <button
                         key={idx}
                         onClick={() => setSelectedImage(img)}
-                        className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${
-                          selectedImage === img
-                            ? "border-blue-600 ring-4 ring-blue-50 scale-105"
-                            : "border-transparent bg-white hover:border-blue-200"
-                        }`}
+                        className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${selectedImage === img
+                          ? "border-blue-600 ring-4 ring-blue-50 scale-105"
+                          : "border-transparent bg-white hover:border-blue-200"
+                          }`}
                       >
                         <Image
                           src={img}
@@ -233,6 +269,9 @@ const Page = () => {
                         7% OFF
                       </span>
                     </div>
+
+                    {/* Tabby Promo */}
+                    <div id="TabbyPromo" className="mt-4"></div>
                   </div>
                 </div>
 
@@ -851,9 +890,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>

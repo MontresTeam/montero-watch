@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
           referrerPolicy="no-referrer"
         />
 
-       {/* ===== GA4 Measurement ID: G-PDQDG7GDTY ===== */}
+        {/* ===== GA4 Measurement ID: G-PDQDG7GDTY ===== */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-PDQDG7GDTY"
           strategy="afterInteractive"

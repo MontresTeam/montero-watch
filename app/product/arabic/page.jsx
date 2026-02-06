@@ -16,21 +16,22 @@ import Watch1 from "@/public/images/Home/watch1.png";
 import Watch2 from "@/public/images/Home/watch2.png";
 import { useRouter } from "next/navigation";
 import { useCurrency } from "@/context/CurrencyContext";
+import Script from "next/script";
 import Navbar from "@/app/components/navBar/NavBar";
 import Footer from "@/app/components/home/Footer/Footer";
 import api from "@/lib/api";
 import { toast } from "react-toastify";
 
-import image1 from "@/public/images/GreenWatch/sub/image1G.png";
-import image2 from "@/public/images/GreenWatch/sub/image2G.png";
-import image3 from "@/public/images/GreenWatch/sub/image3G.png";
-import image4 from "@/public/images/GreenWatch/sub/image4G.png";
-import image5 from "@/public/images/GreenWatch/sub/image5G.png";
-import image6 from "@/public/images/GreenWatch/sub/image6G.png";
-import image7 from "@/public/images/GreenWatch/sub/image7G.png";
-import image8 from "@/public/images/GreenWatch/sub/image8G.png";
-import image9 from "@/public/images/GreenWatch/sub/image9G.png";
-import image10 from "@/public/images/GreenWatch/sub/image10G.png";
+import image1 from "@/public/images/GreenWatch/Sub/image1G.png";
+import image2 from "@/public/images/GreenWatch/Sub/image2G.png";
+import image3 from "@/public/images/GreenWatch/Sub/image3G.png";
+import image4 from "@/public/images/GreenWatch/Sub/image4G.png";
+import image5 from "@/public/images/GreenWatch/Sub/image5G.png";
+import image6 from "@/public/images/GreenWatch/Sub/image6G.png";
+import image7 from "@/public/images/GreenWatch/Sub/image7G.png";
+import image8 from "@/public/images/GreenWatch/Sub/image8G.png";
+import image9 from "@/public/images/GreenWatch/Sub/image9G.png";
+import image10 from "@/public/images/GreenWatch/Sub/image10G.png";
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -95,8 +96,43 @@ const Page = () => {
     t("faq4ArabicEditionAr"),
   ];
 
+  const initTabby = () => {
+    if (window.TabbyPromo) {
+      if (typeof window.TabbyPromo === 'function') {
+        window.TabbyPromo({
+          selector: '#TabbyPromo',
+          currency: 'AED',
+          price: 799,
+          installmentsCount: 4,
+          lang: 'ar',
+          source: 'product',
+          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+        });
+      } else {
+        new window.TabbyPromo({
+          selector: '#TabbyPromo',
+          currency: 'AED',
+          price: 799,
+          installmentsCount: 4,
+          lang: 'ar',
+          source: 'product',
+          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    initTabby();
+  }, []);
+
   return (
     <div className={isAr ? "lang-ar" : ""}>
+      <Script
+        src="https://checkout.tabby.ai/promos/v1/tabby-promo.js"
+        strategy="afterInteractive"
+        onLoad={initTabby}
+      />
       <Navbar />
 
       {/* First Section - Hero */}
@@ -169,11 +205,10 @@ const Page = () => {
                     <button
                       key={idx}
                       onClick={() => setSelectedImage(img)}
-                      className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${
-                        selectedImage === img
-                          ? "border-emerald-600 ring-4 ring-emerald-50 scale-105"
-                          : "border-transparent bg-white hover:border-emerald-200"
-                      }`}
+                      className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 shadow-sm ${selectedImage === img
+                        ? "border-emerald-600 ring-4 ring-emerald-50 scale-105"
+                        : "border-transparent bg-white hover:border-emerald-200"
+                        }`}
                     >
                       <Image
                         src={img}
@@ -227,6 +262,9 @@ const Page = () => {
                       7% OFF
                     </span>
                   </div>
+
+                  {/* Tabby Promo */}
+                  <div id="TabbyPromo" className="mt-4"></div>
                 </div>
               </div>
 
@@ -844,9 +882,8 @@ function ScrollAnimation({ children, animationClass, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${
-        isVisible ? animationClass : "opacity-0"
-      }`}
+      className={`transition-opacity ${isVisible ? animationClass : "opacity-0"
+        }`}
     >
       {children}
     </div>

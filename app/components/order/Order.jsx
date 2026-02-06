@@ -11,6 +11,7 @@ import {
 import TmaraPayment from '../../../public/images/Tamara.jpeg';
 import TabbyPayment from '../../../public/images/tabby.png';
 import { useSearchParams, useRouter } from "next/navigation";
+import Script from "next/script";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -339,12 +340,79 @@ function OrderContent() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const newFormData = { ...formData, [name]: value };
+    setFormData(newFormData);
+
+    // If payment method changed to Tabby, or if phone/email/country changed while Tabby is selected
+    if (
+      (name === 'paymentMethod' && value === 'tabby') ||
+      (['phone', 'email', 'country'].includes(name) && formData.paymentMethod === 'tabby')
+    ) {
+      checkTabbyEligibility(newFormData);
+    }
+
     // Clear error when user starts typing
     if (fieldErrors[name]) {
       setFieldErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
+
+  const [isTabbyChecking, setIsTabbyChecking] = useState(false);
+  const [tabbyError, setTabbyError] = useState(null);
+
+  const checkTabbyEligibility = async (data = formData) => {
+    if (!data.email || !data.phone) return;
+
+    setIsTabbyChecking(true);
+    setTabbyError(null);
+    try {
+      const response = await api.post("/order/tabby/pre-scoring", {
+        email: data.email,
+        phone: `${selectedCountryCode}${data.phone.replace(/[\s-]/g, "")}`,
+        amount: total,
+        currency: currency,
+      });
+
+      if (!response.data.success) {
+        setTabbyError(response.data.message || "Not eligible for Tabby");
+      }
+    } catch (err) {
+      console.error("Tabby pre-scoring error:", err);
+      // We don't necessarily block if the endpoint fails, but we can log it
+    } finally {
+      setIsTabbyChecking(false);
+    }
+  };
+
+  const initTabbyCart = () => {
+    if (window.TabbyPromo && total > 0) {
+      if (typeof window.TabbyPromo === 'function') {
+        window.TabbyPromo({
+          selector: '#TabbyPromoCart',
+          currency: currency || 'AED',
+          price: total,
+          installmentsCount: 4,
+          lang: i18n.language === 'ar' ? 'ar' : 'en',
+          source: 'cart',
+          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+        });
+      } else {
+        new window.TabbyPromo({
+          selector: '#TabbyPromoCart',
+          currency: currency || 'AED',
+          price: total,
+          installmentsCount: 4,
+          lang: i18n.language === 'ar' ? 'ar' : 'en',
+          source: 'cart',
+          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    initTabbyCart();
+  }, [total, i18n.language, currency]);
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault(); // In case it's in a form
@@ -352,8 +420,13 @@ function OrderContent() {
 
     if (!validateForm()) {
       toast.error(t("pleaseReviewFields"), {
-        icon: "ΓÜá∩╕Å",
+        icon: "⚠️",
       });
+      return;
+    }
+
+    if (formData.paymentMethod === 'tabby' && tabbyError) {
+      toast.error(tabbyError || "You are not eligible for Tabby. Please choose another payment method.");
       return;
     }
 
@@ -389,7 +462,9 @@ function OrderContent() {
 
       const endpoint = formData.paymentMethod === "stripe"
         ? "/order/stripe/create-checkout"
-        : "/order/tamara/create-checkout";
+        : formData.paymentMethod === "tamara"
+          ? "/order/tamara/create-checkout"
+          : "/order/tabby/create-checkout";
 
       const response = await api.post(endpoint, orderPayload);
 
@@ -494,6 +569,12 @@ function OrderContent() {
         </div>
         <span className="text-sm font-medium">{t("backToProduct")}</span>
       </button>
+
+      <Script
+        src="https://checkout.tabby.ai/promos/v1/tabby-promo.js"
+        strategy="afterInteractive"
+        onLoad={initTabbyCart}
+      />
 
       <form onSubmit={(e) => handlePlaceOrder(e)}> {/* Wrap in form for enter key submission if desired */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
@@ -770,28 +851,32 @@ function OrderContent() {
                     </label>
 
                     {/* Tabby Option */}
-                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg transition-colors opacity-60 cursor-not-allowed bg-gray-50 border-gray-200`}>
+                    <label className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border rounded-lg cursor-pointer transition-colors ${formData.paymentMethod === 'tabby' ? 'border-gray-800 ring-1 ring-gray-800' : 'border-gray-200 hover:border-gray-300'} ${isTabbyChecking ? 'opacity-50' : ''}`}>
                       <input
                         type="radio"
                         name="paymentMethod"
                         value="tabby"
-                        checked={false}
-                        onChange={() => { }}
-                        disabled={true}
-                        className="mt-0.5 sm:mt-1 w-4 h-4 text-gray-400 border-gray-300 shrink-0"
+                        checked={formData.paymentMethod === 'tabby'}
+                        onChange={handleInputChange}
+                        className="mt-0.5 sm:mt-1 w-4 h-4 text-black border-gray-300 focus:ring-black shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
-                              <span className="font-medium text-gray-500 text-sm sm:text-base">Tabby</span>
-                              <span className="text-[10px] bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded font-medium">Integration Ongoing</span>
+                              <span className="font-medium text-gray-900 text-sm sm:text-base">Tabby</span>
+                              {isTabbyChecking && (
+                                <span className="text-[10px] text-gray-400 animate-pulse">Checking eligibility...</span>
+                              )}
                             </div>
                             <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 leading-tight">
-                              {t("payIn4Installments")}
+                              4 interest-free payments. No hidden fees.
                             </p>
+                            {tabbyError && formData.paymentMethod === 'tabby' && (
+                              <p className="text-[10px] text-red-500 mt-1 font-medium">{tabbyError}</p>
+                            )}
                           </div>
-                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0 opacity-60">
+                          <div className="relative w-14 h-5 sm:w-16 sm:h-6 mt-1 sm:mt-0">
                             <Image
                               src={TabbyPayment}
                               alt="Tabby Payment"
@@ -985,6 +1070,9 @@ function OrderContent() {
                         )}
                       </div>
                     </div>
+
+                    {/* Tabby Promo Cart */}
+                    <div id="TabbyPromoCart" className="mt-2"></div>
 
                     {/* Estimated Delivery */}
                     <div className="flex justify-between items-center py-3 border-y border-gray-100 mt-4">
