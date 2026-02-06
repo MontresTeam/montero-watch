@@ -96,35 +96,28 @@ const Page = () => {
     t("faq4ArabicEditionAr"),
   ];
 
-  const initTabby = () => {
-    if (window.TabbyPromo) {
-      if (typeof window.TabbyPromo === 'function') {
-        window.TabbyPromo({
-          selector: '#TabbyPromo',
-          currency: 'AED',
-          price: 799,
-          installmentsCount: 4,
-          lang: 'ar',
-          source: 'product',
-          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
-        });
-      } else {
-        new window.TabbyPromo({
-          selector: '#TabbyPromo',
-          currency: 'AED',
-          price: 799,
-          installmentsCount: 4,
-          lang: 'ar',
-          source: 'product',
-          publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
-        });
-      }
-    }
-  };
+const tabbyInitialized = useRef(false);
 
-  useEffect(() => {
-    initTabby();
-  }, []);
+const initTabby = () => {
+  if (tabbyInitialized.current) return;
+  if (typeof window === "undefined") return;
+  if (!window.TabbyPromo) return;
+
+  window.TabbyPromo({
+    selector: "#TabbyPromo",
+    currency: "AED",
+    price: 799,
+    installmentsCount: 4,
+    lang: "ar",
+    source: "product",
+    publicKey: process.env.NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+  });
+
+  tabbyInitialized.current = true;
+};
+
+
+
 
   return (
     <div className={isAr ? "lang-ar" : ""}>
@@ -133,6 +126,7 @@ const Page = () => {
         strategy="afterInteractive"
         onLoad={initTabby}
       />
+
       <Navbar />
 
       {/* First Section - Hero */}
